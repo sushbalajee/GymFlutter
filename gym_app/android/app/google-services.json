@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "870131841868",
+    "firebase_url": "https://gymapp-e8453.firebaseio.com",
+    "project_id": "gymapp-e8453",
+    "storage_bucket": "gymapp-e8453.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870131841868:android:52c99b223cfcc189",
+        "android_client_info": {
+          "package_name": "com.example.gymapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870131841868-sjevpur0bjjce86cnn9u627fqsnuda0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyH0AVWVgAY-Pchw_61aX1w9zEJ93QKS8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
