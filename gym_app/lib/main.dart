@@ -44,7 +44,7 @@ class HomePageState extends State<GymApp> {
     return new MaterialApp(
         title: "Getting started with Firebase",
         home: new Scaffold(
-          backgroundColor: Colors.grey[200],
+          //backgroundColor: Colors.grey[200],
           appBar: new AppBar(
             backgroundColor: Colors.red[700],
             title: new Text("GymApp V1.0"),
@@ -60,14 +60,35 @@ class HomePageState extends State<GymApp> {
               horizontalSlider(screenHeight, this.names2, this.picNames1)
             ])
           ]),
-        ));
+          bottomNavigationBar: 
+          new Theme(
+            data: Theme.of(context).copyWith(
+              textTheme: Theme
+            .of(context)
+            .textTheme
+            .copyWith(caption: new TextStyle(color: Colors.white)),
+        // sets the background color of the `BottomNavigationBar`
+        canvasColor: Colors.red[700]),
+            child: new BottomNavigationBar(
+            items:[
+             new BottomNavigationBarItem(
+              icon: new Text("1"),
+              title: new Text("Home")
+             ),
+             new BottomNavigationBarItem(
+              icon: new Text("2"),
+              title: new Text("Workouts")
+             )
+            ]
+          ),
+        )));
   }
 }
 
 Widget horizontalSlider(double sh, List<String> xxx, List<String> yyy){
 
 return Container(
-                height: sh * 0.2,
+                height: sh * 0.20,
                 child: new ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
@@ -104,7 +125,7 @@ class CreateTile extends StatelessWidget {
               image: new AssetImage("assets/$picName.jpg"),
               fit: BoxFit.cover,
               colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
             ),
           ),
           width: screenWidth * 0.40,
@@ -118,9 +139,10 @@ class CreateTile extends StatelessWidget {
               child: Text(
                 name,
                 style: TextStyle(
+                  fontFamily: "Prompt",
                     fontSize: screenWidth * 0.06,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[800]),
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
               ),
             ),
           )),
@@ -131,12 +153,15 @@ class CreateTile extends StatelessWidget {
 Widget sliderTitles(String title, double hh, double ww) {
 
   return Card(
+    elevation: 1.0,
+    //color: Colors.grey[200],
       child: Container(
     alignment: Alignment(0.0, 0.0),
     height: hh,
     width: ww,
     child: new Text(title,
         style: TextStyle(
+          fontFamily: "Prompt",
             fontSize: 18.0,
             fontWeight: FontWeight.w600,
             color: Colors.grey[800])),
