@@ -39,11 +39,10 @@ class _NextPageState extends State<ExerciseList> {
   Widget build(BuildContext context) {
     loadData(widget.value);
     return new Scaffold(
-        appBar: new AppBar(
-          backgroundColor: Colors.grey[900],
-          title: new Text("${widget.value}"),
-        ),
-
+      appBar: new AppBar(
+        backgroundColor: Colors.grey[900],
+              title: new Text(widget.value)
+            ),
         body: Container(
           child: FutureBuilder(
               future: loadData(widget.value),
@@ -73,15 +72,7 @@ class _NextPageState extends State<ExerciseList> {
                     },
                   );
                 }
-
               }),
         ));
   }
 }
-
-//-----------------------------------------------------------------------------------//
-/*child: ColorLoader2(
-                      color1: Colors.red,
-                      color2: Colors.green,
-                      color3: Colors.yellow
-                    ), */
