@@ -7,6 +7,7 @@ import 'color_loader_2.dart';
 
 //-----------------------------------------------------------------------------------//
 
+
 class WorkoutsList extends StatefulWidget {
   final String value;
 
@@ -17,6 +18,16 @@ class WorkoutsList extends StatefulWidget {
 }
 
 //-----------------------------------------------------------------------------------//
+
+class Workouts {
+  
+  String workoutname;
+  String musclegroup;
+  List<WorkoutExercises> exNames;
+
+Workouts(this.workoutname, this.musclegroup, this.exNames);
+
+}
 
 class WorkoutCategory {
   final List<Wkouts> workouts;
@@ -64,19 +75,28 @@ class WorkoutExercises {
 class _NextPageState extends State<WorkoutsList> {
   Future fetchPost() async {
     final response =
-        await http.get('https://api.jsonbin.io/b/5bade51b8713b17b52b0adb1');
+        await http.get('https://gymapp-e8453.firebaseio.com/Legs.json');
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
+List<Workouts> users = [];
+
     for (var u in post.workouts) {
-      print(u.workoutname);
+      //print(u.workoutname);
+      
+      //Workouts sneks = new Workouts("a","b",["a1","b1"]);
+
+    
+    Workouts www = Workouts(u.workoutname, u.musclegroup, u.listOfExercises);
+  users.add(www);
+      //abcd.add(u.workoutname);
 
       for (int i = 0; i < u.listOfExercises.length; i++) {
-        print(u.listOfExercises[i].name);
+        //print(u.listOfExercises[i].name);
       }
     }
-
-    return post;
+print("PLAPLA:" + users.length.toString());
+    return users;
   }
 
 //-----------------------------------------------------------------------------------//
@@ -88,19 +108,25 @@ class _NextPageState extends State<WorkoutsList> {
         appBar: new AppBar(
             backgroundColor: Colors.grey[900], title: new Text(widget.value)),
         body: Container(
-          child: FutureBuilder(
-              future: fetchPost(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                /*return ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        subtitle: Text("Testing subtitle"),
-                          leading: CircleAvatar(backgroundColor: Colors.blue[900]),
-                          title: Text(snapshot.data[index].name));
-                    },
-                  );*/
-              }),
+         child: FutureBuilder(
+           future: fetchPost(),
+           builder: (BuildContext context, AsyncSnapshot snapshot){
+             if(snapshot.data == null){
+               return Container(
+                 child: Center(
+                   child: Text ("Loading..."),
+                 ));
+             }
+             else{
+               return ListView.builder(
+                 itemCount: snapshot.data.length,
+                 itemBuilder: (BuildContext context, int index){
+                   return ListTile(title: Text(snapshot.data[index].workoutname));
+                 }
+               );
+             }
+           }
+         ),
         ));
   }
 }
