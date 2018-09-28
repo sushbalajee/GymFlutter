@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'exercises.dart';
+import 'workouts.dart';
 
 class PageTwo extends StatelessWidget {
 
     final List<String> upperBodyCategories = [
     'Chest',
     'Shoulders',
-    'Triceps',
-    'Biceps',
+    'Arms',
     'Back',
-    'Core',
-    'Forearms'
+    'Legs',
+    'Core'
   ];
   final List<String> lowerBodyCategories = [
     'Quads',
@@ -30,15 +29,6 @@ class PageTwo extends StatelessWidget {
 
   final List<String> picIndexes = ['1', '2', '3', '4', '5', '6', '7'];
 
-
-  /*@override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 300.0,
-      color: Colors.green,
-    );
-  }*/
-
  @override
   Widget build(BuildContext context) {
     
@@ -50,10 +40,10 @@ class PageTwo extends StatelessWidget {
             
             body: new Stack(children: <Widget>[
               new Column(children: <Widget>[
-                sliderTitles("Upper Body", screenHeight * 0.05, screenWidth),
+                sliderTitles("Muscle Building", screenHeight * 0.05, screenWidth),
                 horizontalSlider(
                     screenHeight, this.upperBodyCategories, this.picIndexes),
-                sliderTitles("Lower Body", screenHeight * 0.05, screenWidth),
+                sliderTitles("Weight Loss", screenHeight * 0.05, screenWidth),
                 horizontalSlider(
                     screenHeight, this.lowerBodyCategories, this.picIndexes),
                 sliderTitles("Cardio", screenHeight * 0.05, screenWidth),
@@ -117,7 +107,7 @@ class CreateTile extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ExerciseList(
+                        builder: (context) => WorkoutsList(
                               value: name,
                             )));
               },
