@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:gym_app/workoutsList.dart';
-import 'color_loader_2.dart';
+import 'workoutDetails.dart';
 
 //-----------------------------------------------------------------------------------//
 
 class WorkoutsList extends StatefulWidget {
+
   final String value;
 
   WorkoutsList({Key key, this.value}) : super(key: key);
@@ -70,19 +70,22 @@ class WorkoutExercises {
 }
 
 class _NextPageState extends State<WorkoutsList> {
+
+  List<Workouts> users = [];
+
   Future fetchPost() async {
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Legs.json');
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
-    List<Workouts> users = [];
-
+    //List<Workouts> users = [];
+    users.clear();
     for (var u in post.workouts) {
       Workouts www = Workouts(u.workoutname, u.musclegroup, u.listOfExercises);
       users.add(www);
       for (int i = 0; i < u.listOfExercises.length; i++) {
-        print(u.listOfExercises[i].name);
+        //print(u.listOfExercises[i].name);
       }
     }
 
@@ -111,7 +114,11 @@ class _NextPageState extends State<WorkoutsList> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
-                            title: Text(snapshot.data[index].workoutname));
+                            title: Text(snapshot.data[index].workoutname),
+                            onTap: () { Navigator.push(context,MaterialPageRoute(
+                            builder: (context) => PageThree(value: users, title: snapshot.data[index].workoutname)));
+                            }
+                            );
                       });
                 }
               }),
