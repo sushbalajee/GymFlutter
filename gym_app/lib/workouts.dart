@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'workoutDetails.dart';
+import 'color_loader_2.dart';
 
 //-----------------------------------------------------------------------------------//
 
 class WorkoutsList extends StatefulWidget {
-
   final String value;
 
   WorkoutsList({Key key, this.value}) : super(key: key);
@@ -21,9 +21,10 @@ class WorkoutsList extends StatefulWidget {
 class Workouts {
   String workoutname;
   String musclegroup;
+  String description;
   List<WorkoutExercises> exNames;
 
-  Workouts(this.workoutname, this.musclegroup, this.exNames);
+  Workouts(this.workoutname, this.musclegroup, this.exNames, this.description);
 }
 
 class WorkoutCategory {
@@ -43,9 +44,14 @@ class WorkoutCategory {
 class Wkouts {
   final String musclegroup;
   final String workoutname;
+  final String description;
   final List<WorkoutExercises> listOfExercises;
 
-  Wkouts({this.workoutname, this.musclegroup, this.listOfExercises});
+  Wkouts(
+      {this.workoutname,
+      this.musclegroup,
+      this.listOfExercises,
+      this.description});
 
   factory Wkouts.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['exercises'] as List;
@@ -55,38 +61,52 @@ class Wkouts {
     return Wkouts(
         musclegroup: parsedJson['musclegroup'],
         workoutname: parsedJson['workoutname'],
+        description: parsedJson['description'],
         listOfExercises: finalLevel);
   }
 }
 
 class WorkoutExercises {
   final String name;
+  final String reps;
+  final String sets;
+  final String execution;
+  final String weight;
+  final String rest;
 
-  WorkoutExercises({this.name});
+  WorkoutExercises(
+      {this.name,
+      this.execution,
+      this.reps,
+      this.rest,
+      this.sets,
+      this.weight});
 
   factory WorkoutExercises.fromJson(Map<String, dynamic> parsedJson) {
-    return WorkoutExercises(name: parsedJson['name']);
+    return WorkoutExercises(
+        name: parsedJson['name'],
+        execution: parsedJson['execution'],
+        reps: parsedJson['reps'],
+        sets: parsedJson['sets'],
+        weight: parsedJson['weight'],
+        rest: parsedJson['rest']);
   }
 }
 
 class _NextPageState extends State<WorkoutsList> {
-
   List<Workouts> users = [];
 
   Future fetchPost() async {
     final response =
-        await http.get('https://gymapp-e8453.firebaseio.com/Legs.json');
+        await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
-    //List<Workouts> users = [];
     users.clear();
     for (var u in post.workouts) {
-      Workouts www = Workouts(u.workoutname, u.musclegroup, u.listOfExercises);
+      Workouts www = Workouts(
+          u.workoutname, u.musclegroup, u.listOfExercises, u.description);
       users.add(www);
-      for (int i = 0; i < u.listOfExercises.length; i++) {
-        //print(u.listOfExercises[i].name);
-      }
     }
 
     return users;
@@ -96,29 +116,51 @@ class _NextPageState extends State<WorkoutsList> {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     //loadData(widget.value);
     return new Scaffold(
         appBar: new AppBar(
-            backgroundColor: Colors.grey[900], title: new Text(widget.value)),
+            centerTitle: true,
+            backgroundColor: Colors.grey[900],
+            title: new Text(widget.value)),
         body: Container(
           child: FutureBuilder(
               future: fetchPost(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return Container(
-                      child: Center(
-                    child: Text("Loading..."),
-                  ));
+                if (snapshot.data == null){
+                  return new Stack(children: <Widget>[
+                  Center(child: ColorLoader2(
+                      color1: Colors.red,
+                      color2: Colors.green,
+                      color3: Colors.yellow
+                    )),
+                    Container(
+                      alignment: Alignment(0.0, 0.15),
+                      child:new Text("Loading...", style: TextStyle(fontSize: 20.0))
+                    )
+                  ]);
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
-                            title: Text(snapshot.data[index].workoutname),
-                            onTap: () { Navigator.push(context,MaterialPageRoute(
-                            builder: (context) => PageThree(value: users, title: snapshot.data[index].workoutname)));
-                            }
-                            );
+                            title: Text(snapshot.data[index].workoutname, style: TextStyle(
+                                      fontFamily: "Prompt",
+                                      fontSize: screenWidth * 0.055,
+                                      fontWeight: FontWeight.w700)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PageThree(
+                                            value: users,
+                                            title: snapshot.data[index].workoutname,
+                                            muscleGroup: snapshot.data[index].musclegroup,
+                                            description: snapshot.data[index].description
+                                          )));
+                            });
                       });
                 }
               }),

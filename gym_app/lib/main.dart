@@ -52,6 +52,7 @@ class HomePageState extends State<GymApp> {
         home: new Scaffold(
             backgroundColor: Colors.grey[100],
             appBar: new AppBar(
+              centerTitle: true,
               backgroundColor: Colors.grey[900],
               title: new Text("GymApp V1.0"),
             ),
