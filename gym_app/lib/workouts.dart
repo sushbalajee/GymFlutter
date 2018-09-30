@@ -7,7 +7,6 @@ import 'color_loader_2.dart';
 
 //-----------------------------------------------------------------------------------//
 
-
 class WorkoutsList extends StatefulWidget {
   final String value;
 
@@ -20,13 +19,11 @@ class WorkoutsList extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class Workouts {
-  
   String workoutname;
   String musclegroup;
   List<WorkoutExercises> exNames;
 
-Workouts(this.workoutname, this.musclegroup, this.exNames);
-
+  Workouts(this.workoutname, this.musclegroup, this.exNames);
 }
 
 class WorkoutCategory {
@@ -79,23 +76,16 @@ class _NextPageState extends State<WorkoutsList> {
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
-List<Workouts> users = [];
+    List<Workouts> users = [];
 
     for (var u in post.workouts) {
-      //print(u.workoutname);
-      
-      //Workouts sneks = new Workouts("a","b",["a1","b1"]);
-
-    
-    Workouts www = Workouts(u.workoutname, u.musclegroup, u.listOfExercises);
-  users.add(www);
-      //abcd.add(u.workoutname);
-
+      Workouts www = Workouts(u.workoutname, u.musclegroup, u.listOfExercises);
+      users.add(www);
       for (int i = 0; i < u.listOfExercises.length; i++) {
-        //print(u.listOfExercises[i].name);
+        print(u.listOfExercises[i].name);
       }
     }
-print("PLAPLA:" + users.length.toString());
+
     return users;
   }
 
@@ -108,25 +98,23 @@ print("PLAPLA:" + users.length.toString());
         appBar: new AppBar(
             backgroundColor: Colors.grey[900], title: new Text(widget.value)),
         body: Container(
-         child: FutureBuilder(
-           future: fetchPost(),
-           builder: (BuildContext context, AsyncSnapshot snapshot){
-             if(snapshot.data == null){
-               return Container(
-                 child: Center(
-                   child: Text ("Loading..."),
-                 ));
-             }
-             else{
-               return ListView.builder(
-                 itemCount: snapshot.data.length,
-                 itemBuilder: (BuildContext context, int index){
-                   return ListTile(title: Text(snapshot.data[index].workoutname));
-                 }
-               );
-             }
-           }
-         ),
+          child: FutureBuilder(
+              future: fetchPost(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.data == null) {
+                  return Container(
+                      child: Center(
+                    child: Text("Loading..."),
+                  ));
+                } else {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                            title: Text(snapshot.data[index].workoutname));
+                      });
+                }
+              }),
         ));
   }
 }
