@@ -99,6 +99,7 @@ class _NextPageState extends State<WorkoutsList> {
   Future fetchPost() async {
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+        //await http.get('https://api.jsonbin.io/b/5bb16ced9353c37b743879df');
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
