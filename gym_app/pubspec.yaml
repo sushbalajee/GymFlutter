@@ -54,6 +54,8 @@ flutter:
   - assets/5.jpg
   - assets/6.jpg
   - assets/7.jpg
+  - assets/targets/quads.png
+  - assets/targets/upperleg.png
 
   fonts: 
     - family: Prompt

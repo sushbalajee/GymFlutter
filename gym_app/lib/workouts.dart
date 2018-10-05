@@ -73,6 +73,7 @@ class WorkoutExercises {
   final String execution;
   final String weight;
   final String rest;
+  final String target;
 
   WorkoutExercises(
       {this.name,
@@ -80,7 +81,8 @@ class WorkoutExercises {
       this.reps,
       this.rest,
       this.sets,
-      this.weight});
+      this.weight, 
+      this.target});
 
   factory WorkoutExercises.fromJson(Map<String, dynamic> parsedJson) {
     return WorkoutExercises(
@@ -89,7 +91,8 @@ class WorkoutExercises {
         reps: parsedJson['reps'],
         sets: parsedJson['sets'],
         weight: parsedJson['weight'],
-        rest: parsedJson['rest']);
+        rest: parsedJson['rest'],
+        target: parsedJson['target']);
   }
 }
 
@@ -118,6 +121,8 @@ class _NextPageState extends State<WorkoutsList> {
   @override
   Widget build(BuildContext context) {
 
+    int workoutNumber = 0;
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     //loadData(widget.value);
@@ -143,14 +148,17 @@ class _NextPageState extends State<WorkoutsList> {
                     )
                   ]);
                 } else {
+                  
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
+                        workoutNumber += index;
                         return ListTile(
                             title: Text(snapshot.data[index].workoutname, style: TextStyle(
                                       fontFamily: "Prompt",
                                       fontSize: screenWidth * 0.055,
                                       fontWeight: FontWeight.w700)),
+                                      leading: CircleAvatar(child: Text("$workoutNumber")),
                             onTap: () {
                               Navigator.push(
                                   context,

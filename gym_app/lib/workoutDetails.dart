@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'workouts.dart';
+import 'dart:async';
 
 class PageThree extends StatefulWidget {
   final List<Workouts> value;
@@ -30,14 +31,14 @@ class WorkoutInfo extends State<PageThree> {
 
       if (u.workoutname == widget.title) {
         for (int i = 0; i < u.exNames.length; i++) {
-          //print(u.exNames[i].name);
           WorkoutExercises exercise = WorkoutExercises(
               name: u.exNames[i].name,
               execution: u.exNames[i].execution,
               weight: u.exNames[i].weight,
               reps: u.exNames[i].reps,
               rest: u.exNames[i].rest,
-              sets: u.exNames[i].sets);
+              sets: u.exNames[i].sets,
+              target: u.exNames[i].target);
           workoutExercisesJSON.add(exercise);
         }
       }
@@ -49,6 +50,7 @@ class WorkoutInfo extends State<PageThree> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
+  int exerciseNumber = 0;
     updateData();
 
     return new Scaffold(
@@ -68,20 +70,18 @@ class WorkoutInfo extends State<PageThree> {
                       fontWeight: FontWeight.w700,
                       color: Colors.black)),
             ),
-            Container(
+            Container( color: Colors.grey[900],
               padding:
-                  const EdgeInsetsDirectional.only(start: 15.0, bottom: 15.0),
+                  const EdgeInsetsDirectional.only(start: 15.0, bottom: 15.0, top: 15.0),
               alignment: Alignment(-1.0, 0.0),
               child: Text(widget.description,
                   style: TextStyle(
                       fontFamily: "Prompt",
                       fontSize: screenWidth * 0.045,
                       fontWeight: FontWeight.w700,
-                      color: Colors.black)),
+                      color: Colors.white)),
             ),
             Container(
-                //color: Colors.grey[200],
-                //padding: const EdgeInsets.only(top: 15.0),
                 child: ListView.builder(
                     //addRepaintBoundaries: false,
                     scrollDirection: Axis.vertical,
@@ -89,36 +89,87 @@ class WorkoutInfo extends State<PageThree> {
                     physics: const ClampingScrollPhysics(),
                     itemCount: workoutExercisesJSON.length,
                     itemBuilder: (BuildContext context, int index) {
+                      exerciseNumber += 1;
                       return Card(
                           elevation: 0.1,
-                          child: new Stack(children: <Widget>[
-                          new Column( children: <Widget>[
-                          ListTile(
-                             leading: CircleAvatar(child: new Text("$index"), backgroundColor: Colors.blue),
-                              title: Text(workoutExercisesJSON[index].name, 
-                                  style: TextStyle(
-                                      fontFamily: "Prompt",
-                                      fontSize: screenWidth * 0.05,
-                                      fontWeight: FontWeight.w700
-                                      ))),
-                                       ListTile(
-                              subtitle: new Stack(children: <Widget>[
+                          child: new Padding( padding: EdgeInsets.only(top: 10.0), child: new Stack(children: <Widget>[
+                            new Column(children: <Widget>[
+                              ListTile(
+                                  leading: CircleAvatar(
+                                      child: new Text("$exerciseNumber", style: TextStyle(color: Colors.white),),
+                                      backgroundColor: Colors.blue[900]),
+                                      trailing: new CircleAvatar( backgroundColor: Colors.blue[100], radius: 20.0, child: IconButton(icon: new Text("i", style: TextStyle(color: Colors.black),), onPressed: (){ confirmDialog(context, workoutExercisesJSON[index].name);})),
+                                  title: Text(workoutExercisesJSON[index].name,
+                                      style: TextStyle(
+                                          fontFamily: "Prompt",
+                                          fontSize: screenWidth * 0.05,
+                                          fontWeight: FontWeight.w700)),),
+                              ListTile(
+                                  subtitle: new Stack(children: <Widget>[
                                 new Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       new Text(
                                           "Weight: " +
-                                              workoutExercisesJSON[index].weight,
-                                          style: TextStyle(fontFamily: "Prompt",fontSize: screenWidth * 0.04)),
-                                      new Text("Execution: " + workoutExercisesJSON[index].execution, style: TextStyle(fontFamily: "Prompt",fontSize: screenWidth * 0.04)),
-                                      new Text("Sets: " +workoutExercisesJSON[index].sets, style: TextStyle(fontFamily: "Prompt",fontSize: screenWidth * 0.04)),
-                                      new Text("Repetitions: " +workoutExercisesJSON[index].reps, style: TextStyle(fontFamily: "Prompt",fontSize: screenWidth * 0.04)),
-                                      new Text("Rest times: " +workoutExercisesJSON[index].rest + " seconds between sets", style: TextStyle(fontFamily: "Prompt",fontSize: screenWidth * 0.04)),
+                                              workoutExercisesJSON[index]
+                                                  .weight,
+                                          style: TextStyle(
+                                              fontFamily: "Prompt",
+                                              fontSize: screenWidth * 0.04)),
+                                      new Text(
+                                          "Execution: " +
+                                              workoutExercisesJSON[index]
+                                                  .execution,
+                                          style: TextStyle(
+                                              fontFamily: "Prompt",
+                                              fontSize: screenWidth * 0.04)),
+                                      new Text(
+                                          "Sets: " +
+                                              workoutExercisesJSON[index].sets,
+                                          style: TextStyle(
+                                              fontFamily: "Prompt",
+                                              fontSize: screenWidth * 0.04)),
+                                      new Text(
+                                          "Repetitions: " +
+                                              workoutExercisesJSON[index].reps,
+                                          style: TextStyle(
+                                              fontFamily: "Prompt",
+                                              fontSize: screenWidth * 0.04)),
+                                      new Text( 
+                                          "Rest times: " +
+                                              workoutExercisesJSON[index].rest +
+                                              " seconds between sets",
+                                          style: TextStyle( 
+                                              fontFamily: "Prompt",
+                                              fontSize: screenWidth * 0.04)),
+                                               new Padding( padding: EdgeInsets.only(top: 15.0)  ,child: 
+                                              new Image( fit: BoxFit.cover,  image: AssetImage("assets/targets/" + workoutExercisesJSON[index].target + ".png")),),
                                     ])
-                              ]))])]));
+                              ]))
+                            ])
+                          ])));
                     }))
           ])
         ]));
-  }
+  }  
+}
+
+Future<Null> confirmDialog(BuildContext context, String exexexe) {
+  return showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text(exexexe),
+          actions: <Widget>[
+            new FlatButton(
+              child: const Text('CLOSE'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      });
 }
