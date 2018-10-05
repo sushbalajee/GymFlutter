@@ -23,6 +23,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_database: ^1.0.4
   firebase_core: any
+  connectivity:
   
 
 dev_dependencies:

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'workoutDetails.dart';
 import 'color_loader_2.dart';
+import 'package:connectivity/connectivity.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -98,6 +99,24 @@ class WorkoutExercises {
 
 class _NextPageState extends State<WorkoutsList> {
   List<Workouts> users = [];
+
+  var connectionStatus = 'Unknown';
+  var connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
+
+  void initState(){
+    super.initState();
+    connectivity = new Connectivity();
+    subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+      print(result);
+    });
+  }
+
+  @override
+  void dispose(){
+    subscription.cancel();
+    super.dispose();
+  }
 
   Future fetchPost() async {
     final response =
