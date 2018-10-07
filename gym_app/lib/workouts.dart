@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:convert';
 import 'workoutDetails.dart';
-import 'color_loader_2.dart';
 import 'package:connectivity/connectivity.dart';
 
 //-----------------------------------------------------------------------------------//
 
 class WorkoutsList extends StatefulWidget {
   final String value;
+  final List<Workouts> arrayLi;
 
-  WorkoutsList({Key key, this.value}) : super(key: key);
+  WorkoutsList({Key key, this.value, this.arrayLi}) : super(key: key);
 
   @override
   _NextPageState createState() => new _NextPageState();
@@ -100,41 +98,6 @@ class WorkoutExercises {
 class _NextPageState extends State<WorkoutsList> {
   List<Workouts> users = [];
 
-  var connectionStatus = 'Unknown';
-  var connectivity;
-  StreamSubscription<ConnectivityResult> subscription;
-
-  void initState(){
-    super.initState();
-    connectivity = new Connectivity();
-    subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
-      print(result);
-    });
-  }
-
-  @override
-  void dispose(){
-    subscription.cancel();
-    super.dispose();
-  }
-
-  Future fetchPost() async {
-    final response =
-        await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
-        //await http.get('https://api.jsonbin.io/b/5bb16ced9353c37b743879df');
-    var jsonResponse = json.decode(response.body);
-    WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
-
-    users.clear();
-    for (var u in post.workouts) {
-      Workouts www = Workouts(
-          u.workoutname, u.musclegroup, u.listOfExercises, u.description);
-      users.add(www);
-    }
-
-    return users;
-  }
-
 //-----------------------------------------------------------------------------------//
 
   @override
@@ -142,38 +105,18 @@ class _NextPageState extends State<WorkoutsList> {
 
     int workoutNumber = 0;
 
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    //loadData(widget.value);
     return new Scaffold(
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Colors.grey[900],
             title: new Text(widget.value)),
-        body: Container(
-          child: FutureBuilder(
-              future: fetchPost(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null){
-                  return new Stack(children: <Widget>[
-                  Center(child: ColorLoader2(
-                      color1: Colors.red,
-                      color2: Colors.green,
-                      color3: Colors.yellow
-                    )),
-                    Container(
-                      alignment: Alignment(0.0, 0.15),
-                      child:new Text("Loading...", style: TextStyle(fontSize: 20.0))
-                    )
-                  ]);
-                } else {
-                  
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
+        body: new ListView.builder(
+                      itemCount: widget.arrayLi.length,
                       itemBuilder: (BuildContext context, int index) {
                         workoutNumber += index;
                         return ListTile(
-                            title: Text(snapshot.data[index].workoutname, style: TextStyle(
+                            title: Text(widget.arrayLi[index].workoutname, style: TextStyle(
                                       fontFamily: "Prompt",
                                       fontSize: screenWidth * 0.055,
                                       fontWeight: FontWeight.w700)),
@@ -183,15 +126,12 @@ class _NextPageState extends State<WorkoutsList> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PageThree(
-                                            value: users,
-                                            title: snapshot.data[index].workoutname,
-                                            muscleGroup: snapshot.data[index].musclegroup,
-                                            description: snapshot.data[index].description
+                                            value: widget.arrayLi,
+                                            title: widget.arrayLi[index].workoutname,
+                                            muscleGroup: widget.arrayLi[index].musclegroup,
+                                            description: widget.arrayLi[index].description
                                           )));
                             });
-                      });
-                }
-              }),
-        ));
-  }
+                  }));
+    }
 }
