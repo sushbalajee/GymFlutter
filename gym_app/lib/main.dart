@@ -16,8 +16,6 @@ void main() {
 class GymApp extends StatefulWidget {
   @override
   HomePageState createState() => new HomePageState();
-
-  
 }
 
 //-----------------------------------------------------------------------------------//

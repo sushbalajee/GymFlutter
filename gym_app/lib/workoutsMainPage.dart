@@ -8,35 +8,40 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 
-class PageTwo extends StatelessWidget {
+class PageTwo extends StatefulWidget {
+  @override
+  PageTwoState createState() {
+    return new PageTwoState();
+  }
+}
+
+class PageTwoState extends State<PageTwo> {
+  var connectionStatus = 'Unknown';
+  var connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
 
   final List<Workouts> workouts = [];
+
   final jsonUrl = "https://gymapp-e8453.firebaseio.com/Workouts.json";
 
   Future fetchPost() async {
+    print("This is in the fetchPost: " + connectionStatus);
 
-    var connectionStatus; // = 'Unknown';
-    var connectivity;
-    StreamSubscription<ConnectivityResult> subscription;
+    if (connectionStatus == "ConnectivityResult.wifi" || connectionStatus == "ConnectivityResult.mobile") {
+      final response =
+          await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+      //final response = await http.get('assets/JSON/gymapp-e8453-export.json');
+      var jsonResponse = json.decode(response.body);
+      WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
-    connectivity = new Connectivity();
-    subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      connectionStatus = result.toString();
-      print(result);
-    });
-
-    final response = await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
-    //final response = await http.get('assets/JSON/gymapp-e8453-export.json');
-    var jsonResponse = json.decode(response.body);
-    WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
-
-    workouts.clear();
-    for (var work in post.workouts) {
-      Workouts wk = Workouts(
-          work.workoutname, work.musclegroup, work.listOfExercises, work.description);
-      workouts.add(wk);
+      workouts.clear();
+      for (var work in post.workouts) {
+        Workouts wk = Workouts(work.workoutname, work.musclegroup,
+            work.listOfExercises, work.description);
+        workouts.add(wk);
+      }
+      return workouts;
     }
-    return workouts;
   }
 
   final List<String> upperBodyCategories = [
@@ -47,6 +52,7 @@ class PageTwo extends StatelessWidget {
     'Legs',
     'Core'
   ];
+
   final List<String> lowerBodyCategories = [
     'Quads',
     'Hamstrings',
@@ -55,6 +61,7 @@ class PageTwo extends StatelessWidget {
     'Abductors',
     'Aductors'
   ];
+
   final List<String> cardioCategories = [
     'Bike',
     'Row',
@@ -67,6 +74,11 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    connectivity = new Connectivity();
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      connectionStatus = result.toString();
+    });
 
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
