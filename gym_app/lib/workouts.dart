@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'workoutDetails.dart';
-import 'package:connectivity/connectivity.dart';
 
 //-----------------------------------------------------------------------------------//
 
 class WorkoutsList extends StatefulWidget {
   final String value;
-  final List<Workouts> arrayLi;
+  final List<Workouts> workoutsList;
 
-  WorkoutsList({Key key, this.value, this.arrayLi}) : super(key: key);
+  WorkoutsList({Key key, this.value, this.workoutsList}) : super(key: key);
 
   @override
   _NextPageState createState() => new _NextPageState();
@@ -112,11 +110,11 @@ class _NextPageState extends State<WorkoutsList> {
             backgroundColor: Colors.grey[900],
             title: new Text(widget.value)),
         body: new ListView.builder(
-                      itemCount: widget.arrayLi.length,
+                      itemCount: widget.workoutsList.length,
                       itemBuilder: (BuildContext context, int index) {
                         workoutNumber += index;
                         return ListTile(
-                            title: Text(widget.arrayLi[index].workoutname, style: TextStyle(
+                            title: Text(widget.workoutsList[index].workoutname, style: TextStyle(
                                       fontFamily: "Prompt",
                                       fontSize: screenWidth * 0.055,
                                       fontWeight: FontWeight.w700)),
@@ -126,10 +124,10 @@ class _NextPageState extends State<WorkoutsList> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PageThree(
-                                            value: widget.arrayLi,
-                                            title: widget.arrayLi[index].workoutname,
-                                            muscleGroup: widget.arrayLi[index].musclegroup,
-                                            description: widget.arrayLi[index].description
+                                            value: widget.workoutsList,
+                                            title: widget.workoutsList[index].workoutname,
+                                            muscleGroup: widget.workoutsList[index].musclegroup,
+                                            description: widget.workoutsList[index].description
                                           )));
                             });
                   }));

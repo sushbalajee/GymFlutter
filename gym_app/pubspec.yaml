@@ -24,6 +24,8 @@ dependencies:
   firebase_database: ^1.0.4
   firebase_core: any
   connectivity:
+  dio:
+  path_provider:
   
 
 dev_dependencies:
@@ -57,6 +59,7 @@ flutter:
   - assets/7.jpg
   - assets/targets/quads.png
   - assets/targets/upperleg.png
+  - assets/JSON/gymapp-e8453-export.json
 
   fonts: 
     - family: Prompt
