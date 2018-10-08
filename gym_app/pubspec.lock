@@ -57,13 +57,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  cookie_jar:
-    dependency: transitive
-    description:
-      name: cookie_jar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.6"
   crypto:
     dependency: transitive
     description:
@@ -85,13 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  dio:
+  firebase_auth:
     dependency: "direct main"
     description:
-      name: dio
+      name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.6"
+    version: "0.5.9"
   firebase_core:
     dependency: "direct main"
     description:
@@ -249,13 +242,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.2"
-  path_provider:
-    dependency: "direct main"
-    description:
-      name: path_provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   plugin:
     dependency: transitive
     description:

@@ -5,8 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'color_loader_2.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
+
 
 class PageTwo extends StatefulWidget {
   @override
@@ -16,18 +15,15 @@ class PageTwo extends StatefulWidget {
 }
 
 class PageTwoState extends State<PageTwo> {
+
   var connectionStatus = 'Unknown';
   var connectivity;
   StreamSubscription<ConnectivityResult> subscription;
 
   final List<Workouts> workouts = [];
 
-  final jsonUrl = "https://gymapp-e8453.firebaseio.com/Workouts.json";
-
   Future fetchPost() async {
-    print("This is in the fetchPost: " + connectionStatus);
 
-    if (connectionStatus == "ConnectivityResult.wifi" || connectionStatus == "ConnectivityResult.mobile") {
       final response =
           await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
       //final response = await http.get('assets/JSON/gymapp-e8453-export.json');
@@ -41,7 +37,6 @@ class PageTwoState extends State<PageTwo> {
         workouts.add(wk);
       }
       return workouts;
-    }
   }
 
   final List<String> upperBodyCategories = [
