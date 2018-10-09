@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'workoutsMainPage.dart';
 import 'login.dart';
+import 'auth.dart';
+import 'home.dart';
+import 'root.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -28,7 +31,7 @@ class HomePageState extends State<GymApp> {
 
   PageOne one;
   PageTwo two;
-  Login login;
+  RootPage login;
 
   List<Widget> pages;
   Widget currentPage;
@@ -37,7 +40,7 @@ class HomePageState extends State<GymApp> {
   void initState() {
     one = PageOne();
     two = PageTwo();
-    login = Login();
+    login = RootPage(auth: new Auth());
 
     pages = [one, two, login];
 
@@ -47,6 +50,7 @@ class HomePageState extends State<GymApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return new MaterialApp(
         title: "Gym Application V1.0",
         home: new Scaffold(
@@ -81,18 +85,6 @@ class HomePageState extends State<GymApp> {
                         icon: new Text("3"), title: new Text("Login"))
                   ]),
             )));
-  }
-}
-
-//-----------------------------------------------------------------------------------//
-
-class PageOne extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 300.0,
-      color: Colors.purple,
-    );
   }
 }
 
