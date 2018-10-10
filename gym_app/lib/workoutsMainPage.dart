@@ -26,7 +26,6 @@ class PageTwoState extends State<PageTwo> {
 
       final response =
           await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
-      //final response = await http.get('assets/JSON/gymapp-e8453-export.json');
       var jsonResponse = json.decode(response.body);
       WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 

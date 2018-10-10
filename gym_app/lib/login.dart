@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
+import 'color_loader_2.dart';
 
 class Login extends StatefulWidget {
 Login({this.auth, this.onSignedIn});
@@ -67,12 +68,15 @@ class LoginPageState extends State<Login> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
-      padding: EdgeInsets.all(20.0),
+          color: Colors.grey[100],
+      padding: EdgeInsets.only(left: 20.0, right: 20.0),
       child: new Form(
           key: formKey,
           child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: buildInputs() + buildSubmitButtons())),
+              children: buildInputs() + buildSubmitButtons()
+              )),
     ));
   }
 
@@ -92,28 +96,39 @@ class LoginPageState extends State<Login> {
   }
 
   List<Widget> buildSubmitButtons() {
-    if(formType == FormType.login){
+    if(formType == FormType.login){ 
     return [
-      new RaisedButton(
+      new Container(
+        padding: EdgeInsets.only(top: 20.0),
+        child: new FlatButton(
+          color: Colors.grey[900],
         child: new Text("Login",
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         onPressed: validateAndSubmit,
-      ),
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(20.0))
+      )),
       new FlatButton(
+        
         child:
             new Text("Create an Account", style: new TextStyle(fontSize: 15.0)),
         onPressed: moveToRegister,
       )
-    ];}
+      ];}
     else{
       return [
-      new RaisedButton(
-        child: new Text("Create an account",
-          style: TextStyle(fontSize: 20.0),
+        new Container(
+        padding: EdgeInsets.only(top: 20.0),
+        child: new RaisedButton(
+          color: Colors.grey[900],
+        child: new Text("Register",
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         onPressed: validateAndSubmit,
-      ),
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(20.0))
+      )),
       new FlatButton(
         child:
             new Text("Already have an account? Login in here", style: new TextStyle(fontSize: 15.0)),

@@ -62,11 +62,19 @@ class RootPageState extends State<RootPage> {
       case AuthStatus.notSignedIn:
         return new Login(auth: widget.auth, onSignedIn: signedIn);
       case AuthStatus.signedIn:
-        return new Column(children: <Widget>[
-          Container(child: new Text("You are already signed in")),
-          RaisedButton(child: new Text("Sign Out"), onPressed: signedOut)
+        return new Column(mainAxisAlignment: MainAxisAlignment.center ,children: <Widget>[ 
+          Container(
+            padding: EdgeInsets.all(20.0),
+            alignment: Alignment.center,
+            child: new Text("You are already signed in", style: TextStyle(fontSize: 20.0),)),
+          RaisedButton( 
+            color: Colors.grey[900],
+            child: new Text("Sign Out", style: TextStyle(fontSize: 15.0, color: Colors.white),),
+            onPressed: signedOut,
+            shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(20.0)))
         ]);
     }
-    //return null;
+    return null;
   }
 }
