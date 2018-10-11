@@ -20,13 +20,16 @@ class PageThree extends StatefulWidget {
 class WorkoutInfo extends State<PageThree> {
 
   List<WorkoutExercises> workoutExercisesJSON = [];
+  List<Workouts> workoutInfoJSON = [];
 
   void updateData() {
 
+    workoutInfoJSON.clear();
     workoutExercisesJSON.clear();
 
     for (var u in widget.value) {
-    
+      Workouts workout = Workouts(u.workoutname, u.musclegroup, u.exNames, u.description);
+      workoutInfoJSON.add(workout);
       if (u.workoutname == widget.title) {
         for (int i = 0; i < u.exNames.length; i++) {
           WorkoutExercises exercise = WorkoutExercises(

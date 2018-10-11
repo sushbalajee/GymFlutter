@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'workoutDetails.dart';
 import 'jsonLogic.dart';
+import 'dart:async';
+import 'dart:convert';
+
 
 
 //-----------------------------------------------------------------------------------//
@@ -8,9 +11,9 @@ import 'jsonLogic.dart';
 class WorkoutsList extends StatefulWidget {
 
   final String value;
-  final List<Workouts> workoutsList;
+  //final List<Workouts> workoutsList;
 
-  WorkoutsList({Key key, this.value, this.workoutsList}) : super(key: key);
+  WorkoutsList({Key key, this.value}) : super(key: key);
 
   @override
   _NextPageState createState() => new _NextPageState();
@@ -20,6 +23,26 @@ class WorkoutsList extends StatefulWidget {
 
 class _NextPageState extends State<WorkoutsList> {
   List<Workouts> users = [];
+
+    final List<Workouts> workouts = [];
+
+  Future fetchPost() async {
+
+      //final response =
+          //await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+      //var jsonResponse = json.decode(response.body);
+      String data = await DefaultAssetBundle.of(context).loadString("assets/JSON/testingLocal.json");
+      var jsonResponse = json.decode(data);
+      WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
+
+      workouts.clear();
+      for (var work in post.workouts) {
+        Workouts wk = Workouts(work.workoutname, work.musclegroup,
+            work.listOfExercises, work.description);
+        workouts.add(wk);
+      }
+      return workouts;
+  }
 
 //-----------------------------------------------------------------------------------//
 
@@ -34,12 +57,14 @@ class _NextPageState extends State<WorkoutsList> {
             centerTitle: true,
             backgroundColor: Colors.grey[900],
             title: new Text(widget.value)),
-        body: new ListView.builder( 
-                      itemCount: widget.workoutsList.length,
+        body: Container( child:
+        FutureBuilder( future: fetchPost(), builder: (BuildContext context, AsyncSnapshot snapshot) { 
+          return ListView.builder( 
+                      itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         workoutNumber += index;
                         return ListTile(
-                            title: Text(widget.workoutsList[index].workoutname, style: TextStyle(
+                            title: Text(snapshot.data[index].workoutname, style: TextStyle(
                                       fontFamily: "Prompt",
                                       fontSize: screenWidth * 0.055,
                                       fontWeight: FontWeight.w700)),
@@ -49,12 +74,12 @@ class _NextPageState extends State<WorkoutsList> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PageThree(
-                                            value: widget.workoutsList,
-                                            title: widget.workoutsList[index].workoutname,
-                                            muscleGroup: widget.workoutsList[index].musclegroup,
-                                            description: widget.workoutsList[index].description
+                                            value: workouts,
+                                            title: snapshot.data[index].workoutname,
+                                            muscleGroup: snapshot.data[index].musclegroup,
+                                            description: snapshot.data[index].description
                                           )));
                             });
-                  }));
+                  });})));
     }
 }

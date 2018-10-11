@@ -22,7 +22,7 @@ class PageTwoState extends State<PageTwo> {
   var connectivity;
   StreamSubscription<ConnectivityResult> subscription;
 
-  final List<Workouts> workouts = [];
+  /*final List<Workouts> workouts = [];
 
   Future fetchPost() async {
 
@@ -40,7 +40,7 @@ class PageTwoState extends State<PageTwo> {
         workouts.add(wk);
       }
       return workouts;
-  }
+  }*/
 
   final List<String> upperBodyCategories = [
     'Chest',
@@ -83,27 +83,24 @@ class PageTwoState extends State<PageTwo> {
 
     return new Scaffold(
         backgroundColor: Colors.grey[100],
-        body: Container(
-          child: FutureBuilder(
-              future: fetchPost(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return Stack(children: <Widget>[
+        body: 
+                  new Stack(children: <Widget>[
                     new Column(children: <Widget>[
                       sliderTitles(
                           "Muscle Building", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.upperBodyCategories,
-                          this.picIndexes, this.workouts),
+                          this.picIndexes),
                       sliderTitles(
                           "Weight Loss", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.lowerBodyCategories,
-                          this.picIndexes, this.workouts),
+                          this.picIndexes),
                       sliderTitles("Cardio", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.cardioCategories,
-                          this.picIndexes, this.workouts)
+                          this.picIndexes)
                     ])
-                  ]);
-              }),
-        ));
+                  ])
+              
+        );
   }
 }
 
@@ -129,7 +126,7 @@ Widget sliderTitles(String title, double height, double width) {
 //-----------------------------------------------------------------------------------//
 
 Widget horizontalSlider(double screenHeight, List<String> titles,
-    List<String> picIndex, List<Workouts> listToGo) {
+    List<String> picIndex) {
   return Container(
     height: screenHeight * 0.195,
     child: new ListView.builder(
@@ -137,7 +134,7 @@ Widget horizontalSlider(double screenHeight, List<String> titles,
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       itemBuilder: (BuildContext content, int index) =>
-          CreateTile(titles[index], picIndex[index], listToGo),
+          CreateTile(titles[index], picIndex[index]),
       itemCount: titles.length,
     ),
   );
@@ -148,9 +145,9 @@ Widget horizontalSlider(double screenHeight, List<String> titles,
 class CreateTile extends StatelessWidget {
   final String name;
   final String picName;
-  final List<Workouts> workoutsList;
+  //final List<Workouts> workoutsList;
 
-  CreateTile(this.name, this.picName, this.workoutsList);
+  CreateTile(this.name, this.picName);
 
   //@override
   Widget build(BuildContext context) {
@@ -176,7 +173,6 @@ class CreateTile extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => WorkoutsList(
                               value: name,
-                              workoutsList: workoutsList,
                             )));
               },
               child: SizedBox(
