@@ -1,0 +1,214 @@
+{
+    "Shoulders": [
+        {
+            "description": "This is the description for this workout",
+            "exercises": [
+                {
+                    "execution": "N/A",
+                    "name": "Leg extensions",
+                    "reps": "20",
+                    "rest": "60",
+                    "sets": "5",
+                    "target": "quads",
+                    "weight": "Start at 40% of max weight and increment each set"
+                },
+                {
+                    "execution": "N/A",
+                    "name": "Weighted Bulgarian split squats",
+                    "reps": "12",
+                    "rest": "90",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 50% of max weight and increment each set"
+                },
+                {
+                    "execution": "8 seconds down, 2 seconds up",
+                    "name": "Hack squats",
+                    "reps": "8",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "Superset",
+                    "name": "Leg Press + Smith machine squats",
+                    "reps": "20 - 20",
+                    "rest": "60",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "1 minute continuous",
+                    "name": "Weighted lunges",
+                    "reps": "N/A",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Light dumbbell"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Leg Workout 100"
+        },
+        {
+            "description": "This is the description for this new workout",
+            "exercises": [
+                {
+                    "execution": "N/A",
+                    "name": "2nd Leg extensions",
+                    "reps": "20",
+                    "rest": "60",
+                    "sets": "5",
+                    "target": "quads",
+                    "weight": "Start at 40% of max weight and increment each set"
+                },
+                {
+                    "execution": "N/A",
+                    "name": "2nd Weighted Bulgarian split squats",
+                    "reps": "12",
+                    "rest": "90",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 50% of max weight and increment each set"
+                },
+                {
+                    "execution": "8 seconds down, 2 seconds up",
+                    "name": "2nd Hack squats",
+                    "reps": "8",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "Superset",
+                    "name": "2nd Leg Press + Smith machine squats",
+                    "reps": "20 - 20",
+                    "rest": "60",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "1 minute continuous",
+                    "name": "2nd Weighted lunges",
+                    "reps": "N/A",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Light dumbbell"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Leg Workout 200"
+        }
+    ],
+    "Legs": [
+        {
+            "description": "This is the description for this workout",
+            "exercises": [
+                {
+                    "execution": "N/A",
+                    "name": "Leg extensions",
+                    "reps": "20",
+                    "rest": "60",
+                    "sets": "5",
+                    "target": "quads",
+                    "weight": "Start at 40% of max weight and increment each set"
+                },
+                {
+                    "execution": "N/A",
+                    "name": "Weighted Bulgarian split squats",
+                    "reps": "12",
+                    "rest": "90",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 50% of max weight and increment each set"
+                },
+                {
+                    "execution": "8 seconds down, 2 seconds up",
+                    "name": "Hack squats",
+                    "reps": "8",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "Superset",
+                    "name": "Leg Press + Smith machine squats",
+                    "reps": "20 - 20",
+                    "rest": "60",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "1 minute continuous",
+                    "name": "Weighted lunges",
+                    "reps": "N/A",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Light dumbbell"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Leg Workout 1"
+        },
+        {
+            "description": "This is the description for this new workout",
+            "exercises": [
+                {
+                    "execution": "N/A",
+                    "name": "2nd Leg extensions",
+                    "reps": "20",
+                    "rest": "60",
+                    "sets": "5",
+                    "target": "quads",
+                    "weight": "Start at 40% of max weight and increment each set"
+                },
+                {
+                    "execution": "N/A",
+                    "name": "2nd Weighted Bulgarian split squats",
+                    "reps": "12",
+                    "rest": "90",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 50% of max weight and increment each set"
+                },
+                {
+                    "execution": "8 seconds down, 2 seconds up",
+                    "name": "2nd Hack squats",
+                    "reps": "8",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "Superset",
+                    "name": "2nd Leg Press + Smith machine squats",
+                    "reps": "20 - 20",
+                    "rest": "60",
+                    "sets": "3",
+                    "target": "upperleg",
+                    "weight": "Start at 60% of max weight and increment each set"
+                },
+                {
+                    "execution": "1 minute continuous",
+                    "name": "2nd Weighted lunges",
+                    "reps": "N/A",
+                    "rest": "90",
+                    "sets": "4",
+                    "target": "upperleg",
+                    "weight": "Light dumbbell"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Leg Workout 2"
+        }
+    ]
+}

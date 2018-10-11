@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'workouts.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'color_loader_2.dart';
 import 'package:connectivity/connectivity.dart';
+import 'jsonLogic.dart';
+
 
 
 class PageTwo extends StatefulWidget {
@@ -24,9 +26,11 @@ class PageTwoState extends State<PageTwo> {
 
   Future fetchPost() async {
 
-      final response =
-          await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
-      var jsonResponse = json.decode(response.body);
+      //final response =
+          //await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+      //var jsonResponse = json.decode(response.body);
+      String data = await DefaultAssetBundle.of(context).loadString("assets/JSON/testingLocal.json");
+      var jsonResponse = json.decode(data);
       WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
 
       workouts.clear();
@@ -83,35 +87,21 @@ class PageTwoState extends State<PageTwo> {
           child: FutureBuilder(
               future: fetchPost(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return new Stack(children: <Widget>[
-                    Center(
-                        child: ColorLoader2(
-                            color1: Colors.red,
-                            color2: Colors.green,
-                            color3: Colors.yellow)),
-                    Container(
-                        alignment: Alignment(0.0, 0.15),
-                        child: new Text("Loading...",
-                            style: TextStyle(fontSize: 20.0)))
-                  ]);
-                } else {
                   return Stack(children: <Widget>[
                     new Column(children: <Widget>[
                       sliderTitles(
-                          "Muscle Building", screenHeight * 0.05, screenWidth),
+                          "Muscle Building", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.upperBodyCategories,
                           this.picIndexes, this.workouts),
                       sliderTitles(
-                          "Weight Loss", screenHeight * 0.05, screenWidth),
+                          "Weight Loss", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.lowerBodyCategories,
                           this.picIndexes, this.workouts),
-                      sliderTitles("Cardio", screenHeight * 0.05, screenWidth),
+                      sliderTitles("Cardio", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.cardioCategories,
                           this.picIndexes, this.workouts)
                     ])
                   ]);
-                }
               }),
         ));
   }

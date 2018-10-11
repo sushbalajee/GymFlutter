@@ -60,6 +60,7 @@ flutter:
   - assets/targets/quads.png
   - assets/targets/upperleg.png
   - assets/JSON/gymapp-e8453-export.json
+  - assets/JSON/testingLocal.json
 
   fonts: 
     - family: Prompt

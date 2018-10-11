@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'personalisedWorkouts.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -62,17 +63,26 @@ class RootPageState extends State<RootPage> {
       case AuthStatus.notSignedIn:
         return new Login(auth: widget.auth, onSignedIn: signedIn);
       case AuthStatus.signedIn:
-        return new Column(mainAxisAlignment: MainAxisAlignment.center ,children: <Widget>[ 
+        return new Column( 
+          children: <Widget>[ 
           Container(
             padding: EdgeInsets.all(20.0),
             alignment: Alignment.center,
-            child: new Text("You are already signed in", style: TextStyle(fontSize: 20.0),)),
+            child: new RaisedButton( child: new Text("My Personalised Workouts"),
+            onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PageFour()
+                        ));
+              },),
+            ),
           RaisedButton( 
             color: Colors.grey[900],
             child: new Text("Sign Out", style: TextStyle(fontSize: 15.0, color: Colors.white),),
             onPressed: signedOut,
             shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(20.0)))
+            borderRadius: new BorderRadius.circular(20.0))),
         ]);
     }
     return null;

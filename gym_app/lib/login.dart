@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
-import 'color_loader_2.dart';
 
 class Login extends StatefulWidget {
 Login({this.auth, this.onSignedIn});
@@ -66,15 +65,19 @@ class LoginPageState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return new Scaffold(
+      resizeToAvoidBottomPadding: false,
         body: new Container(
           color: Colors.grey[100],
-      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+           alignment: Alignment.center,
+      padding: EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight/8),
+  
       child: new Form(
           key: formKey,
-          child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: new ListView(
               children: buildInputs() + buildSubmitButtons()
               )),
     ));

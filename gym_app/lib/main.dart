@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'workoutsMainPage.dart';
-import 'login.dart';
 import 'auth.dart';
 import 'home.dart';
 import 'root.dart';
@@ -55,13 +54,14 @@ class HomePageState extends State<GymApp> {
         title: "Gym Application V1.0",
         home: new Scaffold(
             backgroundColor: Colors.grey[100],
+
             appBar: new AppBar(
                 centerTitle: true,
                 backgroundColor: Colors.grey[900],
                 title: new Text("GymApp V1.0")),
-            body: currentPage,
 
-            //Bottom navigation bar
+            body: currentPage,
+            
             bottomNavigationBar: new Theme(
               data: Theme.of(context).copyWith(
                   textTheme: Theme.of(context)
@@ -82,7 +82,7 @@ class HomePageState extends State<GymApp> {
                     new BottomNavigationBarItem(
                         icon: new Text("2"), title: new Text("Workouts")),
                     new BottomNavigationBarItem(
-                        icon: new Text("3"), title: new Text("Login"))
+                        icon: new Text("3"), title: new Text("Personalised"))
                   ]),
             )));
   }
