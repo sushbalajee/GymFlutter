@@ -37,6 +37,7 @@ class LoginPageState extends State<Login> {
         if(formType == FormType.login){
         String userId = await widget.auth.signInWithEmailAndPassword(email, password);
         print('Signed in user with id: $userId');
+
         }
         else{
           String userId = await widget.auth.createUserWithEmailAndPassword(email, password);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'workouts.dart';
 import 'dart:async';
 import 'jsonLogic.dart';
 
@@ -85,7 +84,6 @@ class WorkoutInfo extends State<PageThree> {
             ),
             Container(
                 child: ListView.builder(
-                    //addRepaintBoundaries: false,
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),

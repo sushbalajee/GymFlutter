@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'workouts.dart';
 //import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:convert';
-import 'color_loader_2.dart';
 import 'package:connectivity/connectivity.dart';
-import 'jsonLogic.dart';
 
 
 
@@ -21,26 +18,6 @@ class PageTwoState extends State<PageTwo> {
   var connectionStatus = 'Unknown';
   var connectivity;
   StreamSubscription<ConnectivityResult> subscription;
-
-  /*final List<Workouts> workouts = [];
-
-  Future fetchPost() async {
-
-      //final response =
-          //await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
-      //var jsonResponse = json.decode(response.body);
-      String data = await DefaultAssetBundle.of(context).loadString("assets/JSON/testingLocal.json");
-      var jsonResponse = json.decode(data);
-      WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse);
-
-      workouts.clear();
-      for (var work in post.workouts) {
-        Workouts wk = Workouts(work.workoutname, work.musclegroup,
-            work.listOfExercises, work.description);
-        workouts.add(wk);
-      }
-      return workouts;
-  }*/
 
   final List<String> upperBodyCategories = [
     'Chest',
@@ -145,7 +122,6 @@ Widget horizontalSlider(double screenHeight, List<String> titles,
 class CreateTile extends StatelessWidget {
   final String name;
   final String picName;
-  //final List<Workouts> workoutsList;
 
   CreateTile(this.name, this.picName);
 

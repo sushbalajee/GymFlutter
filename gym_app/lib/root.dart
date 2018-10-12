@@ -3,6 +3,7 @@ import 'auth.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'personalisedWorkouts.dart';
+import 'workouts.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -22,6 +23,7 @@ class RootPageState extends State<RootPage> {
 
   final BaseAuth auth;
   final VoidCallback onSignedOut;
+  String uid;
 
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
@@ -57,8 +59,17 @@ class RootPageState extends State<RootPage> {
     }
   }
 
+  void updateup() {
+    FirebaseAuth.instance.currentUser().then((userId) {
+      uid = userId.uid;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    updateup();
+
     switch (authStatus) {
       case AuthStatus.notSignedIn:
         return new Login(auth: widget.auth, onSignedIn: signedIn);
@@ -73,9 +84,12 @@ class RootPageState extends State<RootPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PageFour()
-                        ));
-              },),
+                        builder: (context) => WorkoutsListPersonal(
+                              value: "Test",
+                              userUid: uid,
+                            ))
+                   );
+            },),
             ),
           RaisedButton( 
             color: Colors.grey[900],
