@@ -16,7 +16,7 @@ class WorkoutCategory {
   factory WorkoutCategory.fromJson(Map<String, dynamic> parsedJson, String xxx) {
 
     //print("This is xxx: " + xxx);
-    var list = parsedJson['Legs'] as List;
+    var list = parsedJson[xxx] as List;
 
     List<Wkouts> imagesList = list.map((i) => Wkouts.fromJson(i)).toList();
 

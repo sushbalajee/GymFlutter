@@ -13,10 +13,7 @@ class RootPage extends StatefulWidget {
   State<StatefulWidget> createState() => RootPageState();
 }
 
-enum AuthStatus {
-  notSignedIn,
-  signedIn,
-}
+enum AuthStatus { notSignedIn, signedIn, signedInAsPT }
 
 class RootPageState extends State<RootPage> {
   RootPageState({this.auth, this.onSignedOut});
@@ -31,13 +28,22 @@ class RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     widget.auth.currentUser().then((userId) {
+      updateup();
+      print(userId);
       setState(() {
-        authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+        if (userId == '7AnBlYo6BNYrC6GAVdTBjGZudaG2') {
+          authStatus =
+              userId == null ? AuthStatus.signedIn : AuthStatus.signedInAsPT;
+        } else {
+          authStatus =
+              userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+        }
       });
     });
   }
 
   void signedIn() {
+    updateup();
     setState(() {
       authStatus = AuthStatus.signedIn;
     });
@@ -67,36 +73,84 @@ class RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-
     updateup();
 
     switch (authStatus) {
       case AuthStatus.notSignedIn:
         return new Login(auth: widget.auth, onSignedIn: signedIn);
+
       case AuthStatus.signedIn:
-        return new Column( 
-          children: <Widget>[ 
+        return new Column(children: <Widget>[
           Container(
             padding: EdgeInsets.all(20.0),
             alignment: Alignment.center,
-            child: new RaisedButton( child: new Text("My Personalised Workouts"),
-            onPressed: () {
+            child: new RaisedButton(
+              child: new Text("My Personalised Workouts"),
+              onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => WorkoutsListPersonal(
                               value: "Test",
                               userUid: uid,
-                            ))
-                   );
-            },),
+                            )));
+              },
             ),
-          RaisedButton( 
-            color: Colors.grey[900],
-            child: new Text("Sign Out", style: TextStyle(fontSize: 15.0, color: Colors.white),),
-            onPressed: signedOut,
-            shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(20.0))),
+          ),
+          RaisedButton(
+              color: Colors.grey[900],
+              child: new Text(
+                "Sign Out",
+                style: TextStyle(fontSize: 15.0, color: Colors.white),
+              ),
+              onPressed: signedOut,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(20.0))),
+        ]);
+
+        case AuthStatus.signedInAsPT:
+        return new Column(children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(20.0),
+            alignment: Alignment.center,
+            child: new RaisedButton(
+              child: new Text("My Personalised Workouts"),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkoutsListPersonal(
+                              value: "Test",
+                              userUid: uid,
+                            )));
+              },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(20.0),
+            alignment: Alignment.center,
+            child: new RaisedButton(
+              child: new Text("I am a PT"),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkoutsListPersonal(
+                              value: "Test",
+                              userUid: uid,
+                            )));
+              },
+            ),
+          ),
+          RaisedButton(
+              color: Colors.grey[900],
+              child: new Text(
+                "Sign Out",
+                style: TextStyle(fontSize: 15.0, color: Colors.white),
+              ),
+              onPressed: signedOut,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(20.0))),
         ]);
     }
     return null;
