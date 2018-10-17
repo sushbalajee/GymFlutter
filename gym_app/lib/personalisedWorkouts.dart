@@ -4,6 +4,7 @@ import 'jsonLogic.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:firebase_database/firebase_database.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -30,7 +31,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse, hitMe);
-
+    //print("Snakes: " + post.uiCode);
     workouts.clear();
     for (var work in post.workouts) {
       Workouts wk = Workouts(work.workoutname, work.musclegroup,

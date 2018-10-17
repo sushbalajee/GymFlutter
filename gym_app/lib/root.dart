@@ -4,6 +4,7 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'personalisedWorkouts.dart';
 import 'workouts.dart';
+import 'usersList.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -132,14 +133,11 @@ class RootPageState extends State<RootPage> {
             child: new RaisedButton(
               child: new Text("I am a PT"),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkoutsListPersonal(
-                              value: "Test",
-                              userUid: uid,
-                            )));
-              },
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UIDList()));
+                              },
             ),
           ),
           RaisedButton(

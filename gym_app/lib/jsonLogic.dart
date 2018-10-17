@@ -10,18 +10,21 @@ class Workouts {
 
 class WorkoutCategory {
   final List<Wkouts> workouts;
+  String uiCode;
 
-  WorkoutCategory({this.workouts});
+  WorkoutCategory({this.workouts, this.uiCode});
 
   factory WorkoutCategory.fromJson(Map<String, dynamic> parsedJson, String xxx) {
 
-    //print("This is xxx: " + xxx);
     var list = parsedJson[xxx] as List;
+
+    String ui = parsedJson.keys.toString();
 
     List<Wkouts> imagesList = list.map((i) => Wkouts.fromJson(i)).toList();
 
-    return WorkoutCategory(workouts: imagesList);
+    return WorkoutCategory(workouts: imagesList, uiCode: ui);
   }
+
 }
 
 class Wkouts {
