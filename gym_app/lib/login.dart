@@ -170,7 +170,6 @@ class Todo {
   String workoutname;
   String musclegroup;
 
-
   Todo(this.workoutname, this.description, this.musclegroup);
 
   toJson() {

@@ -4,6 +4,7 @@ import 'jsonLogic.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'uploadClientWorkouts.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -51,7 +52,7 @@ class UIDListPage extends State<UIDList> {
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     uuiiCode = post.uiCode;
 
-    print(uuiiCode);
+    //print(uuiiCode);
     return uuiiCode;
 
     
@@ -91,7 +92,16 @@ class UIDListPage extends State<UIDList> {
                                       //fontSize: screenWidth  * 0.055,
                                       fontWeight: FontWeight.w700)),
                                       leading: CircleAvatar(child: Text("$workoutNumber")),
-                            onTap: null);
+                            onTap: ()
+                            {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ClientWorkouts(
+                                         userUid: snapshot.data[index],
+                                      )));
+                            }  
+                            );
                   });}}))
       
            );
