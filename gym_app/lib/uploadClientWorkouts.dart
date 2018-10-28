@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:firebase_database/firebase_database.dart';
-import 'jsonLogic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'clientWorkoutDetails.dart';
+import 'dart:async';
 
 //-----------------------------------------------------------------------------------//
 
@@ -24,12 +20,9 @@ class ClientWorkouts extends StatefulWidget {
 
 class _NextPageStateClient extends State<ClientWorkouts> {
 
-
   List<Item> items = List();
   Item item;
   DatabaseReference itemRef;
-  String keekee;
-  var xoxox;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -37,10 +30,9 @@ class _NextPageStateClient extends State<ClientWorkouts> {
   void initState() {
     super.initState();
     item = Item("", "","");
-    final FirebaseDatabase database = FirebaseDatabase.instance; //Rather then just writing FirebaseDatabase(), get the instance.  
+    final FirebaseDatabase database = FirebaseDatabase.instance; 
     itemRef = database.reference().child('Workouts').child(widget.userUid);
     itemRef.onChildAdded.listen(_onEntryAdded);
-    //itemRef.onChildChanged.listen(_onEntryChanged);
   }
 
   _onEntryAdded(Event event) {
@@ -48,15 +40,6 @@ class _NextPageStateClient extends State<ClientWorkouts> {
       items.add(Item.fromSnapshot(event.snapshot));
     });
   }
-
-  /*_onEntryChanged(Event event) {
-    var old = items.singleWhere((entry) {
-      return entry.key == event.snapshot.key;
-    });
-    setState(() {
-      items[items.indexOf(old)] = Item.fromSnapshot(event.snapshot);
-    });
-  }*/
 
   void handleSubmit() {
     final FormState form = formKey.currentState;
@@ -71,6 +54,10 @@ class _NextPageStateClient extends State<ClientWorkouts> {
 
   @override
   Widget build(BuildContext context) {
+
+    int workoutNumber = 0;
+    double screenWidth = MediaQuery.of(context).size.width;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('FB example'),
@@ -78,9 +65,60 @@ class _NextPageStateClient extends State<ClientWorkouts> {
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
+        
           Flexible(
-            flex: 0,
-            child: Center(
+            child: FirebaseAnimatedList(
+              query: itemRef,
+              itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                  Animation<double> animation, int index) {
+                workoutNumber += 1;
+                return new ListTile(
+                  leading: CircleAvatar(child: Text("$workoutNumber")),
+                  title: Text(items[index].workoutname,style: TextStyle(
+                                      fontFamily: "Prompt",
+                                      fontSize: screenWidth * 0.055,
+                                      fontWeight: FontWeight.w700)),
+                   onTap: (){
+                      Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PageFour(
+                                            title: items[index].workoutname,
+                                            muscleGroup: items[index].musclegroup,
+                                            description: items[index].description,
+                                            uid: widget.userUid,
+                                            firebaseGeneratedKey: items[index].key,
+                                          )));
+                   },
+                );
+              },
+            ),
+          ),
+          Container(
+            width: screenWidth,
+            child: new FlatButton(child: 
+            new Text("+ Add Workout +", style: TextStyle(
+                    fontFamily: "Prompt",
+                    fontSize: screenWidth * 0.045,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white)),
+            color: Colors.black,
+
+          onPressed: (){ confirmDialog(context, "Add a new workout");})
+          )
+        ],
+      ),
+    );
+  }
+
+Future<Null> confirmDialog(BuildContext context, String execution) {
+  return showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) { 
+        return new AlertDialog(
+          title: new Text(execution),
+           content: SingleChildScrollView(
               child: Form(
                 key: formKey,
                 child: Flex(
@@ -113,45 +151,25 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                     IconButton(
                       icon: Icon(Icons.send),
                       onPressed: () {
-                        //item.autoKey = xoxox;
                         handleSubmit();
                       },
                     ),
                   ],
                 ),
-              ),
+              )
             ),
-          ),
-          Flexible(
-            child: FirebaseAnimatedList(
-              query: itemRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                return new ListTile(
-                  leading: Icon(Icons.message),
-                  title: Text(items[index].workoutname),
-                  subtitle: Text(items[index].musclegroup),
-                   onTap: (){
-                     print("KEEKEE: " + items[index].key);
-                      Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PageFour(
-                                            title: items[index].workoutname,
-                                            muscleGroup: items[index].musclegroup,
-                                            description: items[index].description,
-                                            uid: widget.userUid,
-                                            keekee: items[index].key,
-                                          )));
-                   },
-                );
+          actions: <Widget>[
+            new FlatButton(
+              child: const Text('CLOSE'),
+              onPressed: () {
+                Navigator.of(context).pop();
               },
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        );
+      });
+}
+
 }
 
 class Item {
@@ -170,18 +188,10 @@ class Item {
 
 
   toJson() {
-
-    var po = <String, dynamic>{
-      'name' : '',
-      'reps' : '',
-      'sets' : '',
-    };
-
     return {
       "workoutname": workoutname,
       "musclegroup": musclegroup,
       "description": description,
-      "exercises": po
     };
   }
   

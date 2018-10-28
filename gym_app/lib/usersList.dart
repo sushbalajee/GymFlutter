@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'workoutDetails.dart';
-import 'jsonLogic.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -9,11 +8,6 @@ import 'uploadClientWorkouts.dart';
 //-----------------------------------------------------------------------------------//
 
 class UIDList extends StatefulWidget {
-
-  //final String userUid;
-  //final String value;
-
-  //UIDList({Key key, this.value, this.userUid}) : super(key: key);
 
   @override
   UIDListPage createState() => new UIDListPage();
@@ -52,7 +46,6 @@ class UIDListPage extends State<UIDList> {
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     uuiiCode = post.uiCode;
 
-    //print(uuiiCode);
     return uuiiCode;
 
     
@@ -63,9 +56,6 @@ class UIDListPage extends State<UIDList> {
   Widget build(BuildContext context) {
 
     int workoutNumber = 0;
-
-    //fetchPost();
-
     return new Scaffold(
         appBar: new AppBar(
             centerTitle: true,
@@ -76,6 +66,7 @@ class UIDListPage extends State<UIDList> {
         FutureBuilder( 
           future: fetchPost(), 
           builder: (BuildContext context, AsyncSnapshot snapshot) { 
+            
             if (snapshot.data == null) {
                   return Container(
                       child: Center(
@@ -85,7 +76,7 @@ class UIDListPage extends State<UIDList> {
           return ListView.builder( 
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        workoutNumber += index;
+                        workoutNumber += 1;
                         return ListTile(
                             title: Text(snapshot.data[index], style: TextStyle(
                                       fontFamily: "Prompt",

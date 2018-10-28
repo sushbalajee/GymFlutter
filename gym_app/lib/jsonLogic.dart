@@ -14,9 +14,9 @@ class WorkoutCategory {
 
   WorkoutCategory({this.workouts, this.uiCode});
 
-  factory WorkoutCategory.fromJson(Map<String, dynamic> parsedJson, String xxx) {
+  factory WorkoutCategory.fromJson(Map<String, dynamic> parsedJson, String category) {
 
-    var list = parsedJson['52xVt9laDRhED4Di1ow4SeUMbkz2'] as List;
+    var list = parsedJson[category] as List;
 
     String ui = parsedJson.keys.toString();
 

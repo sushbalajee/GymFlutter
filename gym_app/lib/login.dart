@@ -3,7 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
@@ -46,7 +45,6 @@ class LoginPageState extends State<Login> {
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
           print('Created user with id: $userId');
-                  //createEndpoint(new Todo("1","2","3"));
                   updateUID();
                   _createMountain(userId);
 
@@ -77,6 +75,7 @@ class LoginPageState extends State<Login> {
               double screenHeight = MediaQuery.of(context).size.height;
           
               return new Scaffold(
+                
                   resizeToAvoidBottomPadding: false,
                   body: new Container(
                     color: Colors.grey[100],
@@ -119,10 +118,14 @@ class LoginPageState extends State<Login> {
                           onPressed: validateAndSubmit,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(20.0)))),
-                  new FlatButton(
+                  new OutlineButton(
+                    borderSide: BorderSide(color: Colors.grey[500]),
                     child: new Text("Create an Account",
                         style: new TextStyle(fontSize: 15.0)),
                     onPressed: moveToRegister,
+                    shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                              )
                   )
                 ];
               } else {
@@ -138,9 +141,13 @@ class LoginPageState extends State<Login> {
                           onPressed: validateAndSubmit,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(20.0)))),
-                  new FlatButton(
+                  new OutlineButton(
+                    borderSide: BorderSide(color: Colors.grey[500]),
                     child: new Text("Already have an account? Login in here",
                         style: new TextStyle(fontSize: 15.0)),
+                        shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                              ),
                     onPressed: moveToLogin,
                   )
                 ];
@@ -148,15 +155,6 @@ class LoginPageState extends State<Login> {
             }
           
             static const jsonCodec = const JsonCodec();
-          
-            createEndpoint(Todo todo) async {
-              var jsonResponse = json.encode(todo);
-              print("Json = $jsonResponse");
-          
-              var url = 'https://gymapp-e8453.firebaseio.com/Workouts.json';
-              var response = await http.post(url, body: jsonResponse);
-            
-            }
 
               void _createMountain(String uid) {
     Database.createMountain(uid).then((String mountainKey) {
@@ -185,15 +183,9 @@ class Database {
 
   static Future<String> createMountain(String userUID) async {
     
-    var mountain = <String, dynamic>{
-      'name' : '',
-    };
-
     DatabaseReference reference = FirebaseDatabase.instance
         .reference().child("Workouts")
         .child(userUID);
-        //.child("mountains")
-        // .push();
 
     reference.set("");
 

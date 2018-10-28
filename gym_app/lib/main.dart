@@ -78,11 +78,11 @@ class HomePageState extends State<GymApp> {
                   },
                   items: [
                     new BottomNavigationBarItem(
-                        icon: new Text("1"), title: new Text("Home")),
+                        icon: new Icon(Icons.home), title: new Text("Home")),
                     new BottomNavigationBarItem(
-                        icon: new Text("2"), title: new Text("Workouts")),
+                        icon: new Icon(Icons.pool), title: new Text("Workouts")),
                     new BottomNavigationBarItem(
-                        icon: new Text("3"), title: new Text("Personalised"))
+                        icon: new Icon(Icons.people), title: new Text("Personalised"))
                   ]),
             )));
   }

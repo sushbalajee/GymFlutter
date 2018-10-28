@@ -3,7 +3,6 @@ import 'auth.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'personalisedWorkouts.dart';
-import 'workouts.dart';
 import 'usersList.dart';
 
 class RootPage extends StatefulWidget {
