@@ -56,14 +56,14 @@ class RootPageState extends State<RootPage> {
     });
   }
 
-  void signOut() async {
+  /*void signOut() async {
     try {
       await auth.signOut();
       onSignedOut();
     } catch (e) {
       print(e);
     }
-  }
+  }*/
 
   void updateup() {
     FirebaseAuth.instance.currentUser().then((userId) {
@@ -73,6 +73,7 @@ class RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     updateup();
 
     switch (authStatus) {
@@ -84,7 +85,8 @@ class RootPageState extends State<RootPage> {
           Container(
             padding: EdgeInsets.all(20.0),
             alignment: Alignment.center,
-            child: new RaisedButton(
+            width: screenWidth,
+            child: new FlatButton(
               child: new Text("My Personalised Workouts"),
               onPressed: () {
                 Navigator.push(
@@ -127,6 +129,7 @@ class RootPageState extends State<RootPage> {
             ),
           ),
           Container(
+            
             padding: EdgeInsets.all(20.0),
             alignment: Alignment.center,
             child: new RaisedButton(

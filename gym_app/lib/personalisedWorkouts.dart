@@ -60,8 +60,6 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
               query: itemRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-
-
                 workoutNumber += 1;
                 return new ListTile(
                   leading: CircleAvatar(child: Text("$workoutNumber")),
