@@ -8,13 +8,12 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
 
-
 class Login extends StatefulWidget {
   Login({this.auth, this.onSignedIn});
 
   final BaseAuth auth;
   final VoidCallback onSignedIn;
-  
+
   @override
   State<StatefulWidget> createState() => LoginPageState();
 }
@@ -22,38 +21,72 @@ class Login extends StatefulWidget {
 enum FormType { login, register }
 
 class LoginPageState extends State<Login> {
-
   final TextEditingController _passController = new TextEditingController();
-  final TextEditingController _confirmPassController = new TextEditingController();
+  final TextEditingController _confirmPassController =
+      new TextEditingController();
   final formKey = new GlobalKey<FormState>();
 
   String email;
   String password;
-  FormType formType = FormType.login;
-  bool checkPT;
+  String personalTrainerID;
 
-  List<String> uuiiCode;
+  List<String> userId;
+
+  FormType formType = FormType.login;
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    if (formType == FormType.login) {
+      return new Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: new Container(
+            color: Colors.grey[100],
+            alignment: Alignment.center,
+            padding:
+                EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
+            child: new Form(
+                key: formKey,
+                child: new ListView(
+                    children: buildInputsForLogin() + buildSubmitButtons())),
+          ));
+    } else {
+      return new Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: new Container(
+            color: Colors.grey[100],
+            alignment: Alignment.center,
+            padding:
+                EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
+            child: new Form(
+                key: formKey,
+                child: new ListView(
+                    children: buildInputsForRegister() + buildSubmitButtons())),
+          ));
+    }
+  }
+  
 
   Future fetchPost(String yyy) async {
-    
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('PTcheck' , null);
-  
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('PTcheck', null);
+
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
 
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
-    uuiiCode = post.uiCode;
+    userId = post.uiCode;
 
-    if(uuiiCode.contains(yyy)){
+    if (userId.contains(yyy)) {
       print("pt success");
-      await prefs.setBool('PTcheck' , true);
-    }else {
+      await prefs.setBool('PTcheck', true);
+    } else {
       print("client success");
-      await prefs.setBool('PTcheck' , false);
+      await prefs.setBool('PTcheck', false);
     }
-    return uuiiCode;
+    return userId;
   }
 
   bool validateAndSave() {
@@ -73,14 +106,15 @@ class LoginPageState extends State<Login> {
         if (formType == FormType.login) {
           String userId =
               await widget.auth.signInWithEmailAndPassword(email, password);
-              fetchPost(userId);
+          fetchPost(userId);
           print('Signed in user with id: $userId');
+          print("Testing: $personalTrainerID");
         } else {
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
-              fetchPost(userId);
+          fetchPost(userId);
           print('Created user with id: $userId');
-
+          print("Testing: $personalTrainerID");
           //updateUID();
           //_createMountain(userId);
         }
@@ -108,16 +142,17 @@ class LoginPageState extends State<Login> {
     }
   }
 
-  void validateAndSubmit2() async {
+  void validateAndSubmitRegisterPT() async {
     print(widget.auth.currentUser());
     if (validateAndSave()) {
       try {
-          String userId =
-              await widget.auth.createUserWithEmailAndPassword(email, password);
-          print('Created user with id: $userId');
-          updateUID();
-          _createMountain(userId);
-          print("I am a PT!");
+        String userId =
+            await widget.auth.createUserWithEmailAndPassword(email, password);
+        fetchPost(userId);
+        print('Created user with id: $userId');
+        updateUID();
+        _createMountain(userId);
+        print("I am a PT!");
         widget.onSignedIn();
       } catch (e) {
         print('Error: $e');
@@ -139,42 +174,7 @@ class LoginPageState extends State<Login> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
-if(formType == FormType.login){
-    return new Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: new Container(
-          color: Colors.grey[100],
-          alignment: Alignment.center,
-          padding:
-              EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
-          child: new Form(
-              key: formKey,
-              child:
-                  new ListView(children: buildInputs() + buildSubmitButtons())),
-        ));
-}
-else{
-   return new Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: new Container(
-          color: Colors.grey[100],
-          alignment: Alignment.center,
-          padding:
-              EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
-          child: new Form(
-              key: formKey,
-              child:
-                  new ListView(children: buildInputs2() + buildSubmitButtons())),
-        ));
-}
-
-  }
-
-  List<Widget> buildInputs() {
+  List<Widget> buildInputsForLogin() {
     return [
       new TextFormField(
           decoration: new InputDecoration(labelText: 'Email'),
@@ -189,30 +189,35 @@ else{
     ];
   }
 
-List<Widget> buildInputs2() {
+  List<Widget> buildInputsForRegister() {
     return [
       new TextFormField(
           decoration: new InputDecoration(labelText: 'Email'),
           validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
           onSaved: (value) => email = value),
       new TextFormField(
-        controller: _passController,
+          controller: _passController,
           decoration: new InputDecoration(labelText: 'Password'),
           obscureText: true,
           validator: (value) =>
               value.isEmpty ? 'Password can\'t be empty' : null,
           onSaved: (value) => password = value),
       new TextFormField(
-        controller: _confirmPassController,
+          controller: _confirmPassController,
           decoration: new InputDecoration(labelText: 'Confirm Password'),
           obscureText: true,
           validator: (value) {
-          if(value != _passController.text){
-            return "Passwords Do Not Match";
-          }})
+            if (value != _passController.text) {
+              return "Passwords Do Not Match";
+            }
+          }),
+      new TextFormField(
+          decoration: new InputDecoration(labelText: 'Personal Trainer ID'),
+          validator: (value) =>
+              value.isEmpty ? 'Personal Trainer ID can\'t be empty' : null,
+          onSaved: (value) => personalTrainerID = value)
     ];
   }
-
 
   List<Widget> buildSubmitButtons() {
     if (formType == FormType.login) {
@@ -259,7 +264,8 @@ List<Widget> buildInputs2() {
           ),
           onPressed: moveToLogin,
         ),
-        new RaisedButton( child: new Text("Register as a PT"), onPressed: validateAndSubmit2)
+        new RaisedButton(
+            child: new Text("Register as a PT"), onPressed: validateAndSubmitRegisterPT)
       ];
     }
   }
@@ -325,4 +331,3 @@ Future<Null> confirmDialog(BuildContext context, String why, String execution) {
         );
       });
 }
-
