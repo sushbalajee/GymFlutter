@@ -4,6 +4,9 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'personalisedWorkouts.dart';
 import 'usersList.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'uploadClientWorkouts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -16,29 +19,56 @@ class RootPage extends StatefulWidget {
 enum AuthStatus { notSignedIn, signedIn, signedInAsPT }
 
 class RootPageState extends State<RootPage> {
+
+
   RootPageState({this.auth, this.onSignedOut});
+
+  List<Item> items = List();
+  Item item;
+
+  bool xxxxx;
 
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   String uid;
+  
+  DatabaseReference itemRef;
 
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
   @override
   void initState() {
     super.initState();
-    widget.auth.currentUser().then((userId) {
+
+      
+
+    widget.auth.currentUser().then((userId){
+
       updateup();
       print(userId);
-      setState(() {
-        if (userId == '7AnBlYo6BNYrC6GAVdTBjGZudaG2') {
+
+      final FirebaseDatabase database = FirebaseDatabase.instance; 
+      itemRef = database.reference().child('Workouts').child(userId);
+      itemRef.onChildAdded.listen(_onEntryAdded);
+
+      setState((){
+        print("Checking status of login : $xxxxx");
+        if (xxxxx == true) {
           authStatus =
               userId == null ? AuthStatus.signedIn : AuthStatus.signedInAsPT;
+              print("You are logged in as a Personal Trainer");
         } else {
           authStatus =
               userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+              print("You are logged in as a client");
         }
       });
+    });
+  }
+
+_onEntryAdded(Event event) {
+    setState(() {
+      items.add(Item.fromSnapshot(event.snapshot));
     });
   }
 
@@ -56,20 +86,19 @@ class RootPageState extends State<RootPage> {
     });
   }
 
-  /*void signOut() async {
-    try {
-      await auth.signOut();
-      onSignedOut();
-    } catch (e) {
-      print(e);
-    }
-  }*/
+  void updateup() async{
 
-  void updateup() {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    xxxxx = prefs.getBool('PTcheck');
+
     FirebaseAuth.instance.currentUser().then((userId) {
-      uid = userId.uid;
+      if(userId != null) {uid = userId.uid;} else {
+        print("User is currently null");
+      }
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -156,3 +185,4 @@ class RootPageState extends State<RootPage> {
     return null;
   }
 }
+

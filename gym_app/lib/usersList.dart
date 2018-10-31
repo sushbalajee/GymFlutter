@@ -38,7 +38,6 @@ class UIDListPage extends State<UIDList> {
 
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     uuiiCode = post.uiCode;
-
     return uuiiCode;
   }
 //-----------------------------------------------------------------------------------//

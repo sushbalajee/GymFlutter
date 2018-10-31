@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'usersList.dart';
+
 
 class Login extends StatefulWidget {
   Login({this.auth, this.onSignedIn});
+
   final BaseAuth auth;
   final VoidCallback onSignedIn;
   
-
   @override
   State<StatefulWidget> createState() => LoginPageState();
 }
@@ -26,6 +30,31 @@ class LoginPageState extends State<Login> {
   String email;
   String password;
   FormType formType = FormType.login;
+  bool checkPT;
+
+  List<String> uuiiCode;
+
+  Future fetchPost(String yyy) async {
+    
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('PTcheck' , null);
+  
+    final response =
+        await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+    var jsonResponse = json.decode(response.body);
+
+    GetUserId post = new GetUserId.fromJson10(jsonResponse);
+    uuiiCode = post.uiCode;
+
+    if(uuiiCode.contains(yyy)){
+      print("pt success");
+      await prefs.setBool('PTcheck' , true);
+    }else {
+      print("client success");
+      await prefs.setBool('PTcheck' , false);
+    }
+    return uuiiCode;
+  }
 
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -44,13 +73,16 @@ class LoginPageState extends State<Login> {
         if (formType == FormType.login) {
           String userId =
               await widget.auth.signInWithEmailAndPassword(email, password);
+              fetchPost(userId);
           print('Signed in user with id: $userId');
         } else {
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
+              fetchPost(userId);
           print('Created user with id: $userId');
-          updateUID();
-          _createMountain(userId);
+
+          //updateUID();
+          //_createMountain(userId);
         }
         widget.onSignedIn();
       } catch (e) {
@@ -71,6 +103,23 @@ class LoginPageState extends State<Login> {
           confirmDialog(context, "Password too short",
               "Please enter a password that is atleast 6 characters");
         }
+        print('Error: $e');
+      }
+    }
+  }
+
+  void validateAndSubmit2() async {
+    print(widget.auth.currentUser());
+    if (validateAndSave()) {
+      try {
+          String userId =
+              await widget.auth.createUserWithEmailAndPassword(email, password);
+          print('Created user with id: $userId');
+          updateUID();
+          _createMountain(userId);
+          print("I am a PT!");
+        widget.onSignedIn();
+      } catch (e) {
         print('Error: $e');
       }
     }
@@ -161,8 +210,6 @@ List<Widget> buildInputs2() {
           if(value != _passController.text){
             return "Passwords Do Not Match";
           }})
-              //value.isEmpty ? 'Passwords do not match' : null,)
-          //onSaved: (value) => password = value)
     ];
   }
 
@@ -211,7 +258,8 @@ List<Widget> buildInputs2() {
             borderRadius: new BorderRadius.circular(20.0),
           ),
           onPressed: moveToLogin,
-        )
+        ),
+        new RaisedButton( child: new Text("Register as a PT"), onPressed: validateAndSubmit2)
       ];
     }
   }
@@ -277,3 +325,4 @@ Future<Null> confirmDialog(BuildContext context, String why, String execution) {
         );
       });
 }
+
