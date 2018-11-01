@@ -9,13 +9,15 @@ class PageFour extends StatefulWidget {
   final String title;
   final String muscleGroup;
   final String description;
+  final String trainerID;
 
   PageFour(
       {Key key,
       this.title,
       this.muscleGroup,
       this.description,
-      this.uid,
+      this.uid, 
+      this.trainerID,
       this.firebaseGeneratedKey})
       : super(key: key);
 
@@ -39,13 +41,18 @@ class UploadedWorkoutInfo extends State<PageFour> {
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
 
-    snek = database.reference().child('Workouts').child(widget.uid);
-    itemRef = database
+        //itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
+
+    snek = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid);
+    /*itemRef = database
         .reference()
         .child('Workouts')
         .child(widget.uid)
         .child(widget.firebaseGeneratedKey)
-        .child('exercises');
+        .child('exercises');*/
+
+    itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child(widget.firebaseGeneratedKey).child('exercises');
+
     itemRef.onChildAdded.listen(_onEntryAdded);
 
   }

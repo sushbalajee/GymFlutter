@@ -32,6 +32,7 @@ class RootPageState extends State<RootPage> {
 
   String uid;
   String statusOfUser;
+  String relo = "";
 
   DatabaseReference itemRef;
 
@@ -48,7 +49,7 @@ class RootPageState extends State<RootPage> {
 
         final FirebaseDatabase database = FirebaseDatabase.instance;
         itemRef = database.reference().child('Workouts').child(userId);
-        itemRef.onChildAdded.listen(_onEntryAdded);
+        //itemRef.onChildAdded.listen(_onEntryAdded);
 
         setState(() {
           if (typeOfUser == true) {
@@ -58,19 +59,20 @@ class RootPageState extends State<RootPage> {
           } else {
             authStatus =
                 userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+            updateRelationship();
             print("You are logged in as a client");
           }
         });
-      } else { 
+      } else {
         print("User is Null");
       }
     });
   }
 
   _onEntryAdded(Event event) {
-    setState(() {
+    //setState(() {
       items.add(Item.fromSnapshot(event.snapshot));
-    });
+    //});
   }
 
   void signedIn() {
@@ -85,6 +87,14 @@ class RootPageState extends State<RootPage> {
       FirebaseAuth.instance.signOut();
       authStatus = AuthStatus.notSignedIn;
     });
+  }
+
+  void updateRelationship() async {
+    SharedPreferences relations = await SharedPreferences.getInstance();
+    relo = relations.getString('relationship');
+
+    print("YOU ARE LOGGED IN WITH THIS PT: " + relo);
+    
   }
 
   void updateup() async {
@@ -120,7 +130,7 @@ class RootPageState extends State<RootPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => WorkoutsListPersonal(
-                              value: "Test",
+                              value: relo,
                               userUid: uid,
                             )));
               },
@@ -153,7 +163,7 @@ class RootPageState extends State<RootPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => WorkoutsListPersonal(
-                              value: "Test",
+                              value: relo,
                               userUid: uid,
                             )));
               },
@@ -166,7 +176,9 @@ class RootPageState extends State<RootPage> {
               child: new Text("My Clients"),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UIDList()));
+                    MaterialPageRoute(builder: (context) => UIDList(
+                      trainerID: uid,
+                    )));
               },
             ),
           ),

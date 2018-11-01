@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'database.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'auth.dart';
@@ -30,7 +31,9 @@ class LoginPageState extends State<Login> {
   String password;
   String personalTrainerID;
 
-  List<String> userId;
+  DatabaseReference relationshipRef;
+
+  List<String> userIds;
 
   FormType formType = FormType.login;
 
@@ -69,24 +72,41 @@ class LoginPageState extends State<Login> {
   
 
   Future fetchPost(String yyy) async {
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('PTcheck', null);
+
+    SharedPreferences relations = await SharedPreferences.getInstance();
+    
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    relationshipRef = database.reference().child("Workouts").child("Relationships").child(yyy);
+
+        relationshipRef.once().then((snapshot){
+        if(snapshot != null){  
+        print("Your Personal Trainer is: " + snapshot.value);
+        relations.setString('relationship', snapshot.value);
+        }
+        else{
+          print("No personal trainer assigned");}
+        }
+        
+  );
 
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
 
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
-    userId = post.uiCode;
+    userIds = post.uiCode;
 
-    if (userId.contains(yyy)) {
+    if (userIds.contains(yyy)) {
       print("pt success");
       await prefs.setBool('PTcheck', true);
     } else {
       print("client success");
       await prefs.setBool('PTcheck', false);
     }
-    return userId;
+    return userIds;
   }
 
   bool validateAndSave() {
@@ -116,7 +136,7 @@ class LoginPageState extends State<Login> {
           print('Created user with id: $userId');
           print("Testing: $personalTrainerID");
           //updateUID();
-          //_createMountain(userId);
+          _createRelationship(userId, personalTrainerID);
         }
         widget.onSignedIn();
       } catch (e) {
@@ -151,7 +171,7 @@ class LoginPageState extends State<Login> {
         fetchPost(userId);
         print('Created user with id: $userId');
         updateUID();
-        _createMountain(userId);
+        _createPTendpoint(userId);
         print("I am a PT!");
         widget.onSignedIn();
       } catch (e) {
@@ -213,8 +233,8 @@ class LoginPageState extends State<Login> {
           }),
       new TextFormField(
           decoration: new InputDecoration(labelText: 'Personal Trainer ID'),
-          validator: (value) =>
-              value.isEmpty ? 'Personal Trainer ID can\'t be empty' : null,
+          //validator: (value) =>
+          //value.isEmpty ? 'Personal Trainer ID can\'t be empty' : null,
           onSaved: (value) => personalTrainerID = value)
     ];
   }
@@ -272,9 +292,15 @@ class LoginPageState extends State<Login> {
 
   static const jsonCodec = const JsonCodec();
 
-  void _createMountain(String uid) {
-    Database.createMountain(uid).then((String mountainKey) {});
+  void _createPTendpoint(String uid) {
+    Database.createPTendpoint(uid).then((String unusedKey) {});
   }
+
+  void _createRelationship(String clientUID, String personalTrainerUID) {
+    Database.createRelationship(clientUID, personalTrainerUID).then((String unusedKey) {});
+    Database.createClientEndpoint(clientUID, personalTrainerUID).then((String unusedKey) {});
+  }
+
 }
 
 class Todo {
@@ -290,17 +316,6 @@ class Todo {
       "workoutname": workoutname,
       "musclegroup": musclegroup
     };
-  }
-}
-
-class Database {
-  static Future<String> createMountain(String userUID) async {
-    DatabaseReference reference =
-        FirebaseDatabase.instance.reference().child("Workouts").child(userUID);
-
-    reference.set("");
-
-    return reference.key;
   }
 }
 

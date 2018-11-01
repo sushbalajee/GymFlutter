@@ -31,7 +31,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
     super.initState();
     item = Item("", "","");
     final FirebaseDatabase database = FirebaseDatabase.instance; 
-    itemRef = database.reference().child('Workouts').child(widget.userUid);
+    itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
@@ -87,6 +87,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                                             muscleGroup: items[index].musclegroup,
                                             description: items[index].description,
                                             uid: widget.userUid,
+                                            trainerID: widget.value,
                                             firebaseGeneratedKey: items[index].key,
                                           )));
                    },

@@ -30,7 +30,8 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
     super.initState();
     item = Item("", "","");
     final FirebaseDatabase database = FirebaseDatabase.instance; 
-    itemRef = database.reference().child('Workouts').child(widget.userUid);
+    print(widget.value);
+    itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
@@ -76,6 +77,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
                                             muscleGroup: items[index].musclegroup,
                                             description: items[index].description,
                                             uid: widget.userUid,
+                                            trainerID: widget.value,
                                             firebaseGeneratedKey: items[index].key,
                                           )));
                    },

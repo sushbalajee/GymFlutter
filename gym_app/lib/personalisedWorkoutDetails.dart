@@ -9,6 +9,7 @@ class PageFive extends StatefulWidget {
   final String title;
   final String muscleGroup;
   final String description;
+  final String trainerID;
 
   PageFive(
       {Key key,
@@ -16,6 +17,7 @@ class PageFive extends StatefulWidget {
       this.muscleGroup,
       this.description,
       this.uid,
+      this.trainerID,
       this.firebaseGeneratedKey})
       : super(key: key);
 
@@ -39,12 +41,7 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
 
     snek = database.reference().child('Workouts').child(widget.uid);
-    itemRef = database
-        .reference()
-        .child('Workouts')
-        .child(widget.uid)
-        .child(widget.firebaseGeneratedKey)
-        .child('exercises');
+    itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child(widget.firebaseGeneratedKey).child('exercises');
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
