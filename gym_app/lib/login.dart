@@ -10,10 +10,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
 
 class Login extends StatefulWidget {
-  Login({this.auth, this.onSignedIn});
+  Login({this.auth, this.onSignedIn, this.onSignedIsAsPT});
 
   final BaseAuth auth;
   final VoidCallback onSignedIn;
+  final VoidCallback onSignedIsAsPT;
 
   @override
   State<StatefulWidget> createState() => LoginPageState();
@@ -30,6 +31,8 @@ class LoginPageState extends State<Login> {
   String email;
   String password;
   String personalTrainerID;
+
+  bool lastshot;
 
   DatabaseReference relationshipRef;
 
@@ -74,23 +77,12 @@ class LoginPageState extends State<Login> {
   Future fetchPost(String yyy) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('PTcheck', null);
 
     SharedPreferences relations = await SharedPreferences.getInstance();
     
     final FirebaseDatabase database = FirebaseDatabase.instance;
     relationshipRef = database.reference().child("Workouts").child("Relationships").child(yyy);
 
-        relationshipRef.once().then((snapshot){
-        if(snapshot != null){  
-        print("Your Personal Trainer is: " + snapshot.value);
-        relations.setString('relationship', snapshot.value);
-        }
-        else{
-          print("No personal trainer assigned");}
-        }
-        
-  );
 
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
@@ -100,10 +92,16 @@ class LoginPageState extends State<Login> {
     userIds = post.uiCode;
 
     if (userIds.contains(yyy)) {
+      lastshot = true;
       print("pt success");
       await prefs.setBool('PTcheck', true);
+      print(prefs.getBool('PTcheck'));
     } else {
       print("client success");
+        relationshipRef.once().then((snapshot){
+        print("Your Personal Trainer is: " + snapshot.value);
+        relations.setString('relationship', snapshot.value);
+        });
       await prefs.setBool('PTcheck', false);
     }
     return userIds;
@@ -128,7 +126,6 @@ class LoginPageState extends State<Login> {
               await widget.auth.signInWithEmailAndPassword(email, password);
           fetchPost(userId);
           print('Signed in user with id: $userId');
-          print("Testing: $personalTrainerID");
         } else {
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
@@ -138,7 +135,11 @@ class LoginPageState extends State<Login> {
           //updateUID();
           _createRelationship(userId, personalTrainerID);
         }
-        widget.onSignedIn();
+        if(lastshot == true){
+        widget.onSignedIsAsPT();
+        }
+        else{
+        widget.onSignedIn();}
       } catch (e) {
         if ("$e" ==
             "PlatformException(exception, The email address is badly formatted., null)") {
@@ -250,7 +251,9 @@ class LoginPageState extends State<Login> {
                   "Login",
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
-                onPressed: validateAndSubmit,
+                onPressed: () async{
+                  validateAndSubmit();
+                },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)))),
         new OutlineButton(

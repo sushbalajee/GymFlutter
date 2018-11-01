@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'auth.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,8 @@ import 'usersList.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'uploadClientWorkouts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -27,14 +30,9 @@ class RootPageState extends State<RootPage> {
 
   bool typeOfUser;
 
-  List<Item> items = List();
-  Item item;
-
   String uid;
   String statusOfUser;
   String relo = "";
-
-  DatabaseReference itemRef;
 
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
@@ -45,16 +43,9 @@ class RootPageState extends State<RootPage> {
     widget.auth.currentUser().then((userId) {
       if (userId != null) {
         updateup();
-        //print(userId);
-
-        final FirebaseDatabase database = FirebaseDatabase.instance;
-        itemRef = database.reference().child('Workouts').child(userId);
-        //itemRef.onChildAdded.listen(_onEntryAdded);
-
         setState(() {
           if (typeOfUser == true) {
-            authStatus =
-                userId == null ? AuthStatus.signedIn : AuthStatus.signedInAsPT;
+            authStatus = userId == null? AuthStatus.notSignedIn : AuthStatus.signedInAsPT;
             statusOfUser = "You are Logged in as a Personal Trainer";
           } else {
             authStatus =
@@ -69,12 +60,6 @@ class RootPageState extends State<RootPage> {
     });
   }
 
-  _onEntryAdded(Event event) {
-    //setState(() {
-      items.add(Item.fromSnapshot(event.snapshot));
-    //});
-  }
-
   void signedIn() {
     updateup();
     setState(() {
@@ -82,7 +67,18 @@ class RootPageState extends State<RootPage> {
     });
   }
 
-  void signedOut() {
+  void signedInAsPT() {
+    updateup();
+    setState(() {
+      authStatus = AuthStatus.signedInAsPT;
+    });
+  }
+
+  void signedOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setBool('PTcheck', false);
+    prefs.clear();
+
     setState(() {
       FirebaseAuth.instance.signOut();
       authStatus = AuthStatus.notSignedIn;
@@ -92,14 +88,12 @@ class RootPageState extends State<RootPage> {
   void updateRelationship() async {
     SharedPreferences relations = await SharedPreferences.getInstance();
     relo = relations.getString('relationship');
-
-    print("YOU ARE LOGGED IN WITH THIS PT: " + relo);
-    
   }
 
-  void updateup() async {
+  Future updateup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     typeOfUser = prefs.getBool('PTcheck');
+    print("typeOfUser: $typeOfUser");
 
     FirebaseAuth.instance.currentUser().then((userId) {
       if (userId != null) {
@@ -113,86 +107,93 @@ class RootPageState extends State<RootPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     updateup();
 
-    switch (authStatus) {
-      case AuthStatus.notSignedIn:
+    if (authStatus == AuthStatus.notSignedIn) {
+      if (typeOfUser == true) {
+        return new Login(auth: widget.auth, onSignedIn: signedInAsPT);
+      } else {
         return new Login(auth: widget.auth, onSignedIn: signedIn);
-
-      case AuthStatus.signedIn:
-        return new Column(children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(20.0),
-            alignment: Alignment.center,
-            width: screenWidth,
-            child: new FlatButton(
-              child: new Text("My Personalised Workouts"),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkoutsListPersonal(
-                              value: relo,
-                              userUid: uid,
-                            )));
-              },
-            ),
-          ),
-          RaisedButton(
-              color: Colors.grey[900],
-              child: new Text(
-                "Sign Out",
-                style: TextStyle(fontSize: 15.0, color: Colors.white),
-              ),
-              onPressed: signedOut,
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(20.0))),
-        ]);
-
-      case AuthStatus.signedInAsPT:
-        return new Column(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child: new Text(statusOfUser),
-          ),
-          Container(
-            padding: EdgeInsets.all(20.0),
-            alignment: Alignment.center,
-            child: new RaisedButton(
-              child: new Text("My Personalised Workouts"),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkoutsListPersonal(
-                              value: relo,
-                              userUid: uid,
-                            )));
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(bottom: 20.0),
-            alignment: Alignment.center,
-            child: new RaisedButton(
-              child: new Text("My Clients"),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UIDList(
-                      trainerID: uid,
-                    )));
-              },
-            ),
-          ),
-          RaisedButton(
-              color: Colors.grey[900],
-              child: new Text(
-                "Sign Out",
-                style: TextStyle(fontSize: 15.0, color: Colors.white),
-              ),
-              onPressed: signedOut,
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(20.0))),
-        ]);
+      }
     }
-    return null;
+
+    if (authStatus == AuthStatus.signedInAsPT) {
+      return new Column(children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(top: 20.0),
+          child: new Text(statusOfUser),
+        ),
+        Container(
+          padding: EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          child: new RaisedButton(
+            child: new Text("My Personalised Workouts"),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WorkoutsListPersonal(
+                            value: relo,
+                            userUid: uid,
+                          )));
+            },
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(bottom: 20.0),
+          alignment: Alignment.center,
+          child: new RaisedButton(
+            child: new Text("My Clients"),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UIDList(
+                            trainerID: uid,
+                          )));
+            },
+          ),
+        ),
+        RaisedButton(
+            color: Colors.grey[900],
+            child: new Text(
+              "Sign Out",
+              style: TextStyle(fontSize: 15.0, color: Colors.white),
+            ),
+            onPressed: signedOut,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(20.0))),
+      ]);
+    }
+
+    if (authStatus == AuthStatus.signedIn) {
+      return new Column(children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          width: screenWidth,
+          child: new FlatButton(
+            child: new Text("My Personalised Workouts"),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WorkoutsListPersonal(
+                            value: relo,
+                            userUid: uid,
+                          )));
+            },
+          ),
+        ),
+        RaisedButton(
+            color: Colors.grey[900],
+            child: new Text(
+              "Sign Out",
+              style: TextStyle(fontSize: 15.0, color: Colors.white),
+            ),
+            onPressed: signedOut,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(20.0))),
+      ]);
+    }
   }
+  //return null;
 }
