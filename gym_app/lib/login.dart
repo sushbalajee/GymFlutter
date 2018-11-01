@@ -10,11 +10,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
 
 class Login extends StatefulWidget {
-  Login({this.auth, this.onSignedIn, this.onSignedIsAsPT});
+  Login({this.auth, this.onSignedIn, this.onSignedInAsPt});
 
   final BaseAuth auth;
   final VoidCallback onSignedIn;
-  final VoidCallback onSignedIsAsPT;
+  final VoidCallback onSignedInAsPt;
 
   @override
   State<StatefulWidget> createState() => LoginPageState();
@@ -23,6 +23,7 @@ class Login extends StatefulWidget {
 enum FormType { login, register }
 
 class LoginPageState extends State<Login> {
+
   final TextEditingController _passController = new TextEditingController();
   final TextEditingController _confirmPassController =
       new TextEditingController();
@@ -32,13 +33,25 @@ class LoginPageState extends State<Login> {
   String password;
   String personalTrainerID;
 
-  bool lastshot;
-
   DatabaseReference relationshipRef;
 
   List<String> userIds;
 
   FormType formType = FormType.login;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.auth.currentUser().then((userId) {
+      if (userId != null) {
+        print("This is the userID: $userId");
+        fetchPost(userId);
+      } else {
+        print("User is Null");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +85,14 @@ class LoginPageState extends State<Login> {
           ));
     }
   }
-  
 
-  Future fetchPost(String yyy) async {
+  Future fetchPost(String userID) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     SharedPreferences relations = await SharedPreferences.getInstance();
     
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    relationshipRef = database.reference().child("Workouts").child("Relationships").child(yyy);
+    relationshipRef = database.reference().child("Workouts").child("Relationships").child(userID);
 
 
     final response =
@@ -91,18 +102,20 @@ class LoginPageState extends State<Login> {
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     userIds = post.uiCode;
 
-    if (userIds.contains(yyy)) {
-      lastshot = true;
-      print("pt success");
+
+    if (userIds.contains(userID)){
       await prefs.setBool('PTcheck', true);
-      print(prefs.getBool('PTcheck'));
+      prefs.getBool('PTcheck');
+      widget.onSignedInAsPt();
+      
+
     } else {
-      print("client success");
-        relationshipRef.once().then((snapshot){
-        print("Your Personal Trainer is: " + snapshot.value);
-        relations.setString('relationship', snapshot.value);
-        });
+      relationshipRef.once().then((snapshot){
+      relations.setString('relationship', snapshot.value);
+      });
       await prefs.setBool('PTcheck', false);
+      prefs.getBool('PTcheck');
+      widget.onSignedIn();
     }
     return userIds;
   }
@@ -118,46 +131,24 @@ class LoginPageState extends State<Login> {
   }
 
   void validateAndSubmit() async {
-    print(widget.auth.currentUser());
     if (validateAndSave()) {
       try {
         if (formType == FormType.login) {
           String userId =
               await widget.auth.signInWithEmailAndPassword(email, password);
-          fetchPost(userId);
+          await fetchPost(userId);
           print('Signed in user with id: $userId');
         } else {
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
-          fetchPost(userId);
+          await fetchPost(userId);
           print('Created user with id: $userId');
           print("Testing: $personalTrainerID");
           //updateUID();
           _createRelationship(userId, personalTrainerID);
         }
-        if(lastshot == true){
-        widget.onSignedIsAsPT();
-        }
-        else{
-        widget.onSignedIn();}
+        //widget.onSignedIn();
       } catch (e) {
-        if ("$e" ==
-            "PlatformException(exception, The email address is badly formatted., null)") {
-          confirmDialog(context, "Invalid Email",
-              "Please check that you have entered your email address correctly and try again");
-        } else if ("$e" ==
-            "PlatformException(exception, There is no user record corresponding to this identifier. The user may have been deleted., null)") {
-          confirmDialog(context, "Invalid User",
-              "Please check that you have entered your email address correctly and try again");
-        } else if ("$e" ==
-            "PlatformException(exception, The password is invalid or the user does not have a password., null)") {
-          confirmDialog(context, "Incorrect Password",
-              "Please check that you have entered your password correctly and try again");
-        } else if ("$e" ==
-            "PlatformException(exception, The given password is invalid. [ Password should be at least 6 characters ], null)") {
-          confirmDialog(context, "Password too short",
-              "Please enter a password that is atleast 6 characters");
-        }
         print('Error: $e');
       }
     }
@@ -234,8 +225,6 @@ class LoginPageState extends State<Login> {
           }),
       new TextFormField(
           decoration: new InputDecoration(labelText: 'Personal Trainer ID'),
-          //validator: (value) =>
-          //value.isEmpty ? 'Personal Trainer ID can\'t be empty' : null,
           onSaved: (value) => personalTrainerID = value)
     ];
   }

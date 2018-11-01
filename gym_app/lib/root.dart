@@ -20,7 +20,7 @@ class RootPage extends StatefulWidget {
   State<StatefulWidget> createState() => RootPageState();
 }
 
-enum AuthStatus { notSignedIn, signedIn, signedInAsPT }
+enum AuthStatus { notSignedIn, signedIn, signedInAsPT, notDetermined}
 
 class RootPageState extends State<RootPage> {
   RootPageState({this.auth, this.onSignedOut});
@@ -28,24 +28,34 @@ class RootPageState extends State<RootPage> {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
 
+  List<String> userIds;
+
   bool typeOfUser;
+  bool howbowdah;
 
   String uid;
   String statusOfUser;
   String relo = "";
 
-  AuthStatus authStatus = AuthStatus.notSignedIn;
+  AuthStatus authStatus = AuthStatus.notDetermined;
 
   @override
   void initState() {
     super.initState();
 
-    widget.auth.currentUser().then((userId) {
+    widget.auth.currentUser().then((userId) async{
+
+    //fetchPost(userId);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    typeOfUser = prefs.getBool('PTcheck');
+    print(typeOfUser);
+
       if (userId != null) {
         updateup();
         setState(() {
           if (typeOfUser == true) {
-            authStatus = userId == null? AuthStatus.notSignedIn : AuthStatus.signedInAsPT;
+            authStatus = AuthStatus.signedInAsPT;
             statusOfUser = "You are Logged in as a Personal Trainer";
           } else {
             authStatus =
@@ -59,6 +69,34 @@ class RootPageState extends State<RootPage> {
       }
     });
   }
+
+
+   Future fetchPost(String userID) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+ 
+    final response =
+        await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+    var jsonResponse = json.decode(response.body);
+
+    GetUserId post = new GetUserId.fromJson10(jsonResponse);
+    userIds = post.uiCode;
+
+    if (userIds.contains(userID)){
+      await prefs.setBool('PTcheck', true);
+      //prefs.getBool('PTcheck');
+      //howbowdah = true;
+      authStatus = AuthStatus.signedInAsPT;
+
+    } else {
+      await prefs.setBool('PTcheck', false);
+      //prefs.getBool('PTcheck');
+      howbowdah = false;
+      //authStatus = AuthStatus.signedIn;
+    }
+    return userIds;
+  }
+
 
   void signedIn() {
     updateup();
@@ -75,13 +113,12 @@ class RootPageState extends State<RootPage> {
   }
 
   void signedOut() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    //prefs.setBool('PTcheck', false);
-    prefs.clear();
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      FirebaseAuth.instance.signOut();
+      prefs.clear();
       authStatus = AuthStatus.notSignedIn;
+      FirebaseAuth.instance.signOut();
     });
   }
 
@@ -91,35 +128,32 @@ class RootPageState extends State<RootPage> {
   }
 
   Future updateup() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    typeOfUser = prefs.getBool('PTcheck');
-    print("typeOfUser: $typeOfUser");
-
     FirebaseAuth.instance.currentUser().then((userId) {
       if (userId != null) {
         uid = userId.uid;
-      } else {}
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    updateup();
+    //updateup();
+    print(authStatus);
 
+    if(authStatus == AuthStatus.notDetermined){
+      return new Text("Waiting");
+    }
+    
     if (authStatus == AuthStatus.notSignedIn) {
-      if (typeOfUser == true) {
-        return new Login(auth: widget.auth, onSignedIn: signedInAsPT);
-      } else {
-        return new Login(auth: widget.auth, onSignedIn: signedIn);
-      }
+        return new Login(auth: widget.auth, onSignedIn: signedIn, onSignedInAsPt: signedInAsPT);
     }
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Column(children: <Widget>[
         Container(
           padding: EdgeInsets.only(top: 20.0),
-          child: new Text(statusOfUser),
+          child: new Text (""),
         ),
         Container(
           padding: EdgeInsets.all(20.0),
@@ -194,6 +228,6 @@ class RootPageState extends State<RootPage> {
                 borderRadius: new BorderRadius.circular(20.0))),
       ]);
     }
+    return null;
   }
-  //return null;
 }

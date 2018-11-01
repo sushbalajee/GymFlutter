@@ -30,9 +30,4 @@ Future<String> currentUser() async {
 Future<void> signOut() async{
   return FirebaseAuth.instance.signOut();
 }
-
-Future<String> allUsers() async {
-  FirebaseUser user = await FirebaseAuth.instance.currentUser();
-  return user.uid;
-}
 }
