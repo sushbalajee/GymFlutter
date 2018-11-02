@@ -23,7 +23,6 @@ class Login extends StatefulWidget {
 enum FormType { login, register, loading }
 
 class LoginPageState extends State<Login> {
-
   final TextEditingController _passController = new TextEditingController();
   final TextEditingController _confirmPassController =
       new TextEditingController();
@@ -32,6 +31,8 @@ class LoginPageState extends State<Login> {
   String email;
   String password;
   String personalTrainerID;
+
+  bool legitness;
 
   DatabaseReference relationshipRef;
 
@@ -53,11 +54,6 @@ class LoginPageState extends State<Login> {
     });
   }
 
-   Widget get _loadingView {
-    return new Center(
-      child: new Text("loading..."),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +72,7 @@ class LoginPageState extends State<Login> {
                 child: new ListView(
                     children: buildInputsForLogin() + buildSubmitButtons())),
           ));
-    } else if (formType == FormType.register){
+    } else if (formType == FormType.register) {
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
           body: new Container(
@@ -89,23 +85,47 @@ class LoginPageState extends State<Login> {
                 child: new ListView(
                     children: buildInputsForRegister() + buildSubmitButtons())),
           ));
-    }
-    else{
+    } else {
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
-          body: new Container( child:
-            new Text("loading...")
-          ));
+          body: new Container(child: new Text("loading...")));
     }
   }
 
   Future fetchPost(String userID) async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     SharedPreferences relations = await SharedPreferences.getInstance();
-    
+
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    relationshipRef = database.reference().child("Workouts").child("Relationships").child(userID);
+    relationshipRef = database
+        .reference()
+        .child("Workouts")
+        .child("Relationships")
+        .child(userID);
+
+    final response =
+        await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
+    var jsonResponse = json.decode(response.body);
+
+    GetUserId post = new GetUserId.fromJson10(jsonResponse);
+    userIds = post.uiCode;
+
+    if (userIds.contains(userID)) {
+      await prefs.setBool('PTcheck', true);
+      prefs.getBool('PTcheck');
+      widget.onSignedInAsPt();
+    } else {
+      relationshipRef.once().then((snapshot) {
+        relations.setString('relationship', snapshot.value);
+      });
+      await prefs.setBool('PTcheck', false);
+      prefs.getBool('PTcheck');
+      widget.onSignedIn();
+    }
+    return userIds;
+  }
+
+    Future checkPTDexists(String personalTrainer) async {
 
 
     final response =
@@ -115,18 +135,12 @@ class LoginPageState extends State<Login> {
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     userIds = post.uiCode;
 
-
-    if (userIds.contains(userID)){
-      await prefs.setBool('PTcheck', true);
-      prefs.getBool('PTcheck');
-      widget.onSignedInAsPt();
+    if (userIds.contains(personalTrainer)) {
+    print("This is legitness");
+    legitness = true;
     } else {
-      relationshipRef.once().then((snapshot){
-      relations.setString('relationship', snapshot.value);
-      });
-      await prefs.setBool('PTcheck', false);
-      prefs.getBool('PTcheck');
-      widget.onSignedIn();
+    print("SCAM! boiiiii");
+    legitness = false;
     }
     return userIds;
   }
@@ -151,6 +165,8 @@ class LoginPageState extends State<Login> {
           await fetchPost(userId);
           print('Signed in user with id: $userId');
         } else {
+          await checkPTDexists(personalTrainerID);
+          if(legitness == true){
           moveToLoading();
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
@@ -159,6 +175,9 @@ class LoginPageState extends State<Login> {
           print("Testing: $personalTrainerID");
           //updateUID();
           _createRelationship(userId, personalTrainerID);
+        }else{
+          print("UNLUGGY USO");
+        }
         }
         //widget.onSignedIn();
       } catch (e) {
@@ -170,18 +189,23 @@ class LoginPageState extends State<Login> {
   void validateAndSubmitRegisterPT() async {
     print(widget.auth.currentUser());
     if (validateAndSave()) {
-      try {
-        moveToLoading();
-        String userId =
-            await widget.auth.createUserWithEmailAndPassword(email, password);
-        fetchPost(userId);
-        print('Created user with id: $userId');
-        updateUID();
-        _createPTendpoint(userId);
-        print("I am a PT!");
-        widget.onSignedIn();
-      } catch (e) {
-        print('Error: $e');
+      if (personalTrainerID == null || personalTrainerID == "") {
+        try {
+          moveToLoading();
+          String userId =
+              await widget.auth.createUserWithEmailAndPassword(email, password);
+          //fetchPost(userId);
+          print('Created user with id: $userId');
+          updateUID();
+          _createPTendpoint(userId);
+          print("I am a PT!");
+          widget.onSignedInAsPt();
+        } catch (e) {
+          print('Error: $e');
+        }
+      }
+      else{
+        print("DO NOT ENTER A PT ID");
       }
     }
   }
@@ -261,7 +285,7 @@ class LoginPageState extends State<Login> {
                   "Login",
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
-                onPressed: () async{
+                onPressed: () async {
                   validateAndSubmit();
                 },
                 shape: new RoundedRectangleBorder(
@@ -298,7 +322,10 @@ class LoginPageState extends State<Login> {
           onPressed: moveToLogin,
         ),
         new RaisedButton(
-            child: new Text("Register as a PT"), onPressed: validateAndSubmitRegisterPT)
+            child: new Text("Register as a PT"),
+            onPressed: () {
+              validateAndSubmitRegisterPT();
+            })
       ];
     }
   }
@@ -310,10 +337,11 @@ class LoginPageState extends State<Login> {
   }
 
   void _createRelationship(String clientUID, String personalTrainerUID) {
-    Database.createRelationship(clientUID, personalTrainerUID).then((String unusedKey) {});
-    Database.createClientEndpoint(clientUID, personalTrainerUID).then((String unusedKey) {});
+    Database.createRelationship(clientUID, personalTrainerUID)
+        .then((String unusedKey) {});
+    Database.createClientEndpoint(clientUID, personalTrainerUID)
+        .then((String unusedKey) {});
   }
-
 }
 
 class Todo {
