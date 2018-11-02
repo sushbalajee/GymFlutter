@@ -48,25 +48,28 @@ class GetClientIDs {
 
 class UIDListPage extends State<UIDList> {
   
-  //String uid;
   List uuiiCode;
+  String informUser;
 
 
   Future fetchPost() async {
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts/'+ widget.trainerID +'.json');
     var jsonResponse = json.decode(response.body);
-
+    if(jsonResponse != ""){
     GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
     uuiiCode = post.uiCode;
-    return uuiiCode;
+    return uuiiCode;}
+    else{
+      informUser = "You do not have any clients registered with your Personal Trainer ID";
+    }
   }
 
 //-----------------------------------------------------------------------------------//
 
 @override
   Widget build(BuildContext context) {
-    fetchPost();
+    //fetchPost();
     return new Scaffold(
         appBar: new AppBar(
             centerTitle: true,
@@ -76,12 +79,20 @@ class UIDListPage extends State<UIDList> {
           child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == null) {
+                  if (snapshot.data == null && informUser == null) {
                     return Container(
                         child: Center(
                       child: Text("Loading..."),
                     ));
-                  } else {
+                  } 
+                  else if (informUser != null){
+                        return Container(
+                        child: Center(
+                      child: Text(informUser),
+                    ));
+                  }
+                  
+                  else {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {

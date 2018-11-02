@@ -150,22 +150,6 @@ class RootPageState extends State<RootPage> {
           child: new Text (""),
         ),
         Container(
-          padding: EdgeInsets.all(20.0),
-          alignment: Alignment.center,
-          child: new RaisedButton(
-            child: new Text("My Personalised Workouts"),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => WorkoutsListPersonal(
-                            value: relo,
-                            userUid: uid,
-                          )));
-            },
-          ),
-        ),
-        Container(
           padding: EdgeInsets.only(bottom: 20.0),
           alignment: Alignment.center,
           child: new RaisedButton(

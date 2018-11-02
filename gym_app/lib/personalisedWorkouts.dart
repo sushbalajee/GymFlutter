@@ -22,12 +22,15 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   List<Item> items = List();
   Item item;
   DatabaseReference itemRef;
+  bool informUser;
+
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    //informUser = true;
     item = Item("", "","");
     final FirebaseDatabase database = FirebaseDatabase.instance; 
     print(widget.value);
@@ -38,6 +41,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   _onEntryAdded(Event event) {
     setState(() {
       items.add(Item.fromSnapshot(event.snapshot));
+      informUser = false;
     });
   }
 
@@ -47,6 +51,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
     int workoutNumber = 0;
     double screenWidth = MediaQuery.of(context).size.width;
     
+    if(informUser == false){
     return Scaffold(
       appBar: AppBar(
         title: Text('My Personalised Workouts'),
@@ -89,5 +94,16 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
       ),
     );
   }
+  else{
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Personalised Workouts'),
+        backgroundColor: Colors.grey[900],
+      ),
+      resizeToAvoidBottomPadding: false,
+      body: new Text("No workouts for you my man"));
+
+  }
+}
 }
 

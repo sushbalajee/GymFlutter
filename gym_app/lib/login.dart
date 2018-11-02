@@ -20,7 +20,7 @@ class Login extends StatefulWidget {
   State<StatefulWidget> createState() => LoginPageState();
 }
 
-enum FormType { login, register }
+enum FormType { login, register, loading }
 
 class LoginPageState extends State<Login> {
 
@@ -53,6 +53,12 @@ class LoginPageState extends State<Login> {
     });
   }
 
+   Widget get _loadingView {
+    return new Center(
+      child: new Text("loading..."),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -70,7 +76,7 @@ class LoginPageState extends State<Login> {
                 child: new ListView(
                     children: buildInputsForLogin() + buildSubmitButtons())),
           ));
-    } else {
+    } else if (formType == FormType.register){
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
           body: new Container(
@@ -82,6 +88,13 @@ class LoginPageState extends State<Login> {
                 key: formKey,
                 child: new ListView(
                     children: buildInputsForRegister() + buildSubmitButtons())),
+          ));
+    }
+    else{
+      return new Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: new Container( child:
+            new Text("loading...")
           ));
     }
   }
@@ -132,11 +145,13 @@ class LoginPageState extends State<Login> {
     if (validateAndSave()) {
       try {
         if (formType == FormType.login) {
+          moveToLoading();
           String userId =
               await widget.auth.signInWithEmailAndPassword(email, password);
           await fetchPost(userId);
           print('Signed in user with id: $userId');
         } else {
+          moveToLoading();
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
           await fetchPost(userId);
@@ -156,6 +171,7 @@ class LoginPageState extends State<Login> {
     print(widget.auth.currentUser());
     if (validateAndSave()) {
       try {
+        moveToLoading();
         String userId =
             await widget.auth.createUserWithEmailAndPassword(email, password);
         fetchPost(userId);
@@ -181,6 +197,13 @@ class LoginPageState extends State<Login> {
     formKey.currentState.reset();
     setState(() {
       formType = FormType.login;
+    });
+  }
+
+  void moveToLoading() {
+    formKey.currentState.reset();
+    setState(() {
+      formType = FormType.loading;
     });
   }
 
