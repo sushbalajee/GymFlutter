@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'clientWorkoutDetails.dart';
+import 'uploadClientWorkoutDetails.dart';
 
 class PageFive extends StatefulWidget {
   final String firebaseGeneratedKey;

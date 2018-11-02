@@ -21,6 +21,7 @@ class RootPage extends StatefulWidget {
 enum AuthStatus { notSignedIn, signedIn, signedInAsPT, notDetermined}
 
 class RootPageState extends State<RootPage> {
+
   RootPageState({this.auth, this.onSignedOut});
 
   final BaseAuth auth;
@@ -29,11 +30,10 @@ class RootPageState extends State<RootPage> {
   List<String> userIds;
 
   bool typeOfUser;
-  bool howbowdah;
 
   String uid;
   String statusOfUser;
-  String relo = "";
+  String relationship = "";
 
   AuthStatus authStatus = AuthStatus.notDetermined;
 
@@ -48,7 +48,7 @@ class RootPageState extends State<RootPage> {
     print(typeOfUser);
 
       if (userId != null) {
-        updateup();
+        updateUserID();
         setState(() {
           if (typeOfUser == true) {
             authStatus = AuthStatus.signedInAsPT;
@@ -57,14 +57,12 @@ class RootPageState extends State<RootPage> {
             authStatus =
                 userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
             updateRelationship();
-            print("You are logged in as a client");
           }
         });
       } else {
         setState(() {
                   authStatus = AuthStatus.notSignedIn;
-                });
-        print("User is Null");
+                });//do something?
       }
     });
   }
@@ -84,7 +82,6 @@ class RootPageState extends State<RootPage> {
     if (userIds.contains(userID)){
       await prefs.setBool('PTcheck', true);
       authStatus = AuthStatus.signedInAsPT;
-
     } else {
       await prefs.setBool('PTcheck', false);
     }
@@ -93,24 +90,21 @@ class RootPageState extends State<RootPage> {
 
 
   void signedIn() {
-    updateup();
+    updateUserID();
     setState(() {
       authStatus = AuthStatus.signedIn;
     });
   }
 
   void signedInAsPT() {
-    updateup();
+    updateUserID();
     setState(() {
       authStatus = AuthStatus.signedInAsPT;
     });
   }
 
   void signedOut() async {
-
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      //prefs.clear();
       FirebaseAuth.instance.signOut();
       authStatus = AuthStatus.notSignedIn;
     });
@@ -118,10 +112,10 @@ class RootPageState extends State<RootPage> {
 
   void updateRelationship() async {
     SharedPreferences relations = await SharedPreferences.getInstance();
-    relo = relations.getString('relationship');
+    relationship = relations.getString('relationship');
   }
 
-  Future updateup() async {
+  Future updateUserID() async {
     FirebaseAuth.instance.currentUser().then((userId) {
       if (userId != null) {
         uid = userId.uid;
@@ -132,11 +126,9 @@ class RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    //updateup();
-    print(authStatus);
 
     if(authStatus == AuthStatus.notDetermined){
-      return new Text("Waiting");
+      return new Text("Waiting");//change
     }
     
     if (authStatus == AuthStatus.notSignedIn) {
@@ -189,7 +181,7 @@ class RootPageState extends State<RootPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => WorkoutsListPersonal(
-                            value: relo,
+                            value: relationship,
                             userUid: uid,
                           )));
             },

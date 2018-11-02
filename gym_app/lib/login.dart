@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
+import 'color_loader_3.dart';
 
 class Login extends StatefulWidget {
   Login({this.auth, this.onSignedIn, this.onSignedInAsPt});
@@ -32,9 +33,9 @@ class LoginPageState extends State<Login> {
   String password;
   String personalTrainerID;
 
-  bool legitness;
+  bool validPTID;
 
-  DatabaseReference relationshipRef;
+  DatabaseReference relationshipEndpoint;
 
   List<String> userIds;
 
@@ -57,8 +58,7 @@ class LoginPageState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
+  
     if (formType == FormType.login) {
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
@@ -66,7 +66,7 @@ class LoginPageState extends State<Login> {
             color: Colors.grey[100],
             alignment: Alignment.center,
             padding:
-                EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
+                EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
             child: new Form(
                 key: formKey,
                 child: new ListView(
@@ -79,7 +79,7 @@ class LoginPageState extends State<Login> {
             color: Colors.grey[100],
             alignment: Alignment.center,
             padding:
-                EdgeInsets.only(left: 20.0, right: 20.0, top: screenHeight / 8),
+                EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
             child: new Form(
                 key: formKey,
                 child: new ListView(
@@ -88,7 +88,18 @@ class LoginPageState extends State<Login> {
     } else {
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
-          body: new Container(child: new Text("loading...")));
+          body:
+           new Stack(
+             children: <Widget>[
+                 Container(
+                 alignment: Alignment.center, 
+                 child: ColorLoader3(dotRadius: 5.0, radius: 20.0,) ),
+                 Container(
+                 padding: EdgeInsets.only(top: 100.0),
+                 alignment: Alignment.center, 
+                 child: new Text("...Logging in...")
+               )
+             ]));
     }
   }
 
@@ -97,7 +108,7 @@ class LoginPageState extends State<Login> {
     SharedPreferences relations = await SharedPreferences.getInstance();
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    relationshipRef = database
+    relationshipEndpoint = database
         .reference()
         .child("Workouts")
         .child("Relationships")
@@ -115,7 +126,7 @@ class LoginPageState extends State<Login> {
       prefs.getBool('PTcheck');
       widget.onSignedInAsPt();
     } else {
-      relationshipRef.once().then((snapshot) {
+      relationshipEndpoint.once().then((snapshot) {
         relations.setString('relationship', snapshot.value);
       });
       await prefs.setBool('PTcheck', false);
@@ -127,7 +138,6 @@ class LoginPageState extends State<Login> {
 
     Future checkPTDexists(String personalTrainer) async {
 
-
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
@@ -136,11 +146,9 @@ class LoginPageState extends State<Login> {
     userIds = post.uiCode;
 
     if (userIds.contains(personalTrainer)) {
-    print("This is legitness");
-    legitness = true;
+    validPTID = true;
     } else {
-    print("SCAM! boiiiii");
-    legitness = false;
+    print("SCAM! boiiiii");//do something
     }
     return userIds;
   }
@@ -163,23 +171,18 @@ class LoginPageState extends State<Login> {
           String userId =
               await widget.auth.signInWithEmailAndPassword(email, password);
           await fetchPost(userId);
-          print('Signed in user with id: $userId');
         } else {
           await checkPTDexists(personalTrainerID);
-          if(legitness == true){
+          if(validPTID == true){
           moveToLoading();
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
           await fetchPost(userId);
-          print('Created user with id: $userId');
-          print("Testing: $personalTrainerID");
-          //updateUID();
           _createRelationship(userId, personalTrainerID);
         }else{
-          print("UNLUGGY USO");
+          print("UNLUGGY USO");//do something
         }
         }
-        //widget.onSignedIn();
       } catch (e) {
         print('Error: $e');
       }
@@ -194,7 +197,6 @@ class LoginPageState extends State<Login> {
           moveToLoading();
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
-          //fetchPost(userId);
           print('Created user with id: $userId');
           updateUID();
           _createPTendpoint(userId);
@@ -205,7 +207,7 @@ class LoginPageState extends State<Login> {
         }
       }
       else{
-        print("DO NOT ENTER A PT ID");
+        print("DO NOT ENTER A PT ID");//do something
       }
     }
   }
@@ -234,11 +236,11 @@ class LoginPageState extends State<Login> {
   List<Widget> buildInputsForLogin() {
     return [
       new TextFormField(
-          decoration: new InputDecoration(labelText: 'Email'),
+          decoration: new InputDecoration(labelText: 'Email', icon: new Icon(Icons.email, color: Colors.grey[900])),
           validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
           onSaved: (value) => email = value),
       new TextFormField(
-          decoration: new InputDecoration(labelText: 'Password'),
+          decoration: new InputDecoration(labelText: 'Password', icon: new Icon(Icons.lock, color:  Colors.grey[900])),
           obscureText: true,
           validator: (value) =>
               value.isEmpty ? 'Password can\'t be empty' : null,
@@ -249,19 +251,19 @@ class LoginPageState extends State<Login> {
   List<Widget> buildInputsForRegister() {
     return [
       new TextFormField(
-          decoration: new InputDecoration(labelText: 'Email'),
+          decoration: new InputDecoration(labelText: 'Email', icon: new Icon(Icons.email, color:  Colors.grey[900])),
           validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
           onSaved: (value) => email = value),
       new TextFormField(
           controller: _passController,
-          decoration: new InputDecoration(labelText: 'Password'),
+          decoration: new InputDecoration(labelText: 'Password', icon: new Icon(Icons.lock, color:  Colors.grey[900])),
           obscureText: true,
           validator: (value) =>
               value.isEmpty ? 'Password can\'t be empty' : null,
           onSaved: (value) => password = value),
       new TextFormField(
           controller: _confirmPassController,
-          decoration: new InputDecoration(labelText: 'Confirm Password'),
+          decoration: new InputDecoration(labelText: 'Confirm Password', icon: new Icon(Icons.lock, color:  Colors.grey[900])),
           obscureText: true,
           validator: (value) {
             if (value != _passController.text) {
@@ -269,12 +271,13 @@ class LoginPageState extends State<Login> {
             }
           }),
       new TextFormField(
-          decoration: new InputDecoration(labelText: 'Personal Trainer ID'),
+          decoration: new InputDecoration(labelText: 'Personal Trainer ID', icon: new Icon(Icons.person, color:  Colors.grey[900])),
           onSaved: (value) => personalTrainerID = value)
     ];
   }
 
   List<Widget> buildSubmitButtons() {
+
     if (formType == FormType.login) {
       return [
         new Container(
@@ -289,14 +292,14 @@ class LoginPageState extends State<Login> {
                   validateAndSubmit();
                 },
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)))),
+                    borderRadius: new BorderRadius.circular(5.0)))),
         new OutlineButton(
-            borderSide: BorderSide(color: Colors.grey[500]),
+            borderSide: BorderSide(color: Colors.grey[400]),
             child: new Text("Create an Account",
                 style: new TextStyle(fontSize: 15.0)),
             onPressed: moveToRegister,
             shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(20.0),
+              borderRadius: new BorderRadius.circular(5.0),
             ))
       ];
     } else {
@@ -311,21 +314,28 @@ class LoginPageState extends State<Login> {
                 ),
                 onPressed: validateAndSubmit,
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)))),
+                    borderRadius: new BorderRadius.circular(5.0)))),
         new OutlineButton(
-          borderSide: BorderSide(color: Colors.grey[500]),
+          borderSide: BorderSide(color: Colors.grey[400]),
           child: new Text("Already have an account? Login in here",
               style: new TextStyle(fontSize: 15.0)),
           shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(20.0),
+            borderRadius: new BorderRadius.circular(5.0),
           ),
           onPressed: moveToLogin,
         ),
-        new RaisedButton(
+        new Container( 
+          //padding: EdgeInsets.only(top: screenHeight/6),
+          child: 
+        new FlatButton(
+            color: Colors.grey[300],
             child: new Text("Register as a PT"),
+            shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(5.0),
+          ),
             onPressed: () {
               validateAndSubmitRegisterPT();
-            })
+            }))
       ];
     }
   }
@@ -341,22 +351,6 @@ class LoginPageState extends State<Login> {
         .then((String unusedKey) {});
     Database.createClientEndpoint(clientUID, personalTrainerUID)
         .then((String unusedKey) {});
-  }
-}
-
-class Todo {
-  String description;
-  String workoutname;
-  String musclegroup;
-
-  Todo(this.workoutname, this.description, this.musclegroup);
-
-  toJson() {
-    return {
-      "description": description,
-      "workoutname": workoutname,
-      "musclegroup": musclegroup
-    };
   }
 }
 

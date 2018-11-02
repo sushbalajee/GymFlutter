@@ -4,8 +4,6 @@ import 'dart:async';
 
 class Database {
 
-  
-
   static Future<String> createPTendpoint(String userUID) async {
     DatabaseReference reference =
         FirebaseDatabase.instance.reference().child("Workouts").child(userUID);
