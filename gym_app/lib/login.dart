@@ -107,8 +107,6 @@ class LoginPageState extends State<Login> {
       await prefs.setBool('PTcheck', true);
       prefs.getBool('PTcheck');
       widget.onSignedInAsPt();
-      
-
     } else {
       relationshipRef.once().then((snapshot){
       relations.setString('relationship', snapshot.value);

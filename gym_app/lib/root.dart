@@ -5,8 +5,6 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'personalisedWorkouts.dart';
 import 'usersList.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'uploadClientWorkouts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -45,8 +43,6 @@ class RootPageState extends State<RootPage> {
 
     widget.auth.currentUser().then((userId) async{
 
-    //fetchPost(userId);
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     typeOfUser = prefs.getBool('PTcheck');
     print(typeOfUser);
@@ -65,6 +61,9 @@ class RootPageState extends State<RootPage> {
           }
         });
       } else {
+        setState(() {
+                  authStatus = AuthStatus.notSignedIn;
+                });
         print("User is Null");
       }
     });
@@ -84,15 +83,10 @@ class RootPageState extends State<RootPage> {
 
     if (userIds.contains(userID)){
       await prefs.setBool('PTcheck', true);
-      //prefs.getBool('PTcheck');
-      //howbowdah = true;
       authStatus = AuthStatus.signedInAsPT;
 
     } else {
       await prefs.setBool('PTcheck', false);
-      //prefs.getBool('PTcheck');
-      howbowdah = false;
-      //authStatus = AuthStatus.signedIn;
     }
     return userIds;
   }
@@ -114,11 +108,11 @@ class RootPageState extends State<RootPage> {
 
   void signedOut() async {
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      prefs.clear();
-      authStatus = AuthStatus.notSignedIn;
+      //prefs.clear();
       FirebaseAuth.instance.signOut();
+      authStatus = AuthStatus.notSignedIn;
     });
   }
 
