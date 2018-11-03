@@ -8,6 +8,8 @@ import 'usersList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'color_loader_3.dart';
+import 'package:flutter/services.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -18,10 +20,9 @@ class RootPage extends StatefulWidget {
   State<StatefulWidget> createState() => RootPageState();
 }
 
-enum AuthStatus { notSignedIn, signedIn, signedInAsPT, notDetermined}
+enum AuthStatus { notSignedIn, signedIn, signedInAsPT, notDetermined }
 
 class RootPageState extends State<RootPage> {
-
   RootPageState({this.auth, this.onSignedOut});
 
   final BaseAuth auth;
@@ -37,15 +38,16 @@ class RootPageState extends State<RootPage> {
 
   AuthStatus authStatus = AuthStatus.notDetermined;
 
+  String _copy = "Copy Me";
+
   @override
   void initState() {
     super.initState();
 
-    widget.auth.currentUser().then((userId) async{
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    typeOfUser = prefs.getBool('PTcheck');
-    print(typeOfUser);
+    widget.auth.currentUser().then((userId) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      typeOfUser = prefs.getBool('PTcheck');
+      print(typeOfUser);
 
       if (userId != null) {
         updateUserID();
@@ -61,17 +63,15 @@ class RootPageState extends State<RootPage> {
         });
       } else {
         setState(() {
-                  authStatus = AuthStatus.notSignedIn;
-                });//do something?
+          authStatus = AuthStatus.notSignedIn;
+        }); //do something?
       }
     });
   }
 
-
-   Future fetchPost(String userID) async {
-
+  Future fetchPost(String userID) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
- 
+
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts.json');
     var jsonResponse = json.decode(response.body);
@@ -79,7 +79,7 @@ class RootPageState extends State<RootPage> {
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
     userIds = post.uiCode;
 
-    if (userIds.contains(userID)){
+    if (userIds.contains(userID)) {
       await prefs.setBool('PTcheck', true);
       authStatus = AuthStatus.signedInAsPT;
     } else {
@@ -87,7 +87,6 @@ class RootPageState extends State<RootPage> {
     }
     return userIds;
   }
-
 
   void signedIn() {
     updateUserID();
@@ -126,72 +125,162 @@ class RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-    if(authStatus == AuthStatus.notDetermined){
-      return new Text("Waiting");//change
+    if (authStatus == AuthStatus.notDetermined) {
+      return new Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: new Stack(children: <Widget>[
+            Container(
+                alignment: Alignment.center,
+                child: ColorLoader3(
+                  dotRadius: 5.0,
+                  radius: 20.0,
+                )),
+            Container(
+                padding: EdgeInsets.only(top: 100.0),
+                alignment: Alignment.center,
+                child: new Text("... Loading ...",
+                    style: new TextStyle(
+                        fontSize: 20.0, fontFamily: "Montserrat")))
+          ]));
     }
-    
+
     if (authStatus == AuthStatus.notSignedIn) {
-        return new Login(auth: widget.auth, onSignedIn: signedIn, onSignedInAsPt: signedInAsPT);
+      return new Login(
+          auth: widget.auth,
+          onSignedIn: signedIn,
+          onSignedInAsPt: signedInAsPT);
     }
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Column(children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 20.0),
-          child: new Text (""),
+         
+        Card(
+            margin: EdgeInsets.all(15.0),
+            shape: Border.all(
+                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
+            child: new Container(
+              height: screenHeight / 3,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/personalized.jpeg"),
+                  fit: BoxFit.cover,
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.85), BlendMode.dstATop),
+                ),
+              ),
+              width: screenWidth,
+              child: FlatButton(
+                child: new Text("My Clients",
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: "Montserrat",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UIDList(
+                                trainerID: uid,
+                              )));
+                },
+              ),
+            )),
+
+            Container(
+          padding: EdgeInsets.only(left: 20.0, right:20.0),
+          child: Text("Send your unique Trainer ID to your clients to enter on registration:", textAlign: TextAlign.left,
+          style: TextStyle(
+                fontSize: 15.0,
+                fontFamily: "Montserrat",
+              ),),
         ),
         Container(
-          padding: EdgeInsets.only(bottom: 20.0),
-          alignment: Alignment.center,
-          child: new RaisedButton(
-            child: new Text("My Clients"),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UIDList(
-                            trainerID: uid,
-                          )));
-            },
-          ),
-        ),
+          padding: EdgeInsets.only(left: 20.0, right:20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text("$uid",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w700
+                    )),
+                IconButton(
+                    icon: new Icon(Icons.content_copy),
+                    tooltip: "Copied to clipboard",
+                    onPressed: () {
+                      Clipboard.setData(new ClipboardData(text: uid));
+                    })
+              ],
+            )),
+            Container( 
+              padding: EdgeInsets.only(top: 50.0),
+              child:
         RaisedButton(
             color: Colors.grey[900],
             child: new Text(
               "Sign Out",
-              style: TextStyle(fontSize: 15.0, color: Colors.white),
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.white,
+                fontFamily: "Montserrat",
+              ),
             ),
             onPressed: signedOut,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(20.0))),
-      ]);
+      )]);
     }
 
     if (authStatus == AuthStatus.signedIn) {
       return new Column(children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(20.0),
-          alignment: Alignment.center,
-          width: screenWidth,
-          child: new FlatButton(
-            child: new Text("My Personalised Workouts"),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => WorkoutsListPersonal(
-                            value: relationship,
-                            userUid: uid,
-                          )));
-            },
-          ),
-        ),
+        Card(
+            margin: EdgeInsets.all(15.0),
+            shape: Border.all(
+                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
+            child: new Container(
+              height: screenHeight / 3,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/4.jpg"),
+                  fit: BoxFit.cover,
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                ),
+              ),
+              width: screenWidth,
+              child: FlatButton(
+                child: new Text("Your Personalised Workouts",
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: "Montserrat",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkoutsListPersonal(
+                                value: relationship,
+                                userUid: uid,
+                              )));
+                },
+              ),
+            )),
         RaisedButton(
             color: Colors.grey[900],
             child: new Text(
               "Sign Out",
-              style: TextStyle(fontSize: 15.0, color: Colors.white),
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.white,
+                fontFamily: "Montserrat",
+              ),
             ),
             onPressed: signedOut,
             shape: new RoundedRectangleBorder(

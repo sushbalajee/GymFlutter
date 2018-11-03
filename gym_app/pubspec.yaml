@@ -63,11 +63,16 @@ flutter:
   - assets/targets/upperleg.png
   - assets/JSON/gymapp-e8453-export.json
   - assets/JSON/testingLocal.json
+  - assets/personalized.jpeg
 
   fonts: 
     - family: Prompt
       fonts: 
         - asset: assets/fonts/Prompt-Regular.ttf
+
+    - family: Montserrat
+      fonts: 
+        - asset: assets/fonts/Montserrat-Regular.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

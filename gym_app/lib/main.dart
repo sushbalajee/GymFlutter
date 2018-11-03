@@ -58,7 +58,7 @@ class HomePageState extends State<GymApp> {
             appBar: new AppBar(
                 centerTitle: true,
                 backgroundColor: Colors.grey[900],
-                title: new Text("GymApp V1.0")),
+                title: new Text("GymApp V1.0", style: TextStyle(fontSize: 25.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
 
             body: currentPage,
             
