@@ -27,7 +27,8 @@ enum FormType { login, register, loading }
 
 class LoginPageState extends State<Login> {
   final TextEditingController _passController = new TextEditingController();
-  final TextEditingController _confirmPassController = new TextEditingController();
+  final TextEditingController _confirmPassController =
+      new TextEditingController();
   final formKey = new GlobalKey<FormState>();
 
   String email;
@@ -48,10 +49,10 @@ class LoginPageState extends State<Login> {
 
     widget.auth.currentUser().then((userId) {
       if (userId != null) {
-        print("This is the userID: $userId");
+        //print("This is the userID: $userId");
         fetchPost(userId);
       } else {
-        print("User is Null");
+        //print("User is Null");
       }
     });
   }
@@ -152,7 +153,9 @@ class LoginPageState extends State<Login> {
     if (userIds.contains(personalTrainer)) {
       validPTID = true;
     } else {
-      print("SCAM! boiiiii"); //do something
+      confirmDialog(context, "Invalid Trainer ID",
+          "Please check that you have entered a valid Trainer ID and try again");
+      resetRegister(); //do something
     }
     return userIds;
   }
@@ -186,13 +189,55 @@ class LoginPageState extends State<Login> {
             await fetchPost(userId);
             _createRelationship(userId, personalTrainerID);
           } else {
-            print("UNLUGGY USO"); //do something
+            //print("UNLUGGY USO"); //do something
           }
         }
       } catch (e) {
-        print('Error: $e');
+        print("$e");
+        if ("$e" ==
+            "PlatformException(exception, The email address is badly formatted., null)") {
+          confirmDialog(context, "Invalid Email",
+              "Please check that you have entered your email address correctly and try again");
+          resetLogin();
+        } else if ("$e" ==
+            "PlatformException(exception, There is no user record corresponding to this identifier. The user may have been deleted., null)") {
+          confirmDialog(context, "Invalid User",
+              "Please check that you have entered your email address correctly and try again");
+          resetLogin();
+        } else if ("$e" ==
+            "PlatformException(exception, The password is invalid or the user does not have a password., null)") {
+          confirmDialog(context, "Incorrect Password",
+              "Please check that you have entered your password correctly and try again");
+          resetLogin();
+        } else if ("$e" ==
+            "PlatformException(exception, The given password is invalid. [ Password should be at least 6 characters ], null)") {
+          confirmDialog(context, "Password too short",
+              "Please enter a password that is atleast 6 characters");
+          resetRegister();
+        } else if ("$e" ==
+            "PlatformException(exception, The email address is already in use by another account., null)") {
+          confirmDialog(context, "Email already in use",
+              "This email address is already in use by another account");
+          resetRegister();
+        } else if ("$e" ==
+            "PlatformException(Error 17011, FIRAuthErrorDomain, There is no user record corresponding to this identifier. The user may have been deleted.)") {
+          confirmDialog(context, "Invalid User", "This user does not exist");
+          resetLogin();
+        }
       }
     }
+  }
+
+  void resetLogin() {
+    setState(() {
+      formType = FormType.login;
+    });
+  }
+
+  void resetRegister() {
+    setState(() {
+      formType = FormType.register;
+    });
   }
 
   void validateAndSubmitRegisterPT() async {
@@ -203,16 +248,55 @@ class LoginPageState extends State<Login> {
           moveToLoading();
           String userId =
               await widget.auth.createUserWithEmailAndPassword(email, password);
+
           print('Created user with id: $userId');
           updateUID();
           _createPTendpoint(userId);
           print("I am a PT!");
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('PTcheck', true);
           widget.onSignedInAsPt();
         } catch (e) {
-          print('Error: $e');
+          print("$e");
+          if ("$e" ==
+              "PlatformException(exception, The email address is badly formatted., null)") {
+            confirmDialog(context, "Invalid Email",
+                "Please check that you have entered your email address correctly and try again");
+            resetLogin();
+          } else if ("$e" ==
+              "PlatformException(exception, There is no user record corresponding to this identifier. The user may have been deleted., null)") {
+            confirmDialog(context, "Invalid User",
+                "Please check that you have entered your email address correctly and try again");
+            resetLogin();
+          } else if ("$e" ==
+              "PlatformException(exception, The password is invalid or the user does not have a password., null)") {
+            confirmDialog(context, "Incorrect Password",
+                "Please check that you have entered your password correctly and try again");
+            resetLogin();
+          } else if ("$e" ==
+              "PlatformException(exception, The given password is invalid. [ Password should be at least 6 characters ], null)") {
+            confirmDialog(context, "Password too short",
+                "Please enter a password that is atleast 6 characters");
+            resetRegister();
+          } else if ("$e" ==
+              "PlatformException(exception, The email address is already in use by another account., null)") {
+            confirmDialog(context, "Email already in use",
+                "This email address is already in use by another account");
+            resetRegister();
+          } else if ("$e" ==
+              "PlatformException(Error 17011, FIRAuthErrorDomain, There is no user record corresponding to this identifier. The user may have been deleted.)") {
+            confirmDialog(context, "Invalid User", "This user does not exist");
+            resetLogin();
+          } else if ("$e" ==
+              "PlatformException(Error 17008, FIRAuthErrorDomain, The email address is badly formatted.)") {
+            confirmDialog(context, "Invalid Email",
+                "Please check that you have entered your email address correctly and try again");
+            resetRegister();
+          }
         }
       } else {
-        print("DO NOT ENTER A PT ID"); //do something
+        confirmDialog(context, "Trainer ID not required",
+            "If you are registering as a Trainer, do not enter a Trainer ID. This field is only required for clients");
       }
     }
   }

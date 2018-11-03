@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'uploadClientWorkouts.dart';
+import 'color_loader_3.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -16,8 +17,7 @@ class UIDList extends StatefulWidget {
 }
 
 class GetUserId {
-
-  List <String> uiCode;
+  List<String> uiCode;
   GetUserId({this.uiCode});
 
   factory GetUserId.fromJson10(Map<String, dynamic> parsedJson) {
@@ -32,13 +32,11 @@ class GetUserId {
 }
 
 class GetClientIDs {
-
   List uiCode;
   GetClientIDs({this.uiCode});
 
   factory GetClientIDs.fromJson20(Map<String, dynamic> parsedJson) {
-
-    List <String >passMe = parsedJson.keys.toList();
+    List<String> passMe = parsedJson.keys.toList();
     print(passMe);
     return GetClientIDs(uiCode: passMe);
   }
@@ -47,27 +45,28 @@ class GetClientIDs {
 //-----------------------------------------------------------------------------------//
 
 class UIDListPage extends State<UIDList> {
-  
   List uuiiCode;
   String informUser;
 
-
   Future fetchPost() async {
-    final response =
-        await http.get('https://gymapp-e8453.firebaseio.com/Workouts/'+ widget.trainerID +'.json');
+    final response = await http.get(
+        'https://gymapp-e8453.firebaseio.com/Workouts/' +
+            widget.trainerID +
+            '.json');
     var jsonResponse = json.decode(response.body);
-    if(jsonResponse != ""){
-    GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
-    uuiiCode = post.uiCode;
-    return uuiiCode;}
-    else{
-      informUser = "You do not have any clients registered with your Personal Trainer ID";
+    if (jsonResponse != "") {
+      GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
+      uuiiCode = post.uiCode;
+      return uuiiCode;
+    } else {
+      informUser =
+          "You do not have any clients registered with your Personal Trainer ID";
     }
   }
 
 //-----------------------------------------------------------------------------------//
 
-@override
+  @override
   Widget build(BuildContext context) {
     //fetchPost();
     return new Scaffold(
@@ -76,23 +75,31 @@ class UIDListPage extends State<UIDList> {
             backgroundColor: Colors.grey[900],
             title: new Text("My Clients")),
         body: Container(
-          child: FutureBuilder(
+            child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null && informUser == null) {
                     return Container(
-                        child: Center(
-                      child: Text("Loading..."),
-                    ));
-                  } 
-                  else if (informUser != null){
-                        return Container(
+                        child: new Stack(children: <Widget>[
+                      Container(
+                          alignment: Alignment.center,
+                          child: ColorLoader3(
+                            dotRadius: 5.0,
+                            radius: 20.0,
+                          )),
+                      Container(
+                          padding: EdgeInsets.only(top: 100.0),
+                          alignment: Alignment.center,
+                          child: new Text("... Loading ...",
+                              style: new TextStyle(
+                                  fontSize: 20.0, fontFamily: "Montserrat")))
+                    ]));
+                  } else if (informUser != null) {
+                    return Container(
                         child: Center(
                       child: Text(informUser),
                     ));
-                  }
-                  
-                  else {
+                  } else {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -101,8 +108,8 @@ class UIDListPage extends State<UIDList> {
                                   style: TextStyle(
                                       fontFamily: "Prompt",
                                       //fontSize: screenWidth  * 0.055,
-                                      fontWeight: FontWeight.w700))
-                                      ,  onTap: () {
+                                      fontWeight: FontWeight.w700)),
+                              onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -110,12 +117,9 @@ class UIDListPage extends State<UIDList> {
                                               userUid: snapshot.data[index],
                                               value: widget.trainerID,
                                             )));
-                             }
-                        
-                            );
+                              });
                         });
                   }
-                })
-        ));
+                })));
   }
 }

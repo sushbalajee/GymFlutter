@@ -32,13 +32,11 @@ class RootPageState extends State<RootPage> {
 
   bool typeOfUser;
 
-  String uid;
+  String uid = "Please sign out and sign in\n to activate your Trainer ID";
   String statusOfUser;
   String relationship = "";
 
   AuthStatus authStatus = AuthStatus.notDetermined;
-
-  String _copy = "Copy Me";
 
   @override
   void initState() {
@@ -47,7 +45,6 @@ class RootPageState extends State<RootPage> {
     widget.auth.currentUser().then((userId) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       typeOfUser = prefs.getBool('PTcheck');
-      print(typeOfUser);
 
       if (userId != null) {
         updateUserID();
@@ -128,6 +125,7 @@ class RootPageState extends State<RootPage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     if (authStatus == AuthStatus.notDetermined) {
+      updateUserID();
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
           body: new Stack(children: <Widget>[
@@ -205,7 +203,7 @@ class RootPageState extends State<RootPage> {
               children: <Widget>[
                 Text("$uid",
                     style: TextStyle(
-                      fontSize: 15.0,
+                      fontSize: 14.0,
                       fontFamily: "Montserrat",
                       fontWeight: FontWeight.w700
                     )),
