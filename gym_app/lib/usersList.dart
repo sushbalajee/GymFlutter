@@ -93,7 +93,7 @@ class UIDListPage extends State<UIDList> {
                       Container(
                           padding: EdgeInsets.only(top: 100.0),
                           alignment: Alignment.center,
-                          child: new Text("... Loading ...",
+                          child: new Text("Loading",
                               style: new TextStyle(
                                   fontSize: 20.0, fontFamily: "Montserrat")))
                     ]));

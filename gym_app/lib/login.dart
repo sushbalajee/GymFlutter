@@ -99,7 +99,7 @@ class LoginPageState extends State<Login> {
             Container(
                 padding: EdgeInsets.only(top: 100.0),
                 alignment: Alignment.center,
-                child: new Text("... Logging in ...",
+                child: new Text("Logging in",
                     style: new TextStyle(
                         fontSize: 20.0, fontFamily: "Montserrat")))
           ]));
@@ -454,15 +454,15 @@ class LoginPageState extends State<Login> {
         .then((String unusedKey) {});
     Database.createClientNames(clientUID, clientName);
   }
-}
-
-String uid;
+  String uid;
 
 void updateUID() {
   FirebaseAuth.instance.currentUser().then((userId) {
     uid = userId.uid;
   });
 }
+}
+
 
 //------------------------------------------------------------------------------//
 

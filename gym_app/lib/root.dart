@@ -42,7 +42,7 @@ class RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
 
-    widget.auth.currentUser().then((userId) async {
+      widget.auth.currentUser().then((userId) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       typeOfUser = prefs.getBool('PTcheck');
 
@@ -101,7 +101,6 @@ class RootPageState extends State<RootPage> {
 
   void signedOut() async {
     setState(() {
-      uid = null;
       FirebaseAuth.instance.signOut();
       authStatus = AuthStatus.notSignedIn;
     });
@@ -139,7 +138,7 @@ class RootPageState extends State<RootPage> {
             Container(
                 padding: EdgeInsets.only(top: 100.0),
                 alignment: Alignment.center,
-                child: new Text("... Loading ...",
+                child: new Text("Loading",
                     style: new TextStyle(
                         fontSize: 20.0, fontFamily: "Montserrat")))
           ]));
