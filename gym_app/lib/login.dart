@@ -34,6 +34,7 @@ class LoginPageState extends State<Login> {
   String email;
   String password;
   String personalTrainerID;
+  String clientName;
 
   bool validPTID;
 
@@ -155,7 +156,7 @@ class LoginPageState extends State<Login> {
     } else {
       confirmDialog(context, "Invalid Trainer ID",
           "Please check that you have entered a valid Trainer ID and try again");
-      resetRegister(); //do something
+      resetRegister();
     }
     return userIds;
   }
@@ -187,43 +188,15 @@ class LoginPageState extends State<Login> {
             String userId = await widget.auth
                 .createUserWithEmailAndPassword(email, password);
             await fetchPost(userId);
-            _createRelationship(userId, personalTrainerID);
+            _createRelationship(userId, personalTrainerID, clientName);
+
           } else {
-            //print("UNLUGGY USO"); //do something
+            resetRegister();
           }
         }
       } catch (e) {
         print("$e");
-        if ("$e" ==
-            "PlatformException(exception, The email address is badly formatted., null)") {
-          confirmDialog(context, "Invalid Email",
-              "Please check that you have entered your email address correctly and try again");
-          resetLogin();
-        } else if ("$e" ==
-            "PlatformException(exception, There is no user record corresponding to this identifier. The user may have been deleted., null)") {
-          confirmDialog(context, "Invalid User",
-              "Please check that you have entered your email address correctly and try again");
-          resetLogin();
-        } else if ("$e" ==
-            "PlatformException(exception, The password is invalid or the user does not have a password., null)") {
-          confirmDialog(context, "Incorrect Password",
-              "Please check that you have entered your password correctly and try again");
-          resetLogin();
-        } else if ("$e" ==
-            "PlatformException(exception, The given password is invalid. [ Password should be at least 6 characters ], null)") {
-          confirmDialog(context, "Password too short",
-              "Please enter a password that is atleast 6 characters");
-          resetRegister();
-        } else if ("$e" ==
-            "PlatformException(exception, The email address is already in use by another account., null)") {
-          confirmDialog(context, "Email already in use",
-              "This email address is already in use by another account");
-          resetRegister();
-        } else if ("$e" ==
-            "PlatformException(Error 17011, FIRAuthErrorDomain, There is no user record corresponding to this identifier. The user may have been deleted.)") {
-          confirmDialog(context, "Invalid User", "This user does not exist");
-          resetLogin();
-        }
+        checkErrors("$e");
       }
     }
   }
@@ -252,52 +225,40 @@ class LoginPageState extends State<Login> {
           print('Created user with id: $userId');
           updateUID();
           _createPTendpoint(userId);
-          print("I am a PT!");
+          //print("I am a PT!");
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setBool('PTcheck', true);
           widget.onSignedInAsPt();
         } catch (e) {
           print("$e");
-          if ("$e" ==
-              "PlatformException(exception, The email address is badly formatted., null)") {
-            confirmDialog(context, "Invalid Email",
-                "Please check that you have entered your email address correctly and try again");
-            resetLogin();
-          } else if ("$e" ==
-              "PlatformException(exception, There is no user record corresponding to this identifier. The user may have been deleted., null)") {
-            confirmDialog(context, "Invalid User",
-                "Please check that you have entered your email address correctly and try again");
-            resetLogin();
-          } else if ("$e" ==
-              "PlatformException(exception, The password is invalid or the user does not have a password., null)") {
-            confirmDialog(context, "Incorrect Password",
-                "Please check that you have entered your password correctly and try again");
-            resetLogin();
-          } else if ("$e" ==
-              "PlatformException(exception, The given password is invalid. [ Password should be at least 6 characters ], null)") {
-            confirmDialog(context, "Password too short",
-                "Please enter a password that is atleast 6 characters");
-            resetRegister();
-          } else if ("$e" ==
-              "PlatformException(exception, The email address is already in use by another account., null)") {
-            confirmDialog(context, "Email already in use",
-                "This email address is already in use by another account");
-            resetRegister();
-          } else if ("$e" ==
-              "PlatformException(Error 17011, FIRAuthErrorDomain, There is no user record corresponding to this identifier. The user may have been deleted.)") {
-            confirmDialog(context, "Invalid User", "This user does not exist");
-            resetLogin();
-          } else if ("$e" ==
-              "PlatformException(Error 17008, FIRAuthErrorDomain, The email address is badly formatted.)") {
-            confirmDialog(context, "Invalid Email",
-                "Please check that you have entered your email address correctly and try again");
-            resetRegister();
-          }
+          checkErrors("$e");
         }
       } else {
         confirmDialog(context, "Trainer ID not required",
             "If you are registering as a Trainer, do not enter a Trainer ID. This field is only required for clients");
       }
+    }
+  }
+
+  void checkErrors(String e) {
+    if (e.contains(
+        "The password is invalid or the user does not have a password")) {
+      confirmDialog(context, "Invalid Password",
+          "Please ensure that you have entered the correct password and try again");
+      resetLogin();
+    } else if (e.contains("The email address is badly formatted")) {
+      confirmDialog(context, "Invalid Email",
+          "Please ensure you have formatted your email correctly and try again");
+      resetLogin();
+    } else if (e.contains(
+        "There is no user record corresponding to this identifier. The user may have been deleted")) {
+      confirmDialog(context, "Invalid User",
+          "There is no user record corresponding to your login. Please register for further access");
+          resetLogin();
+    } else if (e.contains("The password must be 6 characters long or more")) {
+      confirmDialog(context, "Password too short",
+          "Please create a password that is atleast 6 characters");
+          resetRegister();
     }
   }
 
@@ -351,6 +312,16 @@ class LoginPageState extends State<Login> {
 
   List<Widget> buildInputsForRegister() {
     return [
+
+      new TextFormField(
+          decoration: new InputDecoration(
+              labelText: 'Full Name',
+              labelStyle:
+                  new TextStyle(fontSize: 15.0, fontFamily: "Montserrat"),
+              icon: new Icon(Icons.person, color: Colors.grey[900])),
+              validator: (value) => value.isEmpty ? 'This field can\'t be empty' : null,
+          onSaved: (value) => clientName = value),
+
       new TextFormField(
           decoration: new InputDecoration(
               labelText: 'Email',
@@ -388,7 +359,7 @@ class LoginPageState extends State<Login> {
               labelText: 'Personal Trainer ID',
               labelStyle:
                   new TextStyle(fontSize: 15.0, fontFamily: "Montserrat"),
-              icon: new Icon(Icons.person, color: Colors.grey[900])),
+              icon: new Icon(Icons.people, color: Colors.grey[900])),
           onSaved: (value) => personalTrainerID = value)
     ];
   }
@@ -476,11 +447,12 @@ class LoginPageState extends State<Login> {
     Database.createPTendpoint(uid).then((String unusedKey) {});
   }
 
-  void _createRelationship(String clientUID, String personalTrainerUID) {
+  void _createRelationship(String clientUID, String personalTrainerUID, String clientName) {
     Database.createRelationship(clientUID, personalTrainerUID)
         .then((String unusedKey) {});
-    Database.createClientEndpoint(clientUID, personalTrainerUID)
+    Database.createClientEndpoint(clientUID, personalTrainerUID, clientName)
         .then((String unusedKey) {});
+    Database.createClientNames(clientUID, clientName);
   }
 }
 
@@ -500,7 +472,7 @@ Future<Null> confirmDialog(BuildContext context, String why, String execution) {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text("Login Failed - " + why),
+          title: new Text(why),
           content: new Text(execution),
           actions: <Widget>[
             new FlatButton(

@@ -20,11 +20,23 @@ class Database {
     return reference.key;
   }
 
-  static Future<String> createClientEndpoint(String userUID, String personalTrainerUID) async {
-    DatabaseReference reference =
-        FirebaseDatabase.instance.reference().child("Workouts").child(personalTrainerUID).child(userUID);
+  static Future<String> createClientEndpoint(String userUID, String personalTrainerUID, String clientName) async {
+    
+    String join = clientName + " - " + userUID;
+
+    DatabaseReference reference = 
+        FirebaseDatabase.instance.reference().child("Workouts").child(personalTrainerUID).child(join);
 
     reference.set("");
+    return reference.key;
+  }
+
+  static Future<String> createClientNames(String userUID, String clientName) async {
+
+    DatabaseReference reference =
+        FirebaseDatabase.instance.reference().child("Workouts").child("ClientNames").child(userUID);
+
+    reference.set(clientName);
     return reference.key;
   }
 }

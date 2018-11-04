@@ -22,7 +22,10 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   List<Item> items = List();
   Item item;
   DatabaseReference itemRef;
+  DatabaseReference cref;
   bool informUser;
+
+  String jointID;
 
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -33,9 +36,17 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
     //informUser = true;
     item = Item("", "","");
     final FirebaseDatabase database = FirebaseDatabase.instance; 
-    print(widget.value);
-    itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
-    itemRef.onChildAdded.listen(_onEntryAdded);
+
+    cref = database.reference().child('Workouts').child('ClientNames').child(widget.userUid);
+    cref.once().then((DataSnapshot snapshot){
+
+      jointID = snapshot.value + " - " + widget.userUid;
+
+      itemRef = database.reference().child('Workouts').child(widget.value).child(jointID);
+      itemRef.onChildAdded.listen(_onEntryAdded);
+    });
+
+    
   }
 
   _onEntryAdded(Event event) {
@@ -81,7 +92,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
                                             title: items[index].workoutname,
                                             muscleGroup: items[index].musclegroup,
                                             description: items[index].description,
-                                            uid: widget.userUid,
+                                            uid: jointID,
                                             trainerID: widget.value,
                                             firebaseGeneratedKey: items[index].key,
                                           )));
@@ -106,4 +117,3 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   }
 }
 }
-

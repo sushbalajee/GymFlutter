@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'uploadClientWorkouts.dart';
 import 'color_loader_3.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -37,7 +38,7 @@ class GetClientIDs {
 
   factory GetClientIDs.fromJson20(Map<String, dynamic> parsedJson) {
     List<String> passMe = parsedJson.keys.toList();
-    print(passMe);
+    //print(passMe);
     return GetClientIDs(uiCode: passMe);
   }
 }
@@ -47,12 +48,14 @@ class GetClientIDs {
 class UIDListPage extends State<UIDList> {
   List uuiiCode;
   String informUser;
+  List<String>clientNames = [""];
 
   Future fetchPost() async {
     final response = await http.get(
         'https://gymapp-e8453.firebaseio.com/Workouts/' +
             widget.trainerID +
             '.json');
+
     var jsonResponse = json.decode(response.body);
     if (jsonResponse != "") {
       GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);

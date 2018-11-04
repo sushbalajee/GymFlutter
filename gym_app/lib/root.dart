@@ -101,6 +101,7 @@ class RootPageState extends State<RootPage> {
 
   void signedOut() async {
     setState(() {
+      uid = null;
       FirebaseAuth.instance.signOut();
       authStatus = AuthStatus.notSignedIn;
     });
@@ -234,13 +235,16 @@ class RootPageState extends State<RootPage> {
       )]);
     }
 
+
+
     if (authStatus == AuthStatus.signedIn) {
       return new Column(children: <Widget>[
-        Card(
+        Card( 
             margin: EdgeInsets.all(15.0),
             shape: Border.all(
                 color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
             child: new Container(
+              
               height: screenHeight / 3,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
