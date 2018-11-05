@@ -19,7 +19,6 @@ class ClientWorkouts extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class _NextPageStateClient extends State<ClientWorkouts> {
-
   List<Item> items = List();
   Item item;
   DatabaseReference itemRef;
@@ -29,16 +28,20 @@ class _NextPageStateClient extends State<ClientWorkouts> {
   @override
   void initState() {
     super.initState();
-    item = Item("", "","");
-    final FirebaseDatabase database = FirebaseDatabase.instance; 
-    itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
+    item = Item("", "", "");
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    itemRef = database
+        .reference()
+        .child('Workouts')
+        .child(widget.value)
+        .child(widget.userUid);
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
   _onEntryAdded(Event event) {
-    setState(() {
+    //setState(() {
       items.add(Item.fromSnapshot(event.snapshot));
-    });
+    //});
   }
 
   void handleSubmit() {
@@ -54,10 +57,8 @@ class _NextPageStateClient extends State<ClientWorkouts> {
 
   @override
   Widget build(BuildContext context) {
-
-    int workoutNumber = 0;
     double screenWidth = MediaQuery.of(context).size.width;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text('FB example'),
@@ -65,112 +66,127 @@ class _NextPageStateClient extends State<ClientWorkouts> {
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
-        
           Flexible(
             child: FirebaseAnimatedList(
               query: itemRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                workoutNumber += 1;
                 return new ListTile(
-                  leading: CircleAvatar(child: Text("$workoutNumber")),
-                  title: Text(items[index].workoutname,style: TextStyle(
-                                      fontFamily: "Prompt",
-                                      fontSize: screenWidth * 0.055,
-                                      fontWeight: FontWeight.w700)),
-                   onTap: (){
-                      Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PageFour(
-                                            title: items[index].workoutname,
-                                            muscleGroup: items[index].musclegroup,
-                                            description: items[index].description,
-                                            uid: widget.userUid,
-                                            trainerID: widget.value,
-                                            firebaseGeneratedKey: items[index].key,
-                                          )));
-                   },
+                  trailing: new RaisedButton(
+                      child: new Text("Delete"),
+                      onPressed: () {
+                        if(items.length == 3){
+                          print("Na G");
+                        }
+                        else{
+                          itemRef.child(items[index].key).remove();  
+                          Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClientWorkouts(
+                                              userUid: widget.userUid,
+                                              value: widget.value,
+                                            )));
+                      }}),
+
+                  title: Text(items[index].workoutname,
+                      style: TextStyle(
+                          fontFamily: "Prompt",
+                          fontSize: screenWidth * 0.055,
+                          fontWeight: FontWeight.w700)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageFour(
+                                  title: items[index].workoutname,
+                                  muscleGroup: items[index].musclegroup,
+                                  description: items[index].description,
+                                  uid: widget.userUid,
+                                  trainerID: widget.value,
+                                  firebaseGeneratedKey: items[index].key,
+                                )));
+                  },
                 );
               },
             ),
           ),
           Container(
-            width: screenWidth,
-            child: new FlatButton(child: 
-            new Text("+ Add Workout +", style: TextStyle(
-                    fontFamily: "Prompt",
-                    fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white)),
-            color: Colors.black,
-
-          onPressed: (){ confirmDialog(context, "Add a new workout");})
-          )
+              width: screenWidth,
+              child: new FlatButton(
+                  child: new Text("+ Add Workout +",
+                      style: TextStyle(
+                          fontFamily: "Prompt",
+                          fontSize: screenWidth * 0.045,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white)),
+                  color: Colors.black,
+                  onPressed: () {
+                    confirmDialog(context, "Add a new workout");
+                  }))
         ],
       ),
     );
   }
 
-Future<Null> confirmDialog(BuildContext context, String execution) {
-  return showDialog<Null>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) { 
-        return new AlertDialog(
-          title: new Text(execution),
-           content: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Flex(
-                  direction: Axis.vertical,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Text("New workout name"),
-                      title: TextFormField(
-                        initialValue: "",
-                        onSaved: (val) => item.workoutname = val,
-                        validator: (val) => val == "" ? val : null,
-                      ),
+  Future<Null> confirmDialog(BuildContext context, String execution) {
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(execution),
+            content: SingleChildScrollView(
+                child: Form(
+              key: formKey,
+              child: Flex(
+                direction: Axis.vertical,
+                children: <Widget>[
+                  ListTile(
+                    leading: Text("New workout name"),
+                    title: TextFormField(
+                      initialValue: "",
+                      onSaved: (val) => item.workoutname = val,
+                      validator: (val) => val == "" ? val : null,
                     ),
-                    ListTile(
-                      leading: Text("Muscle Group"),
-                      title: TextFormField(
-                        initialValue: '',
-                        onSaved: (val) => item.musclegroup = val,
-                        validator: (val) => val == "" ? val : null,
-                      ),
+                  ),
+                  ListTile(
+                    leading: Text("Muscle Group"),
+                    title: TextFormField(
+                      initialValue: '',
+                      onSaved: (val) => item.musclegroup = val,
+                      validator: (val) => val == "" ? val : null,
                     ),
-                    ListTile(
-                      leading: Text("Description"),
-                      title: TextFormField(
-                        initialValue: "",
-                        onSaved: (val) => item.description = val,
-                        validator: (val) => val == "" ? val : null,
-                      ),
+                  ),
+                  ListTile(
+                    leading: Text("Description"),
+                    title: TextFormField(
+                      initialValue: "",
+                      onSaved: (val) => item.description = val,
+                      validator: (val) => val == "" ? val : null,
                     ),
-                    IconButton(
-                      icon: Icon(Icons.send),
-                      onPressed: () {
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: () {
                         handleSubmit();
-                      },
-                    ),
-                  ],
-                ),
-              )
-            ),
-          actions: <Widget>[
-            new FlatButton(
-              child: const Text('CLOSE'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      });
-}
-
+                        setState(() => _NextPageStateClient());
+                    },
+                  ),
+                ],
+              ),
+            )),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
 }
 
 class Item {
@@ -187,7 +203,6 @@ class Item {
         musclegroup = snapshot.value["musclegroup"],
         description = snapshot.value["description"];
 
-
   toJson() {
     return {
       "workoutname": workoutname,
@@ -195,7 +210,4 @@ class Item {
       "description": description,
     };
   }
-  
 }
-
-

@@ -37,7 +37,10 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   void initState() {
     super.initState();
 
-  timer = new Timer(const Duration(seconds: 3), () {
+  print("YOSEPH: " + widget.userUid);
+  print(widget.value);
+  print("Key: $widget.key");
+  timer = new Timer(const Duration(seconds: 5), () {
       setState(() {
         msg = "No workouts assigned to you";
       });

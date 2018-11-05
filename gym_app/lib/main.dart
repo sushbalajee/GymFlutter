@@ -51,14 +51,14 @@ class HomePageState extends State<GymApp> {
   Widget build(BuildContext context) {
 
     return new MaterialApp(
-        title: "Gym Application V1.0",
+        title: "Gym Application V1.1",
         home: new Scaffold(
             backgroundColor: Colors.grey[100],
 
             appBar: new AppBar(
                 centerTitle: true,
                 backgroundColor: Colors.grey[900],
-                title: new Text("GymApp V1.0", style: TextStyle(fontSize: 25.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
+                title: new Text("GymApp V1.1", style: TextStyle(fontSize: 25.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
 
             body: currentPage,
             
