@@ -55,6 +55,17 @@ class _NextPageStateClient extends State<ClientWorkouts> {
     }
   }
 
+  void handleDelete(int ii) {
+    itemRef.child(items[ii].key).remove();
+    Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClientWorkouts(
+                                        userUid: widget.userUid,
+                                        value: widget.value,
+                                      )));
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -80,16 +91,15 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                       color: Colors.grey[900],
                       onPressed: () {
                         if (items.length == 1) {
-                          confirmError(context, "Please add a new workout before deleting this one", "");
-                        } else {
-                          itemRef.child(items[index].key).remove();
-                          Navigator.pushReplacement(
+                          confirmError(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClientWorkouts(
-                                        userUid: widget.userUid,
-                                        value: widget.value,
-                                      )));
+                              "Please add a new workout before deleting this one",
+                              "");
+                        } else {
+
+
+                          confirmDelete(context, "Are you sure you want to delete this Workout?", index);
+                          
                         }
                       }),
                   title: Text(items[index].workoutname,
@@ -132,25 +142,65 @@ class _NextPageStateClient extends State<ClientWorkouts> {
     );
   }
 
-  Future<Null> confirmError(BuildContext context, String why, String execution) {
-  return showDialog<Null>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(why),
-          content: new Text(execution),
-          actions: <Widget>[
-            new FlatButton(
-              child: const Text('CLOSE'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      });
-}
+  Future<Null> confirmError(
+      BuildContext context, String why, String execution) {
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(why),
+            content: new Text(execution),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<Null> confirmDelete(
+      BuildContext context, String why, int ind) {
+
+        double screenWidth = MediaQuery.of(context).size.width;
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(why),
+            content: Container(
+                    width: screenWidth,
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: new FlatButton(
+                      child: new Text("Delete",
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.045,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white)),
+                      color: Colors.black,
+                      onPressed: () {
+                        handleDelete(ind);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
 
   Future<Null> confirmDialog(BuildContext context, String execution) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -199,6 +249,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                       onPressed: () {
                         handleSubmit();
                         setState(() => _NextPageStateClient());
+                        Navigator.of(context).pop();
                       },
                     ),
                   )
