@@ -61,7 +61,8 @@ class _NextPageStateClient extends State<ClientWorkouts> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('FB example'),
+        backgroundColor: Colors.grey[900],
+        title: Text('Workouts', style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
@@ -72,11 +73,13 @@ class _NextPageStateClient extends State<ClientWorkouts> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 return new ListTile(
-                  trailing: new RaisedButton(
-                      child: new Text("Delete"),
+                  trailing: new IconButton(
+                     iconSize: 45.0,
+                       icon: Icon(Icons.delete_forever),
+                       color: Colors.grey[900],
                       onPressed: () {
-                        if(items.length == 3){
-                          print("Na G");
+                        if(items.length == 1){
+                          print("Please add a new workout before deleting this one");
                         }
                         else{
                           itemRef.child(items[index].key).remove();  
@@ -91,7 +94,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
 
                   title: Text(items[index].workoutname,
                       style: TextStyle(
-                          fontFamily: "Prompt",
+                          fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.055,
                           fontWeight: FontWeight.w700)),
                   onTap: () {
@@ -116,7 +119,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
               child: new FlatButton(
                   child: new Text("+ Add Workout +",
                       style: TextStyle(
-                          fontFamily: "Prompt",
+                          fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.045,
                           fontWeight: FontWeight.w700,
                           color: Colors.white)),
@@ -130,50 +133,58 @@ class _NextPageStateClient extends State<ClientWorkouts> {
   }
 
   Future<Null> confirmDialog(BuildContext context, String execution) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(execution),
+            title: new Text(execution, style: TextStyle(fontFamily: "Montserrat")),
             content: SingleChildScrollView(
                 child: Form(
               key: formKey,
               child: Flex(
                 direction: Axis.vertical,
                 children: <Widget>[
-                  ListTile(
-                    leading: Text("New workout name"),
-                    title: TextFormField(
+
+                  TextFormField(
+                      decoration: InputDecoration( labelText: "New Workout Name"),
                       initialValue: "",
                       onSaved: (val) => item.workoutname = val,
                       validator: (val) => val == "" ? val : null,
                     ),
-                  ),
-                  ListTile(
-                    leading: Text("Muscle Group"),
-                    title: TextFormField(
+
+                   TextFormField(
+                      decoration: InputDecoration( labelText: "Muscle Group"),
                       initialValue: '',
                       onSaved: (val) => item.musclegroup = val,
                       validator: (val) => val == "" ? val : null,
                     ),
-                  ),
-                  ListTile(
-                    leading: Text("Description"),
-                    title: TextFormField(
+                  
+                    TextFormField(
+                      decoration: InputDecoration( labelText: "Description"),
                       initialValue: "",
                       onSaved: (val) => item.description = val,
                       validator: (val) => val == "" ? val : null,
                     ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.send),
+                  Container(
+                width: screenWidth,
+                padding: EdgeInsets.only(top: 30.0),
+                child: new FlatButton(child: 
+                new Text("Submit", style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth *0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                color: Colors.black,
                     onPressed: () {
                         handleSubmit();
                         setState(() => _NextPageStateClient());
                     },
                   ),
-                ],
+                  )],
               ),
             )),
             actions: <Widget>[

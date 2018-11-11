@@ -41,15 +41,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
 
-        //itemRef = database.reference().child('Workouts').child(widget.value).child(widget.userUid);
-
     snek = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid);
-    /*itemRef = database
-        .reference()
-        .child('Workouts')
-        .child(widget.uid)
-        .child(widget.firebaseGeneratedKey)
-        .child('exercises');*/
 
     itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child(widget.firebaseGeneratedKey).child('exercises');
 
@@ -102,8 +94,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
     
               Container(
                 color: Colors.grey[900],
-                padding: const EdgeInsetsDirectional.only(
-                    start: 15.0, bottom: 15.0, top: 15.0),
+                padding: const EdgeInsets.all(15.0),
                 alignment: Alignment(-1.0, 0.0),
                 child: 
                 Text(widget.description,
@@ -208,87 +199,91 @@ class UploadedWorkoutInfo extends State<PageFour> {
       
     
     Future<Null> confirmDialog(BuildContext context, String execution) {
+
+      double screenWidth = MediaQuery.of(context).size.width;
+
       return showDialog<Null>(
           context: context,
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) { 
-            return new AlertDialog(
-              title: new Text(execution),
+            return new AlertDialog( 
+              title: new Text(execution, style: TextStyle(fontFamily: "Montserrat", fontWeight: FontWeight.w700)),
                content: SingleChildScrollView(
                   child: Form(
                     key: formKey,
                     child: Flex(
                       direction: Axis.vertical,
                       children: <Widget>[
-                        ListTile(
-                          leading: Text("name"),
-                          title: TextFormField(
+                        
+                          TextFormField(     
+                             decoration: InputDecoration( labelText: "Name"),    
                             initialValue: "",
                             onSaved: (val) => item.name = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
+                          
                         ),
-                        ListTile(
-                          leading: Text("reps"),
-                          title: TextFormField(
+
+                          TextFormField(
+                            decoration: InputDecoration( labelText: "Reps"),  
                             initialValue: '',
                             onSaved: (val) => item.reps = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
+                          
                         ),
-                        ListTile(
-                          leading: Text("sets"),
-                          title: TextFormField(
+                        
+                          TextFormField(
+                            decoration: InputDecoration( labelText: "Sets"),  
                             initialValue: "",
                             onSaved: (val) => item.sets = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
                         ),
-                        ListTile(
-                          leading: Text("execution"),
-                          title: TextFormField(
+
+                          TextFormField(
+                            decoration: InputDecoration( labelText: "Execution"),  
                             initialValue: "",
                             onSaved: (val) => item.execution = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
                         ),
-                        ListTile(
-                          leading: Text("target"),
-                          title: TextFormField(
+                           TextFormField(
+                            decoration: InputDecoration( labelText: "Target Muscle(s)"),  
                             initialValue: "",
                             onSaved: (val) => item.target = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
                         ),
-                        ListTile(
-                          leading: Text("rest"),
-                          title: TextFormField(
+                          TextFormField(
+                            decoration: InputDecoration( labelText: "Rest"),  
                             initialValue: "",
                             onSaved: (val) => item.rest = val,
                             validator: (val) => val == "" ? val : null,
-                          ),
                         ),
-                        ListTile(
-                          leading: Text("weight"),
-                          title: TextFormField(
+                          TextFormField(
+                            decoration: InputDecoration( labelText: "Weight"),  
                             initialValue: "",
                             onSaved: (val) => item.weight = val,
                             validator: (val) => val == "" ? val : null,
                           ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.send),
+                        Container(
+                width: screenWidth,
+                padding: EdgeInsets.only(top: 30.0),
+                child: new FlatButton(child: 
+                new Text("Submit", style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth *0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                color: Colors.black,
                           onPressed: () {
                             handleSubmit();
                           },
                         ),
-                      ],
+                        )],
                     ),
                   ),
                 ),
               actions: <Widget>[
                 new FlatButton(
-                  child: const Text('CLOSE'),
+                   padding: EdgeInsets.all(20.0),
+                  child: const Text('CLOSE', style: TextStyle(fontFamily: "Montserrat")),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

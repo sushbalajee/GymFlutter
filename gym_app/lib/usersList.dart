@@ -76,7 +76,7 @@ class UIDListPage extends State<UIDList> {
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Colors.grey[900],
-            title: new Text("My Clients")),
+            title: new Text("My Clients", style: TextStyle(fontFamily: "Montserrat"))),
         body: Container(
             child: FutureBuilder(
                 future: fetchPost(),
@@ -106,10 +106,11 @@ class UIDListPage extends State<UIDList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
+                          return ListTile( 
+                            contentPadding: EdgeInsets.all(20.0),
                               title: Text(snapshot.data[index],
                                   style: TextStyle(
-                                      fontFamily: "Prompt",
+                                      fontFamily: "Montserrat",
                                       //fontSize: screenWidth  * 0.055,
                                       fontWeight: FontWeight.w700)),
                               onTap: () {
