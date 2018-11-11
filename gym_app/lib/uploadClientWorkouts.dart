@@ -40,7 +40,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
 
   _onEntryAdded(Event event) {
     //setState(() {
-      items.add(Item.fromSnapshot(event.snapshot));
+    items.add(Item.fromSnapshot(event.snapshot));
     //});
   }
 
@@ -73,30 +73,30 @@ class _NextPageStateClient extends State<ClientWorkouts> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 return new ListTile(
+                  contentPadding: EdgeInsets.only(top: 10.0, left: 20.0),
                   trailing: new IconButton(
-                     iconSize: 45.0,
-                       icon: Icon(Icons.delete_forever),
-                       color: Colors.grey[900],
+                      iconSize: 45.0,
+                      icon: Icon(Icons.delete_forever),
+                      color: Colors.grey[900],
                       onPressed: () {
-                        if(items.length == 1){
-                          print("Please add a new workout before deleting this one");
-                        }
-                        else{
-                          itemRef.child(items[index].key).remove();  
+                        if (items.length == 1) {
+                          confirmError(context, "Please add a new workout before deleting this one", "");
+                        } else {
+                          itemRef.child(items[index].key).remove();
                           Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ClientWorkouts(
-                                              userUid: widget.userUid,
-                                              value: widget.value,
-                                            )));
-                      }}),
-
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClientWorkouts(
+                                        userUid: widget.userUid,
+                                        value: widget.value,
+                                      )));
+                        }
+                      }),
                   title: Text(items[index].workoutname,
                       style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.055,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -132,59 +132,77 @@ class _NextPageStateClient extends State<ClientWorkouts> {
     );
   }
 
+  Future<Null> confirmError(BuildContext context, String why, String execution) {
+  return showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text(why),
+          content: new Text(execution),
+          actions: <Widget>[
+            new FlatButton(
+              child: const Text('CLOSE'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      });
+}
+
   Future<Null> confirmDialog(BuildContext context, String execution) {
-
     double screenWidth = MediaQuery.of(context).size.width;
-
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(execution, style: TextStyle(fontFamily: "Montserrat")),
+            title:
+                new Text(execution, style: TextStyle(fontFamily: "Montserrat")),
             content: SingleChildScrollView(
                 child: Form(
               key: formKey,
               child: Flex(
                 direction: Axis.vertical,
                 children: <Widget>[
-
                   TextFormField(
-                      decoration: InputDecoration( labelText: "New Workout Name"),
-                      initialValue: "",
-                      onSaved: (val) => item.workoutname = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),
-
-                   TextFormField(
-                      decoration: InputDecoration( labelText: "Muscle Group"),
-                      initialValue: '',
-                      onSaved: (val) => item.musclegroup = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),
-                  
-                    TextFormField(
-                      decoration: InputDecoration( labelText: "Description"),
-                      initialValue: "",
-                      onSaved: (val) => item.description = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),
+                    decoration: InputDecoration(labelText: "New Workout Name"),
+                    initialValue: "",
+                    onSaved: (val) => item.workoutname = val,
+                    validator: (val) => val == "" ? val : null,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: "Muscle Group"),
+                    initialValue: '',
+                    onSaved: (val) => item.musclegroup = val,
+                    validator: (val) => val == "" ? val : null,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: "Description"),
+                    initialValue: "",
+                    onSaved: (val) => item.description = val,
+                    validator: (val) => val == "" ? val : null,
+                  ),
                   Container(
-                width: screenWidth,
-                padding: EdgeInsets.only(top: 30.0),
-                child: new FlatButton(child: 
-                new Text("Submit", style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth *0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                    onPressed: () {
+                    width: screenWidth,
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: new FlatButton(
+                      child: new Text("Submit",
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.045,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white)),
+                      color: Colors.black,
+                      onPressed: () {
                         handleSubmit();
                         setState(() => _NextPageStateClient());
-                    },
-                  ),
-                  )],
+                      },
+                    ),
+                  )
+                ],
               ),
             )),
             actions: <Widget>[
