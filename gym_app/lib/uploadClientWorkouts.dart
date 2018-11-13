@@ -70,9 +70,9 @@ class _NextPageStateClient extends State<ClientWorkouts> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
+    return Scaffold( backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Color(0xFF4A657A),
         title: Text('Workouts', style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
@@ -83,12 +83,15 @@ class _NextPageStateClient extends State<ClientWorkouts> {
               query: itemRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                return new ListTile(
-                  contentPadding: EdgeInsets.only(top: 10.0, left: 20.0),
+                    return Card(
+                      elevation: 3.0,
+                       child:
+                new ListTile( 
+                  contentPadding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0),
                   trailing: new IconButton(
-                      iconSize: 45.0,
+                      iconSize: 35.0,
                       icon: Icon(Icons.delete_forever),
-                      color: Colors.grey[900],
+                      color: Color(0xFF4A657A),
                       onPressed: () {
                         if (items.length == 1) {
                           confirmError(
@@ -96,16 +99,14 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                               "Please add a new workout before deleting this one",
                               "");
                         } else {
-
-
                           confirmDelete(context, "Are you sure you want to delete this Workout?", index);
-                          
                         }
                       }),
                   title: Text(items[index].workoutname,
                       style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.055,
+                          color: Color(0xFF22333B),
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.push(
@@ -120,7 +121,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                                   firebaseGeneratedKey: items[index].key,
                                 )));
                   },
-                );
+                ));
               },
             ),
           ),
@@ -133,7 +134,7 @@ class _NextPageStateClient extends State<ClientWorkouts> {
                           fontSize: screenWidth * 0.045,
                           fontWeight: FontWeight.w700,
                           color: Colors.white)),
-                  color: Colors.black,
+                  color: Color(0xFF272727),
                   onPressed: () {
                     confirmDialog(context, "Add a new workout");
                   }))

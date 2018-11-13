@@ -73,11 +73,14 @@ class UIDListPage extends State<UIDList> {
   Widget build(BuildContext context) {
     //fetchPost();
     return new Scaffold(
+
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Colors.grey[900],
+            backgroundColor: Color(0xFF4A657A),
             title: new Text("My Clients", style: TextStyle(fontFamily: "Montserrat"))),
-        body: Container(
+        body: 
+        Container(
+           color: Color(0xFFEFF1F3),
             child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -106,12 +109,20 @@ class UIDListPage extends State<UIDList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ListTile( 
+                          return Card(
+                             //shape: Border.all(
+                //color: Colors.blueGrey[400], width: 1.0, style: BorderStyle.solid),
+                             elevation: 3.0,
+                             child:
+                          ListTile( 
+                            
                             contentPadding: EdgeInsets.all(20.0),
-                              title: Text(snapshot.data[index],
+                              title: Text(snapshot.data[index], border: Border.all(
+                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
                                   style: TextStyle(
                                       fontFamily: "Montserrat",
                                       //fontSize: screenWidth  * 0.055,
+                                      color: Color(0xFF22333B),
                                       fontWeight: FontWeight.w700)),
                               onTap: () {
                                 Navigator.push(
@@ -121,7 +132,7 @@ class UIDListPage extends State<UIDList> {
                                               userUid: snapshot.data[index],
                                               value: widget.trainerID,
                                             )));
-                              });
+                              }));
                         });
                   }
                 })));

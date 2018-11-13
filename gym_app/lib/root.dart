@@ -203,7 +203,7 @@ class RootPageState extends State<RootPage> {
               children: <Widget>[
                 Text("$uid",
                     style: TextStyle(
-                      fontSize: 14.0,
+                      fontSize: 13.0,
                       fontFamily: "Montserrat",
                       fontWeight: FontWeight.w700
                     )),

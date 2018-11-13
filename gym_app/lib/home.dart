@@ -4,8 +4,7 @@ class PageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300.0,
-      color: Colors.purple,
+      color: Color(0xFF22333B),
     );
   }
 }
