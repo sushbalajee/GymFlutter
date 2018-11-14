@@ -12,107 +12,51 @@ class PageOne extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<PageOne> {
-List<String> added = [];
-  String currentText = "";
-  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
+ final myController = TextEditingController();
 
-  List<String> suggestions = [
-    "Apple",
-    "Armidillo",
-    "Actual",
-    "Actuary",
-    "America",
-    "Argentina",
-    "Australia",
-    "Antarctica",
-    "Blueberry",
-    "Cheese",
-    "Danish",
-    "Eclair",
-    "Fudge",
-    "Granola",
-    "Hazelnut",
-    "Ice Cream",
-    "Jely",
-    "Kiwi Fruit",
-    "Lamb",
-    "Macadamia",
-    "Nachos",
-    "Oatmeal",
-    "Palm Oil",
-    "Quail",
-    "Rabbit",
-    "Salad",
-    "T-Bone Steak",
-    "Urid Dal",
-    "Vanilla",
-    "Waffles",
-    "Yam",
-    "Zest"
-  ];
+  @override
+  void initState() {
+    super.initState();
 
-  AutoCompleteTextField textField;
+    myController.addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is removed from the Widget tree
+    // This also removes the _printLatestValue listener
+    myController.dispose();
+    super.dispose();
+  }
+
+  String test;
+
+  _printLatestValue() {
+    setState(() {
+          test = myController.text;
+        });
+    print("Second text field: ${myController.text}");
+  }
 
   @override
   Widget build(BuildContext context) {
-    textField = new AutoCompleteTextField<String>(
-        decoration: new InputDecoration(
-          hintText: "Search Item",
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Retrieve Text Input'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            TextFormField( 
+              controller: myController,
+            ),
+            TextFormField( 
+              controller: myController,
+            ),
+          ],
         ),
-        key: key,
-        submitOnSuggestionTap: true,
-        clearOnSubmit: true,
-        suggestions: suggestions,
-        textInputAction: TextInputAction.go,
-        textChanged: (item) {
-          currentText = item;
-        },
-        textSubmitted: (item) {
-          setState(() {
-            added.clear();
-            currentText = item;
-            added.add(currentText);
-            print(currentText);
-            currentText = "";
-          });
-        },
-        itemBuilder: (context, item) {
-          return new Padding(
-              padding: EdgeInsets.all(8.0), child: new Text(item));
-        },
-        itemSorter: (a, b) {
-          return a.compareTo(b);
-        },
-        itemFilter: (item, query) {
-          return item.toLowerCase().startsWith(query.toLowerCase());
-        });
-
-    Column body = new Column(children: [
-      new ListTile(
-          title: textField,
-          trailing: new IconButton(
-              icon: new Icon(Icons.add),
-              onPressed: () {
-                added.clear();
-                setState(() {
-                  if (currentText != "") {
-                    print(currentText);
-                    added.add(currentText);
-                    textField.clear();
-                    currentText = "";
-                  }
-                });
-              }))
-    ]);
-
-    body.children.addAll(added.map((item) {
-      
-      return new ListTile(title: new Text(item),);
-    }));
-
-    return new Scaffold(
-        appBar: new AppBar(
-            title: new Text('Auto Complete TextField Demo'),),
-        body: body);
+      ),
+    );
   }
 }

@@ -37,6 +37,8 @@ class UploadedWorkoutInfo extends State<PageFour> {
   DatabaseReference itemRef;
   DatabaseReference snek;
 
+  final myController = TextEditingController();
+
   String passMeOn;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -45,6 +47,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
   void initState() {
     super.initState();
 
+    myController.addListener(_printLatestValue);
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
@@ -70,6 +73,23 @@ class UploadedWorkoutInfo extends State<PageFour> {
     //setState(() {
       items.add(Item.fromSnapshot(event.snapshot));
     //});
+  }
+
+  String test;
+
+  _printLatestValue() {
+    setState(() {
+          test = myController.text;
+        });
+    print("Second text field: ${myController.text}");
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is removed from the Widget tree
+    // This also removes the _printLatestValue listener
+    myController.dispose();
+    super.dispose();
   }
 
   void handleSubmit() {
@@ -142,7 +162,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                     fontSize: screenWidth * 0.035,
                     color: Colors.white)),
           ),
-          searchMethod(),
+          //searchMethod(),
           Flexible(
             child: FirebaseAnimatedList(
               query: itemRef,
@@ -295,12 +315,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
                 child: Flex(
                   direction: Axis.vertical,
                   children: <Widget>[
-                    TextFormField(
+                  searchMethod2(),
+
+                    /*TextFormField(
                     initialValue: passMeOn,
                     onSaved: (val) => item.name = currentText,
                     validator: (val) => val == "" ? val : null,
                     
-                    ),
+                    ),*/
                     TextFormField(
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: '',
@@ -462,7 +484,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
           );
         });
   }
-
+/*
   Widget searchMethod() {
 
    return AutoCompleteTextField<String>(
@@ -530,8 +552,100 @@ class UploadedWorkoutInfo extends State<PageFour> {
          print(item);
        },
     );
-  }
+  }*/
+
+  Widget searchMethod2(){
+
+List<String> suggestions = [
+    "Apple",
+    "Armidillo",
+    "Actual",
+    "Actuary",
+    "America",
+    "Argentina",
+    "Australia",
+    "Antarctica",
+    "Blueberry",
+    "Cheese",
+    "Danish",
+    "Eclair",
+    "Fudge",
+    "Granola",
+    "Hazelnut",
+    "Ice Cream",
+    "Jely",
+    "Kiwi Fruit",
+    "Lamb",
+    "Macadamia",
+    "Nachos",
+    "Oatmeal",
+    "Palm Oil",
+    "Quail",
+    "Rabbit",
+    "Salad",
+    "T-Bone Steak",
+    "Urid Dal",
+    "Vanilla",
+    "Waffles",
+    "Yam",
+    "Zest"
+  ];
+return Flex( direction: Axis.vertical,  children: <Widget>[
+  
+   AutoCompleteTextField<String>(
+        decoration: new InputDecoration(
+          hintText: "Search Item",
+        ),
+        key: key,
+        submitOnSuggestionTap: true,
+        clearOnSubmit: true,
+        suggestions: suggestions,
+        textInputAction: TextInputAction.go,
+        textChanged: (item) {
+          currentText = item;
+        },
+        textSubmitted: (item) {
+          setState(() {
+            added.clear();
+            currentText = item;
+            added.add(currentText);
+            passMeOn = currentText;
+            comeON();
+            myController.text = currentText;
+            print(currentText);
+            //currentText = "";
+          });
+        },
+        itemBuilder: (context, item) {
+          return new Padding(
+              padding: EdgeInsets.all(8.0), child: new Text(item));
+        },
+        itemSorter: (a, b) {
+          return a.compareTo(b);
+        },
+        itemFilter: (item, query) {
+          return item.toLowerCase().startsWith(query.toLowerCase());
+        }),
+        comeON()
+
+]);}
+
+
+
+
+Widget comeON(){
+  return
+  TextFormField(    
+    //controller: myController,
+                    //controller: _c,
+                    controller: myController,
+                    //initialValue: tt,
+                    onSaved: (val) => item.name = currentText,
+                    validator: (val) => val == "" ? val : null,
+                    
+                    );
 }
+  }
 
 class Item {
   String key;
