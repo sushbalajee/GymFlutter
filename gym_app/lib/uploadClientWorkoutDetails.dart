@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:async';
+import 'searchTargets.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 class PageFour extends StatefulWidget {
   final String firebaseGeneratedKey;
@@ -26,16 +28,23 @@ class PageFour extends StatefulWidget {
 }
 
 class UploadedWorkoutInfo extends State<PageFour> {
+  List<String> added = [];
+  String currentText = "";
+  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
+
   List<Item> items = List();
   Item item;
   DatabaseReference itemRef;
   DatabaseReference snek;
+
+  String passMeOn;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
@@ -58,9 +67,9 @@ class UploadedWorkoutInfo extends State<PageFour> {
   }
 
   _onEntryAdded(Event event) {
-    setState(() {
+    //setState(() {
       items.add(Item.fromSnapshot(event.snapshot));
-    });
+    //});
   }
 
   void handleSubmit() {
@@ -102,14 +111,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
 
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold( backgroundColor: Color(0xFFEFF1F3),
+    return Scaffold(
+      backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4A657A),//Colors.grey[900],
-        title: Text(widget.title, style: TextStyle( fontFamily: "Montserrat")),
+        backgroundColor: Color(0xFF4A657A), //Colors.grey[900],
+        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
-      body: 
-      Column(
+      body: Column(
         children: <Widget>[
           Container(
             color: Color(0xFF272727),
@@ -124,17 +133,18 @@ class UploadedWorkoutInfo extends State<PageFour> {
           ),
           Container(
             color: Color(0xFF272727),
-            padding: EdgeInsets.only(top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
+            padding: EdgeInsets.only(
+                top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: screenWidth * 0.035,
-                    
                     color: Colors.white)),
           ),
+          searchMethod(),
           Flexible(
-            child: FirebaseAnimatedList( 
+            child: FirebaseAnimatedList(
               query: itemRef,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -142,9 +152,9 @@ class UploadedWorkoutInfo extends State<PageFour> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 exerciseNumber += 1;
-                return Card( 
+                return Card(
                     elevation: 3.0,
-                    child: new Padding( 
+                    child: new Padding(
                         padding: EdgeInsets.only(top: 10.0),
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
@@ -153,15 +163,10 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                     radius: 22.0,
                                     child: new Text(
                                       "$exerciseNumber",
-                                    
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     backgroundColor: Color(0xFF4A657A)),
-
-                                    
-                                trailing:           
-
-                                new IconButton(
+                                trailing: new IconButton(
                                     iconSize: 35.0,
                                     icon: Icon(Icons.delete_forever),
                                     color: Color(0xFF4A657A),
@@ -187,17 +192,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                                   )));
                                       //}
                                     }),
-                                
                                 title: new Stack(children: <Widget>[
                                   new Row(children: <Widget>[
-
                                     Text(items[index].name,
                                         style: TextStyle(
                                             fontFamily: "Montserrat",
                                             color: Color(0xFF4A657A),
                                             fontSize: screenWidth * 0.05,
                                             fontWeight: FontWeight.w700)),
-
                                     Container(
                                         child: new IconButton(
                                             icon: new Icon(Icons.edit),
@@ -208,11 +210,11 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                             }))
                                   ])
                                 ])),
-                            ListTile( 
+                            ListTile(
                                 subtitle: new Stack(children: <Widget>[
-                              new Column(  
+                              new Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[ 
+                                  children: <Widget>[
                                     new Text("Weight: " + items[index].weight,
                                         style: TextStyle(
                                             fontFamily: "Prompt",
@@ -240,7 +242,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                             items[index].rest +
                                             " seconds between sets",
                                         style: TextStyle(
-                                          color: Color(0xFF22333B),
+                                            color: Color(0xFF22333B),
                                             fontFamily: "Prompt",
                                             fontSize: screenWidth * 0.04)),
                                     new Padding(
@@ -261,7 +263,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
           Container(
               width: screenWidth,
               child: new FlatButton(
-                  child: new Text("+ Add Exercise + ",
+                  child: new Text("+ Add your own exercises here + ",
                       style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.045,
@@ -288,16 +290,16 @@ class UploadedWorkoutInfo extends State<PageFour> {
                 style: TextStyle(
                     fontFamily: "Montserrat", fontWeight: FontWeight.w700)),
             content: SingleChildScrollView(
-              child: Form( 
+              child: Form(
                 key: formKey,
-                child: Flex( 
-                  direction: Axis.vertical, 
+                child: Flex(
+                  direction: Axis.vertical,
                   children: <Widget>[
-                    TextFormField( 
-                      decoration: InputDecoration(labelText: "Name"),
-                      initialValue: "",
-                      onSaved: (val) => item.name = val,
-                      validator: (val) => val == "" ? val : null,
+                    TextFormField(
+                    initialValue: passMeOn,
+                    onSaved: (val) => item.name = currentText,
+                    validator: (val) => val == "" ? val : null,
+                    
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Reps"),
@@ -336,26 +338,23 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       onSaved: (val) => item.weight = val,
                       validator: (val) => val == "" ? val : null,
                     ),
-                    
                   ],
                 ),
               ),
             ),
             actions: <Widget>[
-              new FlatButton( 
+              new FlatButton(
                 color: Colors.grey[900],
-                        child: new Text("Submit",
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: screenWidth * 0.045,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white)),
-                        
-                        onPressed: () {
-                          handleSubmit();
-                        },
-                      
-                    ),
+                child: new Text("Submit",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                onPressed: () {
+                  handleSubmit();
+                },
+              ),
               new FlatButton(
                 padding: EdgeInsets.all(20.0),
                 child: const Text('CLOSE',
@@ -462,6 +461,75 @@ class UploadedWorkoutInfo extends State<PageFour> {
             ],
           );
         });
+  }
+
+  Widget searchMethod() {
+
+   return AutoCompleteTextField<String>(
+      key: key,
+      decoration: InputDecoration(labelText: "Search here for exercises", contentPadding: EdgeInsets.all(15.0), suffixIcon: Icon(Icons.search)),
+      suggestions: [
+        "Apple",
+        "Armidillo",
+        "Actual",
+        "Actuary",
+        "America",
+        "Argentina",
+        "Australia",
+        "Antarctica",
+        "Blueberry",
+        "Cheese",
+        "Danish",
+        "Eclair",
+        "Fudge",
+        "Granola",
+        "Hazelnut",
+        "Ice Cream",
+        "Jely",
+        "Kiwi Fruit",
+        "Lamb",
+        "Macadamia",
+        "Nachos",
+        "Oatmeal",
+        "Palm Oil",
+        "Quail",
+        "Rabbit",
+        "Salad",
+        "T-Bone Steak",
+        "Urid Dal",
+        "Vanilla",
+        "Waffles",
+        "Yam",
+        "Zest"
+      ],
+      textChanged: (item) {
+                  currentText = item;
+      },
+      itemBuilder: (context, item) {
+        return new Padding(padding: EdgeInsets.all(0.0), child:
+        OutlineButton( child:
+         new Text(item), onPressed: (){
+
+           setState((){ 
+              passMeOn = item;  
+                    });
+            
+          confirmDialog(context, "Add Exercise");
+              
+         },));
+      },
+      itemSorter: (a, b) {
+        return a.compareTo(b);
+      },
+      itemFilter: (item, query) {
+        return item.toLowerCase().startsWith(query.toLowerCase());
+      },
+      submitOnSuggestionTap: false,
+
+      textSubmitted: (item){
+         print(item);
+       },
+    );
   }
 }
 
