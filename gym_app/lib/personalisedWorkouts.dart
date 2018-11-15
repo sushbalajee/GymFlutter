@@ -37,7 +37,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   void initState() {
     super.initState();
 
-  print("YOSEPH: " + widget.userUid);
+  print("My ID is " + widget.userUid);
   print(widget.value);
   print("Key: $widget.key");
   timer = new Timer(const Duration(seconds: 5), () {
@@ -99,6 +99,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
                       elevation: 3.0,
                        child: 
                   new ListTile(
+                    contentPadding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0),
                     leading: CircleAvatar(child: Text("$workoutNumber", style: TextStyle(color: Colors.white),),
                     backgroundColor: Color(0xFF4A657A)),
                     title: Text(items[index].workoutname,

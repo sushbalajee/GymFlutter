@@ -372,7 +372,7 @@ class LoginPageState extends State<Login> {
         new Container(
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
-                color: Colors.grey[900],
+                color: Color(0xFF22333B),
                 child: new Text(
                   "Login",
                   style: TextStyle(
@@ -387,7 +387,7 @@ class LoginPageState extends State<Login> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)))),
         new OutlineButton(
-            borderSide: BorderSide(color: Colors.grey[400]),
+            borderSide: BorderSide(color: Color(0xFF4A657A)),
             child: new Text("Create an Account",
                 style: new TextStyle(fontSize: 15.0, fontFamily: "Montserrat")),
             onPressed: moveToRegister,
@@ -400,7 +400,7 @@ class LoginPageState extends State<Login> {
         new Container(
             padding: EdgeInsets.only(top: 20.0),
             child: new RaisedButton(
-                color: Colors.grey[900],
+                color: Color(0xFF22333B),
                 child: new Text(
                   "Register",
                   style: TextStyle(
@@ -412,7 +412,7 @@ class LoginPageState extends State<Login> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)))),
         new OutlineButton(
-          borderSide: BorderSide(color: Colors.grey[400]),
+          borderSide: BorderSide(color: Color(0xFF4A657A)),
           padding: EdgeInsets.all(10.0),
           child: new Text("Already have an account? Login in here",
               textAlign: TextAlign.center,
@@ -425,9 +425,10 @@ class LoginPageState extends State<Login> {
         new Container(
             //padding: EdgeInsets.only(top: screenHeight/6),
             child: new FlatButton(
-                color: Colors.grey[300],
+                color: Color(0xFF4A657A),
                 child: new Text("Register as a Trainer",
                     style: new TextStyle(
+                      color: Colors.white,
                         fontSize: 15.0, fontFamily: "Montserrat")),
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(5.0),
