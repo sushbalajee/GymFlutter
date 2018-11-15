@@ -83,14 +83,18 @@ class UploadedWorkoutInfo extends State<PageFour> {
   String imageUrlStorage = "";
 
   final myController = TextEditingController();
-
+ 
   String passMeOn;
+  var focusNode = new FocusNode();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+
+  // listen to focus changes
+    focusNode.addListener(() => print('focusNode updated: hasFocus: ${focusNode.hasFocus}')); 
 
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -112,13 +116,21 @@ class UploadedWorkoutInfo extends State<PageFour> {
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
+
   someMethod(String target) async {
     final ref = FirebaseStorage.instance
         .ref()
         .child('Target Muscles')
         .child('$target.jpg');
 
-    imageUrlStorage = await ref.getDownloadURL();
+        try {
+          imageUrlStorage = await ref.getDownloadURL();
+        } catch (e) {
+          print("err: " + e.toString());
+        }
+
+        
+
   }
 
   _onEntryAdded(Event event) {
@@ -520,9 +532,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
     return Flex(direction: Axis.vertical, children: <Widget>[
       AutoCompleteTextField<String>(
           decoration: new InputDecoration(
-              labelText: "Search",
+              labelText: "Add an Exercise",
               hintText: "Start typing",
-              suffixIcon: Icon(Icons.search)),
+              suffixIcon: IconButton( icon: Icon(Icons.add), onPressed: (){
+              myController.text = currentText;
+              someMethod(currentText);
+              print(currentText);
+              }
+              )),
           key: key,
           submitOnSuggestionTap: true,
           clearOnSubmit: true,
@@ -536,7 +553,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
               added.clear();
               currentText = item;
               added.add(currentText);
-              passMeOn = currentText;
+              //passMeOn = currentText;
               someMethod(currentText);
               myController.text = currentText;
             });
@@ -551,15 +568,19 @@ class UploadedWorkoutInfo extends State<PageFour> {
           itemFilter: (item, query) {
             return item.toLowerCase().contains(query.toLowerCase());
           }),
-      nameWidget(),
+          nameWidget(),
     ]);
   }
 
   Widget nameWidget() {
-    return TextFormField(
+    return TextFormField( 
+      enabled: false,
       decoration: InputDecoration(labelText: "Name"),
-      controller: myController,
-      onSaved: (val) => item.name = currentText,
+      controller: myController, 
+      onSaved: (val) {
+                  someMethod(val);
+                  item.name = val;
+        },
       validator: (val) => val == "" ? val : null,
     );
   }
