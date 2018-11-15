@@ -80,9 +80,11 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
 
     if (informUser == false) {
       return Scaffold(
+        backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          title: Text('My Personalised Workouts'),
-          backgroundColor: Colors.grey[900],
+          backgroundColor: Color(0xFF4A657A),
+          title: Text('My Personalised Workouts',style: TextStyle(fontFamily: "Montserrat")),
+          
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -92,16 +94,19 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
                 query: itemRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                  //print(items);
-
                   workoutNumber += 1;
-                  return new ListTile(
-                    leading: CircleAvatar(child: Text("$workoutNumber")),
+                  return Card(
+                      elevation: 3.0,
+                       child: 
+                  new ListTile(
+                    leading: CircleAvatar(child: Text("$workoutNumber", style: TextStyle(color: Colors.white),),
+                    backgroundColor: Color(0xFF4A657A)),
                     title: Text(items[index].workoutname,
                         style: TextStyle(
-                            fontFamily: "Prompt",
-                            fontSize: screenWidth * 0.055,
-                            fontWeight: FontWeight.w700)),
+                          fontFamily: "Montserrat",
+                          fontSize: screenWidth * 0.055,
+                          color: Color(0xFF22333B),
+                          fontWeight: FontWeight.w600)),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -115,7 +120,8 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
                                     firebaseGeneratedKey: items[index].key,
                                   )));
                     },
-                  );
+                  ));
+
                 },
               ),
             ),

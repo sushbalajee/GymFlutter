@@ -215,7 +215,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                           new Column(children: <Widget>[
                             ListTile(
                                 leading: CircleAvatar(
-                                    radius: 22.0,
+                                    radius: 20.0,
                                     child: new Text(
                                       "$exerciseNumber",
                                       style: TextStyle(color: Colors.white),
@@ -315,7 +315,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
           Container(
               width: screenWidth,
               child: new FlatButton(
-                  child: new Text("+ Add your own exercises here + ",
+                  child: new Text("+ Add Exercise + ",
                       style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.045,
@@ -367,13 +367,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       validator: (val) => val == "" ? val : null,
                     ),
                     TextFormField(
-                      decoration:
-                          InputDecoration(labelText: "Target Muscle(s)"),
-                      initialValue: "",
-                      onSaved: (val) => item.target = imageUrlStorage,
-                      //validator: (val) => val == "" ? val : null,
-                    ),
-                    TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: "",
                       onSaved: (val) => item.rest = val,
@@ -385,6 +378,13 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       onSaved: (val) => item.weight = val,
                       validator: (val) => val == "" ? val : null,
                     ),
+                    Opacity(opacity: 0.0, child: Container( child: 
+                    TextFormField(
+                      enabled: false,
+                      initialValue: "",
+                      onSaved: (val) => item.target = imageUrlStorage,
+                      //validator: (val) => val == "" ? val : null,
+                    ))),
                   ],
                 ),
               ),
@@ -433,12 +433,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
                   direction: Axis.vertical,
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Name"),
-                      initialValue: items[ind].name,
-                      onSaved: (val) => item.name = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),
-                    TextFormField(
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: items[ind].reps,
                       onSaved: (val) => item.reps = val,
@@ -457,13 +451,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       validator: (val) => val == "" ? val : null,
                     ),
                     TextFormField(
-                      decoration:
-                          InputDecoration(labelText: "Target Muscle(s)"),
-                      initialValue: items[ind].target,
-                      onSaved: (val) => item.target = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),
-                    TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: items[ind].rest,
                       onSaved: (val) => item.rest = val,
@@ -475,6 +462,25 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       onSaved: (val) => item.weight = val,
                       validator: (val) => val == "" ? val : null,
                     ),
+                    Opacity( 
+                      opacity: 0.0,
+                      child: Container( child:
+                    TextFormField(
+                      decoration: InputDecoration(labelText: "Name"),
+                      initialValue: items[ind].name,
+                      enabled: false,
+                      onSaved: (val) => item.name = val,
+                      validator: (val) => val == "" ? val : null,
+                    ))),
+                    Opacity( 
+                      opacity: 0.0,
+                      child: Container( child:
+                    TextFormField(
+                      initialValue: items[ind].target,
+                      enabled: false,
+                      onSaved: (val) => item.target = val,
+                      validator: (val) => val == "" ? val : null,
+                    ),)),
                     Container(
                       width: screenWidth,
                       padding: EdgeInsets.only(top: 30.0),
@@ -543,7 +549,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
             return a.compareTo(b);
           },
           itemFilter: (item, query) {
-            return item.toLowerCase().startsWith(query.toLowerCase());
+            return item.toLowerCase().contains(query.toLowerCase());
           }),
       nameWidget(),
     ]);
