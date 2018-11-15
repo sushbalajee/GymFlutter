@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 
 class PageOne extends StatefulWidget {
@@ -12,51 +10,28 @@ class PageOne extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<PageOne> {
- final myController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
+  someMethod() async {
 
-    myController.addListener(_printLatestValue);
-  }
+ final ref = FirebaseStorage.instance
+    .ref()
+    .child('Target Muscles')
+    .child('Weighted-Crunch.gif');
 
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is removed from the Widget tree
-    // This also removes the _printLatestValue listener
-    myController.dispose();
-    super.dispose();
-  }
-
-  String test;
-
-  _printLatestValue() {
-    setState(() {
-          test = myController.text;
-        });
-    print("Second text field: ${myController.text}");
-  }
+var url = await ref.getDownloadURL();
+print(url);
+}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Retrieve Text Input'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextFormField( 
-              controller: myController,
-            ),
-            TextFormField( 
-              controller: myController,
-            ),
-          ],
+    someMethod();
+    //printUrl();
+    return Scaffold( backgroundColor: Colors.grey[300],
+    body: Image.network(
+          'https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSidepose.jpg?alt=media&token=1fe4a633-a0e7-4b3c-afc0-183c3972bbcc',
         ),
-      ),
     );
+    
+    
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:async';
-import 'searchTargets.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class PageFour extends StatefulWidget {
   final String firebaseGeneratedKey;
@@ -28,6 +28,50 @@ class PageFour extends StatefulWidget {
 }
 
 class UploadedWorkoutInfo extends State<PageFour> {
+  /*List<String> suggestions = [
+    "Apple",
+    "Armidillo",
+    "Actual",
+    "Actuary",
+    "America",
+    "Argentina",
+    "Australia",
+    "Antarctica",
+    "Blueberry",
+    "Cheese",
+    "Danish",
+    "Eclair",
+    "Fudge",
+    "Granola",
+    "Hazelnut",
+    "Ice Cream",
+    "Jely",
+    "Kiwi Fruit",
+    "Lamb",
+    "Macadamia",
+    "Nachos",
+    "Oatmeal",
+    "Palm Oil",
+    "Quail",
+    "Rabbit",
+    "Salad",
+    "T-Bone Steak",
+    "Urid Dal",
+    "Vanilla",
+    "Waffles",
+    "Yam",
+    "Zest"
+  ];*/
+
+  List<String> suggestions = [
+    "Barbell Squat",
+    "Bench Press",
+    "Lunges - Dumbbells",
+    "Sidepose",
+    "Sumo Deadlifts",
+    "Tricep Dips",
+  ];
+
   List<String> added = [];
   String currentText = "";
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
@@ -36,6 +80,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
   Item item;
   DatabaseReference itemRef;
   DatabaseReference snek;
+  String imageUrlStorage = "";
 
   final myController = TextEditingController();
 
@@ -47,16 +92,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
   void initState() {
     super.initState();
 
-    myController.addListener(_printLatestValue);
     item = Item("", "", "", "", "", "", "");
-    final FirebaseDatabase database = FirebaseDatabase
-        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    final FirebaseDatabase database = FirebaseDatabase.instance;
 
-    snek = database
+    /*snek = database
         .reference()
         .child('Workouts')
         .child(widget.trainerID)
-        .child(widget.uid);
+        .child(widget.uid);*/
 
     itemRef = database
         .reference()
@@ -69,27 +112,19 @@ class UploadedWorkoutInfo extends State<PageFour> {
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
+  someMethod(String target) async {
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('Target Muscles')
+        .child('$target.jpg');
+
+    imageUrlStorage = await ref.getDownloadURL();
+  }
+
   _onEntryAdded(Event event) {
     //setState(() {
-      items.add(Item.fromSnapshot(event.snapshot));
+    items.add(Item.fromSnapshot(event.snapshot));
     //});
-  }
-
-  String test;
-
-  _printLatestValue() {
-    setState(() {
-          test = myController.text;
-        });
-    print("Second text field: ${myController.text}");
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is removed from the Widget tree
-    // This also removes the _printLatestValue listener
-    myController.dispose();
-    super.dispose();
   }
 
   void handleSubmit() {
@@ -134,7 +169,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
     return Scaffold(
       backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4A657A), //Colors.grey[900],
+        backgroundColor: Color(0xFF4A657A),
         title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
@@ -162,7 +197,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
                     fontSize: screenWidth * 0.035,
                     color: Colors.white)),
           ),
-          //searchMethod(),
           Flexible(
             child: FirebaseAnimatedList(
               query: itemRef,
@@ -171,6 +205,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
               physics: const ClampingScrollPhysics(),
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
+                  //someMethod(items[index].name);
                 exerciseNumber += 1;
                 return Card(
                     elevation: 3.0,
@@ -267,11 +302,8 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                             fontSize: screenWidth * 0.04)),
                                     new Padding(
                                       padding: EdgeInsets.only(top: 15.0),
-                                      child: new Image(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage("assets/targets/" +
-                                              items[index].target +
-                                              ".png")),
+                                      child: Image.network( items[index].target
+                                      ),
                                     ),
                                   ])
                             ]))
@@ -303,7 +335,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
 
     return showDialog<Null>(
         context: context,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return new AlertDialog(
             title: new Text(execution,
@@ -315,14 +347,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                 child: Flex(
                   direction: Axis.vertical,
                   children: <Widget>[
-                  searchMethod2(),
-
-                    /*TextFormField(
-                    initialValue: passMeOn,
-                    onSaved: (val) => item.name = currentText,
-                    validator: (val) => val == "" ? val : null,
-                    
-                    ),*/
+                    searchField(),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: '',
@@ -345,8 +370,8 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       decoration:
                           InputDecoration(labelText: "Target Muscle(s)"),
                       initialValue: "",
-                      onSaved: (val) => item.target = val,
-                      validator: (val) => val == "" ? val : null,
+                      onSaved: (val) => item.target = imageUrlStorage,
+                      //validator: (val) => val == "" ? val : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
@@ -395,7 +420,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
 
     return showDialog<Null>(
         context: context,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return new AlertDialog(
             title: new Text(execution,
@@ -484,168 +509,55 @@ class UploadedWorkoutInfo extends State<PageFour> {
           );
         });
   }
-/*
-  Widget searchMethod() {
 
-   return AutoCompleteTextField<String>(
-      key: key,
-      decoration: InputDecoration(labelText: "Search here for exercises", contentPadding: EdgeInsets.all(15.0), suffixIcon: Icon(Icons.search)),
-      suggestions: [
-        "Apple",
-        "Armidillo",
-        "Actual",
-        "Actuary",
-        "America",
-        "Argentina",
-        "Australia",
-        "Antarctica",
-        "Blueberry",
-        "Cheese",
-        "Danish",
-        "Eclair",
-        "Fudge",
-        "Granola",
-        "Hazelnut",
-        "Ice Cream",
-        "Jely",
-        "Kiwi Fruit",
-        "Lamb",
-        "Macadamia",
-        "Nachos",
-        "Oatmeal",
-        "Palm Oil",
-        "Quail",
-        "Rabbit",
-        "Salad",
-        "T-Bone Steak",
-        "Urid Dal",
-        "Vanilla",
-        "Waffles",
-        "Yam",
-        "Zest"
-      ],
-      textChanged: (item) {
-                  currentText = item;
-      },
-      itemBuilder: (context, item) {
-        return new Padding(padding: EdgeInsets.all(0.0), child:
-        OutlineButton( child:
-         new Text(item), onPressed: (){
-
-           setState((){ 
-              passMeOn = item;  
-                    });
-            
-          confirmDialog(context, "Add Exercise");
-              
-         },));
-      },
-      itemSorter: (a, b) {
-        return a.compareTo(b);
-      },
-      itemFilter: (item, query) {
-        return item.toLowerCase().startsWith(query.toLowerCase());
-      },
-      submitOnSuggestionTap: false,
-
-      textSubmitted: (item){
-         print(item);
-       },
-    );
-  }*/
-
-  Widget searchMethod2(){
-
-List<String> suggestions = [
-    "Apple",
-    "Armidillo",
-    "Actual",
-    "Actuary",
-    "America",
-    "Argentina",
-    "Australia",
-    "Antarctica",
-    "Blueberry",
-    "Cheese",
-    "Danish",
-    "Eclair",
-    "Fudge",
-    "Granola",
-    "Hazelnut",
-    "Ice Cream",
-    "Jely",
-    "Kiwi Fruit",
-    "Lamb",
-    "Macadamia",
-    "Nachos",
-    "Oatmeal",
-    "Palm Oil",
-    "Quail",
-    "Rabbit",
-    "Salad",
-    "T-Bone Steak",
-    "Urid Dal",
-    "Vanilla",
-    "Waffles",
-    "Yam",
-    "Zest"
-  ];
-return Flex( direction: Axis.vertical,  children: <Widget>[
-  
-   AutoCompleteTextField<String>(
-        decoration: new InputDecoration(
-          hintText: "Search Item",
-        ),
-        key: key,
-        submitOnSuggestionTap: true,
-        clearOnSubmit: true,
-        suggestions: suggestions,
-        textInputAction: TextInputAction.go,
-        textChanged: (item) {
-          currentText = item;
-        },
-        textSubmitted: (item) {
-          setState(() {
-            added.clear();
+  Widget searchField() {
+    return Flex(direction: Axis.vertical, children: <Widget>[
+      AutoCompleteTextField<String>(
+          decoration: new InputDecoration(
+              labelText: "Search",
+              hintText: "Start typing",
+              suffixIcon: Icon(Icons.search)),
+          key: key,
+          submitOnSuggestionTap: true,
+          clearOnSubmit: true,
+          suggestions: suggestions,
+          textInputAction: TextInputAction.go,
+          textChanged: (item) {
             currentText = item;
-            added.add(currentText);
-            passMeOn = currentText;
-            comeON();
-            myController.text = currentText;
-            print(currentText);
-            //currentText = "";
-          });
-        },
-        itemBuilder: (context, item) {
-          return new Padding(
-              padding: EdgeInsets.all(8.0), child: new Text(item));
-        },
-        itemSorter: (a, b) {
-          return a.compareTo(b);
-        },
-        itemFilter: (item, query) {
-          return item.toLowerCase().startsWith(query.toLowerCase());
-        }),
-        comeON()
-
-]);}
-
-
-
-
-Widget comeON(){
-  return
-  TextFormField(    
-    //controller: myController,
-                    //controller: _c,
-                    controller: myController,
-                    //initialValue: tt,
-                    onSaved: (val) => item.name = currentText,
-                    validator: (val) => val == "" ? val : null,
-                    
-                    );
-}
+          },
+          textSubmitted: (item) {
+            setState(() {
+              added.clear();
+              currentText = item;
+              added.add(currentText);
+              passMeOn = currentText;
+              someMethod(currentText);
+              myController.text = currentText;
+            });
+          },
+          itemBuilder: (context, item) {
+            return new Padding(
+                padding: EdgeInsets.all(8.0), child: new Text(item));
+          },
+          itemSorter: (a, b) {
+            return a.compareTo(b);
+          },
+          itemFilter: (item, query) {
+            return item.toLowerCase().startsWith(query.toLowerCase());
+          }),
+      nameWidget(),
+    ]);
   }
+
+  Widget nameWidget() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Name"),
+      controller: myController,
+      onSaved: (val) => item.name = currentText,
+      validator: (val) => val == "" ? val : null,
+    );
+  }
+}
 
 class Item {
   String key;
