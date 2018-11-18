@@ -28,40 +28,6 @@ class PageFour extends StatefulWidget {
 }
 
 class UploadedWorkoutInfo extends State<PageFour> {
-  /*List<String> suggestions = [
-    "Apple",
-    "Armidillo",
-    "Actual",
-    "Actuary",
-    "America",
-    "Argentina",
-    "Australia",
-    "Antarctica",
-    "Blueberry",
-    "Cheese",
-    "Danish",
-    "Eclair",
-    "Fudge",
-    "Granola",
-    "Hazelnut",
-    "Ice Cream",
-    "Jely",
-    "Kiwi Fruit",
-    "Lamb",
-    "Macadamia",
-    "Nachos",
-    "Oatmeal",
-    "Palm Oil",
-    "Quail",
-    "Rabbit",
-    "Salad",
-    "T-Bone Steak",
-    "Urid Dal",
-    "Vanilla",
-    "Waffles",
-    "Yam",
-    "Zest"
-  ];*/
 
   List<String> suggestions = [
     "Barbell Squat",
@@ -126,11 +92,8 @@ class UploadedWorkoutInfo extends State<PageFour> {
         try {
           imageUrlStorage = await ref.getDownloadURL();
         } catch (e) {
-          print("err: " + e.toString());
+          imageUrlStorage = "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FNoImage.jpg?alt=media&token=1999bc13-9014-44cd-99d4-7bc6b4dbd717";
         }
-
-        
-
   }
 
   _onEntryAdded(Event event) {
@@ -364,31 +327,31 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: '',
                       onSaved: (val) => item.reps = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Sets"),
                       initialValue: "",
                       onSaved: (val) => item.sets = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Execution"),
                       initialValue: "",
                       onSaved: (val) => item.execution = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: "",
                       onSaved: (val) => item.rest = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Weight"),
                       initialValue: "",
                       onSaved: (val) => item.weight = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     Opacity(opacity: 0.0, child: Container( child: 
                     TextFormField(
@@ -412,6 +375,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                         color: Colors.white)),
                 onPressed: () {
                   handleSubmit();
+                  Navigator.of(context).pop();
                 },
               ),
               new FlatButton(
@@ -448,31 +412,31 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: items[ind].reps,
                       onSaved: (val) => item.reps = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Sets"),
                       initialValue: items[ind].sets,
                       onSaved: (val) => item.sets = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Execution"),
                       initialValue: items[ind].execution,
                       onSaved: (val) => item.execution = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: items[ind].rest,
                       onSaved: (val) => item.rest = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Weight"),
                       initialValue: items[ind].weight,
                       onSaved: (val) => item.weight = val,
-                      validator: (val) => val == "" ? val : null,
+                      validator: (val) => val == "" ? "This field cannot be empty" : null,
                     ),
                     Opacity( 
                       opacity: 0.0,
@@ -493,10 +457,13 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       onSaved: (val) => item.target = val,
                       validator: (val) => val == "" ? val : null,
                     ),)),
-                    Container(
-                      width: screenWidth,
-                      padding: EdgeInsets.only(top: 30.0),
-                      child: new FlatButton(
+                  ],
+                ),
+              ),
+            ),
+            actions: <Widget>[
+
+              new FlatButton(
                         child: new Text("Submit",
                             style: TextStyle(
                                 fontFamily: "Montserrat",
@@ -509,12 +476,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
                           Navigator.of(context).pop();
                         },
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            actions: <Widget>[
               new FlatButton(
                 padding: EdgeInsets.all(20.0),
                 child: const Text('CLOSE',
@@ -553,7 +514,6 @@ class UploadedWorkoutInfo extends State<PageFour> {
               added.clear();
               currentText = item;
               added.add(currentText);
-              //passMeOn = currentText;
               someMethod(currentText);
               myController.text = currentText;
             });

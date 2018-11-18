@@ -62,13 +62,13 @@ class HomePageState extends State<GymApp> {
 
             body: currentPage,
             
-            bottomNavigationBar: new Theme(
+            bottomNavigationBar: new Theme( 
               data: Theme.of(context).copyWith(
                   textTheme: Theme.of(context)
                       .textTheme
                       .copyWith(caption: new TextStyle(color: Colors.white)),
-                  canvasColor: Colors.grey[900]),
-              child: new BottomNavigationBar(
+                  canvasColor: Color(0xFF4A657A)),
+              child: new BottomNavigationBar(  fixedColor: Colors.yellow,
                   currentIndex: currentTab,
                   onTap: (int index) {
                     setState(() {

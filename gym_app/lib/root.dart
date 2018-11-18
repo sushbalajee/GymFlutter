@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'color_loader_3.dart';
 import 'package:flutter/services.dart';
+import 'ptDiary.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -215,6 +216,15 @@ class RootPageState extends State<RootPage> {
                     })
               ],
             )),
+            Container(
+             child: RaisedButton( child: Text("My Diary"),
+              onPressed:(){
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PTDiary()));
+              }),
+            ),
             Container( 
               padding: EdgeInsets.only(top: 50.0),
               child:
@@ -229,7 +239,7 @@ class RootPageState extends State<RootPage> {
               ),
             ),
             onPressed: signedOut,
-            shape: new RoundedRectangleBorder(
+            shape: new RoundedRectangleBorder(  
                 borderRadius: new BorderRadius.circular(20.0))),
       )]);
     }
