@@ -222,7 +222,9 @@ class RootPageState extends State<RootPage> {
                 Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PTDiary()));
+                          builder: (context) => PTDiary(
+                            ptid: uid,
+                          )));
               }),
             ),
             Container( 

@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'upcomingClientSessions.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class PTDiary extends StatefulWidget {
+
+  final String ptid;
+
+  PTDiary({this.ptid});
+
   @override
   _PTDiaryState createState() => new _PTDiaryState();
 }
 
 class _PTDiaryState extends State<PTDiary> {
+
+   DatabaseReference itemRef;
+   List <String> clientList = [''];
+  
 
 
   List<String> calendar28Day = [];
@@ -19,7 +29,7 @@ class _PTDiaryState extends State<PTDiary> {
       var daysFromNow = now.add(new Duration(days: i));
       var day = daysFromNow.day;
       var month = daysFromNow.month;
-      var year = daysFromNow.year;
+      //var year = daysFromNow.year;
       var dayOfWeek = daysFromNow.weekday;
       var actualDayOfWeek;
 
@@ -60,11 +70,32 @@ class _PTDiaryState extends State<PTDiary> {
     
   }
 
+  updateClients(){
+
+    clientList.clear();
+
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    itemRef = database.reference().child('Workouts').child(widget.ptid);
+
+    itemRef.onValue.listen((Event event) {
+      var value = event.snapshot.value;
+      var uids = value.keys;
+      for (var clientIDs in uids) {
+        //print('client ID: $clientIDs');
+        //clientIDs.toString().split("-");
+        var test = clientIDs.toString().split("-");
+        clientList.add(test[0]);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
     calendar28Day.clear();
     calendar28Date.clear();
+
+    updateClients();
 
     getNext28Days();
 
@@ -97,8 +128,10 @@ class _PTDiaryState extends State<PTDiary> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ClientSessions(
+                             id: widget.ptid,
                              day: calendar28Day[index],
                              date: calendar28Date[index],
+                             clientList: clientList,
                           )));
                     },
                   )),

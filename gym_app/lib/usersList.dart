@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'uploadClientWorkouts.dart';
 import 'color_loader_3.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 //-----------------------------------------------------------------------------------//
 
