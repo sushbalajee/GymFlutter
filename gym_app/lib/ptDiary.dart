@@ -60,7 +60,7 @@ class _PTDiaryState extends State<PTDiary> {
       String calendarDay =  (actualDayOfWeek);
 
       String calendarDate = (day.toString() +
-          "/" +
+          "-" +
           month.toString()
           );
       
@@ -83,8 +83,11 @@ class _PTDiaryState extends State<PTDiary> {
       for (var clientIDs in uids) {
         //print('client ID: $clientIDs');
         //clientIDs.toString().split("-");
-        var test = clientIDs.toString().split("-");
-        clientList.add(test[0]);
+        //var test = clientIDs.toString().split("-");
+        clientList.add(clientIDs.toString());
+        if(clientList.contains("ComingUp")){
+        clientList.remove("ComingUp");
+        }
       }
     });
   }

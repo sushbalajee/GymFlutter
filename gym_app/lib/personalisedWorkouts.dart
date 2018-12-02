@@ -61,7 +61,8 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
           .reference()
           .child('Workouts')
           .child(widget.value)
-          .child(jointID);
+          .child(jointID)
+          .child("clientWorkouts");
       itemRef.onChildAdded.listen(_onEntryAdded);
     });
   }

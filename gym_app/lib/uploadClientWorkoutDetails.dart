@@ -76,6 +76,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
         .child('Workouts')
         .child(widget.trainerID)
         .child(widget.uid)
+        .child("clientWorkouts")
         .child(widget.firebaseGeneratedKey)
         .child('exercises');
 

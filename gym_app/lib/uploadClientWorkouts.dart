@@ -34,7 +34,8 @@ class _NextPageStateClient extends State<ClientWorkouts> {
         .reference()
         .child('Workouts')
         .child(widget.value)
-        .child(widget.userUid);
+        .child(widget.userUid)
+        .child("clientWorkouts");
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 

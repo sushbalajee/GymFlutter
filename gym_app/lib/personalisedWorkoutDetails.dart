@@ -41,7 +41,7 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
 
     snek = database.reference().child('Workouts').child(widget.uid);
-    itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child(widget.firebaseGeneratedKey).child('exercises');
+    itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child("clientWorkouts").child(widget.firebaseGeneratedKey).child('exercises');
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
