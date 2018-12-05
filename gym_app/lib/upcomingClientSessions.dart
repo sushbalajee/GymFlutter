@@ -26,7 +26,6 @@ class _ClientSessionsState extends State<ClientSessions> {
   String duration = "";
 
   String firstHalf;
-  String secondHalf;
 
   List<Session> items = List();
   List<Session> anotheritem = List();
@@ -84,23 +83,24 @@ class _ClientSessionsState extends State<ClientSessions> {
                       child: DropdownButton(
                     hint: Text(_selectedText),
                     value: null,
+                    items: widget.clientList.map((String value) {
+                      var splitID = value.toString().split(" - ");
+                      firstHalf = splitID[0];
+                      return new DropdownMenuItem<String>(
+                        value: value.toString(),//firstHalf, 
+                        child: new Text(firstHalf)//new SizedBox(width: screenWidth * 0.8, child: new Text(value.toString())),//new Text(firstHalf),//firsthalf
+                      );
+                    }).toList(),
                     onChanged: (String val) {
                       setState(() {
                         _selectedText = val;
-                        item.clientName = _selectedText;
-                        clientID = firstHalf + "-" + secondHalf;
-                        print(clientID);
+                        var splitID1 = val.toString().split(" - ");
+                        var firstHalf1 = splitID1[0];
+                        item.clientName = firstHalf1;
+                        clientID = _selectedText;
+                        print(firstHalf1);
                       });
                     },
-                    items: widget.clientList.map((String value) {
-                      var splitID = value.toString().split("-");
-                      firstHalf = splitID[0];
-                      secondHalf = splitID[1];
-                      return new DropdownMenuItem<String>(
-                        value: firstHalf,
-                        child: new Text(firstHalf),
-                      );
-                    }).toList(),
                   )),
                 ),
                 Container(
@@ -151,7 +151,6 @@ class _ClientSessionsState extends State<ClientSessions> {
                             color: Colors.white)),
                     color: Color(0xFF4A657A),
                     onPressed: () {
-                      print(_selectedText);
                       item.date = widget.date + " - " + widget.day;
                       handleSubmit();
                     },
@@ -169,8 +168,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                   Animation<double> animation, int index) {
                     
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
-                print(items[index].clientName);
-
+                
                 return Card(
                     elevation: 3.0,
                     child: new ListTile(

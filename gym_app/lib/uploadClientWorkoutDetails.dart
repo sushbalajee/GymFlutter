@@ -225,12 +225,14 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                     }),
                                 title: new Stack(children: <Widget>[
                                   new Row(children: <Widget>[
+                                    Flexible( child:
+                                    Container(child:
                                     Text(items[index].name,
                                         style: TextStyle(
                                             fontFamily: "Montserrat",
                                             color: Color(0xFF4A657A),
                                             fontSize: screenWidth * 0.05,
-                                            fontWeight: FontWeight.w700)),
+                                            fontWeight: FontWeight.w700)))),
                                     Container(
                                         child: new IconButton(
                                             icon: new Icon(Icons.edit),

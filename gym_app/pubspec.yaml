@@ -65,6 +65,11 @@ flutter:
   - assets/JSON/gymapp-e8453-export.json
   - assets/JSON/testingLocal.json
   - assets/personalized.jpeg
+  - assets/journal.jpg
+  - assets/jnal.jpeg
+  - assets/journal1.jpeg
+  - assets/Diary.png
+  - assets/Network.png
 
   fonts: 
     - family: Prompt

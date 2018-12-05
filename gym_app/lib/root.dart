@@ -43,7 +43,7 @@ class RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
 
-      widget.auth.currentUser().then((userId) async {
+    widget.auth.currentUser().then((userId) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       typeOfUser = prefs.getBool('PTcheck');
 
@@ -54,9 +54,9 @@ class RootPageState extends State<RootPage> {
             authStatus = AuthStatus.signedInAsPT;
             statusOfUser = "You are Logged in as a Personal Trainer";
           } else {
+            updateRelationship();
             authStatus =
                 userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
-            updateRelationship();
           }
         });
       } else {
@@ -83,11 +83,13 @@ class RootPageState extends State<RootPage> {
     } else {
       await prefs.setBool('PTcheck', false);
     }
+
     return userIds;
   }
 
   void signedIn() {
     updateUserID();
+    //updateRelationship();
     setState(() {
       authStatus = AuthStatus.signedIn;
     });
@@ -154,13 +156,12 @@ class RootPageState extends State<RootPage> {
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Column(children: <Widget>[
-         
         Card(
             margin: EdgeInsets.all(15.0),
             shape: Border.all(
-                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
+                color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
             child: new Container(
-              height: screenHeight / 3,
+              height: screenHeight / 4,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   image: new AssetImage("assets/personalized.jpeg"),
@@ -188,26 +189,75 @@ class RootPageState extends State<RootPage> {
                 },
               ),
             )),
-
-            Container(
-          padding: EdgeInsets.only(left: 20.0, right:20.0),
-          child: Text("Send your unique Trainer ID to your clients to enter on registration:", textAlign: TextAlign.left,
-          style: TextStyle(
-                fontSize: 15.0,
-                fontFamily: "Montserrat",
-              ),),
+        Card(
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
+            shape: Border.all(
+                color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
+            child: new Container(
+              height: screenHeight / 4,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/journal1.jpeg"),
+                  fit: BoxFit.cover,
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.65), BlendMode.dstATop),
+                ),
+              ),
+              width: screenWidth,
+              child: FlatButton(
+                  child: new Text("Session Planner",
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(
+                          fontSize: 25.0,
+                          fontFamily: "Montserrat",
+                          //color: Colors.white,
+                          fontWeight: FontWeight.w700)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PTDiary(
+                                  ptid: uid,
+                                )));
+                  }),
+            )),
+        Container( 
+          width: screenWidth -30,
+          height: 40.0,
+          color: Color(0xFF4A657A),
+          
+          child: new FlatButton(
+            child: new Text("Sign Out",
+                style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: screenWidth * 0.045,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white)),
+            onPressed: signedOut,
+            
+          ),
         ),
         Container(
-          padding: EdgeInsets.only(left: 20.0, right:20.0),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0, top:20.0),
+          child: Text(
+            "Send your unique Trainer ID to your clients to enter on registration:",
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 15.0,
+              fontFamily: "Montserrat",
+            ),
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text("$uid",
                     style: TextStyle(
-                      fontSize: 13.0,
-                      fontFamily: "Montserrat",
-                      fontWeight: FontWeight.w700
-                    )),
+                        fontSize: 13.0,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w700)),
                 IconButton(
                     icon: new Icon(Icons.content_copy),
                     tooltip: "Copied to clipboard",
@@ -216,46 +266,16 @@ class RootPageState extends State<RootPage> {
                     })
               ],
             )),
-            Container(
-             child: RaisedButton( child: Text("My Diary"),
-              onPressed:(){
-                Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PTDiary(
-                            ptid: uid,
-                          )));
-              }),
-            ),
-            Container( 
-              padding: EdgeInsets.only(top: 50.0),
-              child:
-        RaisedButton(
-            color: Colors.grey[900],
-            child: new Text(
-              "Sign Out",
-              style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.white,
-                fontFamily: "Montserrat",
-              ),
-            ),
-            onPressed: signedOut,
-            shape: new RoundedRectangleBorder(  
-                borderRadius: new BorderRadius.circular(20.0))),
-      )]);
+      ]);
     }
-
-
 
     if (authStatus == AuthStatus.signedIn) {
       return new Column(children: <Widget>[
-        Card( 
+        Card(
             margin: EdgeInsets.all(15.0),
             shape: Border.all(
                 color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
             child: new Container(
-              
               height: screenHeight / 3,
               decoration: new BoxDecoration(
                 image: new DecorationImage(

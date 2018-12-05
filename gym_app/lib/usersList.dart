@@ -59,6 +59,7 @@ class UIDListPage extends State<UIDList> {
     if (jsonResponse != "") {
       GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
       uuiiCode = post.uiCode;
+      uuiiCode.remove("ComingUp");
       return uuiiCode;
     } else {
       informUser =
