@@ -51,7 +51,6 @@ class _ClientSessionsState extends State<ClientSessions> {
         .child("ComingUp")
         .child(widget.date);
     itemRef.onChildAdded.listen(_onEntryAdded);
-
   }
 
   _onEntryAdded(Event event) {
@@ -93,9 +92,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                         firstHalf = splitID[0];
                         return new DropdownMenuItem<String>(
                             value: value.toString(), //firstHalf,
-                            child: new Text(
-                                firstHalf) //new SizedBox(width: screenWidth * 0.8, child: new Text(value.toString())),//new Text(firstHalf),//firsthalf
-                            );
+                            child: new Text(firstHalf));
                       }).toList(),
                       onChanged: (String val) {
                         setState(() {
@@ -205,34 +202,33 @@ class _ClientSessionsState extends State<ClientSessions> {
   }
 
   void handleDelete(int ii) {
-
     sessionsRef1 = database
         .reference()
         .child('Workouts')
         .child(widget.id)
         .child(itemRef.child(items[ii].fullClientID).key)
         .child("clientSessions")
-        .child(itemRef.child(items[ii].date).key + " - " + itemRef.child(items[ii].startTime).key);
+        .child(itemRef.child(items[ii].date).key +
+            " - " +
+            itemRef.child(items[ii].startTime).key);
 
-        //print(itemRef.child(items[ii].fullClientID).key);
-        //print("What is this: " + sessionsRef1.key);
+    //print(itemRef.child(items[ii].fullClientID).key);
+    //print("What is this: " + sessionsRef1.key);
 
     itemRef.child(items[ii].key).remove();
     sessionsRef1.remove();
-    
   }
 
   void handleSubmit() {
     final FormState form = formKey.currentState;
-    //final FirebaseDatabase database = FirebaseDatabase.instance;
 
     sessionsRef = database
         .reference()
         .child('Workouts')
         .child(widget.id)
         .child(clientID)
-        .child("clientSessions")
-        .child(widget.date + " - "  + widget.day + " - " + localStart);
+        .child("clientSessions");
+        //.child(widget.date + " - " + widget.day + " - " + localStart);
 
     if (form.validate()) {
       form.save();
@@ -251,7 +247,8 @@ class Session {
   String date;
   String fullClientID;
 
-  Session(this.clientName, this.startTime, this.endTime, this.date, this.fullClientID);
+  Session(this.clientName, this.startTime, this.endTime, this.date,
+      this.fullClientID);
 
   Session.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,

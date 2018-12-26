@@ -3,7 +3,6 @@ import 'upcomingClientSessions.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class PTDiary extends StatefulWidget {
-
   final String ptid;
 
   PTDiary({this.ptid});
@@ -14,11 +13,8 @@ class PTDiary extends StatefulWidget {
 
 class _PTDiaryState extends State<PTDiary> {
 
-   DatabaseReference itemRef;
-   List <String> clientList = [''];
-  
-
-
+  DatabaseReference itemRef;
+  List<String> clientList = [''];
   List<String> calendar28Day = [];
   List<String> calendar28Date = [];
 
@@ -57,21 +53,16 @@ class _PTDiaryState extends State<PTDiary> {
           break;
       }
 
-      String calendarDay =  (actualDayOfWeek);
+      String calendarDay = (actualDayOfWeek);
 
-      String calendarDate = (day.toString() +
-          "-" +
-          month.toString()
-          );
-      
+      String calendarDate = (day.toString() + "-" + month.toString());
+
       calendar28Day.add(calendarDay);
       calendar28Date.add(calendarDate);
     }
-    
   }
 
-  updateClients(){
-
+  updateClients() {
     clientList.clear();
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -85,8 +76,8 @@ class _PTDiaryState extends State<PTDiary> {
         //clientIDs.toString().split("-");
         //var test = clientIDs.toString().split("-");
         clientList.add(clientIDs.toString());
-        if(clientList.contains("ComingUp")){
-        clientList.remove("ComingUp");
+        if (clientList.contains("ComingUp")) {
+          clientList.remove("ComingUp");
         }
       }
     });
@@ -94,7 +85,6 @@ class _PTDiaryState extends State<PTDiary> {
 
   @override
   Widget build(BuildContext context) {
-
     calendar28Day.clear();
     calendar28Date.clear();
 
@@ -111,33 +101,38 @@ class _PTDiaryState extends State<PTDiary> {
             title: new Text("My Diary",
                 style: TextStyle(fontFamily: "Montserrat"))),
         backgroundColor: Colors.grey[100],
-        body: new GridView.count(   
+        body: new GridView.count(
           gridtile,
           childAspectRatio: 1.1,
           crossAxisCount: 4,
-           
           children: new List<Widget>.generate(28, (index) {
-            return new GridTile(  
-              child: new Card(  
+            return new GridTile(
+              child: new Card(
                   //color: Colors.blue.shade200,
                   child: new OutlineButton(
-                    borderSide: BorderSide(color: Color(0xFF4A657A)),
-                    shape: new RoundedRectangleBorder(
+                borderSide: BorderSide(color: Color(0xFF4A657A)),
+                shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)),
-                    child: new Center(
-                    child: new Text(calendar28Day[index] + "\n" + calendar28Date[index], textAlign: TextAlign.center, style: TextStyle(fontFamily: "Montserrat", fontWeight: FontWeight.w500)),
-                  ), onPressed: (){ 
-                   Navigator.push(
+                child: new Center(
+                  child: new Text(
+                      calendar28Day[index] + "\n" + calendar28Date[index],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w500)),
+                ),
+                onPressed: () {
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => ClientSessions(
-                             id: widget.ptid,
-                             day: calendar28Day[index],
-                             date: calendar28Date[index],
-                             clientList: clientList,
-                          )));
-                    },
-                  )),
+                                id: widget.ptid,
+                                day: calendar28Day[index],
+                                date: calendar28Date[index],
+                                clientList: clientList,
+                              )));
+                },
+              )),
             );
           }),
         ));
