@@ -22,8 +22,11 @@ class _ClientSessionsState extends State<ClientSessions> {
 
   DatabaseReference itemRef;
   DatabaseReference sessionsRef;
+  DatabaseReference sessionsRef1;
   String _selectedText = "Select a Client";
   String duration = "";
+
+  String localStart;
 
   String firstHalf;
 
@@ -39,7 +42,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   void initState() {
     super.initState();
 
-    item = Session("", "", "", "");
+    item = Session("", "", "", "", "");
 
     itemRef = database
         .reference()
@@ -48,6 +51,7 @@ class _ClientSessionsState extends State<ClientSessions> {
         .child("ComingUp")
         .child(widget.date);
     itemRef.onChildAdded.listen(_onEntryAdded);
+
   }
 
   _onEntryAdded(Event event) {
@@ -70,116 +74,118 @@ class _ClientSessionsState extends State<ClientSessions> {
         body: Column(children: <Widget>[
           Form(
             key: formKey,
-            child:
-            Card( elevation: 5.0,
-            child: Flex(
-              direction: Axis.vertical,
-              children: <Widget>[
-                Container(
-                  //alignment: Alignment.center,
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-                  width: screenWidth,
-                  child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                    hint: Text(_selectedText),
-                    value: null,
-                    items: widget.clientList.map((String value) {
-                      var splitID = value.toString().split(" - ");
-                      firstHalf = splitID[0];
-                      return new DropdownMenuItem<String>(
-                        value: value.toString(),//firstHalf, 
-                        child: new Text(firstHalf)//new SizedBox(width: screenWidth * 0.8, child: new Text(value.toString())),//new Text(firstHalf),//firsthalf
-                      );
-                    }).toList(),
-                    onChanged: (String val) {
-                      setState(() {
-                        _selectedText = val;
-                        var splitID1 = val.toString().split(" - ");
-                        var firstHalf1 = splitID1[0];
-                        item.clientName = firstHalf1;
-                        clientID = _selectedText;
-                        print(firstHalf1);
-                      });
-                    },
-                  )),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  width: screenWidth,
-                  child: TimePickerFormField(
-                    format: timeFormat,
-                    decoration: InputDecoration(hintText: 'Start Time'),
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please select a start time';
-                      }
-                    },
-                    onChanged: (t) {
-                      setState(() {
-                        item.startTime = t.toString();
-                      });
-                    },
+            child: Card(
+              elevation: 5.0,
+              child: Flex(
+                direction: Axis.vertical,
+                children: <Widget>[
+                  Container(
+                    //alignment: Alignment.center,
+                    padding:
+                        EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+                    width: screenWidth,
+                    child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                      hint: Text(_selectedText),
+                      value: null,
+                      items: widget.clientList.map((String value) {
+                        var splitID = value.toString().split(" - ");
+                        firstHalf = splitID[0];
+                        return new DropdownMenuItem<String>(
+                            value: value.toString(), //firstHalf,
+                            child: new Text(
+                                firstHalf) //new SizedBox(width: screenWidth * 0.8, child: new Text(value.toString())),//new Text(firstHalf),//firsthalf
+                            );
+                      }).toList(),
+                      onChanged: (String val) {
+                        setState(() {
+                          _selectedText = val;
+                          var splitID1 = val.toString().split(" - ");
+                          var firstHalf1 = splitID1[0];
+                          item.clientName = firstHalf1;
+                          item.fullClientID = _selectedText;
+                          clientID = _selectedText;
+                          print(firstHalf1);
+                        });
+                      },
+                    )),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-                  width: screenWidth,
-                  child: TimePickerFormField(
-                    format: timeFormat,
-                    decoration: InputDecoration(hintText: 'End Time'),
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please select an end time';
-                      }
-                    },
-                    onChanged: (t) {
-                      setState(() {
-                        item.endTime = t.toString();
-                      });
-                    },
+                  Container(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                    width: screenWidth,
+                    child: TimePickerFormField(
+                      format: timeFormat,
+                      decoration: InputDecoration(hintText: 'Start Time'),
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please select a start time';
+                        }
+                      },
+                      onChanged: (t) {
+                        setState(() {
+                          item.startTime = t.toString();
+                          localStart = t.toString();
+                        });
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  width: screenWidth - 10.0,
-                  //padding: EdgeInsets.only(top: 10.0),
-                  child: new FlatButton(
-                    child: new Text("Submit",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: screenWidth * 0.045,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white)),
-                    color: Color(0xFF4A657A),
-                    onPressed: () {
-                      item.date = widget.date + " - " + widget.day;
-                      handleSubmit();
-                    },
+                  Container(
+                    padding:
+                        EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                    width: screenWidth,
+                    child: TimePickerFormField(
+                      format: timeFormat,
+                      decoration: InputDecoration(hintText: 'End Time'),
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please select an end time';
+                        }
+                      },
+                      onChanged: (t) {
+                        setState(() {
+                          item.endTime = t.toString();
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    width: screenWidth - 10.0,
+                    //padding: EdgeInsets.only(top: 10.0),
+                    child: new FlatButton(
+                      child: new Text("Submit",
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.045,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white)),
+                      color: Color(0xFF4A657A),
+                      onPressed: () {
+                        item.date = widget.date + " - " + widget.day;
+                        handleSubmit();
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           ),
           Flexible(
             child: FirebaseAnimatedList(
               query: itemRef,
-              
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                    
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
-                
+
                 return Card(
                     elevation: 3.0,
                     child: new ListTile(
-                      contentPadding:
-                          EdgeInsets.only(left: 15.0),
+                      contentPadding: EdgeInsets.only(left: 15.0),
                       trailing: new IconButton(
                           iconSize: 35.0,
                           icon: Icon(Icons.delete_forever),
                           color: Color(0xFF4A657A),
                           onPressed: () {
-                            print("todo delete");
+                            handleDelete(index);
                           }),
                       title: Text(items[index].clientName,
                           style: TextStyle(
@@ -198,6 +204,24 @@ class _ClientSessionsState extends State<ClientSessions> {
         ]));
   }
 
+  void handleDelete(int ii) {
+
+    sessionsRef1 = database
+        .reference()
+        .child('Workouts')
+        .child(widget.id)
+        .child(itemRef.child(items[ii].fullClientID).key)
+        .child("clientSessions")
+        .child(itemRef.child(items[ii].date).key + " - " + itemRef.child(items[ii].startTime).key);
+
+        //print(itemRef.child(items[ii].fullClientID).key);
+        //print("What is this: " + sessionsRef1.key);
+
+    itemRef.child(items[ii].key).remove();
+    sessionsRef1.remove();
+    
+  }
+
   void handleSubmit() {
     final FormState form = formKey.currentState;
     //final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -207,7 +231,8 @@ class _ClientSessionsState extends State<ClientSessions> {
         .child('Workouts')
         .child(widget.id)
         .child(clientID)
-        .child("clientSessions");
+        .child("clientSessions")
+        .child(widget.date + " - "  + widget.day + " - " + localStart);
 
     if (form.validate()) {
       form.save();
@@ -224,12 +249,14 @@ class Session {
   String startTime;
   String endTime;
   String date;
+  String fullClientID;
 
-  Session(this.clientName, this.startTime, this.endTime, this.date);
+  Session(this.clientName, this.startTime, this.endTime, this.date, this.fullClientID);
 
   Session.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         clientName = snapshot.value["clientName"],
+        fullClientID = snapshot.value["fullClientID"],
         startTime = snapshot.value["startTime"],
         endTime = snapshot.value["endTime"],
         date = snapshot.value["date"];
@@ -237,6 +264,7 @@ class Session {
   toJson() {
     return {
       "clientName": clientName,
+      "fullClientID": fullClientID,
       "startTime": startTime,
       "endTime": endTime,
       "date": date

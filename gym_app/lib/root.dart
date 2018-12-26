@@ -32,6 +32,7 @@ class RootPageState extends State<RootPage> {
   List<String> userIds;
 
   bool typeOfUser;
+  String rel;
 
   String uid = "Please sign out and sign in\n to activate your Trainer ID";
   String statusOfUser;
@@ -89,7 +90,7 @@ class RootPageState extends State<RootPage> {
 
   void signedIn() {
     updateUserID();
-    //updateRelationship();
+    updateRelationship();
     setState(() {
       authStatus = AuthStatus.signedIn;
     });
@@ -112,6 +113,7 @@ class RootPageState extends State<RootPage> {
   void updateRelationship() async {
     SharedPreferences relations = await SharedPreferences.getInstance();
     relationship = relations.getString('relationship');
+
   }
 
   Future updateUserID() async {

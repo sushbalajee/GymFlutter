@@ -24,6 +24,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   Item item;
   DatabaseReference itemRef;
   DatabaseReference cref;
+
   bool informUser;
 
   Timer timer;
@@ -40,6 +41,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   print("My ID is " + widget.userUid);
   print("Widget value: " + widget.value);
   print("My Key: $widget.key");
+ 
   timer = new Timer(const Duration(seconds: 5), () {
       setState(() {
         msg = "No workouts assigned to you";
