@@ -42,7 +42,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   void initState() {
     super.initState();
 
-    item = Session("", "", "", "", "","");
+    item = Session("", "", "", "", "", 0);
 
     itemRef = database
         .reference()
@@ -158,7 +158,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                       color: Color(0xFF4A657A),
                       onPressed: () {
                         item.date = widget.day + " : " + widget.date;
-                        item.paid = "FF6B6B";
+                        item.paid = 0xFFFF6B6B;
                         handleSubmit();
                       },
                     ),
@@ -244,7 +244,7 @@ class Session {
   String endTime;
   String date;
   String fullClientID;
-  String paid;
+  num paid;
 
   Session(this.clientName, this.startTime, this.endTime, this.date,
       this.fullClientID, this.paid);

@@ -12,19 +12,19 @@ class ClientSessionsClientSide extends StatefulWidget {
   final String userUid;
   final String value;
 
-  ClientSessionsClientSide({Key key, this.value, this.userUid}) : super(key: key);
+  ClientSessionsClientSide({Key key, this.value, this.userUid})
+      : super(key: key);
 
- @override
+  @override
   _ClientSessionsStateClient createState() => new _ClientSessionsStateClient();
 }
 
 //-----------------------------------------------------------------------------------//
 
 class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
-
   List<Session> items = List();
   Session item;
-  
+
   DatabaseReference itemRef;
   DatabaseReference cref;
 
@@ -39,13 +39,13 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   void initState() {
     super.initState();
 
-  timer = new Timer(const Duration(seconds: 5), () {
-      setState(() {
-        msg = "No workouts assigned to you";
-      });
+    timer = new Timer(const Duration(seconds: 5), () {
+      //setState(() {
+      msg = "No workouts assigned to you";
+      //});
     });
 
-    item = Session("", "", "", "", "","");
+    item = Session("", "", "", "", "", 0);
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -76,7 +76,6 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (informUser == false) {
@@ -84,8 +83,8 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF4A657A),
-          title: Text('My Personalised Workouts',style: TextStyle(fontFamily: "Montserrat")),
-          
+          title: Text('Upcoming Sessions',
+              style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -95,20 +94,35 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                 query: itemRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                      items.sort((a, b) => a.date.substring(a.date.length - 8, a.date.length).compareTo(b.date.substring(b.date.length - 8, b.date.length)));
+                  items.sort((a, b) => a.date
+                      .substring(a.date.length - 8, a.date.length)
+                      .compareTo(
+                          b.date.substring(b.date.length - 8, b.date.length)));
 
                   return Card(
+                      color: Color(items[index].paid),
                       elevation: 3.0,
-                       child: 
-                  new ListTile(
-                    title: Text(items[index].date,
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.055,
-                          color: Color(0xFF22333B),
-                          fontWeight: FontWeight.w600)),
-                    subtitle: Text(items[index].startTime.substring(10, 15) + " - " + items[index].endTime.substring(10, 15)),
-                  ));
+                      child: new ListTile(
+                        title: Text(items[index].date,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.055,
+                                color: Color(0xFF22333B),
+                                fontWeight: FontWeight.w600)),
+                        subtitle: Text(
+                            items[index].startTime.substring(10, 15) +
+                                " - " +
+                                items[index].endTime.substring(10, 15)),
+                        trailing: new IconButton(
+                            iconSize: 40.0,
+                            icon: Icon(Icons.monetization_on),
+                            color: Colors.white,
+                            onPressed: () {
+                              if (items[index].paid == 0xFFFF6B6B) {
+                                confirmPayment(context, index);
+                              }
+                            }),
+                      ));
                 },
               ),
             ),
@@ -126,23 +140,70 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     }
   }
 
-  Widget tryMe(){
+  Future<Null> confirmPayment(BuildContext context, int ind) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(
+                "Please confirm if you have paid your Personal Trainer for this session"),
+            content: Container(
+              width: screenWidth,
+              padding: EdgeInsets.only(top: 30.0),
+              child: new FlatButton(
+                child: new Text("I have paid",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                color: Colors.black,
+                onPressed: () {
+                  itemRef.child(items[ind].key).child('paid').set(0xFF4ECDC4);
+                  //setState(() => ClientSessionsClientSide());
+                  handlePayment();
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void handlePayment() {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ClientSessionsClientSide(
+                  userUid: widget.userUid,
+                  value: widget.value,
+                )));
+  }
+
+  Widget tryMe() {
     return Container(
-                        child: new Stack(children: <Widget>[
-                      Container(
-                          alignment: Alignment.center,
-                          child: ColorLoader3(
-                            dotRadius: 5.0,
-                            radius: 20.0,
-                          )),
-                      Container(
-                          padding: EdgeInsets.only(top: 100.0),
-                          alignment: Alignment.center,
-                          child: new Text(msg,
-                              style: new TextStyle(
-                                  fontSize: 20.0, fontFamily: "Montserrat"))),
-                    ]));
+        child: new Stack(children: <Widget>[
+      Container(
+          alignment: Alignment.center,
+          child: ColorLoader3(
+            dotRadius: 5.0,
+            radius: 20.0,
+          )),
+      Container(
+          padding: EdgeInsets.only(top: 100.0),
+          alignment: Alignment.center,
+          child: new Text(msg,
+              style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
+    ]));
   }
 }
-
-
