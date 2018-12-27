@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'upcomingClientSessions.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'usersList.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class PTDiary extends StatefulWidget {
   final String ptid;
@@ -14,9 +18,21 @@ class PTDiary extends StatefulWidget {
 class _PTDiaryState extends State<PTDiary> {
 
   DatabaseReference itemRef;
+  DatabaseReference clearOld;
+
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+
   List<String> clientList = [''];
   List<String> calendar28Day = [];
   List<String> calendar28Date = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    cleanUpOldSessions();
+
+  }
 
   getNext28Days() {
     var now = new DateTime.now();
@@ -28,6 +44,23 @@ class _PTDiaryState extends State<PTDiary> {
       var year = daysFromNow.year;
       var dayOfWeek = daysFromNow.weekday;
       var actualDayOfWeek;
+      var modifiedDay;
+      var modifiedMonth;
+
+      if(day < 10){
+        modifiedDay = "0" + day.toString();
+      }
+      else{
+        modifiedDay = day;
+      }
+
+      if(month < 10){
+        modifiedMonth= "0" + month.toString();
+      }
+      else{
+        modifiedMonth = month;
+      }
+      
 
       switch (dayOfWeek) {
         case 1:
@@ -55,7 +88,11 @@ class _PTDiaryState extends State<PTDiary> {
 
       String calendarDay = (actualDayOfWeek);
 
-      String calendarDate = (day.toString() + "-" + month.toString() + "-" + year.toString().substring(year.toString().length - 2));
+      String calendarDate = (modifiedDay.toString() +
+          "-" +
+          modifiedMonth.toString() +
+          "-" +
+          year.toString().substring(year.toString().length - 2));
 
       calendar28Day.add(calendarDay);
       calendar28Date.add(calendarDate);
@@ -65,7 +102,6 @@ class _PTDiaryState extends State<PTDiary> {
   updateClients() {
     clientList.clear();
 
-    final FirebaseDatabase database = FirebaseDatabase.instance;
     itemRef = database.reference().child('Workouts').child(widget.ptid);
 
     itemRef.onValue.listen((Event event) {
@@ -83,8 +119,46 @@ class _PTDiaryState extends State<PTDiary> {
     });
   }
 
+  Future cleanUpOldSessions() async {
+
+    clearOld = database.reference().child('Workouts').child(widget.ptid).child('ComingUp');
+
+    var nowDay = DateTime.now().day;
+    var nowMonth = DateTime.now().month;
+    var nowYear = int.parse(DateTime.now().year.toString().substring(2,4));
+
+    List uuiiCode;
+
+    final response =
+        await http.get('https://gymapp-e8453.firebaseio.com/Workouts/' +
+            widget.ptid +
+            '/ComingUp'
+            '.json');
+
+    var jsonResponse = json.decode(response.body);
+    if (jsonResponse != "") {
+      GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
+      uuiiCode = post.uiCode;
+    }
+
+    for (int i = 0; i < uuiiCode.length; i++){
+      //print("From the DB: " + uuiiCode[i]);
+      int dbDay = int.parse(uuiiCode[i].toString().substring(0,2));
+      int dbMonth = int.parse(uuiiCode[i].toString().substring(3,5));
+      int dbYear = int.parse(uuiiCode[i].toString().substring(6,8));
+
+      if(nowDay > dbDay && nowMonth > dbMonth && nowYear < dbYear){ 
+
+        clearOld.child(uuiiCode[i]).remove();
+        print("Test");
+      }
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     calendar28Day.clear();
     calendar28Date.clear();
 
@@ -115,7 +189,10 @@ class _PTDiaryState extends State<PTDiary> {
                     borderRadius: new BorderRadius.circular(5.0)),
                 child: new Center(
                   child: new Text(
-                      calendar28Day[index].substring(0,3) + "\n" + calendar28Date[index].substring(0,calendar28Date[index].length-3),
+                      calendar28Day[index].substring(0, 3) +
+                          "\n" +
+                          calendar28Date[index]
+                              .substring(0, calendar28Date[index].length - 3),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: "Montserrat",

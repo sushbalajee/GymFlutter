@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'personalisedWorkoutDetails.dart';
-import 'uploadClientWorkouts.dart';
 import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
@@ -27,6 +25,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
 
   DatabaseReference itemRef;
   DatabaseReference cref;
+  DatabaseReference comingUpRef;
 
   bool informUser;
 
@@ -49,11 +48,16 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
+    comingUpRef = database.reference().child('Workouts')
+    .child(widget.value)
+    .child('ComingUp');
+
     cref = database
         .reference()
         .child('Workouts')
         .child('ClientNames')
         .child(widget.userUid);
+
     cref.once().then((DataSnapshot snapshot) {
       jointID = snapshot.value + " - " + widget.userUid;
 
@@ -100,7 +104,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                           b.date.substring(b.date.length - 8, b.date.length)));
 
                   return Card(
-                      color: Color(items[index].paid),
+                      //color: Color(items[index].paid),
                       elevation: 3.0,
                       child: new ListTile(
                         title: Text(items[index].date,
@@ -113,15 +117,18 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                             items[index].startTime.substring(10, 15) +
                                 " - " +
                                 items[index].endTime.substring(10, 15)),
-                        trailing: new IconButton(
+                        /*trailing: new IconButton(
                             iconSize: 40.0,
                             icon: Icon(Icons.monetization_on),
                             color: Colors.white,
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
-                                confirmPayment(context, index);
+                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
                               }
-                            }),
+                              else if (items[index].paid == 0xFFFFE66D){
+                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B);
+                              }
+                            }),*/
                       ));
                 },
               ),
@@ -140,20 +147,20 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     }
   }
 
-  Future<Null> confirmPayment(BuildContext context, int ind) {
+  /*Future<Null> confirmPayment(BuildContext context, int ind,String button, String msg, num changeTo) {
     double screenWidth = MediaQuery.of(context).size.width;
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(
-                "Please confirm if you have paid your Personal Trainer for this session"),
+            title: new Text(msg
+                ),
             content: Container(
               width: screenWidth,
               padding: EdgeInsets.only(top: 30.0),
               child: new FlatButton(
-                child: new Text("I have paid",
+                child: new Text(button,
                     style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: screenWidth * 0.045,
@@ -161,10 +168,11 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                         color: Colors.white)),
                 color: Colors.black,
                 onPressed: () {
-                  itemRef.child(items[ind].key).child('paid').set(0xFF4ECDC4);
+                  //itemRef.child(items[ind].key).child('paid').set(changeTo);
+                  //print(comingUpRef.child('16-1-19').child().key);
                   //setState(() => ClientSessionsClientSide());
-                  handlePayment();
-                  Navigator.pop(context);
+                  //handlePayment();
+                  //Navigator.pop(context);
                 },
               ),
             ),
@@ -188,7 +196,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                   userUid: widget.userUid,
                   value: widget.value,
                 )));
-  }
+  }*/
 
   Widget tryMe() {
     return Container(

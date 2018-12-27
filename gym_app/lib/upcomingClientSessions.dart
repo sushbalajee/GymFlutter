@@ -174,7 +174,8 @@ class _ClientSessionsState extends State<ClientSessions> {
                   Animation<double> animation, int index) {
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
 
-                return Card(
+                return Card( 
+                  //color: Color(items[index].paid),
                     elevation: 3.0,
                     child: new ListTile(
                       contentPadding: EdgeInsets.only(left: 15.0),
