@@ -321,7 +321,7 @@ class RootPageState extends State<RootPage> {
               ),
               width: screenWidth,
               child: FlatButton(
-                  child: new Text("Session Planner",
+                  child: new Text("Upcoming Sessions",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
                           fontSize: 25.0,

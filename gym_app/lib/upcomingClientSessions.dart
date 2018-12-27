@@ -42,7 +42,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   void initState() {
     super.initState();
 
-    item = Session("", "", "", "", "");
+    item = Session("", "", "", "", "","");
 
     itemRef = database
         .reference()
@@ -67,7 +67,7 @@ class _ClientSessionsState extends State<ClientSessions> {
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Color(0xFF4A657A),
-            title: new Text(widget.day + " - " + widget.date,
+            title: new Text(widget.day + " : " + widget.date,
                 style: TextStyle(fontFamily: "Montserrat"))),
         backgroundColor: Colors.grey[100],
         body: Column(children: <Widget>[
@@ -157,7 +157,8 @@ class _ClientSessionsState extends State<ClientSessions> {
                               color: Colors.white)),
                       color: Color(0xFF4A657A),
                       onPressed: () {
-                        item.date = widget.date + " - " + widget.day;
+                        item.date = widget.day + " : " + widget.date;
+                        item.paid = "FF6B6B";
                         handleSubmit();
                       },
                     ),
@@ -212,9 +213,6 @@ class _ClientSessionsState extends State<ClientSessions> {
             " - " +
             itemRef.child(items[ii].startTime).key);
 
-    //print(itemRef.child(items[ii].fullClientID).key);
-    //print("What is this: " + sessionsRef1.key);
-
     itemRef.child(items[ii].key).remove();
     sessionsRef1.remove();
   }
@@ -228,7 +226,7 @@ class _ClientSessionsState extends State<ClientSessions> {
         .child(widget.id)
         .child(clientID)
         .child("clientSessions");
-        //.child(widget.date + " - " + widget.day + " - " + localStart);
+        //.child(widget.day + " : " + widget.date + " - " + localStart);
 
     if (form.validate()) {
       form.save();
@@ -246,9 +244,10 @@ class Session {
   String endTime;
   String date;
   String fullClientID;
+  String paid;
 
   Session(this.clientName, this.startTime, this.endTime, this.date,
-      this.fullClientID);
+      this.fullClientID, this.paid);
 
   Session.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
@@ -256,7 +255,8 @@ class Session {
         fullClientID = snapshot.value["fullClientID"],
         startTime = snapshot.value["startTime"],
         endTime = snapshot.value["endTime"],
-        date = snapshot.value["date"];
+        date = snapshot.value["date"],
+        paid = snapshot.value["paid"];
 
   toJson() {
     return {
@@ -264,7 +264,8 @@ class Session {
       "fullClientID": fullClientID,
       "startTime": startTime,
       "endTime": endTime,
-      "date": date
+      "date": date,
+      "paid": paid
     };
   }
 }

@@ -25,37 +25,37 @@ class _PTDiaryState extends State<PTDiary> {
       var daysFromNow = now.add(new Duration(days: i));
       var day = daysFromNow.day;
       var month = daysFromNow.month;
-      //var year = daysFromNow.year;
+      var year = daysFromNow.year;
       var dayOfWeek = daysFromNow.weekday;
       var actualDayOfWeek;
 
       switch (dayOfWeek) {
         case 1:
-          actualDayOfWeek = "Mon";
+          actualDayOfWeek = "Monday";
           break;
         case 2:
-          actualDayOfWeek = "Tues";
+          actualDayOfWeek = "Tuesday";
           break;
         case 3:
-          actualDayOfWeek = "Wed";
+          actualDayOfWeek = "Wednesday";
           break;
         case 4:
-          actualDayOfWeek = "Thurs";
+          actualDayOfWeek = "Thursday";
           break;
         case 5:
-          actualDayOfWeek = "Fri";
+          actualDayOfWeek = "Friday";
           break;
         case 6:
-          actualDayOfWeek = "Sat";
+          actualDayOfWeek = "Saturday";
           break;
         case 7:
-          actualDayOfWeek = "Sun";
+          actualDayOfWeek = "Sunday";
           break;
       }
 
       String calendarDay = (actualDayOfWeek);
 
-      String calendarDate = (day.toString() + "-" + month.toString());
+      String calendarDate = (day.toString() + "-" + month.toString() + "-" + year.toString().substring(year.toString().length - 2));
 
       calendar28Day.add(calendarDay);
       calendar28Date.add(calendarDate);
@@ -115,7 +115,7 @@ class _PTDiaryState extends State<PTDiary> {
                     borderRadius: new BorderRadius.circular(5.0)),
                 child: new Center(
                   child: new Text(
-                      calendar28Day[index] + "\n" + calendar28Date[index],
+                      calendar28Day[index].substring(0,3) + "\n" + calendar28Date[index].substring(0,calendar28Date[index].length-3),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: "Montserrat",

@@ -45,7 +45,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
       });
     });
 
-    item = Session("", "", "", "", "");
+    item = Session("", "", "", "", "","");
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -76,7 +76,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
 
   @override
   Widget build(BuildContext context) {
-    int workoutNumber = 0;
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (informUser == false) {
@@ -95,7 +95,8 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                 query: itemRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                  workoutNumber += 1;
+                      items.sort((a, b) => a.date.substring(a.date.length - 8, a.date.length).compareTo(b.date.substring(b.date.length - 8, b.date.length)));
+
                   return Card(
                       elevation: 3.0,
                        child: 
@@ -106,6 +107,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                           fontSize: screenWidth * 0.055,
                           color: Color(0xFF22333B),
                           fontWeight: FontWeight.w600)),
+                    subtitle: Text(items[index].startTime.substring(10, 15) + " - " + items[index].endTime.substring(10, 15)),
                   ));
                 },
               ),
