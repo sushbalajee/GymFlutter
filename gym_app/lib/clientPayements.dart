@@ -7,31 +7,20 @@ import 'upcomingClientSessions.dart';
 
 //-----------------------------------------------------------------------------------//
 
-class ClientSessionsClientSide extends StatefulWidget {
+class ClientPayments extends StatefulWidget {
   final String userUid;
   final String value;
 
-  ClientSessionsClientSide({Key key, this.value, this.userUid})
+  ClientPayments({Key key, this.value, this.userUid})
       : super(key: key);
 
   @override
-  _ClientSessionsStateClient createState() => new _ClientSessionsStateClient();
+  _ClientPaymentsState createState() => new _ClientPaymentsState();
 }
 
 //-----------------------------------------------------------------------------------//
 
-class GetAllDates {
-  List uiCode;
-  GetAllDates({this.uiCode});
-
-  factory GetAllDates.fromJson20(Map<String, dynamic> parsedJson) {
-    List<String> passMe = parsedJson.keys.toList();
-    //print(passMe);
-    return GetAllDates(uiCode: passMe);
-  }
-}
-
-class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
+class _ClientPaymentsState extends State<ClientPayments> {
   List<Session> items = List();
   Session item;
 
@@ -51,6 +40,8 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   void initState(){
     super.initState();
 
+    print(widget.userUid);
+
     timer = new Timer(const Duration(seconds: 5), () {
       //setState(() {
       msg = "No workouts assigned to you";
@@ -61,28 +52,17 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
-    comingUpRef = database.reference().child('Workouts')
-    .child(widget.value)
-    .child('ComingUp');
-
-    cref = database
-        .reference()
-        .child('Workouts')
-        .child('ClientNames')
-        .child(widget.userUid);
-
-    cref.once().then((DataSnapshot snapshot){
-      jointID = snapshot.value + " - " + widget.userUid;
+      //jointID = snapshot.value + " - " + widget.userUid;
 
       itemRef = database
           .reference()
           .child('Workouts')
           .child(widget.value)
-          .child(jointID)
+          .child(widget.userUid)
           .child('clientSessions');
 
       itemRef.onChildAdded.listen(_onEntryAdded);
-    });
+
   }
 
   _onEntryAdded(Event event) {
@@ -137,10 +117,10 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                             color: Colors.white,
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
-                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
+                                informPT(context, index, "Your client has not confirmed payment for this session");
                               }
                               else if (items[index].paid == 0xFFFFE66D){
-                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B);
+                                confirmPayment(context, index, "Confirm", "Your client has confirmed that they have paid for this session. Press confirm if you have received the payment.\n\nPlease Note: payment is not done within the app", 0xFF4ECDC4);
                               }
                             }),
                       ));
@@ -160,6 +140,28 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
           body: tryMe());
     }
   }
+
+ Future<Null> informPT(BuildContext context, int ind, String msg) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(msg
+                ),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+  
 
   Future<Null> confirmPayment(BuildContext context, int ind,String button, String msg, num changeTo) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -206,7 +208,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => ClientSessionsClientSide(
+            builder: (context) => ClientPayments(
                   userUid: widget.userUid,
                   value: widget.value,
                 )));

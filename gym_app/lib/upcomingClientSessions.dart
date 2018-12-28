@@ -42,7 +42,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   void initState() {
     super.initState();
 
-    item = Session("", "", "", "", "", 0);
+    item = Session("", "", "", "", "", 0, "");
 
     itemRef = database
         .reference()
@@ -232,7 +232,10 @@ class _ClientSessionsState extends State<ClientSessions> {
     if (form.validate()) {
       form.save();
       form.reset();
-      sessionsRef.push().set(item.toJson());
+      var xx = sessionsRef.push();
+      item.key = xx.key;
+      print(xx.key);
+      xx.set(item.toJson());
       itemRef.push().set(item.toJson());
     }
   }
@@ -248,7 +251,7 @@ class Session {
   num paid;
 
   Session(this.clientName, this.startTime, this.endTime, this.date,
-      this.fullClientID, this.paid);
+      this.fullClientID, this.paid, this.key);
 
   Session.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
@@ -266,7 +269,8 @@ class Session {
       "startTime": startTime,
       "endTime": endTime,
       "date": date,
-      "paid": paid
+      "paid": paid,
+      "key": key
     };
   }
 }

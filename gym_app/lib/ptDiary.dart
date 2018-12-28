@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'upcomingClientSessions.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'usersList.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -25,14 +24,22 @@ class _PTDiaryState extends State<PTDiary> {
   List<String> clientList = [''];
   List<String> calendar28Day = [];
   List<String> calendar28Date = [];
-
+/*
   @override
   void initState() {
     super.initState();
 
-    cleanUpOldSessions();
-
-  }
+    clearOld = database.reference().child('Workouts').child(widget.ptid).child('ComingUp');
+    clearOld.once().then((DataSnapshot snapshot){
+        var checker = snapshot.value;
+        if(checker == null){
+          print("No sessions");
+        }
+        else{
+          cleanUpOldSessions();
+        }
+    });
+  }*/
 
   getNext28Days() {
     var now = new DateTime.now();
@@ -137,7 +144,7 @@ class _PTDiaryState extends State<PTDiary> {
 
     var jsonResponse = json.decode(response.body);
     if (jsonResponse != "") {
-      GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
+      ComingUp post = new ComingUp.fromJson20(jsonResponse);
       uuiiCode = post.uiCode;
     }
 
@@ -147,7 +154,7 @@ class _PTDiaryState extends State<PTDiary> {
       int dbMonth = int.parse(uuiiCode[i].toString().substring(3,5));
       int dbYear = int.parse(uuiiCode[i].toString().substring(6,8));
 
-      if(nowDay > dbDay && nowMonth > dbMonth && nowYear < dbYear){ 
+      if(nowDay > dbDay && nowMonth > dbMonth && nowYear > dbYear){ 
 
         clearOld.child(uuiiCode[i]).remove();
         print("Test");
@@ -213,5 +220,16 @@ class _PTDiaryState extends State<PTDiary> {
             );
           }),
         ));
+  }
+}
+
+class ComingUp{
+  List uiCode;
+  ComingUp({this.uiCode});
+
+  factory ComingUp.fromJson20(Map<String, dynamic> parsedJson) {
+    
+    List<String> passMe = parsedJson.keys.toList();
+    return ComingUp(uiCode: passMe);
   }
 }

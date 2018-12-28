@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'uploadClientWorkoutDetails.dart';
 import 'dart:async';
+import 'clientPayements.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -79,6 +80,25 @@ class _NextPageStateClient extends State<ClientWorkouts> {
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
+          Container(
+              width: screenWidth,
+              child: new FlatButton(
+                  child: new Text("Payments",
+                      style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: screenWidth * 0.045,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white)),
+                  color: Color(0xFF272727),
+                  onPressed: () {
+                    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ClientPayments(
+                  userUid: widget.userUid,
+                  value: widget.value,
+                )));
+                  })),
           Flexible(
             child: FirebaseAnimatedList(
               query: itemRef,
