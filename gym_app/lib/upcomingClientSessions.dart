@@ -184,7 +184,8 @@ class _ClientSessionsState extends State<ClientSessions> {
                           icon: Icon(Icons.delete_forever),
                           color: Color(0xFF4A657A),
                           onPressed: () {
-                            handleDelete(index);
+                            var shitNames = items[index].clientSessionID;
+                            handleDelete(index, shitNames);
                           }),
                       title: Text(items[index].clientName,
                           style: TextStyle(
@@ -203,16 +204,17 @@ class _ClientSessionsState extends State<ClientSessions> {
         ]));
   }
 
-  void handleDelete(int ii) {
+  void handleDelete(int ii, String sucks) {
+
     sessionsRef1 = database
         .reference()
         .child('Workouts')
         .child(widget.id)
         .child(itemRef.child(items[ii].fullClientID).key)
         .child("clientSessions")
-        .child(itemRef.child(items[ii].date).key +
-            " - " +
-            itemRef.child(items[ii].startTime).key);
+        .child(sucks);
+
+        print(sucks);
 
     itemRef.child(items[ii].key).remove();
     sessionsRef1.remove();
@@ -233,8 +235,7 @@ class _ClientSessionsState extends State<ClientSessions> {
       form.save();
       form.reset();
       var xx = sessionsRef.push();
-      item.key = xx.key;
-      print(xx.key);
+      item.clientSessionID = xx.key;
       xx.set(item.toJson());
       itemRef.push().set(item.toJson());
     }
@@ -248,10 +249,11 @@ class Session {
   String endTime;
   String date;
   String fullClientID;
+  String clientSessionID;
   num paid;
 
   Session(this.clientName, this.startTime, this.endTime, this.date,
-      this.fullClientID, this.paid, this.key);
+      this.fullClientID, this.paid, this.clientSessionID);
 
   Session.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
@@ -260,7 +262,8 @@ class Session {
         startTime = snapshot.value["startTime"],
         endTime = snapshot.value["endTime"],
         date = snapshot.value["date"],
-        paid = snapshot.value["paid"];
+        paid = snapshot.value["paid"],
+        clientSessionID = snapshot.value["clientSessionID"];
 
   toJson() {
     return {
@@ -270,7 +273,8 @@ class Session {
       "endTime": endTime,
       "date": date,
       "paid": paid,
-      "key": key
+      "key": key,
+      "clientSessionID": clientSessionID
     };
   }
 }
