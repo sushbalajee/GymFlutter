@@ -8,11 +8,10 @@ import 'upcomingClientSessions.dart';
 //-----------------------------------------------------------------------------------//
 
 class ClientPayments extends StatefulWidget {
-  final String userUid;
-  final String value;
+  final String clientID;
+  final String ptID;
 
-  ClientPayments({Key key, this.value, this.userUid})
-      : super(key: key);
+  ClientPayments({Key key, this.ptID, this.clientID}) : super(key: key);
 
   @override
   _ClientPaymentsState createState() => new _ClientPaymentsState();
@@ -22,47 +21,37 @@ class ClientPayments extends StatefulWidget {
 
 class _ClientPaymentsState extends State<ClientPayments> {
   List<Session> items = List();
-  Session item;
+  //Session item;
 
-  DatabaseReference itemRef;
-  DatabaseReference cref;
-  DatabaseReference comingUpRef;
+  DatabaseReference clientSessionsRef;
 
   bool informUser;
 
   Timer timer;
   String msg = "Loading";
-  List uuiiCode;
 
   String jointID;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
-    print(widget.userUid);
-
     timer = new Timer(const Duration(seconds: 5), () {
-      //setState(() {
-      msg = "No workouts assigned to you";
-      //});
+      msg = "No session history available"; //adjust message
     });
 
-    item = Session("", "", "", "", "", 0, "");
+    //item = Session("", "", "", "", "", 0, "");
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
-      //jointID = snapshot.value + " - " + widget.userUid;
+    clientSessionsRef = database
+        .reference()
+        .child('Workouts')
+        .child(widget.ptID)
+        .child(widget.clientID)
+        .child('clientSessions');
 
-      itemRef = database
-          .reference()
-          .child('Workouts')
-          .child(widget.value)
-          .child(widget.userUid)
-          .child('clientSessions');
-
-      itemRef.onChildAdded.listen(_onEntryAdded);
-
+    clientSessionsRef.onChildAdded.listen(_onEntryAdded);
   }
 
   _onEntryAdded(Event event) {
@@ -81,7 +70,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF4A657A),
-          title: Text('Upcoming Sessions',
+          title: Text('Client Payments',
               style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
@@ -89,7 +78,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
           children: <Widget>[
             Flexible(
               child: FirebaseAnimatedList(
-                query: itemRef,
+                query: clientSessionsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   items.sort((a, b) => a.date
@@ -117,10 +106,9 @@ class _ClientPaymentsState extends State<ClientPayments> {
                             color: Colors.white,
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
-                                informPT(context, index, "Your client has not confirmed payment for this session");
-                              }
-                              else if (items[index].paid == 0xFFFFE66D){
-                                confirmPayment(context, index, "Confirm", "Your client has confirmed that they have paid for this session. Press confirm if you have received the payment.\n\nPlease Note: payment is not done within the app", 0xFF4ECDC4);
+                                informPT(context, index);
+                              } else if (items[index].paid == 0xFFFFE66D) {
+                                confirmPayment(context, index, 0xFF4ECDC4);
                               }
                             }),
                       ));
@@ -137,19 +125,18 @@ class _ClientPaymentsState extends State<ClientPayments> {
             backgroundColor: Colors.grey[900],
           ),
           resizeToAvoidBottomPadding: false,
-          body: tryMe());
+          body: loadingScreen());
     }
   }
 
- Future<Null> informPT(BuildContext context, int ind, String msg) {
-    double screenWidth = MediaQuery.of(context).size.width;
+  Future<Null> informPT(BuildContext context, int ind) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(msg
-                ),
+            title: new Text(
+                "Your client has not confirmed payment for this session"),
             actions: <Widget>[
               new FlatButton(
                 child: const Text('CLOSE'),
@@ -161,22 +148,21 @@ class _ClientPaymentsState extends State<ClientPayments> {
           );
         });
   }
-  
 
-  Future<Null> confirmPayment(BuildContext context, int ind,String button, String msg, num changeTo) {
+  Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
     double screenWidth = MediaQuery.of(context).size.width;
     return showDialog<Null>(
         context: context,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(msg
-                ),
+            title: new Text(
+                "Your client has confirmed that they have paid for this session. Press confirm if you have received the payment.\n\nPlease Note: payment is not done within the app"),
             content: Container(
               width: screenWidth,
               padding: EdgeInsets.only(top: 30.0),
               child: new FlatButton(
-                child: new Text(button,
+                child: new Text("Confirm",
                     style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: screenWidth * 0.045,
@@ -184,9 +170,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                         color: Colors.white)),
                 color: Colors.black,
                 onPressed: () {
-                  itemRef.child(items[ind].key).child('paid').set(changeTo);
-                  //print(comingUpRef.child('16-1-19').child().key);
-                  //setState(() => ClientSessionsClientSide());
+                  clientSessionsRef.child(items[ind].key).child('paid').set(changeTo);
                   handlePayment();
                   Navigator.pop(context);
                 },
@@ -209,12 +193,12 @@ class _ClientPaymentsState extends State<ClientPayments> {
         context,
         MaterialPageRoute(
             builder: (context) => ClientPayments(
-                  userUid: widget.userUid,
-                  value: widget.value,
+                  clientID: widget.clientID,
+                  ptID: widget.ptID,
                 )));
   }
 
-  Widget tryMe() {
+  Widget loadingScreen() {
     return Container(
         child: new Stack(children: <Widget>[
       Container(

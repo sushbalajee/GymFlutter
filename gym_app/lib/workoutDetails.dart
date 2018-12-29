@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'jsonLogic.dart';
 
-class PageThree extends StatefulWidget {
+class WorkoutDetails extends StatefulWidget {
   final List<Workouts> value;
   final String title;
   final String muscleGroup;
   final String description;
 
-  PageThree(
+  WorkoutDetails(
       {Key key, this.value, this.title, this.muscleGroup, this.description})
       : super(key: key);
 
   @override
-  WorkoutInfo createState() => new WorkoutInfo();
+  WorkoutDetailsState createState() => new WorkoutDetailsState();
 }
 
-class WorkoutInfo extends State<PageThree> {
+class WorkoutDetailsState extends State<WorkoutDetails> {
 
   List<WorkoutExercises> workoutExercisesJSON = [];
   List<Workouts> workoutInfoJSON = [];
@@ -196,7 +196,7 @@ class WorkoutInfo extends State<PageThree> {
 Future<Null> confirmDialog(BuildContext context, String execution) {
   return showDialog<Null>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false, 
       builder: (BuildContext context) {
         return new AlertDialog(
           title: new Text(execution),

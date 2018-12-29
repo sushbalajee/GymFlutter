@@ -8,10 +8,10 @@ import 'upcomingClientSessions.dart';
 //-----------------------------------------------------------------------------------//
 
 class ClientSessionsClientSide extends StatefulWidget {
-  final String userUid;
-  final String value;
+  final String clientID;
+  final String ptID;
 
-  ClientSessionsClientSide({Key key, this.value, this.userUid})
+  ClientSessionsClientSide({Key key, this.ptID, this.clientID})
       : super(key: key);
 
   @override
@@ -20,30 +20,17 @@ class ClientSessionsClientSide extends StatefulWidget {
 
 //-----------------------------------------------------------------------------------//
 
-class GetAllDates {
-  List uiCode;
-  GetAllDates({this.uiCode});
-
-  factory GetAllDates.fromJson20(Map<String, dynamic> parsedJson) {
-    List<String> passMe = parsedJson.keys.toList();
-    //print(passMe);
-    return GetAllDates(uiCode: passMe);
-  }
-}
-
 class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   List<Session> items = List();
-  Session item;
+  //Session item;
 
-  DatabaseReference itemRef;
-  DatabaseReference cref;
-  DatabaseReference comingUpRef;
+  DatabaseReference clientSessionRef;
+  DatabaseReference clientNamesRef;
 
   bool informUser;
 
   Timer timer;
   String msg = "Loading";
-  List uuiiCode;
 
   String jointID;
 
@@ -52,36 +39,30 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     super.initState();
 
     timer = new Timer(const Duration(seconds: 5), () {
-      //setState(() {
       msg = "No workouts assigned to you";
-      //});
     });
 
-    item = Session("", "", "", "", "", 0, "");
+    //item = Session("", "", "", "", "", 0, "");
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
-    comingUpRef = database.reference().child('Workouts')
-    .child(widget.value)
-    .child('ComingUp');
-
-    cref = database
+    clientNamesRef = database
         .reference()
         .child('Workouts')
         .child('ClientNames')
-        .child(widget.userUid);
+        .child(widget.clientID);
 
-    cref.once().then((DataSnapshot snapshot){
-      jointID = snapshot.value + " - " + widget.userUid;
+    clientNamesRef.once().then((DataSnapshot snapshot){
+      jointID = snapshot.value + " - " + widget.clientID;
 
-      itemRef = database
+      clientSessionRef = database
           .reference()
           .child('Workouts')
-          .child(widget.value)
+          .child(widget.ptID)
           .child(jointID)
           .child('clientSessions');
 
-      itemRef.onChildAdded.listen(_onEntryAdded);
+      clientSessionRef.onChildAdded.listen(_onEntryAdded);
     });
   }
 
@@ -109,7 +90,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
           children: <Widget>[
             Flexible(
               child: FirebaseAnimatedList(
-                query: itemRef,
+                query: clientSessionRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   items.sort((a, b) => a.date
@@ -157,7 +138,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
             backgroundColor: Colors.grey[900],
           ),
           resizeToAvoidBottomPadding: false,
-          body: tryMe());
+          body: loadingScreen());
     }
   }
 
@@ -182,8 +163,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                         color: Colors.white)),
                 color: Colors.black,
                 onPressed: () {
-                  itemRef.child(items[ind].key).child('paid').set(changeTo);
-                  //print(comingUpRef.child('16-1-19').child().key);
+                  clientSessionRef.child(items[ind].key).child('paid').set(changeTo);
                   //setState(() => ClientSessionsClientSide());
                   handlePayment();
                   Navigator.pop(context);
@@ -207,12 +187,12 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
         context,
         MaterialPageRoute(
             builder: (context) => ClientSessionsClientSide(
-                  userUid: widget.userUid,
-                  value: widget.value,
+                  clientID: widget.clientID,
+                  ptID: widget.ptID,
                 )));
   }
 
-  Widget tryMe() {
+  Widget loadingScreen() {
     return Container(
         child: new Stack(children: <Widget>[
       Container(

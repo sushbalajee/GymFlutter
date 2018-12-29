@@ -5,21 +5,21 @@ import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class PageFour extends StatefulWidget {
+class UploadClientWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
-  final String uid;
+  final String clientID;
   final String title;
   final String muscleGroup;
   final String description;
-  final String trainerID;
+  final String ptID;
 
-  PageFour(
+  UploadClientWorkoutDetails(
       {Key key,
       this.title,
       this.muscleGroup,
       this.description,
-      this.uid,
-      this.trainerID,
+      this.clientID,
+      this.ptID,
       this.firebaseGeneratedKey})
       : super(key: key);
 
@@ -27,8 +27,7 @@ class PageFour extends StatefulWidget {
   UploadedWorkoutInfo createState() => new UploadedWorkoutInfo();
 }
 
-class UploadedWorkoutInfo extends State<PageFour> {
-
+class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
   List<String> suggestions = [
     "Barbell Squat",
     "Bench Press",
@@ -39,19 +38,18 @@ class UploadedWorkoutInfo extends State<PageFour> {
   ];
 
   List<String> added = [];
-  String currentText = "";
+  List<Item> items = List();
+
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
-  List<Item> items = List();
   Item item;
-  DatabaseReference itemRef;
-  DatabaseReference snek;
+
+  DatabaseReference exercisesRef;
+
   String imageUrlStorage = "";
+  String currentText = "";
 
   final myController = TextEditingController();
- 
-  String passMeOn;
-  var focusNode = new FocusNode();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -59,48 +57,36 @@ class UploadedWorkoutInfo extends State<PageFour> {
   void initState() {
     super.initState();
 
-  // listen to focus changes
-    focusNode.addListener(() => print('focusNode updated: hasFocus: ${focusNode.hasFocus}')); 
-
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
-
-    /*snek = database
+    
+    exercisesRef = database
         .reference()
         .child('Workouts')
-        .child(widget.trainerID)
-        .child(widget.uid);*/
-
-    itemRef = database
-        .reference()
-        .child('Workouts')
-        .child(widget.trainerID)
-        .child(widget.uid)
+        .child(widget.ptID)
+        .child(widget.clientID)
         .child("clientWorkouts")
         .child(widget.firebaseGeneratedKey)
         .child('exercises');
 
-    itemRef.onChildAdded.listen(_onEntryAdded);
+    exercisesRef.onChildAdded.listen(_onEntryAdded);
   }
-
 
   someMethod(String target) async {
     final ref = FirebaseStorage.instance
         .ref()
         .child('Target Muscles')
         .child('$target.jpg');
-
-        try {
-          imageUrlStorage = await ref.getDownloadURL();
-        } catch (e) {
-          imageUrlStorage = "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FNoImage.jpg?alt=media&token=1999bc13-9014-44cd-99d4-7bc6b4dbd717";
-        }
+    try {
+      imageUrlStorage = await ref.getDownloadURL();
+    } catch (e) {
+      imageUrlStorage =
+          "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FNoImage.jpg?alt=media&token=1999bc13-9014-44cd-99d4-7bc6b4dbd717";
+    }
   }
 
   _onEntryAdded(Event event) {
-    //setState(() {
     items.add(Item.fromSnapshot(event.snapshot));
-    //});
   }
 
   void handleSubmit() {
@@ -109,7 +95,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
     if (form.validate()) {
       form.save();
       form.reset();
-      itemRef.push().set(item.toJson());
+      exercisesRef.push().set(item.toJson());
     }
   }
 
@@ -119,20 +105,20 @@ class UploadedWorkoutInfo extends State<PageFour> {
     if (form.validate()) {
       form.save();
       form.reset();
-      itemRef.child(fbKey).update(item.toJson());
+      exercisesRef.child(fbKey).update(item.toJson());
     }
 
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => PageFour(
+            builder: (context) => UploadClientWorkoutDetails(
                   description: widget.description,
                   firebaseGeneratedKey: widget.firebaseGeneratedKey,
                   key: widget.key,
                   muscleGroup: widget.muscleGroup,
                   title: widget.title,
-                  trainerID: widget.trainerID,
-                  uid: widget.uid,
+                  ptID: widget.ptID,
+                  clientID: widget.clientID,
                 )));
   }
 
@@ -175,13 +161,12 @@ class UploadedWorkoutInfo extends State<PageFour> {
           ),
           Flexible(
             child: FirebaseAnimatedList(
-              query: itemRef,
+              query: exercisesRef,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                  //someMethod(items[index].name);
                 exerciseNumber += 1;
                 return Card(
                     elevation: 3.0,
@@ -202,14 +187,13 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                     icon: Icon(Icons.delete_forever),
                                     color: Color(0xFF4A657A),
                                     onPressed: () {
-                                      /*if (items.length == 1) {
-                          //confirmError(context, "Please add a new workout before deleting this one", "");
-                        } else {*/
-                                      itemRef.child(items[index].key).remove();
+                                      exercisesRef
+                                          .child(items[index].key)
+                                          .remove();
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => PageFour(
+                                              builder: (context) => UploadClientWorkoutDetails(
                                                     description:
                                                         widget.description,
                                                     firebaseGeneratedKey: widget
@@ -218,21 +202,22 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                                     muscleGroup:
                                                         widget.muscleGroup,
                                                     title: widget.title,
-                                                    trainerID: widget.trainerID,
-                                                    uid: widget.uid,
+                                                    ptID: widget.ptID,
+                                                    clientID: widget.clientID,
                                                   )));
-                                      //}
                                     }),
                                 title: new Stack(children: <Widget>[
                                   new Row(children: <Widget>[
-                                    Flexible( child:
-                                    Container(child:
-                                    Text(items[index].name,
-                                        style: TextStyle(
-                                            fontFamily: "Montserrat",
-                                            color: Color(0xFF4A657A),
-                                            fontSize: screenWidth * 0.05,
-                                            fontWeight: FontWeight.w700)))),
+                                    Flexible(
+                                        child: Container(
+                                            child: Text(items[index].name,
+                                                style: TextStyle(
+                                                    fontFamily: "Montserrat",
+                                                    color: Color(0xFF4A657A),
+                                                    fontSize:
+                                                        screenWidth * 0.05,
+                                                    fontWeight:
+                                                        FontWeight.w700)))),
                                     Container(
                                         child: new IconButton(
                                             icon: new Icon(Icons.edit),
@@ -280,8 +265,7 @@ class UploadedWorkoutInfo extends State<PageFour> {
                                             fontSize: screenWidth * 0.04)),
                                     new Padding(
                                       padding: EdgeInsets.only(top: 15.0),
-                                      child: Image.network( items[index].target
-                                      ),
+                                      child: Image.network(items[index].target),
                                     ),
                                   ])
                             ]))
@@ -330,39 +314,46 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: '',
                       onSaved: (val) => item.reps = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Sets"),
                       initialValue: "",
                       onSaved: (val) => item.sets = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Execution"),
                       initialValue: "",
                       onSaved: (val) => item.execution = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: "",
                       onSaved: (val) => item.rest = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Weight"),
                       initialValue: "",
                       onSaved: (val) => item.weight = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
-                    Opacity(opacity: 0.0, child: Container( child: 
-                    TextFormField(
-                      enabled: false,
-                      initialValue: "",
-                      onSaved: (val) => item.target = imageUrlStorage,
-                      //validator: (val) => val == "" ? val : null,
-                    ))),
+                    Opacity(
+                        opacity: 0.0,
+                        child: Container(
+                            child: TextFormField(
+                          enabled: false,
+                          initialValue: "",
+                          onSaved: (val) => item.target = imageUrlStorage,
+                          //validator: (val) => val == "" ? val : null,
+                        ))),
                   ],
                 ),
               ),
@@ -415,70 +406,75 @@ class UploadedWorkoutInfo extends State<PageFour> {
                       decoration: InputDecoration(labelText: "Reps"),
                       initialValue: items[ind].reps,
                       onSaved: (val) => item.reps = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Sets"),
                       initialValue: items[ind].sets,
                       onSaved: (val) => item.sets = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Execution"),
                       initialValue: items[ind].execution,
                       onSaved: (val) => item.execution = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: items[ind].rest,
                       onSaved: (val) => item.rest = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Weight"),
                       initialValue: items[ind].weight,
                       onSaved: (val) => item.weight = val,
-                      validator: (val) => val == "" ? "This field cannot be empty" : null,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
                     ),
-                    Opacity( 
-                      opacity: 0.0,
-                      child: Container( child:
-                    TextFormField(
-                      decoration: InputDecoration(labelText: "Name"),
-                      initialValue: items[ind].name,
-                      enabled: false,
-                      onSaved: (val) => item.name = val,
-                      validator: (val) => val == "" ? val : null,
-                    ))),
-                    Opacity( 
-                      opacity: 0.0,
-                      child: Container( child:
-                    TextFormField(
-                      initialValue: items[ind].target,
-                      enabled: false,
-                      onSaved: (val) => item.target = val,
-                      validator: (val) => val == "" ? val : null,
-                    ),)),
+                    Opacity(
+                        opacity: 0.0,
+                        child: Container(
+                            child: TextFormField(
+                          decoration: InputDecoration(labelText: "Name"),
+                          initialValue: items[ind].name,
+                          enabled: false,
+                          onSaved: (val) => item.name = val,
+                          validator: (val) => val == "" ? val : null,
+                        ))),
+                    Opacity(
+                        opacity: 0.0,
+                        child: Container(
+                          child: TextFormField(
+                            initialValue: items[ind].target,
+                            enabled: false,
+                            onSaved: (val) => item.target = val,
+                            validator: (val) => val == "" ? val : null,
+                          ),
+                        )),
                   ],
                 ),
               ),
             ),
             actions: <Widget>[
-
               new FlatButton(
-                        child: new Text("Submit",
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: screenWidth * 0.045,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white)),
-                        color: Colors.black,
-                        onPressed: () {
-                          handleEdit(items[ind].key);
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                child: new Text("Submit",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                color: Colors.black,
+                onPressed: () {
+                  handleEdit(items[ind].key);
+                  Navigator.of(context).pop();
+                },
+              ),
               new FlatButton(
                 padding: EdgeInsets.all(20.0),
                 child: const Text('CLOSE',
@@ -498,12 +494,13 @@ class UploadedWorkoutInfo extends State<PageFour> {
           decoration: new InputDecoration(
               labelText: "Add an Exercise",
               hintText: "Start typing",
-              suffixIcon: IconButton( icon: Icon(Icons.add), onPressed: (){
-              myController.text = currentText;
-              someMethod(currentText);
-              print(currentText);
-              }
-              )),
+              suffixIcon: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    myController.text = currentText;
+                    someMethod(currentText);
+                    print(currentText);
+                  })),
           key: key,
           submitOnSuggestionTap: true,
           clearOnSubmit: true,
@@ -531,19 +528,19 @@ class UploadedWorkoutInfo extends State<PageFour> {
           itemFilter: (item, query) {
             return item.toLowerCase().contains(query.toLowerCase());
           }),
-          nameWidget(),
+      nameWidget(),
     ]);
   }
 
   Widget nameWidget() {
-    return TextFormField( 
+    return TextFormField(
       enabled: false,
       decoration: InputDecoration(labelText: "Name"),
-      controller: myController, 
+      controller: myController,
       onSaved: (val) {
-                  someMethod(val);
-                  item.name = val;
-        },
+        someMethod(val);
+        item.name = val;
+      },
       validator: (val) => val == "" ? val : null,
     );
   }

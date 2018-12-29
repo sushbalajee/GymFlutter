@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'workouts.dart';
-//import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 

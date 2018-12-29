@@ -50,10 +50,8 @@ class LoginPageState extends State<Login> {
 
     widget.auth.currentUser().then((userId) {
       if (userId != null) {
-        //print("This is the userID: $userId");
         fetchPost(userId);
       } else {
-        //print("User is Null");
       }
     });
   }
@@ -213,6 +211,8 @@ class LoginPageState extends State<Login> {
     });
   }
 
+//------------------------------------------------------------------------------//
+
   void validateAndSubmitRegisterPT() async {
     print(widget.auth.currentUser());
     if (validateAndSave()) {
@@ -225,7 +225,6 @@ class LoginPageState extends State<Login> {
           print('Created user with id: $userId');
           updateUID();
           _createPTendpoint(userId);
-          //print("I am a PT!");
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setBool('PTcheck', true);
           widget.onSignedInAsPt();
@@ -239,6 +238,8 @@ class LoginPageState extends State<Login> {
       }
     }
   }
+
+//------------------------------------------------------------------------------//
 
   void checkErrors(String e) {
     if (e.contains(
@@ -310,9 +311,10 @@ class LoginPageState extends State<Login> {
     ];
   }
 
+//------------------------------------------------------------------------------//
+
   List<Widget> buildInputsForRegister() {
     return [
-
       new TextFormField(
           decoration: new InputDecoration(
               labelText: 'Full Name',
@@ -321,7 +323,6 @@ class LoginPageState extends State<Login> {
               icon: new Icon(Icons.person, color: Colors.grey[900])),
               validator: (value) => value.isEmpty ? 'This field can\'t be empty' : null,
           onSaved: (value) => clientName = value),
-
       new TextFormField(
           decoration: new InputDecoration(
               labelText: 'Email',
@@ -455,7 +456,8 @@ class LoginPageState extends State<Login> {
         .then((String unusedKey) {});
     Database.createClientNames(clientUID, clientName);
   }
-  String uid;
+
+String uid;
 
 void updateUID() {
   FirebaseAuth.instance.currentUser().then((userId) {
@@ -470,7 +472,7 @@ void updateUID() {
 Future<Null> confirmDialog(BuildContext context, String why, String execution) {
   return showDialog<Null>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false, 
       builder: (BuildContext context) {
         return new AlertDialog(
           title: new Text(why),

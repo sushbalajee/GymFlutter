@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class PageOne extends StatefulWidget {
   @override
@@ -7,19 +6,9 @@ class PageOne extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<PageOne> {
-  someMethod() async {
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('Target Muscles')
-        .child('Weighted-Crunch.gif');
-
-    await ref.getDownloadURL();
-  }
 
   @override
   Widget build(BuildContext context) {
-    //someMethod();
-    //printUrl();
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(

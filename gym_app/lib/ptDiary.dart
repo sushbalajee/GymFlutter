@@ -6,9 +6,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class PTDiary extends StatefulWidget {
-  final String ptid;
+  final String ptID;
 
-  PTDiary({this.ptid});
+  PTDiary({this.ptID});
 
   @override
   _PTDiaryState createState() => new _PTDiaryState();
@@ -24,22 +24,6 @@ class _PTDiaryState extends State<PTDiary> {
   List<String> clientList = [''];
   List<String> calendar28Day = [];
   List<String> calendar28Date = [];
-/*
-  @override
-  void initState() {
-    super.initState();
-
-    clearOld = database.reference().child('Workouts').child(widget.ptid).child('ComingUp');
-    clearOld.once().then((DataSnapshot snapshot){
-        var checker = snapshot.value;
-        if(checker == null){
-          print("No sessions");
-        }
-        else{
-          cleanUpOldSessions();
-        }
-    });
-  }*/
 
   getNext28Days() {
     var now = new DateTime.now();
@@ -67,7 +51,6 @@ class _PTDiaryState extends State<PTDiary> {
       else{
         modifiedMonth = month;
       }
-      
 
       switch (dayOfWeek) {
         case 1:
@@ -109,15 +92,12 @@ class _PTDiaryState extends State<PTDiary> {
   updateClients() {
     clientList.clear();
 
-    itemRef = database.reference().child('Workouts').child(widget.ptid);
+    itemRef = database.reference().child('Workouts').child(widget.ptID);
 
     itemRef.onValue.listen((Event event) {
       var value = event.snapshot.value;
       var uids = value.keys;
       for (var clientIDs in uids) {
-        //print('client ID: $clientIDs');
-        //clientIDs.toString().split("-");
-        //var test = clientIDs.toString().split("-");
         clientList.add(clientIDs.toString());
         if (clientList.contains("ComingUp")) {
           clientList.remove("ComingUp");
@@ -128,7 +108,7 @@ class _PTDiaryState extends State<PTDiary> {
 
   Future cleanUpOldSessions() async {
 
-    clearOld = database.reference().child('Workouts').child(widget.ptid).child('ComingUp');
+    clearOld = database.reference().child('Workouts').child(widget.ptID).child('ComingUp');
 
     var nowDay = DateTime.now().day;
     var nowMonth = DateTime.now().month;
@@ -138,18 +118,18 @@ class _PTDiaryState extends State<PTDiary> {
 
     final response =
         await http.get('https://gymapp-e8453.firebaseio.com/Workouts/' +
-            widget.ptid +
+            widget.ptID +
             '/ComingUp'
             '.json');
 
     var jsonResponse = json.decode(response.body);
     if (jsonResponse != "") {
-      ComingUp post = new ComingUp.fromJson20(jsonResponse);
+      ComingUp post = new ComingUp.fromJson(jsonResponse);
       uuiiCode = post.uiCode;
     }
 
     for (int i = 0; i < uuiiCode.length; i++){
-      //print("From the DB: " + uuiiCode[i]);
+
       int dbDay = int.parse(uuiiCode[i].toString().substring(0,2));
       int dbMonth = int.parse(uuiiCode[i].toString().substring(3,5));
       int dbYear = int.parse(uuiiCode[i].toString().substring(6,8));
@@ -157,7 +137,7 @@ class _PTDiaryState extends State<PTDiary> {
       if(nowDay > dbDay && nowMonth > dbMonth && nowYear > dbYear){ 
 
         clearOld.child(uuiiCode[i]).remove();
-        print("Test");
+
       }
     }
 
@@ -189,7 +169,6 @@ class _PTDiaryState extends State<PTDiary> {
           children: new List<Widget>.generate(28, (index) {
             return new GridTile(
               child: new Card(
-                  //color: Colors.blue.shade200,
                   child: new OutlineButton(
                 borderSide: BorderSide(color: Color(0xFF4A657A)),
                 shape: new RoundedRectangleBorder(
@@ -210,7 +189,7 @@ class _PTDiaryState extends State<PTDiary> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ClientSessions(
-                                id: widget.ptid,
+                                ptID: widget.ptID,
                                 day: calendar28Day[index],
                                 date: calendar28Date[index],
                                 clientList: clientList,
@@ -227,7 +206,7 @@ class ComingUp{
   List uiCode;
   ComingUp({this.uiCode});
 
-  factory ComingUp.fromJson20(Map<String, dynamic> parsedJson) {
+  factory ComingUp.fromJson(Map<String, dynamic> parsedJson) {
     
     List<String> passMe = parsedJson.keys.toList();
     return ComingUp(uiCode: passMe);

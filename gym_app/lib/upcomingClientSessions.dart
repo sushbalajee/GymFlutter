@@ -8,10 +8,10 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 class ClientSessions extends StatefulWidget {
   final String date;
   final String day;
-  final String id;
+  final String ptID;
   final List<String> clientList;
 
-  ClientSessions({this.date, this.day, this.id, this.clientList});
+  ClientSessions({this.date, this.day, this.ptID, this.clientList});
 
   @override
   _ClientSessionsState createState() => new _ClientSessionsState();
@@ -20,21 +20,18 @@ class ClientSessions extends StatefulWidget {
 class _ClientSessionsState extends State<ClientSessions> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  DatabaseReference itemRef;
-  DatabaseReference sessionsRef;
+  DatabaseReference comingUpRef;
+  DatabaseReference clientSessionsRef;
   DatabaseReference sessionsRef1;
-  String _selectedText = "Select a Client";
-  String duration = "";
 
+  String selectedText = "Select a Client";
   String localStart;
-
+  String clientID;
   String firstHalf;
 
   List<Session> items = List();
-  List<Session> anotheritem = List();
   Session item;
 
-  String clientID;
   final FirebaseDatabase database = FirebaseDatabase.instance;
 
   final timeFormat = DateFormat.jm();
@@ -44,19 +41,17 @@ class _ClientSessionsState extends State<ClientSessions> {
 
     item = Session("", "", "", "", "", 0, "");
 
-    itemRef = database
+    comingUpRef = database
         .reference()
         .child('Workouts')
-        .child(widget.id)
+        .child(widget.ptID)
         .child("ComingUp")
         .child(widget.date);
-    itemRef.onChildAdded.listen(_onEntryAdded);
+    comingUpRef.onChildAdded.listen(_onEntryAdded);
   }
 
   _onEntryAdded(Event event) {
-    //setState(() {
     items.add(Session.fromSnapshot(event.snapshot));
-    //});
   }
 
   @override
@@ -79,29 +74,28 @@ class _ClientSessionsState extends State<ClientSessions> {
                 direction: Axis.vertical,
                 children: <Widget>[
                   Container(
-                    //alignment: Alignment.center,
                     padding:
                         EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
                     width: screenWidth,
                     child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                      hint: Text(_selectedText),
+                      hint: Text(selectedText),
                       value: null,
                       items: widget.clientList.map((String value) {
                         var splitID = value.toString().split(" - ");
                         firstHalf = splitID[0];
                         return new DropdownMenuItem<String>(
-                            value: value.toString(), //firstHalf,
+                            value: value.toString(),
                             child: new Text(firstHalf));
                       }).toList(),
                       onChanged: (String val) {
                         setState(() {
-                          _selectedText = val;
+                          selectedText = val;
                           var splitID1 = val.toString().split(" - ");
                           var firstHalf1 = splitID1[0];
                           item.clientName = firstHalf1;
-                          item.fullClientID = _selectedText;
-                          clientID = _selectedText;
+                          item.fullClientID = selectedText;
+                          clientID = selectedText;
                           print(firstHalf1);
                         });
                       },
@@ -147,7 +141,6 @@ class _ClientSessionsState extends State<ClientSessions> {
                   ),
                   Container(
                     width: screenWidth - 10.0,
-                    //padding: EdgeInsets.only(top: 10.0),
                     child: new FlatButton(
                       child: new Text("Submit",
                           style: TextStyle(
@@ -169,13 +162,12 @@ class _ClientSessionsState extends State<ClientSessions> {
           ),
           Flexible(
             child: FirebaseAnimatedList(
-              query: itemRef,
+              query: comingUpRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
 
-                return Card( 
-                  //color: Color(items[index].paid),
+                return Card(
                     elevation: 3.0,
                     child: new ListTile(
                       contentPadding: EdgeInsets.only(left: 15.0),
@@ -184,8 +176,8 @@ class _ClientSessionsState extends State<ClientSessions> {
                           icon: Icon(Icons.delete_forever),
                           color: Color(0xFF4A657A),
                           onPressed: () {
-                            var shitNames = items[index].clientSessionID;
-                            handleDelete(index, shitNames);
+                            var clientSessionFBKey = items[index].clientSessionID;
+                            handleDelete(index, clientSessionFBKey);
                           }),
                       title: Text(items[index].clientName,
                           style: TextStyle(
@@ -194,9 +186,6 @@ class _ClientSessionsState extends State<ClientSessions> {
                               color: Color(0xFF22333B),
                               fontWeight: FontWeight.w600)),
                       subtitle: Text(items[index].startTime.substring(10, 15)),
-                      onTap: () {
-                        print("todo ?");
-                      },
                     ));
               },
             ),
@@ -204,40 +193,37 @@ class _ClientSessionsState extends State<ClientSessions> {
         ]));
   }
 
-  void handleDelete(int ii, String sucks) {
+  void handleDelete(int ii, String clientSessionKey) {
 
     sessionsRef1 = database
         .reference()
         .child('Workouts')
-        .child(widget.id)
-        .child(itemRef.child(items[ii].fullClientID).key)
+        .child(widget.ptID)
+        .child(comingUpRef.child(items[ii].fullClientID).key)
         .child("clientSessions")
-        .child(sucks);
+        .child(clientSessionKey);
 
-        print(sucks);
-
-    itemRef.child(items[ii].key).remove();
+    comingUpRef.child(items[ii].key).remove();
     sessionsRef1.remove();
   }
 
   void handleSubmit() {
     final FormState form = formKey.currentState;
 
-    sessionsRef = database
+    clientSessionsRef = database
         .reference()
         .child('Workouts')
-        .child(widget.id)
+        .child(widget.ptID)
         .child(clientID)
         .child("clientSessions");
-        //.child(widget.day + " : " + widget.date + " - " + localStart);
 
     if (form.validate()) {
       form.save();
       form.reset();
-      var xx = sessionsRef.push();
-      item.clientSessionID = xx.key;
-      xx.set(item.toJson());
-      itemRef.push().set(item.toJson());
+      var setSessionKey = clientSessionsRef.push();
+      item.clientSessionID = setSessionKey.key;
+      setSessionKey.set(item.toJson());
+      comingUpRef.push().set(item.toJson());
     }
   }
 }

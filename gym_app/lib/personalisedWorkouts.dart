@@ -7,23 +7,23 @@ import 'color_loader_3.dart';
 import 'dart:async';
 //-----------------------------------------------------------------------------------//
 
-class WorkoutsListPersonal extends StatefulWidget {
-  final String userUid;
-  final String value;
+class PersonalisedWorkouts extends StatefulWidget {
+  final String clientID;
+  final String ptID;
 
-  WorkoutsListPersonal({Key key, this.value, this.userUid}) : super(key: key);
+  PersonalisedWorkouts({Key key, this.ptID, this.clientID}) : super(key: key);
 
   @override
-  _NextPageStatePersonal createState() => new _NextPageStatePersonal();
+  PersonalisedWorkoutsState createState() => new PersonalisedWorkoutsState();
 }
 
 //-----------------------------------------------------------------------------------//
 
-class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
+class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
   List<Item> items = List();
-  Item item;
-  DatabaseReference itemRef;
-  DatabaseReference cref;
+  //Item item;
+  DatabaseReference clientWorkoutsRef;
+  DatabaseReference clientNamesRef;
 
   bool informUser;
 
@@ -38,34 +38,30 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
   void initState() {
     super.initState();
 
-  print("My ID is " + widget.userUid);
-  print("Widget value: " + widget.value);
-  print("My Key: $widget.key");
- 
-  timer = new Timer(const Duration(seconds: 5), () {
+    timer = new Timer(const Duration(seconds: 5), () {
       setState(() {
         msg = "No workouts assigned to you";
       });
     });
 
-    item = Item("", "", "");
+    //item = Item("", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
-    cref = database
+    clientNamesRef = database
         .reference()
         .child('Workouts')
         .child('ClientNames')
-        .child(widget.userUid);
-    cref.once().then((DataSnapshot snapshot) {
-      jointID = snapshot.value + " - " + widget.userUid;
+        .child(widget.clientID);
+    clientNamesRef.once().then((DataSnapshot snapshot) {
+      jointID = snapshot.value + " - " + widget.clientID;
 
-      itemRef = database
+      clientWorkoutsRef = database
           .reference()
           .child('Workouts')
-          .child(widget.value)
+          .child(widget.ptID)
           .child(jointID)
           .child("clientWorkouts");
-      itemRef.onChildAdded.listen(_onEntryAdded);
+      clientWorkoutsRef.onChildAdded.listen(_onEntryAdded);
     });
   }
 
@@ -86,46 +82,50 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF4A657A),
-          title: Text('My Personalised Workouts',style: TextStyle(fontFamily: "Montserrat")),
-          
+          title: Text('My Personalised Workouts',
+              style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
           children: <Widget>[
             Flexible(
               child: FirebaseAnimatedList(
-                query: itemRef,
+                query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   workoutNumber += 1;
                   return Card(
                       elevation: 3.0,
-                       child: 
-                  new ListTile(
-                    contentPadding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0),
-                    leading: CircleAvatar(child: Text("$workoutNumber", style: TextStyle(color: Colors.white),),
-                    backgroundColor: Color(0xFF4A657A)),
-                    title: Text(items[index].workoutname,
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.055,
-                          color: Color(0xFF22333B),
-                          fontWeight: FontWeight.w600)),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PageFive(
-                                    title: items[index].workoutname,
-                                    muscleGroup: items[index].musclegroup,
-                                    description: items[index].description,
-                                    uid: jointID,
-                                    trainerID: widget.value,
-                                    firebaseGeneratedKey: items[index].key,
-                                  )));
-                    },
-                  ));
-
+                      child: new ListTile(
+                        contentPadding: EdgeInsets.only(
+                            top: 10.0, bottom: 10.0, left: 15.0),
+                        leading: CircleAvatar(
+                            child: Text(
+                              "$workoutNumber",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Color(0xFF4A657A)),
+                        title: Text(items[index].workoutname,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.055,
+                                color: Color(0xFF22333B),
+                                fontWeight: FontWeight.w600)),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PersonalisedWorkoutDetails(
+                                        title: items[index].workoutname,
+                                        muscleGroup: items[index].musclegroup,
+                                        description: items[index].description,
+                                        clientID: jointID,
+                                        ptID: widget.ptID,
+                                        firebaseGeneratedKey: items[index].key,
+                                      )));
+                        },
+                      ));
                 },
               ),
             ),
@@ -139,7 +139,7 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
             backgroundColor: Colors.grey[900],
           ),
           resizeToAvoidBottomPadding: false,
-          body: tryMe());
+          body: loadingScreen());
     }
   }
 
@@ -149,21 +149,20 @@ class _NextPageStatePersonal extends State<WorkoutsListPersonal> {
     timer.cancel();
   }
 
-  Widget tryMe(){
+  Widget loadingScreen() {
     return Container(
-                        child: new Stack(children: <Widget>[
-                      Container(
-                          alignment: Alignment.center,
-                          child: ColorLoader3(
-                            dotRadius: 5.0,
-                            radius: 20.0,
-                          )),
-                      Container(
-                          padding: EdgeInsets.only(top: 100.0),
-                          alignment: Alignment.center,
-                          child: new Text(msg,
-                              style: new TextStyle(
-                                  fontSize: 20.0, fontFamily: "Montserrat"))),
-                    ]));
+        child: new Stack(children: <Widget>[
+      Container(
+          alignment: Alignment.center,
+          child: ColorLoader3(
+            dotRadius: 5.0,
+            radius: 20.0,
+          )),
+      Container(
+          padding: EdgeInsets.only(top: 100.0),
+          alignment: Alignment.center,
+          child: new Text(msg,
+              style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
+    ]));
   }
 }

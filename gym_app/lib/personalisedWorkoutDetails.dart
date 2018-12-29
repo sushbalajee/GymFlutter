@@ -3,21 +3,21 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'uploadClientWorkoutDetails.dart';
 
-class PageFive extends StatefulWidget {
+class PersonalisedWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
-  final String uid;
+  final String clientID;
   final String title;
   final String muscleGroup;
   final String description;
-  final String trainerID;
+  final String ptID;
 
-  PageFive(
+  PersonalisedWorkoutDetails(
       {Key key,
       this.title,
       this.muscleGroup,
       this.description,
-      this.uid,
-      this.trainerID,
+      this.clientID,
+      this.ptID,
       this.firebaseGeneratedKey})
       : super(key: key);
 
@@ -25,24 +25,33 @@ class PageFive extends StatefulWidget {
   PersonalisedWorkoutInfo createState() => new PersonalisedWorkoutInfo();
 }
 
-class PersonalisedWorkoutInfo extends State<PageFive> {
+class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
+
   List<Item> items = List();
-  Item item;
-  DatabaseReference itemRef;
-  DatabaseReference snek;
+  //Item item;
+  DatabaseReference clientExercisesRef;
+  //DatabaseReference snek;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    item = Item("", "", "", "", "", "", "");
-    final FirebaseDatabase database = FirebaseDatabase
-        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    //item = Item("", "", "", "", "", "", "");
+    final FirebaseDatabase database = FirebaseDatabase.instance; 
 
-    snek = database.reference().child('Workouts').child(widget.uid);
-    itemRef = database.reference().child('Workouts').child(widget.trainerID).child(widget.uid).child("clientWorkouts").child(widget.firebaseGeneratedKey).child('exercises');
-    itemRef.onChildAdded.listen(_onEntryAdded);
+    //snek = database.reference().child('Workouts').child(widget.uid);
+
+    clientExercisesRef = database
+        .reference()
+        .child('Workouts')
+        .child(widget.ptID)
+        .child(widget.clientID)
+        .child("clientWorkouts")
+        .child(widget.firebaseGeneratedKey)
+        .child('exercises');
+
+    clientExercisesRef.onChildAdded.listen(_onEntryAdded);
   }
 
   _onEntryAdded(Event event) {
@@ -60,7 +69,7 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
     return Scaffold(
       backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        title: Text(widget.title,style: TextStyle(fontFamily: "Montserrat")),
+        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
         backgroundColor: Color(0xFF4A657A),
       ),
       resizeToAvoidBottomPadding: false,
@@ -78,7 +87,7 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
                     color: Colors.white)),
           ),
           Container(
-                       color: Color(0xFF272727),
+            color: Color(0xFF272727),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
@@ -90,7 +99,7 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
           ),
           Flexible(
             child: FirebaseAnimatedList(
-              query: itemRef,
+              query: clientExercisesRef,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
@@ -112,10 +121,10 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
                                   backgroundColor: Color(0xFF4A657A)),
                               title: Text(items[index].name,
                                   style: TextStyle(
-                                            fontFamily: "Montserrat",
-                                            color: Color(0xFF4A657A),
-                                            fontSize: screenWidth * 0.05,
-                                            fontWeight: FontWeight.w700)),
+                                      fontFamily: "Montserrat",
+                                      color: Color(0xFF4A657A),
+                                      fontSize: screenWidth * 0.05,
+                                      fontWeight: FontWeight.w700)),
                             ),
                             ListTile(
                                 subtitle: new Stack(children: <Widget>[
@@ -152,10 +161,9 @@ class PersonalisedWorkoutInfo extends State<PageFive> {
                                             fontFamily: "Prompt",
                                             color: Color(0xFF22333B),
                                             fontSize: screenWidth * 0.04)),
-                                     new Padding(
+                                    new Padding(
                                       padding: EdgeInsets.only(top: 15.0),
-                                      child: Image.network( items[index].target
-                                      ),
+                                      child: Image.network(items[index].target),
                                     ),
                                   ])
                             ]))

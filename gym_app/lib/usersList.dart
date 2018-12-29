@@ -8,10 +8,9 @@ import 'color_loader_3.dart';
 //-----------------------------------------------------------------------------------//
 
 class UIDList extends StatefulWidget {
-  @override
-  final String trainerID;
+  final String ptID;
 
-  UIDList({Key key, this.trainerID}) : super(key: key);
+  UIDList({Key key, this.ptID}) : super(key: key);
 
   UIDListPage createState() => new UIDListPage();
 }
@@ -37,7 +36,6 @@ class GetClientIDs {
 
   factory GetClientIDs.fromJson20(Map<String, dynamic> parsedJson) {
     List<String> passMe = parsedJson.keys.toList();
-    //print(passMe);
     return GetClientIDs(uiCode: passMe);
   }
 }
@@ -45,22 +43,22 @@ class GetClientIDs {
 //-----------------------------------------------------------------------------------//
 
 class UIDListPage extends State<UIDList> {
-  List uuiiCode;
+  List clients;
   String informUser;
-  List<String>clientNames = [""];
+  //List<String> clientNames = [""];
 
   Future fetchPost() async {
     final response = await http.get(
         'https://gymapp-e8453.firebaseio.com/Workouts/' +
-            widget.trainerID +
+            widget.ptID +
             '.json');
 
     var jsonResponse = json.decode(response.body);
     if (jsonResponse != "") {
       GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
-      uuiiCode = post.uiCode;
-      uuiiCode.remove("ComingUp");
-      return uuiiCode;
+      clients = post.uiCode;
+      clients.remove("ComingUp");
+      return clients;
     } else {
       informUser =
           "You do not have any clients registered with your Personal Trainer ID";
@@ -71,16 +69,14 @@ class UIDListPage extends State<UIDList> {
 
   @override
   Widget build(BuildContext context) {
-    //fetchPost();
     return new Scaffold(
-
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Color(0xFF4A657A),
-            title: new Text("My Clients", style: TextStyle(fontFamily: "Montserrat"))),
-        body: 
-        Container(
-           color: Color(0xFFEFF1F3),
+            title: new Text("My Clients",
+                style: TextStyle(fontFamily: "Montserrat"))),
+        body: Container(
+            color: Color(0xFFEFF1F3),
             child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -110,29 +106,29 @@ class UIDListPage extends State<UIDList> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
-                             //shape: Border.all(
-                //color: Colors.blueGrey[400], width: 1.0, style: BorderStyle.solid),
-                             elevation: 3.0,
-                             child:
-                          ListTile( 
-                            
-                            contentPadding: EdgeInsets.all(20.0),
-                              title: Text(snapshot.data[index], border: Border.all(
-                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      //fontSize: screenWidth  * 0.055,
-                                      color: Color(0xFF22333B),
-                                      fontWeight: FontWeight.w700)),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ClientWorkouts(
-                                              userUid: snapshot.data[index],
-                                              value: widget.trainerID,
-                                            )));
-                              }));
+                              elevation: 3.0,
+                              child: ListTile(
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  title: Text(snapshot.data[index],
+                                      border: Border.all(
+                                          color: Colors.grey[900],
+                                          width: 4.5,
+                                          style: BorderStyle.solid),
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          color: Color(0xFF22333B),
+                                          fontWeight: FontWeight.w700)),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                UploadClientWorkouts(
+                                                  clientID:
+                                                      snapshot.data[index],
+                                                  ptID: widget.ptID,
+                                                )));
+                                  }));
                         });
                   }
                 })));

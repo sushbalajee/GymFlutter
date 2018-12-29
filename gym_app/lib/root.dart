@@ -30,10 +30,9 @@ class RootPageState extends State<RootPage> {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
 
-  List<String> userIds;
+  List<String> userIDs;
 
-  bool typeOfUser;
-  String rel;
+  bool userType;
 
   String uid = "Please sign out and sign in\n to activate your Trainer ID";
   String statusOfUser;
@@ -47,12 +46,12 @@ class RootPageState extends State<RootPage> {
 
     widget.auth.currentUser().then((userId) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      typeOfUser = prefs.getBool('PTcheck');
+      userType = prefs.getBool('PTcheck');
 
       if (userId != null) {
         updateUserID();
         setState(() {
-          if (typeOfUser == true) {
+          if (userType == true) {
             authStatus = AuthStatus.signedInAsPT;
             statusOfUser = "You are Logged in as a Personal Trainer";
           } else {
@@ -64,7 +63,7 @@ class RootPageState extends State<RootPage> {
       } else {
         setState(() {
           authStatus = AuthStatus.notSignedIn;
-        }); //do something?
+        });
       }
     });
   }
@@ -77,16 +76,16 @@ class RootPageState extends State<RootPage> {
     var jsonResponse = json.decode(response.body);
 
     GetUserId post = new GetUserId.fromJson10(jsonResponse);
-    userIds = post.uiCode;
+    userIDs = post.uiCode;
 
-    if (userIds.contains(userID)) {
+    if (userIDs.contains(userID)) {
       await prefs.setBool('PTcheck', true);
       authStatus = AuthStatus.signedInAsPT;
     } else {
       await prefs.setBool('PTcheck', false);
     }
 
-    return userIds;
+    return userIDs;
   }
 
   void signedIn() {
@@ -129,6 +128,8 @@ class RootPageState extends State<RootPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+//------------------------------------------------------------------------------//
+
     if (authStatus == AuthStatus.notDetermined) {
       updateUserID();
       return new Scaffold(
@@ -149,12 +150,16 @@ class RootPageState extends State<RootPage> {
           ]));
     }
 
+//------------------------------------------------------------------------------//
+
     if (authStatus == AuthStatus.notSignedIn) {
       return new Login(
           auth: widget.auth,
           onSignedIn: signedIn,
           onSignedInAsPt: signedInAsPT);
     }
+
+//------------------------------------------------------------------------------//
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Column(children: <Widget>[
@@ -186,7 +191,7 @@ class RootPageState extends State<RootPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => UIDList(
-                                trainerID: uid,
+                                ptID: uid,
                               )));
                 },
               ),
@@ -212,14 +217,13 @@ class RootPageState extends State<RootPage> {
                       style: new TextStyle(
                           fontSize: 25.0,
                           fontFamily: "Montserrat",
-                          //color: Colors.white,
                           fontWeight: FontWeight.w700)),
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => PTDiary(
-                                  ptid: uid,
+                                  ptID: uid,
                                 )));
                   }),
             )),
@@ -269,6 +273,8 @@ class RootPageState extends State<RootPage> {
       ]);
     }
 
+//------------------------------------------------------------------------------//
+
     if (authStatus == AuthStatus.signedIn) {
       return new Column(children: <Widget>[
         Card(
@@ -298,9 +304,9 @@ class RootPageState extends State<RootPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => WorkoutsListPersonal(
-                                value: relationship,
-                                userUid: uid,
+                          builder: (context) => PersonalisedWorkouts(
+                                ptID: relationship,
+                                clientID: uid,
                               )));
                 },
               ),
@@ -326,15 +332,14 @@ class RootPageState extends State<RootPage> {
                       style: new TextStyle(
                           fontSize: 25.0,
                           fontFamily: "Montserrat",
-                          //color: Colors.white,
                           fontWeight: FontWeight.w700)),
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ClientSessionsClientSide(
-                                  userUid: uid,
-                                  value: relationship,
+                                  clientID: uid,
+                                  ptID: relationship,
                                 )));
                   }),
             )),
