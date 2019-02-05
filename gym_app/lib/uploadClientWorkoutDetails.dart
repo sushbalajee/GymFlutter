@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class UploadClientWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
   final String clientID;
-  final String title;
+  final String title; 
   final String muscleGroup;
   final String description;
   final String ptID;
@@ -137,7 +137,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
-          Container(
+          Container( 
             color: Color(0xFF272727),
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
@@ -148,7 +148,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     fontWeight: FontWeight.w700,
                     color: Colors.white)),
           ),
-          Container(
+          Container(  
             color: Color(0xFF272727),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),

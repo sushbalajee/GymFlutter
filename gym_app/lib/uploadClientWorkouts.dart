@@ -44,9 +44,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   }
 
   _onEntryAdded(Event event) {
-    //setState(() {
     items.add(Item.fromSnapshot(event.snapshot));
-    //});
   }
 
   void handleSubmit() {
@@ -74,34 +72,18 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    var split = widget.clientID.split(" - ");
+    var clientName = split[0];
+
     return Scaffold(
       backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
         backgroundColor: Color(0xFF4A657A),
-        title: Text('Workouts', style: TextStyle(fontFamily: "Montserrat")),
+        title: Text(clientName, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
-          Container(
-              width: screenWidth,
-              child: new FlatButton(
-                  child: new Text("Payments",
-                      style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.045,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white)),
-                  color: Color(0xFF272727),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ClientPayments(
-                                  clientID: widget.clientID,
-                                  ptID: widget.ptID,
-                                )));
-                  })),
           Flexible(
             child: FirebaseAnimatedList(
               query: clientWorkoutsRef,
@@ -130,14 +112,14 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             }
                           }),
                       title: Text(items[index].workoutname,
-                          style: TextStyle(
+                          style: TextStyle(  
                               fontFamily: "Montserrat",
                               fontSize: screenWidth * 0.055,
                               color: Color(0xFF22333B),
                               fontWeight: FontWeight.w600)),
                       onTap: () {
                         Navigator.push(
-                            context,
+                            context, 
                             MaterialPageRoute(
                                 builder: (context) =>
                                     UploadClientWorkoutDetails(
@@ -153,9 +135,28 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               },
             ),
           ),
-          Container(
+          Container( 
               width: screenWidth,
-              child: new FlatButton(
+              child: new FlatButton( 
+                  child: new Text("Sessions",
+                      style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: screenWidth * 0.050,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white)),
+                  color: Color(0xFF272727),
+                  onPressed: () {
+                    Navigator.push( 
+                        context, 
+                        MaterialPageRoute(
+                            builder: (context) => ClientPayments(
+                                  clientID: widget.clientID,
+                                  ptID: widget.ptID,
+                                )));
+                  })),
+          Container( 
+              width: screenWidth,
+              child: new FlatButton( 
                   child: new Text("+ Add Workout +",
                       style: TextStyle(
                           fontFamily: "Montserrat",

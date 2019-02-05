@@ -37,10 +37,10 @@ class _ClientPaymentsState extends State<ClientPayments> {
     super.initState();
 
     timer = new Timer(const Duration(seconds: 5), () {
-      msg = "No session history available"; //adjust message
+      setState(() {
+                   msg = "No session history available";
+            });
     });
-
-    //item = Session("", "", "", "", "", 0, "");
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -81,6 +81,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                 query: clientSessionsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
+                      if(snapshot.value != null){
                   items.sort((a, b) => a.date
                       .substring(a.date.length - 8, a.date.length)
                       .compareTo(
@@ -112,7 +113,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                               }
                             }),
                       ));
-                },
+                }},
               ),
             ),
           ],
@@ -121,7 +122,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
     } else {
       return Scaffold(
           appBar: AppBar(
-            title: Text('My Personalised Workouts'),
+            title: Text('Client Payments'),
             backgroundColor: Colors.grey[900],
           ),
           resizeToAvoidBottomPadding: false,

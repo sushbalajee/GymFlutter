@@ -18,7 +18,7 @@ class _PTDiaryState extends State<PTDiary> {
 
   DatabaseReference itemRef;
   DatabaseReference clearOld;
-
+  
   final FirebaseDatabase database = FirebaseDatabase.instance;
 
   List<String> clientList = [''];
@@ -167,13 +167,13 @@ class _PTDiaryState extends State<PTDiary> {
           childAspectRatio: 1.1,
           crossAxisCount: 4,
           children: new List<Widget>.generate(28, (index) {
-            return new GridTile(
+            return new GridTile( 
               child: new Card(
                   child: new OutlineButton(
                 borderSide: BorderSide(color: Color(0xFF4A657A)),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)),
-                child: new Center(
+                child: new Center( 
                   child: new Text(
                       calendar28Day[index].substring(0, 3) +
                           "\n" +

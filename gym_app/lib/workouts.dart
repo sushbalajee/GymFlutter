@@ -16,7 +16,6 @@ class WorkoutsList extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class _WorkoutsListState extends State<WorkoutsList> {
-  //List<Workouts> users = [];
 
   final List<Workouts> workouts = [];
 
@@ -43,10 +42,11 @@ class _WorkoutsListState extends State<WorkoutsList> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     return new Scaffold(
+      backgroundColor: Color(0xFFEFF1F3),
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Colors.grey[900],
-            title: new Text(widget.value)),
+            backgroundColor: Color(0xFF4A657A),
+            title: new Text(widget.value, style: TextStyle(fontFamily: "Montserrat"))),
         body: Container(
             child: FutureBuilder(
                 future: fetchPost(widget.value),
@@ -61,14 +61,19 @@ class _WorkoutsListState extends State<WorkoutsList> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
                           workoutNumber += index;
-                          return ListTile(
+                          return Card(
+                      elevation: 3.0,
+                          child: new ListTile(
                               title: Text(snapshot.data[index].workoutname,
                                   style: TextStyle(
-                                      fontFamily: "Prompt",
+                                      fontFamily: "Montserrat",
                                       fontSize: screenWidth * 0.055,
-                                      fontWeight: FontWeight.w700)),
+                                      color: Color(0xFF22333B),
+                                      fontWeight: FontWeight.w600)),
                               leading:
-                                  CircleAvatar(child: Text("$workoutNumber")),
+                                  CircleAvatar(child: Text("$workoutNumber",style: TextStyle(color: Colors.white)),backgroundColor: Color(0xFF4A657A)),
+                              contentPadding: EdgeInsets.only(
+                            top: 10.0, bottom: 10.0, left: 15.0),
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -81,7 +86,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                                 .data[index].musclegroup,
                                             description: snapshot
                                                 .data[index].description)));
-                              });
+                              }));
                         });
                   }
                 })));

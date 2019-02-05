@@ -21,6 +21,11 @@ class ClientSessionsClientSide extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
+
+      var nowDay = DateTime.now().day;
+      var nowMonth = DateTime.now().month;
+      var nowYear = int.parse(DateTime.now().year.toString().substring(2,4));
+
   List<Session> items = List();
   //Session item;
 
@@ -98,6 +103,16 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                       .compareTo(
                           b.date.substring(b.date.length - 8, b.date.length)));
 
+      var splitColon = items[index].date.split(" : ");
+      var afterColon = splitColon[1];
+
+      int dbDay = int.parse(afterColon.toString().substring(0,2));
+      int dbMonth = int.parse(afterColon.toString().substring(3,5));
+      int dbYear = int.parse("20" + afterColon.toString().substring(6,8));
+
+      var testUTC = DateTime.utc(dbYear, dbMonth, dbDay);
+    
+      if(testUTC.isAfter(DateTime.now().toUtc())){
                   return Card(
                       color: Color(items[index].paid),
                       elevation: 3.0,
@@ -125,7 +140,36 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                               }
                             }),
                       ));
-                },
+                }
+                else{
+                  return Card(
+                      color: Color(items[index].paid),
+                      elevation: 3.0,
+                      child: new ListTile(
+                        title: Text(items[index].date,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.055,
+                                color: Color(0xFF22333B),
+                                fontWeight: FontWeight.w600)),
+                        subtitle: Text(
+                            items[index].startTime.substring(10, 15) +
+                                " - " +
+                                items[index].endTime.substring(10, 15) + " - Past Session"),
+                        trailing: new IconButton(
+                            iconSize: 40.0,
+                            icon: Icon(Icons.monetization_on),
+                            color: Colors.white,
+                            onPressed: () {
+                              if (items[index].paid == 0xFFFF6B6B) {
+                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
+                              }
+                              else if (items[index].paid == 0xFFFFE66D){
+                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B);
+                              }
+                            }),
+                      ));
+                }},
               ),
             ),
           ],

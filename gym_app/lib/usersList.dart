@@ -45,7 +45,6 @@ class GetClientIDs {
 class UIDListPage extends State<UIDList> {
   List clients;
   String informUser;
-  //List<String> clientNames = [""];
 
   Future fetchPost() async {
     final response = await http.get(

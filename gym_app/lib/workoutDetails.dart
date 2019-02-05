@@ -54,35 +54,38 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
     updateData();
 
     return new Scaffold(
-        appBar: new AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.grey[900],
-            title: new Text(widget.title)),
-        body: new Stack(children: <Widget>[
-          new ListView(children: <Widget>[
+        backgroundColor: Color(0xFFEFF1F3),
+        appBar: AppBar(
+        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
+        backgroundColor: Color(0xFF4A657A),
+      ),
+      resizeToAvoidBottomPadding: false,
+        body: new Column(
+          children: <Widget>[
+          //new ListView(children: <Widget>[
             Container(
-              padding: const EdgeInsets.all(15.0),
+              color: Color(0xFF272727),
+              padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
               alignment: Alignment(-1.0, 0.0),
               child: Text("Muscle Group - " + widget.muscleGroup,
                   style: TextStyle(
-                      fontFamily: "Prompt",
-                      fontSize: screenWidth * 0.055,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black)),
-            ),
-            Container(
-              color: Colors.grey[900],
-              padding: const EdgeInsetsDirectional.only(
-                  start: 15.0, bottom: 15.0, top: 15.0),
-              alignment: Alignment(-1.0, 0.0),
-              child: Text(widget.description,
-                  style: TextStyle(
-                      fontFamily: "Prompt",
+                      fontFamily: "Montserrat",
                       fontSize: screenWidth * 0.045,
                       fontWeight: FontWeight.w700,
                       color: Colors.white)),
             ),
             Container(
+              color: Color(0xFF272727),
+            padding: EdgeInsets.only(
+                top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
+            alignment: Alignment(-1.0, 0.0),
+              child: Text(widget.description,
+                  style: TextStyle(
+                      fontFamily: "Montserrat",
+                    fontSize: screenWidth * 0.035,
+                      color: Colors.white)),
+            ),
+            Flexible(
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -91,7 +94,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                     itemBuilder: (BuildContext context, int index) {
                       exerciseNumber += 1;
                       return Card(
-                          elevation: 0.1,
+                          elevation: 3.0,
                           child: new Padding(
                               padding: EdgeInsets.only(top: 10.0),
                               child: new Stack(children: <Widget>[
@@ -102,26 +105,12 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                           "$exerciseNumber",
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        backgroundColor: Colors.blue[900]),
-                                    trailing: new CircleAvatar(
-                                        backgroundColor: Colors.blue[100],
-                                        radius: 20.0,
-                                        child: IconButton(
-                                            icon: new Text(
-                                              "i",
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            onPressed: () {
-                                              confirmDialog(
-                                                  context,
-                                                  workoutExercisesJSON[index]
-                                                      .name);
-                                            })),
+                                        backgroundColor: Color(0xFF4A657A)),
                                     title: Text(
                                         workoutExercisesJSON[index].name,
                                         style: TextStyle(
-                                            fontFamily: "Prompt",
+                                            fontFamily: "Montserrat",
+                                      color: Color(0xFF4A657A),
                                             fontSize: screenWidth * 0.05,
                                             fontWeight: FontWeight.w700)),
                                   ),
@@ -137,6 +126,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                       .weight,
                                               style: TextStyle(
                                                   fontFamily: "Prompt",
+                                                  color: Color(0xFF22333B),
                                                   fontSize:
                                                       screenWidth * 0.04)),
                                           new Text(
@@ -145,6 +135,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                       .execution,
                                               style: TextStyle(
                                                   fontFamily: "Prompt",
+                                                  color: Color(0xFF22333B),
                                                   fontSize:
                                                       screenWidth * 0.04)),
                                           new Text(
@@ -153,6 +144,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                       .sets,
                                               style: TextStyle(
                                                   fontFamily: "Prompt",
+                                                  color: Color(0xFF22333B),
                                                   fontSize:
                                                       screenWidth * 0.04)),
                                           new Text(
@@ -161,6 +153,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                       .reps,
                                               style: TextStyle(
                                                   fontFamily: "Prompt",
+                                                  color: Color(0xFF22333B),
                                                   fontSize:
                                                       screenWidth * 0.04)),
                                           new Text(
@@ -170,25 +163,28 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                   " seconds between sets",
                                               style: TextStyle(
                                                   fontFamily: "Prompt",
+                                                  color: Color(0xFF22333B),
                                                   fontSize:
                                                       screenWidth * 0.04)),
                                           new Padding(
                                             padding: EdgeInsets.only(top: 15.0),
-                                            child: new Image(
+                                            child:
+                                            Image.network(workoutExercisesJSON[index].target)
+                                            /*child: new Image(
                                                 fit: BoxFit.cover,
                                                 image: AssetImage(
                                                     "assets/targets/" +
                                                         workoutExercisesJSON[
                                                                 index]
                                                             .target +
-                                                        ".png")),
+                                                        ".png"))*/
                                           ),
                                         ])
                                   ]))
                                 ])
                               ])));
                     }))
-          ])
+          //])
         ]));
   }
 }
