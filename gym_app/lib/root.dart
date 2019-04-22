@@ -172,17 +172,17 @@ backgroundColor: Color(0xFF232528),
                       topRight: const Radius.circular(25.0))),
           child:
       new Column(children: <Widget>[
-        
-        Card( 
+        Card(
           color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 15.0, top: 0.0),
+            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 0.0),
             shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(25.0)),
             //shape: Border.all(
-              //  color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
-            child: new Container(
+              //  color: Color(0xFF840032), width: 1.5, style: BorderStyle.solid),
+            child: new Container( padding: EdgeInsets.all(10.0),
               height: screenHeight / 4,
               decoration: new BoxDecoration( 
+                border: Border.all(color: Colors.grey[100], width: 5, style: BorderStyle.solid),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
                 image: new DecorationImage(
                   image: new AssetImage("assets/personalized.jpeg"), 
@@ -212,15 +212,27 @@ backgroundColor: Color(0xFF232528),
             )),
         Card(
           color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 20.0),
-            shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(25.0)),
+            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0),
             //shape: Border.all(
-                //color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
+                //color: Color(0xFF840032), width: 1.5, style: BorderStyle.solid),
             child: new Container(
               height: screenHeight / 4,
               decoration: new BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+                border: Border(
+      left: BorderSide( //                   <--- left side
+        color: Colors.grey[100],
+        width: 5,
+      ),
+      bottom: BorderSide( //                   <--- left side
+        color: Colors.grey[100],
+        width: 5,
+      ),
+      right: BorderSide( //                   <--- left side
+        color: Colors.grey[100],
+        width: 5,
+      ) ),
+                //border: Border.all(color: Color(0xFF840032), width: 2.5, style: BorderStyle.solid),
+                //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
                 image: new DecorationImage(
                   image: new AssetImage("assets/journal.jpg"),
                   fit: BoxFit.cover,
@@ -246,10 +258,10 @@ backgroundColor: Color(0xFF232528),
                                 )));
                   }),
             )),
-        Container(
-          width: screenWidth - 30,
+            Container(
+          width: screenWidth,
           height: 40.0,
-          color: Color(0xFF4A657A),
+          color: Color(0xFF232528),
           child: new FlatButton(
             child: new Text("Sign Out",
                 style: TextStyle(
@@ -260,8 +272,8 @@ backgroundColor: Color(0xFF232528),
             onPressed: signedOut,
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+            Container(
+          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
           child: Text(
             "Send your unique Trainer ID to your clients to enter on registration:",
             textAlign: TextAlign.left,
@@ -288,7 +300,7 @@ backgroundColor: Color(0xFF232528),
                       Clipboard.setData(new ClipboardData(text: uid));
                     })
               ],
-            )),
+            ))
       ])));
     }
 

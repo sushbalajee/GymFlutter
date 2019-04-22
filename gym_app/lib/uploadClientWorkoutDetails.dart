@@ -129,16 +129,21 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color(0xFFEFF1F3),
+      backgroundColor: Color(0xFF232528),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4A657A),
+        backgroundColor: Color(0xFF232528),
         title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
-      body: Column(
+      body: 
+      Column(
         children: <Widget>[
           Container( 
-            color: Color(0xFF272727),
+           decoration: new BoxDecoration(
+                  color: Color(0xFF840032),
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
@@ -149,7 +154,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     color: Colors.white)),
           ),
           Container(  
-            color: Color(0xFF272727),
+            color: Color(0xFF840032),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
@@ -169,8 +174,24 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   Animation<double> animation, int index) {
                 exerciseNumber += 1;
                 return Card(
-                    elevation: 3.0,
-                    child: new Padding(
+                  
+                    color: Colors.grey[100],
+                  margin: EdgeInsets.all(0.0),
+                            shape: new RoundedRectangleBorder( 
+                    borderRadius: BorderRadius.all( Radius.circular(0.0))),
+                    //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
+                    elevation: 2.0,
+                    child: 
+                    new Container( 
+                      decoration: new BoxDecoration(
+      color: Colors.purple,
+      gradient: new LinearGradient(
+        colors: [Colors.grey[200], Colors.white],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter
+      ),
+    ),
+                      child: new Padding( 
                         padding: EdgeInsets.only(top: 10.0),
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
@@ -185,7 +206,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                 trailing: new IconButton(
                                     iconSize: 35.0,
                                     icon: Icon(Icons.delete_forever),
-                                    color: Color(0xFF4A657A),
+                                    color: Color(0xFF840032),
                                     onPressed: () {
                                       exercisesRef
                                           .child(items[index].key)
@@ -270,7 +291,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                   ])
                             ]))
                           ])
-                        ])));
+                        ]))));
               },
             ),
           ),

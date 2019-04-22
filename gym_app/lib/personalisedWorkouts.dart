@@ -87,6 +87,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
+          
           children: <Widget>[
             Flexible(
               child: FirebaseAnimatedList(

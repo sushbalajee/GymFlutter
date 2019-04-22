@@ -69,13 +69,18 @@ class UIDListPage extends State<UIDList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Color(0xFF232528),
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF4A657A),
+            backgroundColor: Color(0xFF232528),
             title: new Text("My Clients",
                 style: TextStyle(fontFamily: "Montserrat"))),
         body: Container(
-            color: Color(0xFFEFF1F3),
+           decoration: new BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
             child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -104,8 +109,12 @@ class UIDListPage extends State<UIDList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                              elevation: 3.0,
+                          return Card( color: Colors.grey[100],
+                          margin: EdgeInsets.all(1.0),
+                            shape: new RoundedRectangleBorder(
+                    //borderRadius: BorderRadius.all( Radius.circular(25.0))),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
+                              elevation: 0.6,
                               child: ListTile(
                                   contentPadding: EdgeInsets.all(20.0),
                                   title: Text(snapshot.data[index],

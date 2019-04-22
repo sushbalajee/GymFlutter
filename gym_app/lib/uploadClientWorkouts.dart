@@ -76,13 +76,21 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
     var clientName = split[0];
 
     return Scaffold(
-      backgroundColor: Color(0xFFEFF1F3),
+      backgroundColor: Color(0xFF232528),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4A657A),
+        backgroundColor: Color(0xFF232528),
         title: Text(clientName, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
-      body: Column(
+      body: 
+      Container(
+           decoration: new BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
+                      child:
+      Column(
         children: <Widget>[
           Flexible(
             child: FirebaseAnimatedList(
@@ -90,14 +98,19 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 return Card(
-                    elevation: 3.0,
+                  color: Colors.grey[100],
+                  margin: EdgeInsets.all(1.0),
+                            shape: new RoundedRectangleBorder(
+                    //borderRadius: BorderRadius.all( Radius.circular(25.0))),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
+                    elevation: 0.6,
                     child: new ListTile(
                       contentPadding:
                           EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0),
                       trailing: new IconButton(
                           iconSize: 35.0,
                           icon: Icon(Icons.delete_forever),
-                          color: Color(0xFF4A657A),
+                          color: Color(0xFF840032),
                           onPressed: () {
                             if (items.length == 1) {
                               confirmError(
@@ -169,7 +182,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                   }))
         ],
       ),
-    );
+    ));
   }
 
   Future<Null> confirmError(

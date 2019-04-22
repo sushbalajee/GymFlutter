@@ -59,7 +59,7 @@ class HomePageState extends State<GymApp> {
                 
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Evolve Fitness Consultantz", style: TextStyle(fontSize: 20.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
+                title: new Text("Evolve Fitness Consultants", style: TextStyle(fontSize: 20.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
 
             body: currentPage,
             
