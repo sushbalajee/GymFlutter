@@ -96,7 +96,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                           item.clientName = firstHalf1;
                           item.fullClientID = selectedText;
                           clientID = selectedText;
-                          print(firstHalf1);
+                          selectedText =firstHalf1;
                         });
                       },
                     )),
@@ -116,6 +116,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                         setState(() {
                           item.startTime = t.toString();
                           localStart = t.toString();
+                          print(t.toString());
                         });
                       },
                     ),
@@ -205,6 +206,17 @@ class _ClientSessionsState extends State<ClientSessions> {
 
     comingUpRef.child(items[ii].key).remove();
     sessionsRef1.remove();
+
+    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClientSessions(
+                                ptID: widget.ptID,
+                                day: widget.day,
+                                date: widget.date,
+                                clientList: widget.clientList,
+                              )));
+
   }
 
   void handleSubmit() {

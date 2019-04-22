@@ -70,6 +70,11 @@ flutter:
   - assets/journal1.jpeg
   - assets/Diary.png
   - assets/Network.png
+  - assets/Evolve Logo White.png
+  - assets/Evolve Logo.png
+  - assets/notebook.png
+  - assets/group.png
+
 
   fonts: 
     - family: Prompt
@@ -79,6 +84,10 @@ flutter:
     - family: Montserrat
       fonts: 
         - asset: assets/fonts/Montserrat-Regular.ttf
+
+    - family: Haymaker
+      fonts: 
+        - asset: assets/fonts/Haymaker.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

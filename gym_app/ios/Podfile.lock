@@ -136,12 +136,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
+  connectivity: c72716e202a1225ec4810740d5cb56b8ae3bf4cc
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
-  firebase_auth: 27a5a77a032d557c18f8e223aaf8ec1368f6cdbc
-  firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
-  firebase_database: dd62ab9f71967c9011ce2fd03a89e762dcc364df
-  firebase_storage: e34d30ff8bb57e691191b70e9d255ec2eba2351f
+  firebase_auth: 6023fc2e28feabd6571d9a105b678cce7978be90
+  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
+  firebase_database: b78d1e592c4f3cf826497dae722116a937aa99e0
+  firebase_storage: 6dbb71176c8a85e171184f8775606c566433026d
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -149,15 +149,15 @@ SPEC CHECKSUMS:
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseStorage: fd82e5e5c474897e19972b34b22ac0f589dce04e
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
 
 PODFILE CHECKSUM: aae6fa82cd47a8438f7199ba79b92a719e7a3963
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0

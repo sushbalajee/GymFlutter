@@ -162,16 +162,30 @@ class RootPageState extends State<RootPage> {
 //------------------------------------------------------------------------------//
 
     if (authStatus == AuthStatus.signedInAsPT) {
-      return new Column(children: <Widget>[
-        Card(
-            margin: EdgeInsets.all(15.0),
-            shape: Border.all(
-                color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
+      return new Scaffold(
+backgroundColor: Color(0xFF232528),
+        body: Container(
+        decoration: new BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
+          child:
+      new Column(children: <Widget>[
+        
+        Card( 
+          color: Colors.grey[100],
+            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 15.0, top: 0.0),
+            shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(25.0)),
+            //shape: Border.all(
+              //  color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
             child: new Container(
               height: screenHeight / 4,
-              decoration: new BoxDecoration(
+              decoration: new BoxDecoration( 
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
                 image: new DecorationImage(
-                  image: new AssetImage("assets/personalized.jpeg"),
+                  image: new AssetImage("assets/personalized.jpeg"), 
                   fit: BoxFit.cover,
                   colorFilter: new ColorFilter.mode(
                       Colors.black.withOpacity(0.85), BlendMode.dstATop),
@@ -184,7 +198,7 @@ class RootPageState extends State<RootPage> {
                     style: new TextStyle(
                         fontSize: 25.0,
                         fontFamily: "Montserrat",
-                        color: Colors.white,
+                        color: Color(0xFFEFCA08),
                         fontWeight: FontWeight.w700)),
                 onPressed: () {
                   Navigator.push(
@@ -197,14 +211,18 @@ class RootPageState extends State<RootPage> {
               ),
             )),
         Card(
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
-            shape: Border.all(
-                color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
+          color: Colors.grey[100],
+            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 20.0),
+            shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(25.0)),
+            //shape: Border.all(
+                //color: Color(0xFF4A657A), width: 1.5, style: BorderStyle.solid),
             child: new Container(
               height: screenHeight / 4,
               decoration: new BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
                 image: new DecorationImage(
-                  image: new AssetImage("assets/journal1.jpeg"),
+                  image: new AssetImage("assets/journal.jpg"),
                   fit: BoxFit.cover,
                   colorFilter: new ColorFilter.mode(
                       Colors.black.withOpacity(0.65), BlendMode.dstATop),
@@ -217,6 +235,7 @@ class RootPageState extends State<RootPage> {
                       style: new TextStyle(
                           fontSize: 25.0,
                           fontFamily: "Montserrat",
+                          color: Color(0xFF232528),
                           fontWeight: FontWeight.w700)),
                   onPressed: () {
                     Navigator.push(
@@ -270,13 +289,23 @@ class RootPageState extends State<RootPage> {
                     })
               ],
             )),
-      ]);
+      ])));
     }
 
 //------------------------------------------------------------------------------//
 
     if (authStatus == AuthStatus.signedIn) {
-      return new Column(children: <Widget>[
+
+      return new Scaffold(
+backgroundColor: Color(0xFF002642),
+        body: Container(
+        decoration: new BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
+          child:
+      new Column(children: <Widget>[
         Card(
             margin: EdgeInsets.all(15.0),
             shape: Border.all(
@@ -356,7 +385,7 @@ class RootPageState extends State<RootPage> {
             onPressed: signedOut,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(20.0))),
-      ]);
+      ])));
     }
     return null;
   }

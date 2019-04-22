@@ -109,10 +109,11 @@ class UIDListPage extends State<UIDList> {
                               child: ListTile(
                                   contentPadding: EdgeInsets.all(20.0),
                                   title: Text(snapshot.data[index],
-                                      border: Border.all(
+                                  
+                                     /*border : Border.all(
                                           color: Colors.grey[900],
                                           width: 4.5,
-                                          style: BorderStyle.solid),
+                                          style: BorderStyle.solid)*/
                                       style: TextStyle(
                                           fontFamily: "Montserrat",
                                           color: Color(0xFF22333B),

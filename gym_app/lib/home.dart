@@ -9,13 +9,17 @@ class _MyHomePageState extends State<PageOne> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return Scaffold( 
+      backgroundColor: Color(0xFF232528),
       body: Container(
+        decoration: new BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
           alignment: Alignment.center,
-          child: Image.network(
-            'https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSidepose.jpg?alt=media&token=1fe4a633-a0e7-4b3c-afc0-183c3972bbcc',
-          )),
+          child: Image( image: new AssetImage("assets/Evolve Logo.png")),
+          ),
     );
   }
 }
