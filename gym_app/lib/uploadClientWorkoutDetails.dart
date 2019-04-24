@@ -129,40 +129,40 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color(0xFF232528),
+      //backgroundColor: Color(0xFF550000),
       appBar: AppBar(
         backgroundColor: Color(0xFF232528),
-        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
+        title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
       ),
       resizeToAvoidBottomPadding: false,
       body: 
       Column(
         children: <Widget>[
-          Container( 
-           decoration: new BoxDecoration(
-                  color: Color(0xFF840032),
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0))),
+          Container(
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "Ubuntu",
                     fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white)),
+                    fontWeight: FontWeight.w600)),
           ),
-          Container(  
-            color: Color(0xFF840032),
+          Container( 
+            decoration: new BoxDecoration(
+    border: Border(
+      bottom: BorderSide( //                   <--- left side
+        color: Colors.grey[300],
+        width: 1.0,
+      )),
+  ),
+            //color: Color(0xFF550000),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: screenWidth * 0.035,
-                    color: Colors.white)),
+                    fontFamily: "Ubuntu",
+                    fontSize: screenWidth * 0.035)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -184,9 +184,9 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     child: 
                     new Container( 
                       decoration: new BoxDecoration(
-      color: Colors.purple,
+      color: Colors.grey,
       gradient: new LinearGradient(
-        colors: [Colors.grey[200], Colors.white],
+        colors: [Colors.grey[100], Colors.white],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter
       ),
@@ -202,11 +202,11 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                       "$exerciseNumber",
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    backgroundColor: Color(0xFF4A657A)),
+                                    backgroundColor: Color(0xFF232528)),
                                 trailing: new IconButton(
                                     iconSize: 35.0,
                                     icon: Icon(Icons.delete_forever),
-                                    color: Color(0xFF840032),
+                                    color: Color(0xFF232528),
                                     onPressed: () {
                                       exercisesRef
                                           .child(items[index].key)
@@ -233,8 +233,8 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                         child: Container(
                                             child: Text(items[index].name,
                                                 style: TextStyle(
-                                                    fontFamily: "Montserrat",
-                                                    color: Color(0xFF4A657A),
+                                                    fontFamily: "Ubuntu",
+                                                    color: Color(0xFF232528),
                                                     fontSize:
                                                         screenWidth * 0.05,
                                                     fontWeight:
@@ -242,7 +242,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                     Container(
                                         child: new IconButton(
                                             icon: new Icon(Icons.edit),
-                                            color: Color(0xFF4A657A),
+                                            color: Color(0xFF232528),
                                             onPressed: () {
                                               confirmEdit(context,
                                                   "Edit Exercise", index);

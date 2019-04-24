@@ -163,43 +163,26 @@ class RootPageState extends State<RootPage> {
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Scaffold(
-backgroundColor: Color(0xFF232528),
+        backgroundColor: Colors.grey[100],
         body: Container(
-        decoration: new BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0))),
           child:
       new Column(children: <Widget>[
-        Card(
+        Card( 
+          elevation: 0.6,
           color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 0.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
             shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(25.0)),
-            //shape: Border.all(
-              //  color: Color(0xFF840032), width: 1.5, style: BorderStyle.solid),
-            child: new Container( padding: EdgeInsets.all(10.0),
+                    borderRadius: new BorderRadius.circular(10.0)),
+            child: new Container( 
               height: screenHeight / 4,
-              decoration: new BoxDecoration( 
-                border: Border.all(color: Colors.grey[100], width: 5, style: BorderStyle.solid),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
-                image: new DecorationImage(
-                  image: new AssetImage("assets/personalized.jpeg"), 
-                  fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.85), BlendMode.dstATop),
-                ),
-              ),
               width: screenWidth,
+              decoration: new BoxDecoration( 
+                image: new DecorationImage(
+                  image: new AssetImage("assets/personalEdit.png"), 
+                  fit: BoxFit.cover
+                )),
               child: FlatButton(
-                child: new Text("My Clients",
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontSize: 25.0,
-                        fontFamily: "Montserrat",
-                        color: Color(0xFFEFCA08),
-                        fontWeight: FontWeight.w700)),
+                child: null,
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -212,43 +195,19 @@ backgroundColor: Color(0xFF232528),
             )),
         Card(
           color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0),
-            //shape: Border.all(
-                //color: Color(0xFF840032), width: 1.5, style: BorderStyle.solid),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
+            shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0)),
             child: new Container(
-              height: screenHeight / 4,
-              decoration: new BoxDecoration(
-                border: Border(
-      left: BorderSide( //                   <--- left side
-        color: Colors.grey[100],
-        width: 5,
-      ),
-      bottom: BorderSide( //                   <--- left side
-        color: Colors.grey[100],
-        width: 5,
-      ),
-      right: BorderSide( //                   <--- left side
-        color: Colors.grey[100],
-        width: 5,
-      ) ),
-                //border: Border.all(color: Color(0xFF840032), width: 2.5, style: BorderStyle.solid),
-                //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+               height: screenHeight / 4,
+               width: screenWidth,
+              decoration: new BoxDecoration( 
                 image: new DecorationImage(
-                  image: new AssetImage("assets/journal.jpg"),
-                  fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.65), BlendMode.dstATop),
-                ),
-              ),
-              width: screenWidth,
+                  image: new AssetImage("assets/journalEdit.png"), 
+                  fit: BoxFit.cover
+                )),
               child: FlatButton(
-                  child: new Text("Session Planner",
-                      textAlign: TextAlign.center,
-                      style: new TextStyle(
-                          fontSize: 25.0,
-                          fontFamily: "Montserrat",
-                          color: Color(0xFF232528),
-                          fontWeight: FontWeight.w700)),
+                child: null,
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -258,10 +217,14 @@ backgroundColor: Color(0xFF232528),
                                 )));
                   }),
             )),
+
+            
             Container(
-          width: screenWidth,
+              decoration: new BoxDecoration(
+                color: Color(0xFF232528),
+                borderRadius: BorderRadius.all(Radius.circular(2.0))),
+          width: screenWidth - 30,
           height: 40.0,
-          color: Color(0xFF232528),
           child: new FlatButton(
             child: new Text("Sign Out",
                 style: TextStyle(
@@ -270,10 +233,11 @@ backgroundColor: Color(0xFF232528),
                     fontWeight: FontWeight.w700,
                     color: Colors.white)),
             onPressed: signedOut,
-          ),
+          )
+          ,
         ),
             Container(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
           child: Text(
             "Send your unique Trainer ID to your clients to enter on registration:",
             textAlign: TextAlign.left,

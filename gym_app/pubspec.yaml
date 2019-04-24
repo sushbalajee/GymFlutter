@@ -60,20 +60,14 @@ flutter:
   - assets/5.jpg
   - assets/6.jpg
   - assets/7.jpg
-  - assets/targets/quads.png
-  - assets/targets/upperleg.png
   - assets/JSON/gymapp-e8453-export.json
   - assets/JSON/testingLocal.json
-  - assets/personalized.jpeg
-  - assets/journal.jpg
-  - assets/jnal.jpeg
-  - assets/journal1.jpeg
-  - assets/Diary.png
-  - assets/Network.png
   - assets/Evolve Logo White.png
   - assets/Evolve Logo.png
-  - assets/notebook.png
-  - assets/group.png
+  - assets/groupEdit.png
+  - assets/BookEdit.png
+  - assets/personalEdit.png
+  - assets/journalEdit.png
 
 
   fonts: 
@@ -88,6 +82,12 @@ flutter:
     - family: Haymaker
       fonts: 
         - asset: assets/fonts/Haymaker.ttf
+
+    - family: Ubuntu
+      fonts: 
+        - asset: assets/fonts/Ubuntu-Regular.ttf
+        - asset: assets/fonts/Ubuntu-Light.ttf
+        - asset: assets/fonts/Ubuntu-Medium.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

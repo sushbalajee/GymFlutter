@@ -69,18 +69,13 @@ class UIDListPage extends State<UIDList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Color(0xFF232528),
+      //backgroundColor: Color(0xFF232528),
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
             title: new Text("My Clients",
                 style: TextStyle(fontFamily: "Montserrat"))),
         body: Container(
-           decoration: new BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0))),
             child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -109,7 +104,9 @@ class UIDListPage extends State<UIDList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Card( color: Colors.grey[100],
+                          return Card( 
+                            
+                          color: Colors.grey[100],
                           margin: EdgeInsets.all(1.0),
                             shape: new RoundedRectangleBorder(
                     //borderRadius: BorderRadius.all( Radius.circular(25.0))),
@@ -118,11 +115,6 @@ class UIDListPage extends State<UIDList> {
                               child: ListTile(
                                   contentPadding: EdgeInsets.all(20.0),
                                   title: Text(snapshot.data[index],
-                                  
-                                     /*border : Border.all(
-                                          color: Colors.grey[900],
-                                          width: 4.5,
-                                          style: BorderStyle.solid)*/
                                       style: TextStyle(
                                           fontFamily: "Montserrat",
                                           color: Color(0xFF22333B),
