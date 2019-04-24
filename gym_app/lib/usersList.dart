@@ -74,7 +74,7 @@ class UIDListPage extends State<UIDList> {
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
             title: new Text("My Clients",
-                style: TextStyle(fontFamily: "Montserrat"))),
+                style: TextStyle(fontFamily: "Ubuntu"))),
         body: Container(
             child: FutureBuilder(
                 future: fetchPost(),
@@ -116,9 +116,9 @@ class UIDListPage extends State<UIDList> {
                                   contentPadding: EdgeInsets.all(20.0),
                                   title: Text(snapshot.data[index],
                                       style: TextStyle(
-                                          fontFamily: "Montserrat",
+                                          fontFamily: "Ubuntu",
                                           color: Color(0xFF22333B),
-                                          fontWeight: FontWeight.w700)),
+                                          fontWeight: FontWeight.w600)),
                                   onTap: () {
                                     Navigator.push(
                                         context,

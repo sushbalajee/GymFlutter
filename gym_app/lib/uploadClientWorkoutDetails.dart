@@ -57,6 +57,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
   void initState() {
     super.initState();
 
+
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
     
@@ -202,11 +203,11 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                       "$exerciseNumber",
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    backgroundColor: Color(0xFF232528)),
+                                    backgroundColor: Color(0xFF405062)),
                                 trailing: new IconButton(
                                     iconSize: 35.0,
                                     icon: Icon(Icons.delete_forever),
-                                    color: Color(0xFF232528),
+                                    color: Color(0xFF405062),
                                     onPressed: () {
                                       exercisesRef
                                           .child(items[index].key)
@@ -234,7 +235,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                             child: Text(items[index].name,
                                                 style: TextStyle(
                                                     fontFamily: "Ubuntu",
-                                                    color: Color(0xFF232528),
+                                                    color: Color(0xFF405062),
                                                     fontSize:
                                                         screenWidth * 0.05,
                                                     fontWeight:
@@ -242,7 +243,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                     Container(
                                         child: new IconButton(
                                             icon: new Icon(Icons.edit),
-                                            color: Color(0xFF232528),
+                                            color: Color(0xFF405062),
                                             onPressed: () {
                                               confirmEdit(context,
                                                   "Edit Exercise", index);
@@ -298,7 +299,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
           Container(
               width: screenWidth,
               child: new FlatButton(
-                  child: new Text("+ Add Exercise + ",
+                  child: new Text("Add Exercise",
                       style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: screenWidth * 0.045,
@@ -320,11 +321,20 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(execution,
-                style: TextStyle(
-                    fontFamily: "Montserrat", fontWeight: FontWeight.w700)),
-            content: SingleChildScrollView(
+          return new Scaffold(
+            appBar: new AppBar(
+
+              leading: new IconButton(
+  icon: new Icon(Icons.close),
+  onPressed: () => Navigator.of(context).pop(),
+), 
+                
+                centerTitle: true,
+                backgroundColor: Color(0xFF232528),
+                title: new Text("Add a new exercise", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
+          
+            body: SingleChildScrollView(
+              padding: EdgeInsets.all(15.0),
               child: Form(
                 key: formKey,
                 child: Flex(
@@ -366,6 +376,26 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
                     ),
+                    Container(
+                      width: screenWidth - 30,
+                    padding: EdgeInsets.only(top: 30.0),
+                      child: new FlatButton(
+                color: Colors.grey[900],
+                child: new Text("Submit",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                onPressed: () {
+                  //final FormState form = formKey.currentState;
+                  if(formKey.currentState.validate()){
+                  Navigator.of(context).pop();}
+                  handleSubmit();
+                  
+                },
+              ),
+                    ),
                     Opacity(
                         opacity: 0.0,
                         child: Container(
@@ -379,32 +409,10 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                 ),
               ),
             ),
-            actions: <Widget>[
-              new FlatButton(
-                color: Colors.grey[900],
-                child: new Text("Submit",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                onPressed: () {
-                  handleSubmit();
-                  Navigator.of(context).pop();
-                },
-              ),
-              new FlatButton(
-                padding: EdgeInsets.all(20.0),
-                child: const Text('CLOSE',
-                    style: TextStyle(fontFamily: "Montserrat")),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
           );
         });
   }
+
 
   Future<Null> confirmEdit(BuildContext context, String execution, int ind) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -413,11 +421,20 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(execution,
-                style: TextStyle(
-                    fontFamily: "Montserrat", fontWeight: FontWeight.w700)),
-            content: SingleChildScrollView(
+          return new Scaffold(
+            appBar: new AppBar(
+
+              leading: new IconButton(
+  icon: new Icon(Icons.close),
+  onPressed: () => Navigator.of(context).pop(),
+), 
+                
+                centerTitle: true,
+                backgroundColor: Color(0xFF232528),
+                title: new Text("Edit this exercise", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
+          
+            body: SingleChildScrollView(
+              padding: EdgeInsets.all(15.0),
               child: Form(
                 key: formKey,
                 child: Flex(
@@ -458,6 +475,22 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
                     ),
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0),
+                      width: screenWidth - 30,
+                      child: new FlatButton(
+                child: new Text("Submit",
+                    style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
+                color: Colors.black,
+                onPressed: () {
+                  handleEdit(items[ind].key);
+                  Navigator.of(context).pop();
+                },
+              ),),
                     Opacity(
                         opacity: 0.0,
                         child: Container(
@@ -482,29 +515,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                 ),
               ),
             ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Submit",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                onPressed: () {
-                  handleEdit(items[ind].key);
-                  Navigator.of(context).pop();
-                },
-              ),
-              new FlatButton(
-                padding: EdgeInsets.all(20.0),
-                child: const Text('CLOSE',
-                    style: TextStyle(fontFamily: "Montserrat")),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+
           );
         });
   }
@@ -562,7 +573,8 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         someMethod(val);
         item.name = val;
       },
-      validator: (val) => val == "" ? val : null,
+      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
     );
   }
 }

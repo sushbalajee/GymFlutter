@@ -78,8 +78,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF232528),
-        title: Text(clientName, style: TextStyle(fontFamily: "Ubuntu")),
-      ),
+        title: Text(clientName, style: TextStyle(fontFamily: "Ubuntu")),),
       resizeToAvoidBottomPadding: false,
       body: 
       Column(
@@ -102,7 +101,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       trailing: new IconButton(
                           iconSize: 35.0,
                           icon: Icon(Icons.delete_forever),
-                          color: Color(0xFF550000),
+                          color: Color(0xFF405062),
                           onPressed: () {
                             if (items.length == 1) {
                               confirmError(
@@ -245,10 +244,20 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         context: context, 
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title:
-                new Text(execution, style: TextStyle(fontFamily: "Montserrat")),
-            content: SingleChildScrollView(
+          return new Scaffold(
+            appBar: new AppBar(
+
+              leading: new IconButton(
+  icon: new Icon(Icons.close),
+  onPressed: () => Navigator.of(context).pop(),
+), 
+                
+                centerTitle: true,
+                backgroundColor: Color(0xFF232528),
+                title: new Text("Create a new workout", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
+          
+            body: SingleChildScrollView(
+              padding: EdgeInsets.all(15.0),
                 child: Form(
               key: formKey,
               child: Flex(
@@ -272,12 +281,8 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                     onSaved: (val) => item.description = val,
                     validator: (val) => val == "" ? val : null,
                   ),
-                ],
-              ),
-            )),
-            actions: <Widget>[
-              Container(
-                    width: screenWidth/3,
+                  Container(
+                    width: screenWidth - 30,
                     padding: EdgeInsets.only(top: 30.0),
                     child: new FlatButton(
                       child: new Text("Submit",
@@ -288,22 +293,21 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                               color: Colors.white)),
                       color: Colors.black,
                       onPressed: () {
+                        if(formKey.currentState.validate()){
+                  Navigator.of(context).pop();}
                         handleSubmit();
                         setState(() => _UploadClientWorkoutsState());
-                        Navigator.of(context).pop();
+                        //Navigator.of(context).pop();
                       },
                     ),
                   ),
-              FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                ],
               ),
-            ],
+            )),
           );
         });
   }
+
 }
 
 class Item {

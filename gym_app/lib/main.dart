@@ -51,7 +51,7 @@ class HomePageState extends State<GymApp> {
   Widget build(BuildContext context) {
 
     return new MaterialApp(
-        title: "Evolve FC",
+        //title: "Evolve FC",
         home: new Scaffold(
             backgroundColor: Colors.grey[100],
 
@@ -59,7 +59,7 @@ class HomePageState extends State<GymApp> {
                 
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Evolve Fitness Consultants", style: TextStyle(fontSize: 20.0, fontFamily: "Montserrat", fontWeight: FontWeight.w500),)),
+                title: new Text("Gym App v0.1", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
 
             body: currentPage,
             

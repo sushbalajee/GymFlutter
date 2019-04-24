@@ -228,9 +228,9 @@ class RootPageState extends State<RootPage> {
           child: new FlatButton(
             child: new Text("Sign Out",
                 style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "Ubuntu",
                     fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white)),
             onPressed: signedOut,
           )

@@ -66,7 +66,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                           child: new ListTile(
                               title: Text(snapshot.data[index].workoutname,
                                   style: TextStyle(
-                                      fontFamily: "Montserrat",
+                                      fontFamily: "Ubuntu",
                                       fontSize: screenWidth * 0.055,
                                       color: Color(0xFF22333B),
                                       fontWeight: FontWeight.w600)),
