@@ -61,9 +61,9 @@ class _ClientSessionsState extends State<ClientSessions> {
     return Scaffold(
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF4A657A),
+            backgroundColor: Color(0xFF232528),
             title: new Text(widget.day + " : " + widget.date,
-                style: TextStyle(fontFamily: "Montserrat"))),
+                style: TextStyle(fontFamily: "Ubuntu"))),
         backgroundColor: Colors.grey[100],
         body: Column(children: <Widget>[
           Form(
@@ -145,11 +145,11 @@ class _ClientSessionsState extends State<ClientSessions> {
                     child: new FlatButton(
                       child: new Text("Submit",
                           style: TextStyle(
-                              fontFamily: "Montserrat",
+                              fontFamily: "Ubuntu",
                               fontSize: screenWidth * 0.045,
                               fontWeight: FontWeight.w700,
                               color: Colors.white)),
-                      color: Color(0xFF4A657A),
+                      color: Color(0xFF232528),
                       onPressed: () {
                         item.date = widget.day + " : " + widget.date;
                         item.paid = 0xFFFF6B6B;

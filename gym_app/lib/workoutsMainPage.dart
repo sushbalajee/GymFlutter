@@ -19,29 +19,30 @@ class PageTwoState extends State<PageTwo> {
   StreamSubscription<ConnectivityResult> subscription;
 
   final List<String> upperBodyCategories = [
-    'Chest',
-    'Shoulders',
-    'Arms',
-    'Back',
-    'Legs',
-    'Core'
+  'Abs',
+  'Back',
+  'Biceps',
+  'Chest',
+  'Legs',
+  'Shoulders',
+  'Triceps',
+  'Cardio'
   ];
 
   final List<String> lowerBodyCategories = [
-    'Quads',
-    'Hamstrings',
-    'Calves',
-    'Glutes',
-    'Abductors',
-    'Aductors'
+    'Fat Loss',
+    'Mass Gain',
+    'Power Lifting',
+    'HIIT',
+    'Body Builder',
+    'Athlete Body'
   ];
 
   final List<String> cardioCategories = [
-    'Bike',
-    'Row',
-    'Swim',
-    'Hill Climb',
-    'Treadmill',
+    'One Day: Full-body ',
+    'Two-day split: Upper body/Lower body',
+    'Three-day split: Push/Pull/Legs',
+    'Four-day split: Full body',
   ];
 
   final List<String> picIndexes = ['1', '2', '3', '4', '5', '6', '7'];
@@ -63,14 +64,14 @@ class PageTwoState extends State<PageTwo> {
                   new Stack(children: <Widget>[
                     new Column(children: <Widget>[
                       sliderTitles(
-                          "Muscle Building", screenHeight * 0.045, screenWidth),
+                          "Muscle Group Focus", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.upperBodyCategories,
                           this.picIndexes),
                       sliderTitles(
-                          "Weight Loss", screenHeight * 0.045, screenWidth),
+                          "Goals", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.lowerBodyCategories,
                           this.picIndexes),
-                      sliderTitles("Cardio", screenHeight * 0.045, screenWidth),
+                      sliderTitles("Muscle / Day splits", screenHeight * 0.045, screenWidth),
                       horizontalSlider(screenHeight, this.cardioCategories,
                           this.picIndexes)
                     ])

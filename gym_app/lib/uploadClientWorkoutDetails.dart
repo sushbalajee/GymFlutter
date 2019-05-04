@@ -29,12 +29,7 @@ class UploadClientWorkoutDetails extends StatefulWidget {
 
 class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
   List<String> suggestions = [
-    "Barbell Squat",
-    "Bench Press",
-    "Lunges - Dumbbells",
-    "Sidepose",
-    "Sumo Deadlifts",
-    "Tricep Dips",
+    "Weighted-Crunch",
   ];
 
   List<String> added = [];
@@ -57,7 +52,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
   void initState() {
     super.initState();
 
-
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
     
@@ -77,7 +71,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
     final ref = FirebaseStorage.instance
         .ref()
         .child('Target Muscles')
-        .child('$target.jpg');
+        .child('$target.gif');
     try {
       imageUrlStorage = await ref.getDownloadURL();
     } catch (e) {

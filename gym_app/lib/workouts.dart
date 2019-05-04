@@ -45,8 +45,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
       backgroundColor: Color(0xFFEFF1F3),
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF4A657A),
-            title: new Text(widget.value, style: TextStyle(fontFamily: "Montserrat"))),
+            backgroundColor: Color(0xFF232528),
+            title: new Text(widget.value, style: TextStyle(fontFamily: "Ubuntu"))),
         body: Container(
             child: FutureBuilder(
                 future: fetchPost(widget.value),
@@ -60,9 +60,14 @@ class _WorkoutsListState extends State<WorkoutsList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          workoutNumber += index;
+                          //workoutNumber += index;
                           return Card(
-                      elevation: 3.0,
+                            color: Colors.grey[100],
+                      margin: EdgeInsets.all(1.0),
+                            shape: new RoundedRectangleBorder(
+                    //borderRadius: BorderRadius.all( Radius.circular(25.0))),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
+                    elevation: 0.6,
                           child: new ListTile(
                               title: Text(snapshot.data[index].workoutname,
                                   style: TextStyle(
@@ -70,8 +75,6 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                       fontSize: screenWidth * 0.055,
                                       color: Color(0xFF22333B),
                                       fontWeight: FontWeight.w600)),
-                              leading:
-                                  CircleAvatar(child: Text("$workoutNumber",style: TextStyle(color: Colors.white)),backgroundColor: Color(0xFF4A657A)),
                               contentPadding: EdgeInsets.only(
                             top: 10.0, bottom: 10.0, left: 15.0),
                               onTap: () {

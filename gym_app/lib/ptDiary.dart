@@ -158,21 +158,23 @@ class _PTDiaryState extends State<PTDiary> {
     return Scaffold(
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF4A657A),
+            backgroundColor: Color(0xFF232528),
             title: new Text("My Diary",
-                style: TextStyle(fontFamily: "Montserrat"))),
+                style: TextStyle(fontFamily: "Ubuntu"))),
         backgroundColor: Colors.grey[100],
-        body: new GridView.count(  
+        body: new GridView.count( 
           gridtile,
           childAspectRatio: 1.1,
           crossAxisCount: 4,
           children: new List<Widget>.generate(28, (index) {
             return new GridTile( 
               child: new Card(
+                elevation: 2.0,
+                margin: EdgeInsets.all(2.0),
                   child: new OutlineButton(
-                borderSide: BorderSide(color: Color(0xFF4A657A)),
+                borderSide: BorderSide(color: Color(0xFF232528), width: 0.1),
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(5.0)),
+                    borderRadius: new BorderRadius.circular(1.0)),
                 child: new Center( 
                   child: new Text(
                       calendar28Day[index].substring(0, 3) +

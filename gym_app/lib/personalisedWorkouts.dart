@@ -83,7 +83,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         appBar: AppBar(
           backgroundColor: Color(0xFF4A657A),
           title: Text('My Personalised Workouts',
-              style: TextStyle(fontFamily: "Montserrat")),
+              style: TextStyle(fontFamily: "Ubuntu")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
