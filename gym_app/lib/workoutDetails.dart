@@ -102,131 +102,112 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                   itemBuilder: (BuildContext context, int index) {
                     exerciseNumber += 1;
                     return Card(
-                        //elevation: 3.0,
-                        color: Colors.grey[100],
-                        margin: EdgeInsets.all(0.0),
+                        margin: EdgeInsets.all(5.0),
                         shape: new RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(0.0))),
-                        //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
                         elevation: 2.0,
-                        child: new Container(
-                            decoration: new BoxDecoration(
-                              color: Colors.grey,
-                              gradient: new LinearGradient(
-                                  colors: [Colors.grey[100], Colors.white],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter),
-                            ),
-                            child: new Padding(
-                                padding: EdgeInsets.only(top: 10.0),
-                                child: new Stack(children: <Widget>[
-                                  new Column(children: <Widget>[
-                                    ListTile(
-                                      leading: CircleAvatar(
-                                          child: new Text(
-                                            "$exerciseNumber",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          backgroundColor: Color(0xFF405062)),
-                                      title: Text(
-                                          workoutExercisesJSON[index].name,
-                                          style: TextStyle(
-                                              fontFamily: "Montserrat",
-                                              color: Color(0xFF405062),
-                                              fontSize: screenWidth * 0.05,
-                                              fontWeight: FontWeight.w700)),
-                                    ),
-                                    ListTile(
-                                        subtitle: new Stack(children: <Widget>[
-                                      new Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            new Text(
-                                                "Sets: " +
-                                                    workoutExercisesJSON[index]
-                                                        .sets,
-                                                style: TextStyle(
-                                                    fontFamily: "Prompt",
-                                                    color: Color(0xFF22333B),
-                                                    fontSize:
-                                                        screenWidth * 0.04)),
-                                            new Text(
-                                                "Repetitions: " +
-                                                    workoutExercisesJSON[index]
-                                                        .reps,
-                                                style: TextStyle(
-                                                    fontFamily: "Prompt",
-                                                    color: Color(0xFF22333B),
-                                                    fontSize:
-                                                        screenWidth * 0.04)),
-                                            new Text(
-                                                "Rest times: " +
-                                                    workoutExercisesJSON[index]
-                                                        .rest,
-                                                style: TextStyle(
-                                                    fontFamily: "Prompt",
-                                                    color: Color(0xFF22333B),
-                                                    fontSize:
-                                                        screenWidth * 0.04)),
-                                            new ExpansionTile(
-                                              title: Align(
-                                                  alignment: Alignment(
+                        child: new Stack(children: <Widget>[
+                          new Column(children: <Widget>[
+                            Container(
+                                color: Color(0xFFEFCA08),
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                      child: new Text(
+                                        "$exerciseNumber",
+                                        style: TextStyle(
+                                            fontFamily: "Ubuntu",
+                                            color: Color(0xFFEFCA08)),
+                                      ),
+                                      backgroundColor: Color(0xFF232528)),
+                                  title: Text(workoutExercisesJSON[index].name,
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          color: Color(0xFF232528),
+                                          fontSize: screenWidth * 0.05,
+                                          fontWeight: FontWeight.w700)),
+                                )),
+                            ListTile(
+                                subtitle: new Stack(children: <Widget>[
+                              new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  
+                                  children: <Widget>[
+                                   
+                                    Container(
+                                      padding: EdgeInsets.only(top: 10.0),
+                                      child:
+                                      new Text(
+                                        "Sets: " +
+                                            workoutExercisesJSON[index].sets,
+                                        style: TextStyle(
+                                            fontFamily: "Prompt",
+                                            color: Color(0xFF22333B),
+                                            fontSize: screenWidth * 0.04),
+                                        textAlign: TextAlign.left)),
+                                   
+                                   
+                                    new Text(
+                                        "Repetitions: " +
+                                            workoutExercisesJSON[index].reps,
+                                        style: TextStyle(
+                                            fontFamily: "Prompt",
+                                            color: Color(0xFF22333B),
+                                            fontSize: screenWidth * 0.04)),
+                                  
+                                      new Text(
+                                        "Rest times: " +
+                                            workoutExercisesJSON[index].rest,
+                                        style: TextStyle(
+                                            fontFamily: "Prompt",
+                                            color: Color(0xFF22333B),
+                                            fontSize: screenWidth * 0.04)),
+                                    new ExpansionTile(
+                                      title: Align(
+                                          alignment: Alignment(
                                                       -1 - (60 / screenWidth),
                                                       0.0),
-                                                  child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        new Text("Execution",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Prompt",
-                                                                color: Color(
-                                                                    0xFF22333B),
-                                                                fontSize:
-                                                                    screenWidth *
-                                                                        0.04))
-                                                      ])),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 0.0),
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        new Text(
-                                                            workoutExercisesJSON[
-                                                                    index]
-                                                                .execution,
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Prompt",
-                                                                color: Color(
-                                                                    0xFF22333B),
-                                                                fontSize:
-                                                                    screenWidth *
-                                                                        0.04))
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
+                                                new Text("Execution",
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ])),
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 0.0),
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                    workoutExercisesJSON[index]
+                                                        .execution,
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
                                               ],
                                             ),
-                                            new Image.network(
-                                                workoutExercisesJSON[index]
-                                                    .target),
-                                          ])
-                                    ]))
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    new Image.network(
+                                        workoutExercisesJSON[index].target),
                                   ])
-                                ]))));
+                            ]))
+                          ])
+                        ]));
                   }))
         ]));
   }

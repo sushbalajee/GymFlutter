@@ -57,18 +57,31 @@ class _WorkoutsListState extends State<WorkoutsList> {
                       child: Text("Loading..."),
                     ));
                   } else {
-                    return ListView.builder(
+                    return ListView.builder( 
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          //workoutNumber += index;
+                          workoutNumber += 1;
                           return Card(
                             color: Colors.grey[100],
                       margin: EdgeInsets.all(1.0),
-                            shape: new RoundedRectangleBorder(
+                           // shape: new RoundedRectangleBorder(
                     //borderRadius: BorderRadius.all( Radius.circular(25.0))),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
+                    //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
                     elevation: 0.6,
                           child: new ListTile(
+                            
+                            leading: CircleAvatar(
+                                          child: new Text(
+                                            "$workoutNumber",
+                                            style:
+                                                TextStyle(
+                                      fontFamily: "Ubuntu",
+                                      fontSize: screenWidth * 0.055,
+                                      color: Color(0xFFEFCA08),
+                                      fontWeight: FontWeight.w600),
+                                          ),
+                                          backgroundColor: Color(0xFF232528)),
+                            
                               title: Text(snapshot.data[index].workoutname,
                                   style: TextStyle(
                                       fontFamily: "Ubuntu",
@@ -90,6 +103,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                             description: snapshot
                                                 .data[index].description)));
                               }));
+                        
                         });
                   }
                 })));
