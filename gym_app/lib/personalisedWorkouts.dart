@@ -81,13 +81,12 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
       return Scaffold(
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          backgroundColor: Color(0xFF4A657A),
+          backgroundColor: Color(0xFF232528),
           title: Text('My Personalised Workouts',
               style: TextStyle(fontFamily: "Ubuntu")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
-          
           children: <Widget>[
             Flexible(
               child: FirebaseAnimatedList(
@@ -96,19 +95,31 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                     Animation<double> animation, int index) {
                   workoutNumber += 1;
                   return Card(
-                      elevation: 3.0,
+                    color: Colors.grey[100],
+                    margin: EdgeInsets.all(1.0),
+                      shape: new RoundedRectangleBorder(
+                          //borderRadius: BorderRadius.all( Radius.circular(25.0))),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25.0),
+                              topRight: Radius.circular(25.0))),
+                      elevation: 0.6,
                       child: new ListTile(
                         contentPadding: EdgeInsets.only(
                             top: 10.0, bottom: 10.0, left: 15.0),
                         leading: CircleAvatar(
-                            child: Text(
-                              "$workoutNumber",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Color(0xFF4A657A)),
+                                          child: new Text(
+                                            "$workoutNumber",
+                                            style:
+                                                TextStyle(
+                                      fontFamily: "Ubuntu",
+                                      fontSize: screenWidth * 0.055,
+                                      color: Color(0xFFEFCA08),
+                                      fontWeight: FontWeight.w600),
+                                          ),
+                                          backgroundColor: Color(0xFF232528)),
                         title: Text(items[index].workoutname,
                             style: TextStyle(
-                                fontFamily: "Montserrat",
+                                fontFamily: "Ubuntu",
                                 fontSize: screenWidth * 0.055,
                                 color: Color(0xFF22333B),
                                 fontWeight: FontWeight.w600)),

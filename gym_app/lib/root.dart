@@ -163,205 +163,187 @@ class RootPageState extends State<RootPage> {
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Scaffold(
-        backgroundColor: Colors.grey[100],
-        body: Container(
-          child:
-      new Column(children: <Widget>[
-        Card( 
-          elevation: 0.6,
-          color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
-            shape: new RoundedRectangleBorder(
+          backgroundColor: Colors.grey[100],
+          body: Container(
+              child: new Column(children: <Widget>[
+            Card(
+                elevation: 0.6,
+                color: Colors.grey[100],
+                margin: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
+                shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
-            child: new Container( 
-              height: screenHeight / 4,
-              width: screenWidth,
-              decoration: new BoxDecoration( 
-                image: new DecorationImage(
-                  image: new AssetImage("assets/personalEdit.png"), 
-                  fit: BoxFit.cover
+                child: new Container(
+                  height: screenHeight / 4,
+                  width: screenWidth,
+                  decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                          image: new AssetImage("assets/MyClients.png"),
+                          fit: BoxFit.cover)),
+                  child: FlatButton(
+                    child: null,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UIDList(
+                                    ptID: uid,
+                                  )));
+                    },
+                  ),
                 )),
-              child: FlatButton(
-                child: null,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UIDList(
-                                ptID: uid,
-                              )));
-                },
-              ),
-            )),
-        Card(
-          color: Colors.grey[100],
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
-            shape: new RoundedRectangleBorder(
+            Card(
+                color: Colors.grey[100],
+                margin: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
+                shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
-            child: new Container(
-               height: screenHeight / 4,
-               width: screenWidth,
-              decoration: new BoxDecoration( 
-                image: new DecorationImage(
-                  image: new AssetImage("assets/journalEdit.png"), 
-                  fit: BoxFit.cover
+                child: new Container(
+                  height: screenHeight / 4,
+                  width: screenWidth,
+                  decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                          image: new AssetImage("assets/SessionPlanner.png"),
+                          fit: BoxFit.cover)),
+                  child: FlatButton(
+                      child: null,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PTDiary(
+                                      ptID: uid,
+                                    )));
+                      }),
                 )),
-              child: FlatButton(
-                child: null,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PTDiary(
-                                  ptID: uid,
-                                )));
-                  }),
-            )),
-
-            
             Container(
               decoration: new BoxDecoration(
-                color: Color(0xFF232528),
-                borderRadius: BorderRadius.all(Radius.circular(2.0))),
-          width: screenWidth - 30,
-          height: 40.0,
-          child: new FlatButton(
-            child: new Text("Sign Out",
-                style: TextStyle(
-                    fontFamily: "Ubuntu",
-                    fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white)),
-            onPressed: signedOut,
-          )
-          ,
-        ),
-            Container(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-          child: Text(
-            "Send your unique Trainer ID to your clients to enter on registration:",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 15.0,
-              fontFamily: "Montserrat",
-            ),
-          ),
-        ),
-        Container(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text("$uid",
+                  color: Color(0xFF232528),
+                  borderRadius: BorderRadius.all(Radius.circular(2.0))),
+              width: screenWidth - 30,
+              height: 40.0,
+              child: new FlatButton(
+                child: new Text("Sign Out",
                     style: TextStyle(
-                        fontSize: 13.0,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w700)),
-                IconButton(
-                    icon: new Icon(Icons.content_copy),
-                    tooltip: "Copied to clipboard",
-                    onPressed: () {
-                      Clipboard.setData(new ClipboardData(text: uid));
-                    })
-              ],
-            ))
-      ])));
+                        fontFamily: "Ubuntu",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white)),
+                onPressed: signedOut,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+              child: Text(
+                "Send your unique Trainer ID to your clients to enter on registration:",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontFamily: "Montserrat",
+                ),
+              ),
+            ),
+            Container(
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text("$uid",
+                        style: TextStyle(
+                            fontSize: 13.0,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w700)),
+                    IconButton(
+                        icon: new Icon(Icons.content_copy),
+                        tooltip: "Copied to clipboard",
+                        onPressed: () {
+                          Clipboard.setData(new ClipboardData(text: uid));
+                        })
+                  ],
+                ))
+          ])));
     }
 
 //------------------------------------------------------------------------------//
 
     if (authStatus == AuthStatus.signedIn) {
-
       return new Scaffold(
-backgroundColor: Color(0xFF002642),
-        body: Container(
-        decoration: new BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0))),
-          child:
-      new Column(children: <Widget>[
-        Card(
-            margin: EdgeInsets.all(15.0),
-            shape: Border.all(
-                color: Colors.grey[900], width: 4.5, style: BorderStyle.solid),
-            child: new Container(
-              height: screenHeight / 4,
+          backgroundColor: Colors.grey[100],
+          body: new Column(children: <Widget>[
+            Card(
+                elevation: 0.6,
+                color: Colors.grey[100],
+                margin: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0)),
+                child: new Container(
+                  height: screenHeight / 4,
+                  decoration: new BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage("assets/MyWorkouts.jpg"),
+                      fit: BoxFit.cover
+                    ),
+                  ),
+                  width: screenWidth,
+                  child: FlatButton(
+                    child: null,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PersonalisedWorkouts(
+                                    ptID: relationship,
+                                    clientID: uid,
+                                  )));
+                    },
+                  ),
+                )),
+            Card(
+                elevation: 0.6,
+                color: Colors.grey[100],
+                margin: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0)),
+                child: new Container(
+                  height: screenHeight / 4,
+                  decoration: new BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage("assets/MySessions.jpg"),
+                      fit: BoxFit.cover
+                    ),
+                  ),
+                  width: screenWidth,
+                  child: FlatButton(
+                      child: null,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClientSessionsClientSide(
+                                      clientID: uid,
+                                      ptID: relationship,
+                                    )));
+                      }),
+                )),
+            Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("assets/4.jpg"),
-                  fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.9), BlendMode.dstATop),
-                ),
-              ),
-              width: screenWidth,
-              child: FlatButton(
-                child: new Text("Your Personalised Workouts",
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontSize: 25.0,
-                        fontFamily: "Montserrat",
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700)),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PersonalisedWorkouts(
-                                ptID: relationship,
-                                clientID: uid,
-                              )));
-                },
-              ),
-            )),
-        Card(
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
-            shape: Border.all(
-                color: Color(0xFF4A657A), width: 3.5, style: BorderStyle.solid),
-            child: new Container(
-              height: screenHeight / 4,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("assets/journal1.jpeg"),
-                  fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.65), BlendMode.dstATop),
-                ),
-              ),
-              width: screenWidth,
-              child: FlatButton(
-                  child: new Text("Upcoming Sessions",
-                      textAlign: TextAlign.center,
-                      style: new TextStyle(
-                          fontSize: 25.0,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w700)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ClientSessionsClientSide(
-                                  clientID: uid,
-                                  ptID: relationship,
-                                )));
-                  }),
-            )),
-        RaisedButton(
-            color: Colors.grey[900],
-            child: new Text(
-              "Sign Out",
-              style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.white,
-                fontFamily: "Montserrat",
+                  color: Color(0xFF232528),
+                  borderRadius: BorderRadius.all(Radius.circular(2.0))),
+              width: screenWidth - 30,
+              height: 40.0,
+              child: new FlatButton(
+                child: new Text("Sign Out",
+                    style: TextStyle(
+                        fontFamily: "Ubuntu",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white)),
+                onPressed: signedOut,
               ),
             ),
-            onPressed: signedOut,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(20.0))),
-      ])));
+          ]));
     }
     return null;
   }

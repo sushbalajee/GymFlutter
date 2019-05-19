@@ -61,18 +61,14 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
         ),
         resizeToAvoidBottomPadding: false,
         body: new Column(children: <Widget>[
-          //new ListView(children: <Widget>[
           Container(
-            //color: Color(0xFF272727),
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
                   fontFamily: "Ubuntu",
                   fontSize: screenWidth * 0.045,
-                  fontWeight: FontWeight.w600,
-                  //color: Colors.white
-                )),
+                  fontWeight: FontWeight.w600)),
           ),
           Container(
             //color: Color(0xFF272727),
@@ -90,8 +86,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             child: Text(widget.description,
                 style: TextStyle(
                   fontFamily: "Ubuntu",
-                  fontSize: screenWidth * 0.035,
-                )),
+                  fontSize: screenWidth * 0.035)),
           ),
           Flexible(
               child: ListView.builder(
@@ -102,7 +97,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                   itemBuilder: (BuildContext context, int index) {
                     exerciseNumber += 1;
                     return Card(
-                        margin: EdgeInsets.all(5.0),
+                        margin: EdgeInsets.all(10.0),
                         shape: new RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(0.0))),
@@ -110,43 +105,39 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
                             Container(
-                                color: Color(0xFFEFCA08),
+                                color: Color(0xFF232528),
                                 child: ListTile(
                                   leading: CircleAvatar(
                                       child: new Text(
                                         "$exerciseNumber",
                                         style: TextStyle(
                                             fontFamily: "Ubuntu",
-                                            color: Color(0xFFEFCA08)),
+                                            color: Color(0xFF232528)),
                                       ),
-                                      backgroundColor: Color(0xFF232528)),
+                                      backgroundColor: Color(0xFFEFCA08)),
                                   title: Text(workoutExercisesJSON[index].name,
                                       style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          color: Color(0xFF232528),
-                                          fontSize: screenWidth * 0.05,
-                                          fontWeight: FontWeight.w700)),
+                                          fontFamily: "Ubuntu",
+                                          color: Color(0xFFEFCA08),
+                                          fontSize: screenWidth * 0.06,
+                                          fontWeight: FontWeight.w600)),
                                 )),
                             ListTile(
                                 subtitle: new Stack(children: <Widget>[
                               new Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  
                                   children: <Widget>[
-                                   
                                     Container(
-                                      padding: EdgeInsets.only(top: 10.0),
-                                      child:
-                                      new Text(
-                                        "Sets: " +
-                                            workoutExercisesJSON[index].sets,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04),
-                                        textAlign: TextAlign.left)),
-                                   
-                                   
+                                        padding: EdgeInsets.only(top: 10.0),
+                                        child: new Text(
+                                            "Sets: " +
+                                                workoutExercisesJSON[index]
+                                                    .sets,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04),
+                                            textAlign: TextAlign.left)),
                                     new Text(
                                         "Repetitions: " +
                                             workoutExercisesJSON[index].reps,
@@ -154,8 +145,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                             fontFamily: "Prompt",
                                             color: Color(0xFF22333B),
                                             fontSize: screenWidth * 0.04)),
-                                  
-                                      new Text(
+                                    new Text(
                                         "Rest times: " +
                                             workoutExercisesJSON[index].rest,
                                         style: TextStyle(
@@ -165,8 +155,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                     new ExpansionTile(
                                       title: Align(
                                           alignment: Alignment(
-                                                      -1 - (60 / screenWidth),
-                                                      0.0),
+                                              -1 - (60 / screenWidth), 0.0),
                                           child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[

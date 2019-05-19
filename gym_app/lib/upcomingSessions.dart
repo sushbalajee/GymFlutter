@@ -86,9 +86,9 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
       return Scaffold(
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          backgroundColor: Color(0xFF4A657A),
+          backgroundColor: Color(0xFF232528),
           title: Text('Upcoming Sessions',
-              style: TextStyle(fontFamily: "Montserrat")),
+              style: TextStyle(fontFamily: "Ubuntu")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -114,8 +114,10 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     
       if(testUTC.isAfter(DateTime.now().toUtc())){
                   return Card(
-                      color: Color(items[index].paid),
-                      elevation: 3.0,
+                      color: Colors.grey[100],
+                      margin: EdgeInsets.all(1.0),
+                      //color: Color(items[index].paid),
+                      elevation: 0.6,
                       child: new ListTile(
                         title: Text(items[index].date,
                             style: TextStyle(
@@ -130,7 +132,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                         trailing: new IconButton(
                             iconSize: 40.0,
                             icon: Icon(Icons.monetization_on),
-                            color: Colors.white,
+                            color: Color(items[index].paid),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
                                 confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
@@ -143,23 +145,26 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                 }
                 else{
                   return Card(
-                      color: Color(items[index].paid),
-                      elevation: 3.0,
+                      color: Colors.grey[100],
+                      //color: Color(items[index].paid),
+                      elevation: 0.6,
+                       margin: EdgeInsets.all(1.0),
                       child: new ListTile(
                         title: Text(items[index].date,
                             style: TextStyle(
-                                fontFamily: "Montserrat",
+                                fontFamily: "Ubuntu",
                                 fontSize: screenWidth * 0.055,
                                 color: Color(0xFF22333B),
                                 fontWeight: FontWeight.w600)),
                         subtitle: Text(
                             items[index].startTime.substring(10, 15) +
                                 " - " +
-                                items[index].endTime.substring(10, 15) + " - Past Session"),
-                        trailing: new IconButton(
-                            iconSize: 40.0,
+                                items[index].endTime.substring(10, 15) + " - Past Session", style: TextStyle(color: Colors.red),),
+                        trailing:
+                        new IconButton(
+                            iconSize: 50.0,
                             icon: Icon(Icons.monetization_on),
-                            color: Colors.white,
+                            color: Color(items[index].paid),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
                                 confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);

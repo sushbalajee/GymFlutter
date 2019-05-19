@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:convert';
 
 class UploadClientWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
@@ -34,6 +35,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
   List<String> added = [];
   List<Item> items = List();
+  List<String> suggestionsForDropDown = [];
 
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
@@ -43,14 +45,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
   String imageUrlStorage = "";
   String currentText = "";
+  String textForEx;
 
   final myController = TextEditingController();
+  final myController2 = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+
+    fetchPost();
+
 
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -65,6 +72,36 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         .child('exercises');
 
     exercisesRef.onChildAdded.listen(_onEntryAdded);
+  }
+
+  Future fetchPost() async {
+    String data = await DefaultAssetBundle.of(context)
+        .loadString("assets/JSON/ExerciseDB.json");
+    var jsonResponse = json.decode(data);
+
+    for(var x in jsonResponse){
+      suggestionsForDropDown.add(x['name']);
+
+      if(x['name'] == "Test1"){
+        print(x['execution']);
+      }
+    }
+  }
+
+  Future fetchPostForExecution(String currText) async {
+    String data = await DefaultAssetBundle.of(context)
+        .loadString("assets/JSON/ExerciseDB.json");
+    var jsonResponse = json.decode(data);
+
+    for(var x in jsonResponse){
+      //suggestionsForDropDown.add(x['name']);
+      if(x['name'] == currText){
+        textForEx = x['execution'];
+        //print(x['execution']);
+      }
+    }
+    myController2.text = textForEx;
+    
   }
 
   someMethod(String target) async {
@@ -530,7 +567,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
           key: key,
           submitOnSuggestionTap: true,
           clearOnSubmit: true,
-          suggestions: suggestions,
+          suggestions: suggestionsForDropDown,
           textInputAction: TextInputAction.go,
           textChanged: (item) {
             currentText = item;
@@ -542,6 +579,8 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
               added.add(currentText);
               someMethod(currentText);
               myController.text = currentText;
+              print(currentText);
+              fetchPostForExecution(currentText);
             });
           },
           itemBuilder: (context, item) {
@@ -555,6 +594,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
             return item.toLowerCase().contains(query.toLowerCase());
           }),
       nameWidget(),
+      executionWidget()
     ]);
   }
 
@@ -566,6 +606,20 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
       onSaved: (val) {
         someMethod(val);
         item.name = val;
+      },
+      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
+    );
+  }
+
+  Widget executionWidget() {
+    return TextFormField(
+      enabled: true,
+      decoration: InputDecoration(labelText: "Execution2"),
+      controller: myController2,
+      onSaved: (val) {
+        //someMethod(val);
+        item.execution = val;
       },
       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
@@ -607,4 +661,23 @@ class Item {
       "weight": weight
     };
   }
+}
+
+
+class Person1 {
+  Person1(this.name, this.execution);
+  final String name;
+  final String execution;
+  // named constructor
+  Person1.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        execution = json['execution'];
+  // method
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'execution': execution,
+    };
+  }
+ 
 }

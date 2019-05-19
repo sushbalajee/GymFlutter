@@ -60,12 +60,13 @@ flutter:
   - assets/5.jpg
   - assets/6.jpg
   - assets/7.jpg
+  - assets/MyWorkouts.jpg
+  - assets/MySessions.jpg
   - assets/JSON/gymapp-e8453-export.json
   - assets/JSON/testingLocal.json
-  - assets/groupEdit.png
-  - assets/BookEdit.png
-  - assets/personalEdit.png
-  - assets/journalEdit.png
+  - assets/JSON/ExerciseDB.json
+  - assets/MyClients.png
+  - assets/SessionPlanner.png
 
 
   fonts: 

@@ -23,6 +23,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
     String data = await DefaultAssetBundle.of(context)
         .loadString("assets/JSON/testingLocal.json");
     var jsonResponse = json.decode(data);
+
     WorkoutCategory post = new WorkoutCategory.fromJson(jsonResponse, hitMe);
 
     workouts.clear();

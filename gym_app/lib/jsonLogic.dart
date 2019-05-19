@@ -81,3 +81,4 @@ class WorkoutExercises {
         target: parsedJson['target']);
   }
 }
+

@@ -26,7 +26,6 @@ class PersonalisedWorkoutDetails extends StatefulWidget {
 }
 
 class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
-
   List<Item> items = List();
   //Item item;
   DatabaseReference clientExercisesRef;
@@ -38,7 +37,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
   void initState() {
     super.initState();
     //item = Item("", "", "", "", "", "", "");
-    final FirebaseDatabase database = FirebaseDatabase.instance; 
+    final FirebaseDatabase database = FirebaseDatabase.instance;
 
     //snek = database.reference().child('Workouts').child(widget.uid);
 
@@ -67,35 +66,40 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color(0xFFEFF1F3),
+      //backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
-        backgroundColor: Color(0xFF4A657A),
+        title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
+        backgroundColor: Color(0xFF232528),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
           Container(
-            color: Color(0xFF272727),
+            //color: Color(0xFF272727),
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "Ubuntu",
                     fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white)),
+                    fontWeight: FontWeight.w600)),
           ),
           Container(
-            color: Color(0xFF272727),
+            //color: Color(0xFF272727),
+            decoration: new BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                //                   <--- left side
+                color: Colors.grey[300],
+                width: 1.0,
+              )),
+            ),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: screenWidth * 0.035,
-                    color: Colors.white)),
+                    fontFamily: "Ubuntu", fontSize: screenWidth * 0.035)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -107,35 +111,47 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                   Animation<double> animation, int index) {
                 exerciseNumber += 1;
                 return Card(
-                    elevation: 3.0,
-                    child: new Padding(
-                        padding: EdgeInsets.only(top: 10.0),
-                        child: new Stack(children: <Widget>[
+                    margin: EdgeInsets.all(10.0),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                    elevation: 2.0,
+                    child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
+                            Container(
+                                color: Color(0xFF232528),
+                                child:
                             ListTile(
                               leading: CircleAvatar(
                                   child: new Text(
                                     "$exerciseNumber",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                            fontFamily: "Ubuntu",
+                                            color: Color(0xFF232528)),
                                   ),
-                                  backgroundColor: Color(0xFF4A657A)),
+                                  backgroundColor: Color(0xFFEFCA08)),
                               title: Text(items[index].name,
                                   style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      color: Color(0xFF4A657A),
-                                      fontSize: screenWidth * 0.05,
-                                      fontWeight: FontWeight.w700)),
-                            ),
+                                      fontFamily: "Ubuntu",
+                                          color: Color(0xFFEFCA08),
+                                      fontSize: screenWidth * 0.06,
+                                      fontWeight: FontWeight.w600)),
+                            )),
                             ListTile(
                                 subtitle: new Stack(children: <Widget>[
                               new Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    new Text("Weight: " + items[index].weight,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
+
+                                    Container(
+                                        padding: EdgeInsets.only(top: 10.0),
+                                        child: new Text(
+                                            "Weight: " +
+                                                items[index].weight,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04),
+                                            textAlign: TextAlign.left)),
                                     new Text(
                                         "Execution: " + items[index].execution,
                                         style: TextStyle(
@@ -168,7 +184,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                   ])
                             ]))
                           ])
-                        ])));
+                        ]));
               },
             ),
           ),

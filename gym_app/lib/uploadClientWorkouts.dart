@@ -76,108 +76,110 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
     var clientName = split[0];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF232528),
-        title: Text(clientName, style: TextStyle(fontFamily: "Ubuntu")),),
-      resizeToAvoidBottomPadding: false,
-      body: 
-      Column(
-        children: <Widget>[
-          Flexible(
-            child: FirebaseAnimatedList(
-              query: clientWorkoutsRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                return Card(
-                  color: Colors.grey[100],
-                  margin: EdgeInsets.all(1.0),
-                            shape: new RoundedRectangleBorder(
-                    //borderRadius: BorderRadius.all( Radius.circular(25.0))),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
-                    elevation: 0.6,
-                    child: new ListTile(
-                      contentPadding:
-                          EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0),
-                      trailing: new IconButton(
-                          iconSize: 35.0,
-                          icon: Icon(Icons.delete_forever),
-                          color: Color(0xFF405062),
-                          onPressed: () {
-                            if (items.length == 1) {
-                              confirmError(
-                                  context,
-                                  "Please add a new workout before deleting this one",
-                                  "");
-                            } else {
-                              confirmDelete(
-                                  context,
-                                  "Are you sure you want to delete this Workout?",
-                                  index);
-                            }
-                          }),
-                      title: Text(items[index].workoutname,
-                          style: TextStyle(  
-                              fontFamily: "Ubuntu",
-                              fontSize: screenWidth * 0.055,
-                              color: Color(0xFF22333B),
-                              fontWeight: FontWeight.w600)),
-                      onTap: () {
-                        Navigator.push(
-                            context, 
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    UploadClientWorkoutDetails(
-                                      title: items[index].workoutname,
-                                      muscleGroup: items[index].musclegroup,
-                                      description: items[index].description,
-                                      clientID: widget.clientID,
-                                      ptID: widget.ptID,
-                                      firebaseGeneratedKey: items[index].key,
-                                    )));
-                      },
-                    ));
-              },
+        appBar: AppBar(
+            backgroundColor: Color(0xFF232528),
+            title: Text(clientName, style: TextStyle(fontFamily: "Ubuntu"))),
+        resizeToAvoidBottomPadding: false,
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: FirebaseAnimatedList(
+                query: clientWorkoutsRef,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  return Card(
+                      color: Colors.grey[100],
+                      margin: EdgeInsets.all(1.0),
+                      shape: new RoundedRectangleBorder(
+                          //borderRadius: BorderRadius.all( Radius.circular(25.0))),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25.0),
+                              topRight: Radius.circular(25.0))),
+                      elevation: 0.6,
+                      child: new ListTile(
+                        contentPadding: EdgeInsets.only(
+                            top: 10.0, bottom: 10.0, left: 15.0),
+                        trailing: new IconButton(
+                            iconSize: 35.0,
+                            icon: Icon(Icons.delete_forever),
+                            color: Color(0xFF405062),
+                            onPressed: () {
+                              if (items.length == 1) {
+                                confirmError(
+                                    context,
+                                    "Please add a new workout before deleting this one",
+                                    "");
+                              } else {
+                                confirmDelete(
+                                    context,
+                                    "Are you sure you want to delete this Workout?",
+                                    index);
+                              }
+                            }),
+                        title: Text(items[index].workoutname,
+                            style: TextStyle(
+                                fontFamily: "Ubuntu",
+                                fontSize: screenWidth * 0.055,
+                                color: Color(0xFF22333B),
+                                fontWeight: FontWeight.w600)),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      UploadClientWorkoutDetails(
+                                        title: items[index].workoutname,
+                                        muscleGroup: items[index].musclegroup,
+                                        description: items[index].description,
+                                        clientID: widget.clientID,
+                                        ptID: widget.ptID,
+                                        firebaseGeneratedKey: items[index].key,
+                                      )));
+                        },
+                      ));
+                },
+              ),
             ),
-          ),
-          Container( 
-              width: screenWidth - 20,
-              child: new OutlineButton(
-                  borderSide: BorderSide(
-            color: Color(0xFF232528), //Color of the border
-            style: BorderStyle.solid, //Style of the border //width of the border
-          ),
-                  child: new Text("Sessions",
-                      style: TextStyle(
+            Container(
+                width: screenWidth - 20,
+                child: new OutlineButton(
+                    borderSide: BorderSide(
+                      color: Color(0xFF232528), //Color of the border
+                      style: BorderStyle
+                          .solid, //Style of the border //width of the border
+                    ),
+                    child: new Text("Sessions",
+                        style: TextStyle(
                           fontFamily: "Ubuntu",
                           fontSize: screenWidth * 0.050,
                           fontWeight: FontWeight.w600,
-                          )),
-                  color: Color(0xFF232528),
-                  onPressed: () {
-                    Navigator.push( 
-                        context, 
-                        MaterialPageRoute(
-                            builder: (context) => ClientPayments(
-                                  clientID: widget.clientID,
-                                  ptID: widget.ptID,
-                                )));
-                  })),
-          Container( 
-            padding: EdgeInsets.only(bottom:10.0),
-              width: screenWidth - 20,
-              child: new FlatButton( 
-                  child: new Text("Add Workout",
-                      style: TextStyle(
-                          fontFamily: "Ubuntu",
-                          fontSize: screenWidth * 0.045,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white)),
-                  color: Color(0xFF272727),
-                  onPressed: () {
-                    confirmDialog(context, "Add a new workout");
-                  }))
-        ],
-    ));
+                        )),
+                    color: Color(0xFF232528),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClientPayments(
+                                    clientID: widget.clientID,
+                                    ptID: widget.ptID,
+                                  )));
+                    })),
+            Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                width: screenWidth - 20,
+                child: new FlatButton(
+                    child: new Text("Add Workout",
+                        style: TextStyle(
+                            fontFamily: "Ubuntu",
+                            fontSize: screenWidth * 0.045,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white)),
+                    color: Color(0xFF272727),
+                    onPressed: () {
+                      confirmDialog(context, "Add a new workout");
+                    }))
+          ],
+        ));
   }
 
   Future<Null> confirmError(
@@ -240,74 +242,78 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
   Future<Null> confirmDialog(BuildContext context, String execution) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return showDialog<Null>( 
-        context: context, 
+    return showDialog<Null>(
+        context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new Scaffold(
             appBar: new AppBar(
-
-              leading: new IconButton(
-  icon: new Icon(Icons.close),
-  onPressed: () => Navigator.of(context).pop(),
-), 
-                
+                leading: new IconButton(
+                  icon: new Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Create a new workout", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
-          
+                title: new Text(
+                  "Create a new workout",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "Ubuntu",
+                      fontWeight: FontWeight.w500),
+                )),
             body: SingleChildScrollView(
-              padding: EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15.0),
                 child: Form(
-              key: formKey,
-              child: Flex(
-                direction: Axis.vertical,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "New Workout Name"),
-                    initialValue: "",
-                    onSaved: (val) => item.workoutname = val,
-                    validator: (val) => val == "" ? val : null,
+                  key: formKey,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    children: <Widget>[
+                      TextFormField(
+                        decoration:
+                            InputDecoration(labelText: "New Workout Name"),
+                        initialValue: "",
+                        onSaved: (val) => item.workoutname = val,
+                        validator: (val) => val == "" ? val : null,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Muscle Group"),
+                        initialValue: '',
+                        onSaved: (val) => item.musclegroup = val,
+                        validator: (val) => val == "" ? val : null,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: "Description"),
+                        initialValue: "",
+                        onSaved: (val) => item.description = val,
+                        validator: (val) => val == "" ? val : null,
+                      ),
+                      Container(
+                        width: screenWidth - 30,
+                        padding: EdgeInsets.only(top: 30.0),
+                        child: new FlatButton(
+                          child: new Text("Submit",
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: screenWidth * 0.045,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white)),
+                          color: Colors.black,
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              Navigator.of(context).pop();
+                            }
+                            handleSubmit();
+                            setState(() => _UploadClientWorkoutsState());
+                            //Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Muscle Group"),
-                    initialValue: '',
-                    onSaved: (val) => item.musclegroup = val,
-                    validator: (val) => val == "" ? val : null,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Description"),
-                    initialValue: "",
-                    onSaved: (val) => item.description = val,
-                    validator: (val) => val == "" ? val : null,
-                  ),
-                  Container(
-                    width: screenWidth - 30,
-                    padding: EdgeInsets.only(top: 30.0),
-                    child: new FlatButton(
-                      child: new Text("Submit",
-                          style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: screenWidth * 0.045,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white)),
-                      color: Colors.black,
-                      onPressed: () {
-                        if(formKey.currentState.validate()){
-                  Navigator.of(context).pop();}
-                        handleSubmit();
-                        setState(() => _UploadClientWorkoutsState());
-                        //Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            )),
+                )),
           );
         });
   }
-
 }
 
 class Item {
