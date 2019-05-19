@@ -112,6 +112,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                         "$exerciseNumber",
                                         style: TextStyle(
                                             fontFamily: "Ubuntu",
+                                            fontWeight: FontWeight.w700,
                                             color: Color(0xFF232528)),
                                       ),
                                       backgroundColor: Color(0xFFEFCA08)),

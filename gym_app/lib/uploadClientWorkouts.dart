@@ -70,6 +70,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
   @override
   Widget build(BuildContext context) {
+    int workoutNumber = 0;
     double screenWidth = MediaQuery.of(context).size.width;
 
     var split = widget.clientID.split(" - ");
@@ -87,6 +88,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                 query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
+                      workoutNumber += 1;
                   return Card(
                       color: Colors.grey[100],
                       margin: EdgeInsets.all(1.0),
@@ -99,10 +101,21 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       child: new ListTile(
                         contentPadding: EdgeInsets.only(
                             top: 10.0, bottom: 10.0, left: 15.0),
+                            leading: CircleAvatar(
+                                          child: new Text(
+                                            "$workoutNumber",
+                                            style:
+                                                TextStyle(
+                                      fontFamily: "Ubuntu",
+                                      fontSize: screenWidth * 0.055,
+                                      color: Color(0xFFEFCA08),
+                                      fontWeight: FontWeight.w600),
+                                          ),
+                                          backgroundColor: Color(0xFF232528)),
                         trailing: new IconButton(
                             iconSize: 35.0,
                             icon: Icon(Icons.delete_forever),
-                            color: Color(0xFF405062),
+                            color: Color(0xFF232528),
                             onPressed: () {
                               if (items.length == 1) {
                                 confirmError(

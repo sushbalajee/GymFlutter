@@ -1,10 +1,74 @@
 [{
-	"name": "Test",
-	"execution": "Testing"
+	"name": "Air Bike",
+	"execution": "Lie on your back with your knees bent and feet flat on the floor. Place hands behind your head. Raise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle. Slowly pedal them in the air, alternating as if riding a bicycle."
 }, {
-	"name": "Test1",
-	"execution": "Testing1"
+	"name": "Barbell Rollout",
+	"execution": "Kneel and hold a barbell under your shoulders on the ground. Keep your core strong as you roll the bar out in front of you, keeping your arms straight. Return to the starting position."
 }, {
-	"name": "Test2",
-	"execution": "Testing2"
+	"name": "Cable Woodchoppers",
+	"execution": "Set the cable pulley to slightly above chest height. Keep your body facing forward with hips stable. Grab the pulley handle, fully extend your arms and bring your arms forward and across your body. Hold for 1 second at the end of the movement and slowly return to starting position."
+},
+{
+	"name": "Cross Body Crunch",
+	"execution": "Lie on your back with hips and knees bent. Place hands on chest with forearms crossed. Flex and twist waist to one direction while raising torso from bench by bending hips. Return until back of shoulders contact floor or mat. Repeat to opposite side alternating twists."
+},
+{
+	"name": "Crunch",
+	"execution": "Lay down flat and hold your hands behind your neck. Lift up with a rolling movement of your back, you should feel each individual vertebrae losing contact with the ground. At the highest point, contract your abs as much as you can and hold there for 2 sec. Return to the starting position by unrolling your back."
+},
+{
+	"name": "Dumbbell Side Bend",
+	"execution": "Bend waist to opposite side of dumbbell until a slight stretch is felt. Lower to the same distance on the opposite side. Continue by alternating sides."
+},
+{
+	"name": "Flutter Kicks",
+	"execution": "Lay down flat and lift your straightened legs from the ground at a 45 degree angle. As your left foot travels downward and nearly touches the floor, your right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your right foot down until it nearly touches the floor, and bring your left foot upwards. Your head should stay off the ground, supported by tightened upper abdominals."
+},
+{
+	"name": "Hanging Leg Raises",
+	"execution": "Grasp and hang from a high bar. Raise legs by flexing hips and knees until hips are fully flexed. Continue to raise knees toward shoulders by flexing waist. Return until waist, hips, and knees are extended."
+},
+{
+	"name": "Landmine 180",
+	"execution": "Hold one end of a barbell with the other end anchored. Tighten your abs as you move the bar in an arc from one side to the next."
+},
+{
+	"name": "Mountain Climbers",
+	"execution": "Get into a push-up position. Keep your hips low as your alternate bringing your knees in toward your chest."
+},
+{
+	"name": "Reverse Crunch",
+	"execution": "Lie face up on the floor with your palms facing down. Bend your hips and knees 90 degrees. Raise your hips off the floor and crunch them inward. Pause, and then slowly lower your legs until your heels nearly touch the floor."
+},
+{
+	"name": "Russian Twist",
+	"execution": "Start by sitting on the floor, with knees bent and feet flat on the ground. Lean back so your upper body is at a 45-degree angle to the floor. Keep your back straight at this angle throughout the exercise. Link your hands together in front of your chest, brace your core and raise your legs up off the ground. Rotate your arms all the way over to one side, then do the same in the other direction."
+},
+{
+	"name": "Side Crunch",
+	"execution": "Lay down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position outside of leg down to side. Flex waist, raising your upper body off the ground. Return to the starting position and repeat with movement in opposite leg position."
+},
+{
+	"name": "Sit Up",
+	"execution": "Lay down flat with knees bent, feet flat on the floor and hands behind your head. Ask a partner or use a weight (barbell, weight plate etc.) to keep you feet fixed. Lift your upper body till your head or elbows touch your knees. Return slowly to the starting position"
+},
+{
+	"name": "Stability Ball Crunch",
+	"execution": "Sit on exercise ball. Walk forward and lie back on the ball with your shoulders and head hanging off, and your knees and hips bent. Gently hyperextend your back on the contour of ball. Place hands behind neck, or beside your head. Flex waist to raise upper torso. Return to starting position"
+},
+{
+	"name": "Stability Ball Pull In",
+	"execution": "Start in a high plank, with wrists under shoulders, core engaged, and top of your feet resting on ball. Keep hips level and use core to pull knees toward your chest, rolling the ball toward you. Straighten legs and return to the starting position."
+},
+{
+	"name": "Straight Arm Crunch",
+	"execution": "Lie on your back in a normal sit-up position, with feet flat on ground, knees bent and your arms stretched out straight on each side. Perform a crunch by reaching both of your arms straight out in front of you and return slowly to the start position."
+},
+{
+	"name": "Tuck Crunch",
+	"execution": "Lie on your back, cross your arms over your chest and grasp your opposing shoulders. Raise your legs off the floor by bending your knees and keeping your calves parallel with the floor. Raise your torso off the floor but keep your back on the mat. Slowly return to the starting position."
+},
+{
+	"name": "Windshield Wiper",
+	"execution": "Hold onto the handles, set high off the ground, and hang below them. Lift your legs straight to the ceiling and rotate them from side to side."
 }]

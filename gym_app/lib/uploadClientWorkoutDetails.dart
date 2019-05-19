@@ -9,7 +9,7 @@ import 'dart:convert';
 class UploadClientWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
   final String clientID;
-  final String title; 
+  final String title;
   final String muscleGroup;
   final String description;
   final String ptID;
@@ -29,10 +29,6 @@ class UploadClientWorkoutDetails extends StatefulWidget {
 }
 
 class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
-  List<String> suggestions = [
-    "Weighted-Crunch",
-  ];
-
   List<String> added = [];
   List<Item> items = List();
   List<String> suggestionsForDropDown = [];
@@ -58,10 +54,9 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
     fetchPost();
 
-
     item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    
+
     exercisesRef = database
         .reference()
         .child('Workouts')
@@ -79,10 +74,10 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         .loadString("assets/JSON/ExerciseDB.json");
     var jsonResponse = json.decode(data);
 
-    for(var x in jsonResponse){
+    for (var x in jsonResponse) {
       suggestionsForDropDown.add(x['name']);
 
-      if(x['name'] == "Test1"){
+      if (x['name'] == "Test1") {
         print(x['execution']);
       }
     }
@@ -93,15 +88,12 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         .loadString("assets/JSON/ExerciseDB.json");
     var jsonResponse = json.decode(data);
 
-    for(var x in jsonResponse){
-      //suggestionsForDropDown.add(x['name']);
-      if(x['name'] == currText){
+    for (var x in jsonResponse) {
+      if (x['name'] == currText) {
         textForEx = x['execution'];
-        //print(x['execution']);
       }
     }
     myController2.text = textForEx;
-    
   }
 
   someMethod(String target) async {
@@ -167,8 +159,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
       ),
       resizeToAvoidBottomPadding: false,
-      body: 
-      Column(
+      body: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
@@ -179,22 +170,22 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     fontSize: screenWidth * 0.045,
                     fontWeight: FontWeight.w600)),
           ),
-          Container( 
+          Container(
             decoration: new BoxDecoration(
-    border: Border(
-      bottom: BorderSide( //                   <--- left side
-        color: Colors.grey[300],
-        width: 1.0,
-      )),
-  ),
+              border: Border(
+                  bottom: BorderSide(
+                //                   <--- left side
+                color: Colors.grey[300],
+                width: 1.0,
+              )),
+            ),
             //color: Color(0xFF550000),
             padding: EdgeInsets.only(
                 top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Ubuntu",
-                    fontSize: screenWidth * 0.035)),
+                    fontFamily: "Ubuntu", fontSize: screenWidth * 0.035)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -206,124 +197,161 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   Animation<double> animation, int index) {
                 exerciseNumber += 1;
                 return Card(
-                  
-                    color: Colors.grey[100],
-                  margin: EdgeInsets.all(0.0),
-                            shape: new RoundedRectangleBorder( 
-                    borderRadius: BorderRadius.all( Radius.circular(0.0))),
+                    //color: Colors.grey[100],
+                    margin: EdgeInsets.all(10.0),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(0.0))),
                     //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
                     elevation: 2.0,
-                    child: 
-                    new Container( 
-                      decoration: new BoxDecoration(
-      color: Colors.grey,
-      gradient: new LinearGradient(
-        colors: [Colors.grey[100], Colors.white],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter
-      ),
-    ),
-                      child: new Padding( 
-                        padding: EdgeInsets.only(top: 10.0),
-                        child: new Stack(children: <Widget>[
-                          new Column(children: <Widget>[
-                            ListTile(
-                                leading: CircleAvatar(
-                                    radius: 20.0,
-                                    child: new Text(
-                                      "$exerciseNumber",
-                                      style: TextStyle(color: Colors.white),
+                    child: new Stack(children: <Widget>[
+                              new Column(children: <Widget>[
+                                Container(
+                                color: Color(0xFF232528),
+                                child:
+                                ListTile(
+                                    leading: CircleAvatar(
+                                        child: new Text(
+                                          "$exerciseNumber",
+                                          style: TextStyle(color: Color(0xFF232528), fontWeight: FontWeight.w700, fontFamily: "Ubuntu"),
+                                        ),
+                                        backgroundColor: Color(0xFFEFCA08)),
+                                    trailing: new IconButton(
+                                        iconSize: 35.0,
+                                        icon: Icon(Icons.delete_forever),
+                                        color: Color(0xFFEFCA08),
+                                        onPressed: () {
+                                          exercisesRef
+                                              .child(items[index].key)
+                                              .remove();
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      UploadClientWorkoutDetails(
+                                                        description:
+                                                            widget.description,
+                                                        firebaseGeneratedKey: widget
+                                                            .firebaseGeneratedKey,
+                                                        key: widget.key,
+                                                        muscleGroup:
+                                                            widget.muscleGroup,
+                                                        title: widget.title,
+                                                        ptID: widget.ptID,
+                                                        clientID:
+                                                            widget.clientID,
+                                                      )));
+                                        }),
+                                    title: new Stack(children: <Widget>[
+                                      new Row(children: <Widget>[
+                                        Flexible(
+                                            child: Container(
+                                                child: Text(items[index].name,
+                                                    style: TextStyle(
+                                                        fontFamily: "Ubuntu",
+                                                        color:
+                                                            Color(0xFFEFCA08),
+                                                        fontSize:
+                                                            screenWidth * 0.06,
+                                                        fontWeight:
+                                                            FontWeight.w600)))),
+                                        Container(
+                                            child: new IconButton(
+                                                icon: new Icon(Icons.edit),
+                                                color: Color(0xFFEFCA08),
+                                                onPressed: () {
+                                                  confirmEdit(context,
+                                                      "Edit Exercise", index);
+                                                }))
+                                      ])
+                                    ]))),
+                                ListTile(
+                                    subtitle: new Stack(children: <Widget>[
+                                  new Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                        padding: EdgeInsets.only(top: 10.0),
+                                        child:
+                                        new Text(
+                                            "Weight: " + items[index].weight,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04))),
+                                        /*new Text(
+                                            "Execution: " +
+                                                items[index].execution,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04)),*/
+                                        new Text("Sets: " + items[index].sets,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04)),
+                                        new Text(
+                                            "Repetitions: " + items[index].reps,
+                                            style: TextStyle(
+                                                fontFamily: "Prompt",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04)),
+                                        new Text(
+                                            "Rest times: " +
+                                                items[index].rest +
+                                                " seconds between sets",
+                                            style: TextStyle(
+                                                color: Color(0xFF22333B),
+                                                fontFamily: "Prompt",
+                                                fontSize: screenWidth * 0.04)),
+                                        new Padding(
+                                          padding: EdgeInsets.only(top: 15.0),
+                                          child: Image.network(
+                                              items[index].target),
+                                        ),
+                                        new ExpansionTile(
+                                      title: Align(
+                                          alignment: Alignment(
+                                              -1 - (60 / screenWidth), 0.0),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text("Execution",
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ])),
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 0.0),
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                    items[index].execution,
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    backgroundColor: Color(0xFF405062)),
-                                trailing: new IconButton(
-                                    iconSize: 35.0,
-                                    icon: Icon(Icons.delete_forever),
-                                    color: Color(0xFF405062),
-                                    onPressed: () {
-                                      exercisesRef
-                                          .child(items[index].key)
-                                          .remove();
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => UploadClientWorkoutDetails(
-                                                    description:
-                                                        widget.description,
-                                                    firebaseGeneratedKey: widget
-                                                        .firebaseGeneratedKey,
-                                                    key: widget.key,
-                                                    muscleGroup:
-                                                        widget.muscleGroup,
-                                                    title: widget.title,
-                                                    ptID: widget.ptID,
-                                                    clientID: widget.clientID,
-                                                  )));
-                                    }),
-                                title: new Stack(children: <Widget>[
-                                  new Row(children: <Widget>[
-                                    Flexible(
-                                        child: Container(
-                                            child: Text(items[index].name,
-                                                style: TextStyle(
-                                                    fontFamily: "Ubuntu",
-                                                    color: Color(0xFF405062),
-                                                    fontSize:
-                                                        screenWidth * 0.05,
-                                                    fontWeight:
-                                                        FontWeight.w700)))),
-                                    Container(
-                                        child: new IconButton(
-                                            icon: new Icon(Icons.edit),
-                                            color: Color(0xFF405062),
-                                            onPressed: () {
-                                              confirmEdit(context,
-                                                  "Edit Exercise", index);
-                                            }))
-                                  ])
-                                ])),
-                            ListTile(
-                                subtitle: new Stack(children: <Widget>[
-                              new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    new Text("Weight: " + items[index].weight,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text(
-                                        "Execution: " + items[index].execution,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text("Sets: " + items[index].sets,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text(
-                                        "Repetitions: " + items[index].reps,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text(
-                                        "Rest times: " +
-                                            items[index].rest +
-                                            " seconds between sets",
-                                        style: TextStyle(
-                                            color: Color(0xFF22333B),
-                                            fontFamily: "Prompt",
-                                            fontSize: screenWidth * 0.04)),
-                                    new Padding(
-                                      padding: EdgeInsets.only(top: 15.0),
-                                      child: Image.network(items[index].target),
-                                    ),
-                                  ])
-                            ]))
-                          ])
-                        ]))));
+                                      ])
+                                ]))
+                              ])
+                            ]));
               },
             ),
           ),
@@ -354,16 +382,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         builder: (BuildContext context) {
           return new Scaffold(
             appBar: new AppBar(
-
-              leading: new IconButton(
-  icon: new Icon(Icons.close),
-  onPressed: () => Navigator.of(context).pop(),
-), 
-                
+                leading: new IconButton(
+                  icon: new Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Add a new exercise", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
-          
+                title: new Text(
+                  "Add a new exercise",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "Ubuntu",
+                      fontWeight: FontWeight.w500),
+                )),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(15.0),
               child: Form(
@@ -386,13 +417,14 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
                     ),
-                    TextFormField(
+                    /*TextFormField(
                       decoration: InputDecoration(labelText: "Execution"),
                       initialValue: "",
                       onSaved: (val) => item.execution = val,
+                      //controller: myController2,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    ),*/
                     TextFormField(
                       decoration: InputDecoration(labelText: "Rest"),
                       initialValue: "",
@@ -409,23 +441,23 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     ),
                     Container(
                       width: screenWidth - 30,
-                    padding: EdgeInsets.only(top: 30.0),
+                      padding: EdgeInsets.only(top: 30.0),
                       child: new FlatButton(
-                color: Colors.grey[900],
-                child: new Text("Submit",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                onPressed: () {
-                  //final FormState form = formKey.currentState;
-                  if(formKey.currentState.validate()){
-                  Navigator.of(context).pop();}
-                  handleSubmit();
-                  
-                },
-              ),
+                        color: Colors.grey[900],
+                        child: new Text("Submit",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.045,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white)),
+                        onPressed: () {
+                          //final FormState form = formKey.currentState;
+                          if (formKey.currentState.validate()) {
+                            Navigator.of(context).pop();
+                          }
+                          handleSubmit();
+                        },
+                      ),
                     ),
                     Opacity(
                         opacity: 0.0,
@@ -444,7 +476,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         });
   }
 
-
   Future<Null> confirmEdit(BuildContext context, String execution, int ind) {
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -454,16 +485,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         builder: (BuildContext context) {
           return new Scaffold(
             appBar: new AppBar(
-
-              leading: new IconButton(
-  icon: new Icon(Icons.close),
-  onPressed: () => Navigator.of(context).pop(),
-), 
-                
+                leading: new IconButton(
+                  icon: new Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Edit this exercise", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
-          
+                title: new Text(
+                  "Edit this exercise",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "Ubuntu",
+                      fontWeight: FontWeight.w500),
+                )),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(15.0),
               child: Form(
@@ -510,18 +544,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       padding: EdgeInsets.only(top: 20.0),
                       width: screenWidth - 30,
                       child: new FlatButton(
-                child: new Text("Submit",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                onPressed: () {
-                  handleEdit(items[ind].key);
-                  Navigator.of(context).pop();
-                },
-              ),),
+                        child: new Text("Submit",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.045,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white)),
+                        color: Colors.black,
+                        onPressed: () {
+                          handleEdit(items[ind].key);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
                     Opacity(
                         opacity: 0.0,
                         child: Container(
@@ -546,7 +581,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                 ),
               ),
             ),
-
           );
         });
   }
@@ -607,22 +641,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         someMethod(val);
         item.name = val;
       },
-      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
+      validator: (val) => val == "" ? "This field cannot be empty" : null,
     );
   }
 
   Widget executionWidget() {
     return TextFormField(
       enabled: true,
-      decoration: InputDecoration(labelText: "Execution2"),
+      decoration: InputDecoration(labelText: "Execution"),
       controller: myController2,
       onSaved: (val) {
-        //someMethod(val);
         item.execution = val;
       },
-      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
+      validator: (val) => val == "" ? "This field cannot be empty" : null,
     );
   }
 }
@@ -661,23 +692,4 @@ class Item {
       "weight": weight
     };
   }
-}
-
-
-class Person1 {
-  Person1(this.name, this.execution);
-  final String name;
-  final String execution;
-  // named constructor
-  Person1.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        execution = json['execution'];
-  // method
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'execution': execution,
-    };
-  }
- 
 }

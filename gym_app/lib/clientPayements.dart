@@ -69,9 +69,9 @@ class _ClientPaymentsState extends State<ClientPayments> {
       return Scaffold(
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          backgroundColor: Color(0xFF4A657A),
+          backgroundColor: Color(0xFF232528),
           title: Text('Client Payments',
-              style: TextStyle(fontFamily: "Montserrat")),
+              style: TextStyle(fontFamily: "Ubuntu")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -88,8 +88,9 @@ class _ClientPaymentsState extends State<ClientPayments> {
                           b.date.substring(b.date.length - 8, b.date.length)));
 
                   return Card(
-                      color: Color(items[index].paid),
-                      elevation: 3.0,
+                      color: Colors.grey[100],
+                      margin: EdgeInsets.all(1.0),
+                      elevation: 0.6,
                       child: new ListTile(
                         title: Text(items[index].date,
                             style: TextStyle(
@@ -104,7 +105,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                         trailing: new IconButton(
                             iconSize: 40.0,
                             icon: Icon(Icons.monetization_on),
-                            color: Colors.white,
+                            color: Color(items[index].paid),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
                                 informPT(context, index);

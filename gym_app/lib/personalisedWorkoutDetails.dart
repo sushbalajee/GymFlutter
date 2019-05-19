@@ -125,6 +125,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                   child: new Text(
                                     "$exerciseNumber",
                                     style: TextStyle(
+                                            fontWeight: FontWeight.w700,
                                             fontFamily: "Ubuntu",
                                             color: Color(0xFF232528)),
                                   ),
