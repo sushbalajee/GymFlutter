@@ -153,12 +153,12 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                                 color: Color(0xFF22333B),
                                                 fontSize: screenWidth * 0.04),
                                             textAlign: TextAlign.left)),
-                                    new Text(
+                                    /*new Text(
                                         "Execution: " + items[index].execution,
                                         style: TextStyle(
                                             fontFamily: "Prompt",
                                             color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
+                                            fontSize: screenWidth * 0.04)),*/
                                     new Text("Sets: " + items[index].sets,
                                         style: TextStyle(
                                             fontFamily: "Prompt",
@@ -181,6 +181,43 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                     new Padding(
                                       padding: EdgeInsets.only(top: 15.0),
                                       child: Image.network(items[index].target),
+                                    ),
+                                    new ExpansionTile(
+                                      title: Align(
+                                          alignment: Alignment(
+                                              -1 - (60 / screenWidth), 0.0),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text("Execution",
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ])),
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 10.0),
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                    items[index].execution,
+                                                    style: TextStyle(
+                                                        fontFamily: "Prompt",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ])
                             ]))

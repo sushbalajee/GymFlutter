@@ -183,8 +183,8 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     } else {
       return Scaffold(
           appBar: AppBar(
-            title: Text('My Personalised Workouts'),
-            backgroundColor: Colors.grey[900],
+            title: Text('Upcoming Sessions', style: TextStyle(fontFamily: "Ubuntu")),
+            backgroundColor: Color(0xFF232528),
           ),
           resizeToAvoidBottomPadding: false,
           body: loadingScreen());

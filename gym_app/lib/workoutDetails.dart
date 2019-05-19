@@ -153,7 +153,10 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                             fontFamily: "Prompt",
                                             color: Color(0xFF22333B),
                                             fontSize: screenWidth * 0.04)),
-                                    new ExpansionTile(
+                                    new Image.network(
+                                        workoutExercisesJSON[index].target),
+
+                                        new ExpansionTile(
                                       title: Align(
                                           alignment: Alignment(
                                               -1 - (60 / screenWidth), 0.0),
@@ -170,8 +173,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                               ])),
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 0.0),
+                                          padding: const EdgeInsets.only(bottom:10.0),
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: Column(
@@ -192,8 +194,6 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                         ),
                                       ],
                                     ),
-                                    new Image.network(
-                                        workoutExercisesJSON[index].target),
                                   ])
                             ]))
                           ])
