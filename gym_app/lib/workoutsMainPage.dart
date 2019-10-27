@@ -3,8 +3,6 @@ import 'workouts.dart';
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 
-
-
 class PageTwo extends StatefulWidget {
   @override
   PageTwoState createState() {
@@ -13,20 +11,19 @@ class PageTwo extends StatefulWidget {
 }
 
 class PageTwoState extends State<PageTwo> {
-
   var connectionStatus = 'Unknown';
   var connectivity;
   StreamSubscription<ConnectivityResult> subscription;
 
   final List<String> upperBodyCategories = [
-  'Abs',
-  'Back',
-  'Biceps',
-  'Chest',
-  'Legs',
-  'Shoulders',
-  'Triceps',
-  'Cardio'
+    'Abs',
+    'Back',
+    'Biceps',
+    'Chest',
+    'Legs',
+    'Shoulders',
+    'Triceps',
+    'Cardio'
   ];
 
   final List<String> lowerBodyCategories = [
@@ -60,61 +57,62 @@ class PageTwoState extends State<PageTwo> {
 
     return new Scaffold(
         backgroundColor: Colors.grey[100],
-        body: 
-                  new Stack(children: <Widget>[
-                    new Column(children: <Widget>[
-                      sliderTitles(
-                          "Muscle Group Focus", screenHeight * 0.045, screenWidth),
-                      horizontalSlider(screenHeight, this.upperBodyCategories,
-                          this.picIndexes),
-                      sliderTitles(
-                          "Goals", screenHeight * 0.045, screenWidth),
-                      horizontalSlider(screenHeight, this.lowerBodyCategories,
-                          this.picIndexes),
-                      sliderTitles("Muscle / Day splits", screenHeight * 0.045, screenWidth),
-                      horizontalSlider(screenHeight, this.cardioCategories,
-                          this.picIndexes)
-                    ])
-                  ])
-              
-        );
+        body: new Stack(children: <Widget>[
+          new Column(children: <Widget>[
+            sliderTitles(
+                "Muscle Group Focus", screenHeight * 0.045, screenWidth),
+            horizontalSlider(
+                screenHeight, this.upperBodyCategories, this.picIndexes),
+            sliderTitles("Goals", screenHeight * 0.045, screenWidth),
+            horizontalSlider(
+                screenHeight, this.lowerBodyCategories, this.picIndexes),
+            sliderTitles(
+                "Muscle / Day splits", screenHeight * 0.045, screenWidth),
+            horizontalSlider(
+                screenHeight, this.cardioCategories, this.picIndexes)
+          ])
+        ]));
   }
 }
 
 //-----------------------------------------------------------------------------------//
 
 Widget sliderTitles(String title, double height, double width) {
-  return Card(
-      elevation: 0.0,
-      child: Container(
-        color: Colors.grey[100],
-        alignment: Alignment(0.0, 0.0),
-        height: height,
-        width: width,
-        child: new Text(title,
-            style: TextStyle(
-                fontFamily: "Prompt",
-                fontSize: 19.0,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey[800])),
-      ));
+  return Container(
+    
+    alignment: Alignment(0.0, 0.0),
+    height: height,
+    width: width,
+    child: new Text(title,
+        style: TextStyle(
+            fontFamily: "Prompt",
+            fontSize: 19.0,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF232528))),
+  );
 }
 
 //-----------------------------------------------------------------------------------//
 
-Widget horizontalSlider(double screenHeight, List<String> titles,
-    List<String> picIndex) {
-  return Container(
-    height: screenHeight * 0.195,
-    child: new ListView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      physics: const ClampingScrollPhysics(),
-      itemBuilder: (BuildContext content, int index) =>
-          CreateTile(titles[index], picIndex[index]),
-      itemCount: titles.length,
-    ),
-  );
+Widget horizontalSlider(
+    double screenHeight, List<String> titles, List<String> picIndex) {
+  return Card(
+      shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(0.0)),
+      elevation: 5.0,
+      margin: EdgeInsets.only(bottom: 0.0, left: 0.0, right: 0.0),
+      child: Container(
+        margin: EdgeInsets.only(left: 15, bottom: 10.0, top: 10.0),
+        height: screenHeight * 0.195,
+        child: new ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemBuilder: (BuildContext content, int index) =>
+              CreateTile(titles[index], picIndex[index]),
+          itemCount: titles.length,
+        ),
+      ));
 }
 
 //-----------------------------------------------------------------------------------//
@@ -130,40 +128,38 @@ class CreateTile extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Card(
-        shape: Border.all(
-            color: Colors.grey[900], width: 0.1, style: BorderStyle.solid),
         child: new Container(
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage("assets/$picName.jpg"),
-              fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage("assets/$picName.jpg"),
+          fit: BoxFit.cover,
+          colorFilter: new ColorFilter.mode(
+              Colors.black.withOpacity(0.9), BlendMode.dstATop),
+        ),
+      ),
+      width: screenWidth * 0.40,
+      child: FlatButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkoutsList(
+                          value: name,
+                        )));
+          },
+          child: SizedBox(
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              child: Text(
+                name,
+                style: TextStyle(
+                    fontFamily: "Prompt",
+                    fontSize: screenWidth * 0.055,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+              ),
             ),
-          ),
-          width: screenWidth * 0.40,
-          child: FlatButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkoutsList(
-                              value: name,
-                            )));
-              },
-              child: SizedBox(
-                child: Container(
-                  alignment: AlignmentDirectional.center,
-                  child: Text(
-                    name,
-                    style: TextStyle(
-                        fontFamily: "Prompt",
-                        fontSize: screenWidth * 0.055,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
-                  ),
-                ),
-              )),
-        ));
+          )),
+    ));
   }
 }

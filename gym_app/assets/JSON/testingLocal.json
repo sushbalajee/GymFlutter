@@ -2,10 +2,10 @@
 
     "Abs": [
         {
-            "description": "Do these exercises in order five times through. Don’t rest between exercises, but pause for 30 seconds after the last move before starting your next round.",
+            "description": "Do these exercises in order five times through.\n Don’t rest between exercises, but pause for 30 seconds after the last move before starting your next round.",
             "exercises": [
                 {
-                    "execution": "Hold onto the handles, set high off the ground, and hang below them. Lift your legs straight to the ceiling and rotate them from side to side.",
+                    "execution": "Hold onto the handles, set high off the ground, and hang below them.\nLift your legs straight to the ceiling and rotate them from side to side.",
                     "name": "Windshield Wiper",
                     "reps": "14",
                     "rest": "No rest",
@@ -13,7 +13,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8"
                 },
                 {
-                    "execution": "Kneel and hold a barbell under your shoulders on the ground. Keep your core strong as you roll the bar out in front of you, keeping your arms straight. Return to the starting position.",
+                    "execution": "Kneel and hold a barbell under your shoulders on the ground.\n Keep your core strong as you roll the bar out in front of you, keeping your arms straight.\n Return to the starting position.",
                     "name": "Barbell Rollout",
                     "reps": "30",
                     "rest": "No rest",
@@ -21,7 +21,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FBarbell%20Rollout.gif?alt=media&token=904949c3-8075-4ef7-a3a9-7964b1d9716b"
                 },
                 {
-                    "execution": "Hold one end of a barbell with the other end anchored. Tighten your abs as you move the bar in an arc from one side to the next.",
+                    "execution": "Hold one end of a barbell with the other end anchored.\n Tighten your abs as you move the bar in an arc from one side to the next.",
                     "name": "Landmine 180",
                     "reps": "15",
                     "rest": "No rest",
@@ -29,7 +29,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FLandmine%20180.gif?alt=media&token=35a5da8f-0985-40d4-bf8a-36cb331a2d56"
                 },
                 {
-                    "execution": "Get into a push-up position. Keep your hips low as your alternate bringing your knees in toward your chest.",
+                    "execution": "Get into a push-up position.\n Keep your hips low as your alternate bringing your knees in toward your chest.",
                     "name": "Mountain Climbers",
                     "reps": "1 Minute - AMRAP",
                     "rest": "30 Seconds before starting next round",
@@ -68,7 +68,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSit%20Up.gif?alt=media&token=e0c71b11-1d0b-448b-aa80-7f5428d11ad6"
                 },
                 {
-                    "execution": "Lie on your back with your knees bent and feet flat on the floor. Place hands behind your head. Raise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle. Slowly pedal them in the air, alternating as if riding a bicycle.",
+                    "execution": "Lie on your back with your knees bent, feet flat on the floor and hands behind your head.\n\nRaise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle.\nSlowly pedal them in the air, alternating legs as if riding a bicycle.",
                     "name": "Air Bike",
                     "reps": "60 Seconds - AMAP",
                     "rest": "30 Seconds",
