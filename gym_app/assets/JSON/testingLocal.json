@@ -433,5 +433,604 @@
             "musclegroup": "Back",
             "workoutname": "The Low Down"
         }
+    ],
+    "Chest": [
+        {
+            "description": "This workout is about hypertrophy, not power and strength. It implements higher reps on the inner-chest exercises and more total volume to deliver a good pump.",
+            "exercises": [
+                {
+                    "execution": "Lie flat on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest.",
+                    "name": "Dumbbell Fly",
+                    "reps": "12-15",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie flat on bench. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press bar upward until your arms are extended.",
+                    "name": "Bench Press",
+                    "reps": "8",
+                    "rest": "90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp two opposing high pulley cables and stand with the pulleys to either side. Bend over slightly by flexing hips and knees, bend your elbows slightly and internally rotate shoulders so that your elbows are back initially.\n\nBring the cable handles together in hugging motion with elbows in fixed position. Keep your shoulders internally rotated so that your elbows are pointed upward at the top of the motion, and out to the sides at the bottom of the movement. Return to starting position until your chest muscles are stretched.",
+                    "name": "Cable Fly",
+                    "reps": "12-15",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie down with your hands placed on top of the bosu ball, and raise your body off floor by extending arms and keeping your body straight.\n\nLower body by bending your arms, until your chest is just above the floor. Push your body up until arms are extended.",
+                    "name": "Push Up (Bosu Ball)",
+                    "reps": "AMRAP",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Chest",
+            "workoutname": "Inner Chest Focus"
+        },
+        {
+            "description": "Go heavy on the first exercise, and then pump the muscles full of blood with lighter weights and higher reps for the remaining exercises",
+            "exercises": [
+                {
+                    "execution": "Lie supine on an incline bench. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press the bar upward until your arms are extended.",
+                    "name": "Incline Bench Press",
+                    "reps": "5",
+                    "rest": "90 seconds",
+                    "sets": "5",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders.",
+                    "name": "Dumbbell Bench Press",
+                    "reps": "6-8",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit with your back against the pad, and grasp the handles on both sides at shoulder height. Slightly bend elbows and internally rotate shoulders so your elbows are back.\n\nKeeping elbows pointed high, push the lever handles forward and together. Slowly return to the starting position until a mild stretch is felt in your chest or shoulders.",
+                    "name": "Machine Seated Fly",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Chest",
+            "workoutname": "The Pump"
+        },
+        {
+            "description": "Keep all the work/weight relatively light, with a focus on experimenting with intensity techniques that work the chest to exhaustion. Perform the exercises in sequence with no rest in between. Rest for up to two minutes between rounds and repeat for a total of 3 rounds.",
+            "exercises": [
+                {
+                    "execution": "Sit with your chest approximately at the height of the handles. Grasp handles with wide overhand grip and elbows out to the sides, just below your shoulders.\n\nPush levers until your arms are fully extended. Slowly return to the starting position until a mild stretch is felt in your chest.",
+                    "name": "Machine Chest Press",
+                    "reps": "8-10",
+                    "rest": "No rest",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie with your upper back perpendicular to the bench. Flex hips slightly and grasp one dumbbell with both hands under the inner plate of the dumbbell. Position the dumbbell over your chest with elbows slightly bent.\n\nKeeping elbows slightly bent throughout movement, lower the dumbbell over and beyond your head until upper arms are in-line with your torso. Pull the dumbbell up and over your chest.",
+                    "name": "Dumbbell Pullover",
+                    "reps": "8-10",
+                    "rest": "No rest",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie flat on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest.",
+                    "name": "Dumbbell Fly",
+                    "reps": "8-10",
+                    "rest": "120 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Chest",
+            "workoutname": "Light Weights - Hard Work"
+        },
+        {
+            "description": "Choose weights that allow you to just complete the number of reps listed. Over time, work up to increasing the weight while completing the number of reps listed for every set. For best results, perform this workout twice a week with a sufficient number of rest days inbetween.",
+            "exercises": [
+                {
+                    "execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders.",
+                    "name": "Incline Dumbbell Press",
+                    "reps": "4-6",
+                    "rest": "120 seconds",
+                    "sets": "5",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie flat on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest.",
+                    "name": "Dumbbell Fly",
+                    "reps": "8-10",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie down with your hands placed on top of the bosu ball, and raise your body off floor by extending arms and keeping your body straight.\n\nLower body by bending your arms, until your chest is just above the floor. Push your body up until arms are extended.",
+                    "name": "Push Up (Bosu Ball)",
+                    "reps": "10-15",
+                    "rest": "30 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Chest",
+            "workoutname": "The Pec Punisher"
+        },
+        {
+            "description": "Use a heavy weight on the decline bench press, and progressively lighter weights as the workout goes on and fatigue sets in. Finish with two sets of pushups, which should feel very difficult after the other exercises.",
+            "exercises": [
+                {
+                    "execution": "Lie flat on a decline bench with feet under the brace. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press bar upward until your arms are extended.",
+                    "name": "Decline Bench Press",
+                    "reps": "3-5",
+                    "rest": "120 seconds",
+                    "sets": "5",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie supine on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest.",
+                    "name": "Incline Dumbbell Fly",
+                    "reps": "6-10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell. Twist the dumbbells so that your palms are facing your shoulders.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders.",
+                    "name": "Dumbbell Reverse Bench Press",
+                    "reps": "12-15",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie down with your hands slightly wider than shoulder width apart, and raise your body off floor by extending arms and keeping your body straight.\n\nLower body by bending your arms, until your chest is just above the floor. Push your body up until arms are extended.",
+                    "name": "Push Up",
+                    "reps": "AMRAP",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Chest",
+            "workoutname": "The Ultimate Chest"
+        }
+    ],
+    "Shoulders": [
+        {
+            "description": "This basic routine consists of an overhead press plus a single-joint move for each of the three delt heads. Where possible, start with machines to learn the feel of the motion before graduating to free weights. Start light to focus on proper form first. Add weight only when you can fully control the motion.",
+            "exercises": [
+                {
+                    "execution": "Sit and grasp the lever handles to each side with an overhand grip.\n\nPress the lever until your arms are extended upward. Slowly return to the starting position.",
+                    "name": "Lever Military Press",
+                    "reps": "12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp dumbbells in front of your thighs with elbows slightly bent. Bend forward with a slight bend in your hips and knees.\n\nRaise your upper arms to the sides, until your elbows are shoulder height. Ensure your elbows' height is above or equal to your wrists. Slowly return to the starting position.",
+                    "name": "Side Lateral Raise",
+                    "reps": "12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Stand facing the pulleys and grasp stirrups with arms straight down to each side of your body with palms facing back.\n\nRaise the stirrups forward and upward until your upper arms are well above horizontal. Slowly return to the starting position.",
+                    "name": "Front Cable Raise",
+                    "reps": "12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit on the machine with your chest against the pad. Grasp the parallel handles with your thumbs up at shoulder height. Bend elbows slightly and internally rotate your shoulders so that your elbows are at shoulder height.\n\nKeeping elbows pointed high, pull the handles apart and to the rear until your elbows are just behind your back. Slowly return to the starting position.",
+                    "name": "Reverse Machine Fly",
+                    "reps": "12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Shoulders",
+            "workoutname": "Foundation"
+        },
+        {
+            "description": "This is a short, sharp 30 minute workout that is intended to train your shoulders extremely hard. This workout must be executed with focus and intensity from start to finish. The third set of the Seated Dumbbell Press (Ex. 2) is for AMRAP. The Front plate raise (Ex. 3) and Seated Side Lateral Raise (Ex. 4) are to be performed as a superset.",
+            "exercises": [
+                {
+                    "execution": "Stand facing the twin pulley cables positioned close together and at shoulder height. Grasp the cable attachment in each hand, step back away from machine to allow for tension in the cable and stand with feet staggered. Point your elbows outward with your arms straight or slightly bent.\n\nPull the stirrups out to your sides, maintaining a strong elbow position throughout exercise. Slowly return to the starting position.",
+                    "name": "Cable Rear Delt Fly",
+                    "reps": "15-20",
+                    "rest": "90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on the seat with dumbbells resting on lower thigh. Kick the dumbbells up and position them to each side of your shoulders with elbows below wrists.\n\nPress dumbbells upward until arms are extended overhead. Lower to the sides of your shoulders and repeat.",
+                    "name": "Seated Dumbbell Press",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp a weight plate with your elbows straight or slightly bent.\n\nRaise the plate forward and upward until your upper arms are above horizontal. Slowly return to the starting position.",
+                    "name": "Front Plate Raise",
+                    "reps": "10",
+                    "rest": "No rest",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on the seat with dumbbells to either side and elbows slightly bent.\n\nRaise your upper arms to the sides until your elbow is at shoulder height. Slowly return to the starting position.",
+                    "name": "Seated Lateral Raise",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the bar in a shoulder width grip or slightly narrow overhand grip.\n\nPull the bar up to your neck with elbows leading and allow your wrists to flex as the bar rises. Slowly return to the starting position.",
+                    "name": "Upright Barbell Row",
+                    "reps": "20",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Shoulders",
+            "workoutname": "In & Out"
+        },
+        {
+            "description": "The deltoid is divided into 3 main parts; The anterior (front deltoid), lateral (middle deltoid), and posterior head (rear deltoid). This workout emphasises the workload on the anterior head (front deltoid), by incorporating two press exercises that allow for multi-joint movements, followed by two single-joint movements that specifically target the anterior head. The pressing movements should be performed using moderate to heavy weights. The One-Arm Side Laterals (Ex. 4) puts a focus on the middle delts to allow for a balanced workout.",
+            "exercises": [
+                {
+                    "execution": "Sit down on the seat, grasp the barbell with a slightly wider than shoulder width overhand grip and position the bar near your upper chest.\n\nPress the bar upward until your arms are extended overhead. Slowly return to the starting position.",
+                    "name": "Seated Barbell Military Press",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on seat with two dumbbells positioned in front of your shoulders, palms facing your body and elbows under wrists.\n\nInitiate the movement by bringing elbows out to your sides. Continue to raise your elbows outward while pressing dumbbells overhead until your arms are straight. Slowly return to the starting position by reversing the movement.",
+                    "name": "Arnold Dumbbell Press",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Stand facing the pulleys and grasp stirrups with arms straight down to each side of your body with palms facing back.\n\nRaise the stirrups forward and upward until your upper arms are well above horizontal. Slowly return to the starting position.",
+                    "name": "Front Cable Raise",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Position a dumbbell in front of your pelvis with elbows slightly bent. Grasp a stationary object with other hand to provide support. Bend over with a slight bend in your knees.\n\nRaise your upper arm to the side until your elbow is at shoulder height. Maintain a perpendicular motion with your upper arm, a fixed elbow position and ensure elbows are above your wrists throughout the exercise. Slowly return to the starting position.",
+                    "name": "One-Arm Side Laterals",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Shoulders",
+            "workoutname": "Front Delt Focus"
+        },
+        {
+            "description": "The deltoid is divided into 3 main parts; The anterior (front deltoid), lateral (middle deltoid), and posterior head (rear deltoid). This workout emphasises the workload on the lateral head (middle deltoid), by incorporating two multi-joint exercises, followed by two single-joint movements that specifically target the lateral head. The Reverse Machine Fly (Ex. 4) puts a focus on the rear delts to allow for a balanced workout. Perform AMRAP for the last set of your Machine Lateral Raise (Ex 3).",
+            "exercises": [
+                {
+                    "execution": "Sit down on the seat with dumbbells resting on lower thigh. Kick the dumbbells up and position them to each side of your shoulders with elbows below wrists.\n\nPress dumbbells upward until arms are extended overhead. Lower to the sides of your shoulders and repeat.",
+                    "name": "Seated Dumbbell Press",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the bar in a shoulder width grip or slightly narrow overhand grip.\n\nPull the bar up to your neck with elbows leading and allow your wrists to flex as the bar rises. Slowly return to the starting position.",
+                    "name": "Upright Barbell Row",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on seat and position bent arms between the padded lever and sides of your body.\n\nRaise arms to the sides until your upper arms are horizontal. Slowly return to the starting position.",
+                    "name": "Machine Lateral Raise",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit on the machine with your chest against the pad. Grasp the parallel handles with your thumbs up at shoulder height. Bend elbows slightly and internally rotate your shoulders so that your elbows are at shoulder height.\n\nKeeping elbows pointed high, pull the handles apart and to the rear until your elbows are just behind your back. Slowly return to the starting position.",
+                    "name": "Reverse Machine Fly",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Shoulders",
+            "workoutname": "Mid Delt Focus"
+        },
+        {
+            "description": "The deltoid is divided into 3 main parts; The anterior (front deltoid), lateral (middle deltoid), and posterior head (rear deltoid). This workout emphasises the workload on the posterior head (rear deltoid), by incorporating a row that allows for a multi-joint movement, followed by three single-joint movements that specifically target the posterior head.",
+            "exercises": [
+                {
+                    "execution": "Bend your knees slightly, bend over and grasp the lever handles while keeping your back straight.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward.",
+                    "name": "T-Bar Row",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit on the edge of a bench, bend over and position your torso over thighs. Grasp dumbbells with each hand under your legs. Position elbows with slight bend with palms facing together behind your ankles.\n\nRaise your upper arms to sides until your elbows are at shoulder height. Maintain a perpendicular motion with your upper arms, a fixed elbow position and ensure elbows are above your wrists throughout the exercise.",
+                    "name": "Seated Rear Deltoid Raise",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Stand with your side to a low pulley and grasp the stirrup attachment with your hand that is furthest from pulley.\n\nRaise your upper arms to the sides until your elbow is at shoulder height. Slowly return to the starting position.",
+                    "name": "Cable Lateral Raise",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Stand facing the twin pulley cables positioned close together and at shoulder height. Grasp the cable attachment in each hand, step back away from machine to allow for tension in the cable and stand with feet staggered. Point your elbows outward with your arms straight or slightly bent.\n\nPull the stirrups out to your sides, maintaining a strong elbow position throughout exercise. Slowly return to the starting position.",
+                    "name": "Cable Rear Delt Fly",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Shoulders",
+            "workoutname": "Rear Delt Focus" 
+        }
+    ],
+    "Arms": [
+        {
+            "description": "This is a high intensity workout with a total focus on the biceps. It consists of four exercises that provide the greatest stimulus across both the long and the short bicep heads. ",
+            "exercises": [
+                {
+                    "execution": "Hold barbell with shoulder width underhand grip.\n\nWith elbows to your sides, raise the bar until your forearms are vertical. Lower until arms are fully extended.",
+                    "name": "Barbell Curls",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Hold a dumbbell and sit on the preacher bench. With your arm bent and palm facing shoulder, place the back of your arm down on the pad.\n\nLower the dumbbell until your arm is fully extended. Raise the dumbbell until your forearm is vertical.",
+                    "name": "One-Arm Preacher Curls",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit back on a 45-60 degree incline bench. With your arms hanging down straight, position the two dumbbells with your palms facing inward.\n\nWith your elbows back to the sides, raise one dumbbell and rotate your forearm until it is vertical and your palm is facing your shoulder. Lower your arm to the original position and repeat with opposite arm. Alternate arms with every repetition.",
+                    "name": "Incline Dumbbell Curls",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Hold a dumbbell in each hand, palms facing in and arms straight.\n\nWith your elbows to your sides, raise one dumbbell until your forearm is vertical. Lower your arm to original position and repeat with opposite arm. Alternate arms with every repetition.",
+                    "name": "Hammer Curls",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Biceps",
+            "workoutname": "The Pump"
+        },
+        {
+            "description": "This workout includes a combination of exercises designed to work your long-head and lateral head. For all tricep exercises, keep your elbows as tight to your sides as you can.",
+            "exercises": [
+                {
+                    "execution": "Lie flat on bench and grasp barbell from the rack in a shoulder width grip.\n\nLower the weight to your chest with elbows close to your body and push the barbell back up until your arms are straight.",
+                    "name": "Close-Grip Barbell Bench Press",
+                    "reps": "6-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Place handles in the narrow position. Sit on the seat with your back against pad. Grasp the handles and position your elbows back.\n\nPush the levers down by straightening your arms downward. Allow the lever bar to raise with your elbows pointing back, until your shoulders are slightly stretched.",
+                    "name": "Dip Machine",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down on the seat with dumbbells resting on lower thigh. Kick the dumbbells up and position them to each side of your shoulders with elbows below wrists.\n\nPress dumbbells upward until arms are extended overhead. Lower to the sides of your shoulders and repeat.",
+                    "name": "Seated Dumbbell Press",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Face the high pulley, grasp the V-bar attachment with a narrow overhand grip and position your elbows to the side\n\nExtend arms down and return until your forearm is close to your upper arm.",
+                    "name": "Triceps Pushdown - V Bar",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Triceps",
+            "workoutname": "Overall Mass Triceps"
+        },
+        {
+            "description": "The exercises in the following workout target the two heads of the bicep, the long head and the short head, as well as the brachialis.",
+            "exercises": [
+                {
+                    "execution": "Step up and grasp the bar with an underhand shoulder width grip.\n\nPull your body up until elbows are to your sides. Lower your body until your arms and shoulders are fully extended.",
+                    "name": "Chin-ups",
+                    "reps": "6-8",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit back on a 45-60 degree incline bench. With your arms hanging down straight, position the two dumbbells with your palms facing inward.\n\nWith your elbows back to the sides, raise one dumbbell and rotate your forearm until it is vertical and your palm is facing your shoulder. Lower your arm to the original position and repeat with opposite arm. Alternate arms with every repetition.",
+                    "name": "Incline Dumbbell Curls",
+                    "reps": "6-8",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit on a bench and hold a dumbbell between your feet. Place the back of your upper arm against your inner thigh. Lean into the leg to raise your elbow slightly.\n\nRaise the dumbbell to your front of shoulder. Lower the dumbbell until your arm is fully extended.",
+                    "name": "Concentration Curls",
+                    "reps": "6-10",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Hold an EZ-Bar in an overhand shoulder width grip.\n\nWith elbows to your sides, raise the bar until your forearms are vertical. Lower until arms are fully extended.",
+                    "name": "Reverse EZ Bar Curls",
+                    "reps": "6-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Biceps",
+            "workoutname": "Total Biceps"
+        },
+        {
+            "description": "This workout starts with a multijoint exercise for an initial size and strength stimulus, then increases the intensity by adding high volumes of work. Superset EZ-Bar Skullcrushers (Ex. 2) with the Close-Grip Barbell Bench Press (Ex. 3) and superset Triceps Pushdown - Rope (Ex. 4) with Triceps Overhead Extention - Rope (Ex. 5).",
+            "exercises": [
+                {
+                    "execution": "Place handles in the narrow position. Sit on the seat with your back against pad. Grasp the handles and position your elbows back.\n\nPush the levers down by straightening your arms downward. Allow the lever bar to raise with your elbows pointing back, until your shoulders are slightly stretched.",
+                    "name": "Dip Machine ",
+                    "reps": "8-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie on the bench with a narrow overhand grip on the barbell. Position the barbell over your shoulders with arms extended.\n\nLower the bar to your forehead by bending your elbows. Extend your arms and repeat.",
+                    "name": "EZ-Bar Skullcrusher",
+                    "reps": "8-10",
+                    "rest": "No rest",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie flat on bench and grasp barbell from the rack in a shoulder width grip.\n\nLower the weight to your chest with elbows close to your body and push the barbell back up until your arms are straight.",
+                    "name": "Close-Grip Barbell Bench Press",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Face the high pulley, grasp the rope attachment with a narrow overhand grip and position your elbows to the side\n\nExtend arms down and turn your palms down at the bottom. Return until your forearm is close to your upper arm.",
+                    "name": "Triceps Pushdown - Rope",
+                    "reps": "10-12",
+                    "rest": "No rest",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "From high pulley cable, grasp the ends of the rope attachment. Raise one arm over head while turning your body away from the pulley. Face away from the pulley with feet staggered. Position ends of the ropes behind your head or neck with elbows upward and over head.\n\nRaise ends of the rope overhead by extending forearms until your arms are straight. Lower the rope attachment until your forearms are against your upper arms.",
+                    "name": "Triceps Overhead Extension - Rope",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Triceps",
+            "workoutname": "Total Triceps"
+        },
+        {
+            "description": "This workout is designed to shock your muscles in a way that is different to the standard routine of training arms. This intense workout should be executed once month to compliment your usual bicep/tricep workouts.",
+            "exercises": [
+                {
+                    "execution": "Sit with two dumbbells position in front of shoulders, palms facing your body and elbows under wrists.\n\nInitiate the movement by bringing elbows out to sides. Continue to raise your elbows outward while pressing dumbbells overhead until your arms are straight. Lower to the front of your shoulders in the opposite pattern and repeat.",
+                    "name": "Seated Dumbbell Curl",
+                    "reps": "10 (per arm)",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit on the preacher bench placing back of your arms on the pad. Grasp the bar in a shoulder width, underhand grip.\n\nRaise the bar until your forearms are vertical. Lower barbell until your arms are fully extended.",
+                    "name": "Preacher Curls",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Hold barbell with shoulder width underhand grip.\n\nWith elbows to your sides, raise the bar until your forearms are vertical. Lower until arms are fully extended.",
+                    "name": "Barbell Curls",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie flat on bench and grasp barbell from the rack in a shoulder width grip.\n\nLower the weight to your chest with elbows close to your body and push the barbell back up until your arms are straight.",
+                    "name": "Close-Grip Barbell Bench Press",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Position a dumbbell over your head with both hands under the inner plate (heart shaped grip).\n\nWith elbows over your head, lower forearms behind your upper arms by flexing your elbows. Flex your wrists at bottom to avoid hitting dumbbell on back of your neck. Raise the dumbbell over head by extending your elbows while hyper-extending your wrists.",
+                    "name": "Standing Dumbbell Triceps Extensions",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Face the high pulley, grasp the V-bar attachment with a narrow overhand grip and position your elbows to the side\n\nExtend arms down and return until your forearm is close to your upper arm.",
+                    "name": "Triceps Pushdown - V Bar",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "2",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Arms",
+            "workoutname": "Total Arms"
+        }
     ]
 }
