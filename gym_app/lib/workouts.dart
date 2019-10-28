@@ -39,7 +39,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
 
   @override
   Widget build(BuildContext context) {
-    int workoutNumber = 0;
+    //int workoutNumber = 0;
 
     double screenWidth = MediaQuery.of(context).size.width;
     return new Scaffold(
@@ -52,6 +52,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
             child: FutureBuilder(
                 future: fetchPost(widget.value),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  int workoutNumber = 0;
                   if (snapshot.data == null) {
                     return Container(
                         child: Center(

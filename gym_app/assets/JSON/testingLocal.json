@@ -2,10 +2,10 @@
 
     "Abs": [
         {
-            "description": "Do these exercises in order five times through.\n Don’t rest between exercises, but pause for 30 seconds after the last move before starting your next round.",
+            "description": "Do these exercises in order five times through.\nDon’t rest between exercises, but pause for 30 seconds after the last move before starting your next round.",
             "exercises": [
                 {
-                    "execution": "Hold onto the handles, set high off the ground, and hang below them.\nLift your legs straight to the ceiling and rotate them from side to side.",
+                    "execution": "Grasp and hang from a high bar.\n\nLift your legs straight to the ceiling and rotate them from side to side.",
                     "name": "Windshield Wiper",
                     "reps": "14",
                     "rest": "No rest",
@@ -13,7 +13,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8"
                 },
                 {
-                    "execution": "Kneel and hold a barbell under your shoulders on the ground.\n Keep your core strong as you roll the bar out in front of you, keeping your arms straight.\n Return to the starting position.",
+                    "execution": "Kneel and hold a barbell on the ground under your shoulders.\n\nKeep your core strong as you roll the bar out in front of you, keeping your arms straight. Return to the starting position.",
                     "name": "Barbell Rollout",
                     "reps": "30",
                     "rest": "No rest",
@@ -21,7 +21,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FBarbell%20Rollout.gif?alt=media&token=904949c3-8075-4ef7-a3a9-7964b1d9716b"
                 },
                 {
-                    "execution": "Hold one end of a barbell with the other end anchored.\n Tighten your abs as you move the bar in an arc from one side to the next.",
+                    "execution": "Hold one end of a barbell with the other end anchored.\n\nTighten your abs as you move the bar in an arc from one side to the other.",
                     "name": "Landmine 180",
                     "reps": "15",
                     "rest": "No rest",
@@ -29,7 +29,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FLandmine%20180.gif?alt=media&token=35a5da8f-0985-40d4-bf8a-36cb331a2d56"
                 },
                 {
-                    "execution": "Get into a push-up position.\n Keep your hips low as your alternate bringing your knees in toward your chest.",
+                    "execution": "Get into a push-up position.\n\nKeep your hips low as your alternate bringing your knees in toward your chest.",
                     "name": "Mountain Climbers",
                     "reps": "1 Minute - AMRAP",
                     "rest": "30 Seconds before starting next round",
@@ -41,18 +41,18 @@
             "workoutname": "Beginner Core"
         },
         {
-            "description": "This workout includes 4 exercises that will train your entire core. Perform this core workout twice a week, with several days of rest between sessions. AMAP = As many as possible",
+            "description": "This workout includes 4 exercises that will train your entire core. Perform this core workout twice a week, with several days of rest between sessions. AMRAP = As many reps as possible",
             "exercises": [
                 {
-                    "execution": "Start in a high plank, with wrists under shoulders, core engaged, and top of your feet resting on ball. Keep hips level and use core to pull knees toward your chest, rolling the ball toward you. Straighten legs and return to the starting position.",
+                    "execution": "Start in a high plank, with your wrists under shoulders, core engaged, and the top of your feet resting on ball.\n\nKeep hips level and use your core to pull your knees toward your chest, rolling the ball toward you. Straighten your legs and return to the starting position.",
                     "name": "Pull In (Stability Ball)",
-                    "reps": "60 Seconds",
+                    "reps": "60 Seconds - AMRAP",
                     "rest": "30 Seconds",
                     "sets": "3",
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStability%20Ball%20Pull%20In.gif?alt=media&token=d1f40daf-c472-43a8-9ff9-014c223f9afc"
                 },
                 {
-                    "execution": "Bend waist to opposite side of dumbbell until a slight stretch is felt. Lower to opposite side, same distance and repeat. Continue by alternating sides.",
+                    "execution": "Hold a dumbbell in one hand.\n\nBend your waist to the opposite side of the dumbbell until a slight stretch is felt. Lower to the same distance on the opposite side. Continue by alternating sides.",
                     "name": "Dumbell Side Bend",
                     "reps": "12-15",
                     "rest": "30 Seconds",
@@ -60,17 +60,17 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FDumbbell%20Side%20Bend.gif?alt=media&token=7ff2fdaf-de71-404b-92d1-c7dfa4394aa3"
                 },
                 {
-                    "execution": "Lay down flat with knees bent, feet flat on the floor and hands behind your head. Ask a partner or use a weight (barbell, weight plate etc.) to keep you feet fixed. Lift your upper body till your head or elbows touch your knees. Return slowly to the starting position",
+                    "execution": "Lie down with your knees bent, feet flat on the floor and hands behind your head. Ask a partner or use a weight (barbell, weight plate etc.) to keep your feet fixed.\n\nLift your upper body until your elbows touch your knees. Slowly return to the starting position.",
                     "name": "Sit Up",
-                    "reps": "60 Seconds - AMAP",
+                    "reps": "60 Seconds - AMRAP",
                     "rest": "30 Seconds",
                     "sets": "3",
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSit%20Up.gif?alt=media&token=e0c71b11-1d0b-448b-aa80-7f5428d11ad6"
                 },
                 {
-                    "execution": "Lie on your back with your knees bent, feet flat on the floor and hands behind your head.\n\nRaise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle.\nSlowly pedal them in the air, alternating legs as if riding a bicycle.",
+                    "execution": "Lie on your back with your knees bent, feet flat on the floor and hands behind your head.\n\nRaise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90-degree angle. Slowly pedal them in the air, alternating legs as if riding a bicycle.",
                     "name": "Air Bike",
-                    "reps": "60 Seconds - AMAP",
+                    "reps": "60 Seconds - AMRAP",
                     "rest": "30 Seconds",
                     "sets": "3",
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FAir%20Bike.gif?alt=media&token=b4c1cebd-0e43-4fe0-9133-21a88020510b"
@@ -83,7 +83,7 @@
             "description": "A short, Intense abdominal workout that will help you build a solid core.",
             "exercises": [
                 {
-                    "execution": "Take the cable in your hands and hold it next to your temples. Get down onto your knees, hold your upper body straight and start to bend forward. Go down with a fast movement, rolling your back in (your ellbows point to your knees). Once down, go slowly back to the starting position",
+                    "execution": "Sit on an exercise ball, walk forward, lie back on the ball with your shoulders and head hanging off and knees bent. Gently hyperextend your back on the contour of ball and place hands accross your chest.\n\nFlex waist to raise your upper torso and slowly return to the starting position.",
                     "name": "Crunches (Stability Ball)",
                     "reps": "15",
                     "rest": "30 Seconds",
@@ -91,7 +91,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStability%20Ball%20Crunch.gif?alt=media&token=9dab2320-070a-4f94-b95b-53f453b70227"
                 },
                 {
-                    "execution": "Grasp and hang from a high bar. Raise legs by flexing hips and knees until hips are fully flexed. Continue to raise knees toward shoulders by flexing waist. Return until waist, hips, and knees are extended.",
+                    "execution": "Grasp and hang from a high bar.\n\nRaise your legs by flexing hips and knees until your hips are fully flexed. Continue to raise knees toward shoulders by flexing waist. Return to the starting position with your legs extended.",
                     "name": "Hanging Leg Raises",
                     "reps": "15",
                     "rest": "30 Seconds",
@@ -99,7 +99,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FHanging%20Leg%20Raises.gif?alt=media&token=1c3d4bd6-c3d0-43ad-99eb-9b34d8fd0d1c"
                 },
                 {
-                    "execution": "Lie on your back with your knees bent and feet flat on the floor. Place hands behind your head. Raise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle. Slowly pedal them in the air, alternating as if riding a bicycle.",
+                    "execution": "Lie on your back with your knees bent, feet flat on the floor and hands behind your head.\n\nRaise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90-degree angle. Slowly pedal them in the air, alternating legs as if riding a bicycle.",
                     "name": "Air Bike",
                     "reps": "20",
                     "rest": "30 Seconds",
@@ -107,7 +107,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FAir%20Bike.gif?alt=media&token=b4c1cebd-0e43-4fe0-9133-21a88020510b"
                 },
                 {
-                    "execution": "Lay down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position outside of leg down to side. Flex waist, raising your upper body off the ground. Return to the starting position and repeat with movement in opposite leg position.",
+                    "execution": "Lie down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position legs to one side of your body.\n\nFlex waist, raising your upper body off the ground. Return to the starting position and repeat the movement in opposite leg position.",
                     "name": "Side Crunch",
                     "reps": "15 each side",
                     "rest": "30 Seconds",
@@ -122,7 +122,7 @@
             "description": "Do these exercises in order three times through. Don’t rest between exercises, but pause for 2 minutes after the last move before starting your next round.",
             "exercises": [
                 {
-                    "execution": "Lay down flat and lift your straightened legs from the ground at a 45 degree angle. As your left foot travels downward and nearly touches the floor, your right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your right foot down until it nearly touches the floor, and bring your left foot upwards. Your head should stay off the ground, supported by tightened upper abdominals.",
+                    "execution": "Lie down flat and lift your straightened legs from the ground at a 45-degree angle.\n\nAs your left foot travels downward and nearly touches the floor, your right foot should seek to reach a 45-degree angle, or as close to one as possible. Bring your right foot down until it nearly touches the floor, and bring your left foot upwards. Your head should stay off the ground, supported by tightened upper abdominals. Continue by alternating legs.",
                     "name": "Flutter Kicks",
                     "reps": "20",
                     "rest": "No rest",
@@ -130,7 +130,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FFlutter%20Kicks.gif?alt=media&token=74a973a7-4d92-4094-bcd2-325676ea063d"
                 },
                 {
-                    "execution": "Lie on your back with legs straightened and arms at your sides, keeping your elbows bent at 90 degrees. As you sit up, twist your upper body to the left and bring your left knee toward your right elbow. Lower your body to the starting position, and repeat to your right.",
+                    "execution": "Lie down with your knees bent, feet flat on the floor and your arms stretched out straight on each side.\n\nPerform a crunch by reaching both of your arms straight out in front of you. Slowly return to the starting position.",
                     "name": "Straight Arm Crunch",
                     "reps": "12",
                     "rest": "No rest",
@@ -138,7 +138,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStraight%20Arm%20Crunch.gif?alt=media&token=1c0f4ff3-7624-493e-903c-ace08ccef2d3"
                 },
                 {
-                    "execution": "Start by sitting on the floor, with knees bent and feet flat on the ground. Lean back so your upper body is at a 45-degree angle to the floor. Keep your back straight at this angle throughout the exercise. Link your hands together in front of your chest, brace your core and raise your legs up off the ground. Rotate your arms all the way over to one side, then do the same in the other direction.",
+                    "execution": "Sit on the floor, with your knees bent and feet flat on the ground. Lean back so your upper body is at a 45-degree angle to the floor. Keep your back straight at this angle throughout the exercise.\n\nLink your hands together in front of your chest, brace your core and raise your legs up off the ground. Rotate your arms all the way over to one side, then do the same in the opposite direction.",
                     "name": "Russian Twist",
                     "reps": "15",
                     "rest": "No rest",
@@ -146,7 +146,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FRussian%20Twist.gif?alt=media&token=832d26dc-08cc-43d8-839d-f15dbb66bf00"
                 },
                 {
-                    "execution": "Lay on your side and support your body between your forearm to your feet.",
+                    "execution": "Get into a position on your side and support your body between your forearm and feet.\n\nHold this position as long as possible. To increase the difficulty, an arm or leg can be raised while performing this exercise.",
                     "name": "Side Plank",
                     "reps": "30 Seconds each side",
                     "rest": "No rest",
@@ -154,7 +154,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 },
                 {
-                    "execution": "Lay down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position outside of leg down to side. Flex waist, raising your upper body off the ground. Return to the starting position and repeat with movement in opposite leg position.",
+                    "execution": "Lie down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position legs to one side of your body.\n\nFlex waist, raising your upper body off the ground. Return to the starting position and repeat the movement in opposite leg position.",
                     "name": "Side Crunch",
                     "reps": "10 each side",
                     "rest": "2 minutes before starting next round",
@@ -169,7 +169,7 @@
             "description": "Do these exercises in order five times through. Don’t rest between exercises, but pause for 60 seconds after the last move before starting your next round.",
             "exercises": [
                 {
-                    "execution": "Lay down flat and hold your hands behind your neck. Lift up with a rolling movement of your back, you should feel how each individual vertebrae loses contact with the ground. At the highest point, contract your abs as much as you can and hold there for 2 sec. Return to the starting position by unrolling your back.",
+                    "execution": "Lie down flat and hold your hands behind your neck.\n\nLift up with a rolling movement of your back, you should feel each individual vertebrae losing contact with the ground. At the highest point, contract your abs as much as you can and hold there for a second. Return to the starting position by unrolling your back.",
                     "name": "Crunches",
                     "reps": "20",
                     "rest": "No rest",
@@ -177,7 +177,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCrunch.gif?alt=media&token=28cfdfaa-91e4-4d87-a5f1-58d8006e4b25"
                 },
                 {
-                    "execution": "Lie on your back with hips and knees bent. Place hands on chest with forearms crossed. Flex and twist waist to one direction while raising torso from bench by bending hips. Return until back of shoulders contact floor or mat. Repeat to opposite side alternating twists.",
+                    "execution": "Lie down on your back with hips and knees bent, and hands behind your head.\n\nTwist your waist one direction by raising your torso from the ground, lift one leg toward you and touch your opposite elbow to the rasied leg. Return to the the starting position and repeat with the opposite side.",
                     "name": "Cross Body Crunch",
                     "reps": "10",
                     "rest": "No rest",
@@ -185,7 +185,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCross%20Body%20Crunch.gif?alt=media&token=468b1615-71ac-41a8-8654-d768ce438144"
                 },
                 {
-                    "execution": "Lie on your back in a normal sit-up position, with feet flat on ground, knees bent and your arms stretched out straight on each side. Perform a crunch by reaching both of your arms straight out in front of you and return slowly to the start position.",
+                    "execution": "Lie down with your knees bent, feet flat on the floor and your arms stretched out straight on each side.\n\nPerform a crunch by reaching both of your arms straight out in front of you. Slowly return to the starting position.",
                     "name": "Straight Arm Crunch",
                     "reps": "10",
                     "rest": "No rest",
@@ -193,7 +193,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStraight%20Arm%20Crunch.gif?alt=media&token=1c0f4ff3-7624-493e-903c-ace08ccef2d3"
                 },
                 {
-                    "execution": "Lie on your back, cross your arms over your chest and grasp your opposing shoulders. Raise your legs off the floor by bending your knees and keeping your calves parallel with the floor. Raise your torso off the floor but keep your back on the mat. Slowly return to the starting position.",
+                    "execution": "Lie on your back and cross your arms over your chest. Raise your legs off the floor by bending your knees and keeping your calves parallel with the floor.\n\nRaise your torso off the floor while keeping your back on the mat. Slowly return to the starting position.",
                     "name": "Tuck Crunch",
                     "reps": "10",
                     "rest": "No rest",
@@ -201,7 +201,7 @@
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FTuck%20Crunch.gif?alt=media&token=4960e166-93e0-4036-afc0-140f2d7a6c4e"
                 },
                 {
-                    "execution": "Lie face up on the floor with your palms facing down. Bend your hips and knees 90 degrees. Raise your hips off the floor and crunch them inward. Pause, and then slowly lower your legs until your heels nearly touch the floor.",
+                    "execution": "Lie down on the floor with your palms facing down. Bend your hips and knees to a 90-degree angle.\n\nRaise your hips off the floor and crunch them inward. Slowly return to the starting position.",
                     "name": "Reverse Crunch",
                     "reps": "10",
                     "rest": "60 Seconds before starting next round",
@@ -213,100 +213,225 @@
             "workoutname": "Crunch Time"
         }
     ],
-    "Shoulders": [
+    "Back": [
         {
-            "description": "This is the description for this workout",
+            "description": "This workout is designed to be hard and heavy. Ensure that you take enough time to recover between sets (90-120 seconds). Heavy deadlifts may require an additional minute of rest.",
             "exercises": [
                 {
-                    "execution": "N/AAAA",
-                    "name": "Leg extensions",
-                    "reps": "20",
-                    "rest": "60",
+                    "execution": "With feet flat beneath the bar, squat down to grasp the barbell with a shoulder width, overhand or mixed grip. Take a deep breath and engage your core.\n\nLift the bar by extending your hips and knees to full extension. Pull your shoulders back at the top of the lift if they are rounded. Lower the bar to the floor by bending your hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet.",
+                    "name": "Barbell Deadlift",
+                    "reps": "8-10",
+                    "rest": "90-120 seconds",
                     "sets": "5",
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 },
                 {
-                    "execution": "N/A",
-                    "name": "Weighted Bulgarian split squats",
-                    "reps": "12",
-                    "rest": "90",
-                    "sets": "3",
+                    "execution": "Grasp the high bar with a shoulder width, underhand grip.\n\nPull your body up until your elbows are at your sides. Lower your body until your arms and shoulders are fully extended.",
+                    "name": "Chin Up",
+                    "reps": "8-10",
+                    "rest": "90-120 seconds",
+                    "sets": "5",
                     "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 },
                 {
-                    "execution": "8 seconds down, 2 seconds up",
-                    "name": "Hack squats",
-                    "reps": "8",
-                    "rest": "90",
-                    "sets": "4",
-                    "target": "Weighted-Crunch"
+                    "execution": "Bend your knees slightly, bend over and grasp the lever handles while keeping your back straight.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward.",
+                    "name": "T-Bar Row",
+                    "reps": "8-10",
+                    "rest": "90-120 seconds",
+                    "sets": "5",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 },
                 {
-                    "execution": "Superset",
-                    "name": "Leg Press + Smith machine squats",
-                    "reps": "20 - 20",
-                    "rest": "60",
-                    "sets": "3",
-                    "target": "upperleg"
-                },
-                {
-                    "execution": "1 minute continuous",
-                    "name": "Weighted lunges",
-                    "reps": "N/A",
-                    "rest": "90",
-                    "sets": "4",
-                    "target": "upperleg"
+                    "execution": "Bend your knees slightly and bend over the bar while keeping your back straight. Grasp the bar in an underhand grip.\n\nPull the bar to your upper waist. Lower the bar until your arms are extended and shoulders are stretched downward.",
+                    "name": "Bent Over Barbell Row - Underhand",
+                    "reps": "8-10",
+                    "rest": "90-120 seconds",
+                    "sets": "5",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 }
             ],
-            "musclegroup": "Legs",
-            "workoutname": "Leg Workout 100"
+            "musclegroup": "Back",
+            "workoutname": "The Foundation"
         },
         {
-            "description": "This is the description for this new workout",
+            "description": "Rather than focusing on size, this workout is designed to enhance the definition and give you a thick back.",
             "exercises": [
                 {
-                    "execution": "N/A",
-                    "name": "2nd Leg extensions",
-                    "reps": "20",
-                    "rest": "60",
+                    "execution": "Bend your knees slightly and bend over the bar while keeping your back straight. Grasp the bar in a wide overhand grip.\n\nPull the bar to your upper waist. Lower the bar until your arms are extended and shoulders are stretched downward.",
+                    "name": "Bent Over Barbell Row - Overhand",
+                    "reps": "8-10",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Bend your knees slightly and bend over the bar while keeping your back straight. Grasp the bar in an underhand grip.\n\nPull the bar to your upper waist. Lower the bar until your arms are extended and shoulders are stretched downward.",
+                    "name": "Bent Over Barbell Row - Underhand",
+                    "reps": "8-10",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Kneel over the side of the bench by placing your knee and hand of the supporting arm on the bench. Position your opposite foot slightly back and to the side. Grasp the dumbbell from floor.\n\nPull the dumbbell up until it makes contact with ribs or until your upper arm is just beyond horizontal. Lower the dumbbell until your arm is extended and your shoulder is stretched downward.",
+                    "name": "Bent Over Row - Dumbbell",
+                    "reps": "8-10 (per arm)",
+                    "rest": "90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "With feet flat beneath the bar, squat down to grasp the barbell with a shoulder width, overhand or mixed grip. Take a deep breath and engage your core.\n\nLift the bar by extending your hips and knees to full extension. Pull your shoulders back at the top of the lift if they are rounded. Lower the bar to the floor by bending your hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet.",
+                    "name": "Barbell Deadlift",
+                    "reps": "8-10",
+                    "rest": "90-120 seconds",
                     "sets": "5",
-                    "target": "quads"
-                },
-                {
-                    "execution": "N/A",
-                    "name": "2nd Weighted Bulgarian split squats",
-                    "reps": "12",
-                    "rest": "90",
-                    "sets": "3",
-                    "target": "upperleg"
-                },
-                {
-                    "execution": "8 seconds down, 2 seconds up",
-                    "name": "2nd Hack squats",
-                    "reps": "8",
-                    "rest": "90",
-                    "sets": "4",
-                    "target": "upperleg"
-                },
-                {
-                    "execution": "Superset",
-                    "name": "2nd Leg Press + Smith machine squats",
-                    "reps": "20 - 20",
-                    "rest": "60",
-                    "sets": "3",
-                    "target": "upperleg"
-                },
-                {
-                    "execution": "1 minute continuous",
-                    "name": "2nd Weighted lunges",
-                    "reps": "N/A",
-                    "rest": "90",
-                    "sets": "4",
-                    "target": "upperleg"
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
                 }
             ],
-            "musclegroup": "Legs",
-            "workoutname": "Leg Workout 200"
+            "musclegroup": "Back",
+            "workoutname": "Thick Definition"
+        },
+        {
+            "description": "This workout focuses on developing a wide V-taper by working the upper back. For all the movements in this workout routine, position your hands just slightly wider than your shoulders on each side. For the seconds round of Lateral Pulldowns (Ex. 4), use a weight that causes you to fail at 10 reps.",
+            "exercises": [
+                {
+                    "execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Lateral Pulldown - Wide Grip",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Bend your knees slightly, bend over and grasp the lever handles while keeping your back straight.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward.",
+                    "name": "T-Bar Row",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit slightly forward on the seat and grasp the cable attachment. Place your feet on vertical platform and slide your hips back, positioning your knees with slight bend.\n\nPull the cable attachment to your waist while straightening lower back. Pull your shoulders back and push your chest forward while creating a slight arch in your back. Return until your arms are extended, shoulders are stretched forward, and your lower back is flexed forward slightly.",
+                    "name": "Seated Cable Rows",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Lateral Pulldown - Wide Grip",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Back",
+            "workoutname": "Wicked Wings"
+        },
+        {
+            "description": "This workout is designed to add definition and details to your back by using higher reps and supersets. Throughout this workout, ensure that you focus on squeezing the muscles and feeling them contract and stretch. Super set Straight Arm Pulldowns (Ex. 3) with the Single Arm - High Cable Rows (Ex. 4).",
+            "exercises": [
+                {
+                    "execution": "Grasp the high cable bar with a close overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Lateral Pulldown - Close Grip",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit slightly forward on the seat and grasp the cable attachment. Place your feet on vertical platform and slide your hips back, positioning your knees with slight bend.\n\nPull the cable attachment to your waist while straightening lower back. Pull your shoulders back and push your chest forward while creating a slight arch in your back. Return until your arms are extended, shoulders are stretched forward, and your lower back is flexed forward slightly.",
+                    "name": "Seated Cable Rows",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the bar from the high pulley using a shoulder width overhand grip. Bend your torso forward at the waist by around 30-degrees with your arms fully extended in front of you and a slight bend at the elbows.\n\nWhile keeping the arms straight, pull the bar down by contracting the lats until your hands are next to the side of the thighs. Return until you feel a stretch in your lats.",
+                    "name": "Straight Arm Pulldown",
+                    "reps": "12",
+                    "rest": "No rest",
+                    "sets": "4 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the cable in an overhand grip and kneel down on the floor.\n\nPull and rotate the cable attachment down to the side of your chest so that you are in an underhand grip at the bottom of the movement. Return until your arm and shoulder is fully extended, and you are back in an overhand grip.",
+                    "name": "Single Arm - High Cable Row",
+                    "reps": "12",
+                    "rest": "60 seconds",
+                    "sets": "4 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down behind your neck. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Rear Lateral Pulldown - Wide Grip",
+                    "reps": "15",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie face down on a hyperextension bench, tucking your ankles securely under the footpads and cross your arms in front of you.\n\nBend forward slowly at the waist as far as you can while keeping your back flat. Slowly return to the starting position.",
+                    "name": "45-Degree Hyperextensions",
+                    "reps": "12-15",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Back",
+            "workoutname": "Hi-Definition"
+        },
+        {
+            "description": "This is a lower-back friendly workout for those of you have injuries/issues in your lower back. The workout is designed to allow you to develop your back without putting any strain on the lower back. The key to keeping this workout safe is to stay on the support pads on all movements.",
+            "exercises": [
+                {
+                    "execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Lateral Pulldown - Wide Grip",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Bend your knees slightly and rest your chest on the support pad. Grasp the lever handles with a shoulder width underhand grip.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward.",
+                    "name": "Reverse T-Bar Row",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp the high cable bar with a close overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended.",
+                    "name": "Lateral Pulldown - Close Grip",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down and place your chest against the support pad. Grasp the lever handles with an underhand grip.\n\nPull the levers back until your elbows are just behind your back with shoulders pulled back. Return until your arms are extended and shoulders are stretched forward.",
+                    "name": "Seated Row",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie down on an elevated, angled bench, and grasp dumbbells below to either side.\n\nPull the dumbbells to sides until your upper arm is just beyond horizontal or at the height of your back. Lower the dumbbells until your arms are extended and shoulders are stretched downward.",
+                    "name": "Incline Row - Dumbbell",
+                    "reps": "10",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Back",
+            "workoutname": "The Low Down"
         }
     ]
 }

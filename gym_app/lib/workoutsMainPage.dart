@@ -16,13 +16,12 @@ class PageTwoState extends State<PageTwo> {
   StreamSubscription<ConnectivityResult> subscription;
 
   final List<String> upperBodyCategories = [
-    'Abs',
-    'Back',
-    'Biceps',
     'Chest',
-    'Legs',
+    'Back',
     'Shoulders',
-    'Triceps',
+    'Arms',
+    'Legs',
+    'Abs',
     'Cardio'
   ];
 
