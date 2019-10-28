@@ -935,7 +935,7 @@
             "exercises": [
                 {
                     "execution": "Place handles in the narrow position. Sit on the seat with your back against pad. Grasp the handles and position your elbows back.\n\nPush the levers down by straightening your arms downward. Allow the lever bar to raise with your elbows pointing back, until your shoulders are slightly stretched.",
-                    "name": "Dip Machine ",
+                    "name": "Dip Machine",
                     "reps": "8-10",
                     "rest": "60-90 seconds",
                     "sets": "4",
@@ -1031,6 +1031,227 @@
             ],
             "musclegroup": "Arms",
             "workoutname": "Total Arms"
+        }
+    ],
+    "Legs": [
+        {
+            "description": "This workout targets the major muscle groups in your legs: quads, glutes, hamstrings, and calves. It starts with the most challenging exercises and heaviest loads, while the rest of the workout hits the thighs from a range of angles.",
+            "exercises": [
+                {
+                    "execution": "Rest the bar on the back of your shoulders, grasp the barbell on either side and stand with your feet shoulder width apart.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight.",
+                    "name": "Barbell Squat",
+                    "reps": "6-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your feet on the platform. Grasp the handles, extend your hips and knees and release lever.\n\nLower the platform by flexing your hips and knees until your hips are completely flexed. Slowly return to the starting position.",
+                    "name": "Leg Press",
+                    "reps": "6-10",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Stand while holding dumbbells on either side.\n\nStep forward with your first leg. Land heel first, followed by the forefoot. Lower your body by flexing the knee and hip of your front leg until the knee of your rear leg is almost in contact with floor. Stand on the front leg with assistance of the rear leg and lunge forward with opposite leg. Alternate legs with every lunge.",
+                    "name": "Walking Lunges - Dumbbell",
+                    "reps": "8-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your shins under the padded lever. Grasp the handles to sides for support.\n\nMove the lever forward and upward by extending knees until your legs are straight. Slowly return to the starting position.",
+                    "name": "Leg Extensions",
+                    "reps": "8-12",
+                    "rest": "60  seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp dumbells in front of you and stand with your feet shoulder width apart.\n\nFlex your hips and drive your glutes back as far as you can, which should generate tension in your hamstrings as your hands approach knee level. Lift dumbbells by extending hips and waist until standing upright. Pull shoulders back slightly if rounded.",
+                    "name": "Romanian Deadlift - Dumbbell",
+                    "reps": "8-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie prone on the bench with your knees just beyond the edge of the bench. Lower your legs under the pads and grasp the handles.\n\nRaise the pad to the back of your thighs by flexing your knees. Slowly return to the starting position.",
+                    "name": "Hamstring Curls",
+                    "reps": "8-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Position your toes and balls of your feet on a calf block with your heels extending off. Place your hand on a support for balance.\n\nRaise your heels by extending ankles as high as possible. Lower your heels by bending ankles until your calves are stretched.",
+                    "name": "Standing Calf Raises",
+                    "reps": "8-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Complete Legs"
+        },
+        {
+            "description": "This workout is largely machine based, which allows you to practice movements before loading them with heavier weights or moving on to more complex/challenging free-weight moves.",
+            "exercises": [
+                {
+                    "execution": "Hold a kettlebell close to your chest with your elbows pointing down and feet hip width apart.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your elbows contact your knees. Extend your knees and hips until legs are straight.",
+                    "name": "Goblet Squat",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your feet on the platform. Grasp the handles, extend your hips and knees and release lever.\n\nLower the platform by flexing your hips and knees until your hips are completely flexed. Slowly return to the starting position.",
+                    "name": "Leg Press",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your shins under the padded lever. Grasp the handles to sides for support.\n\nMove the lever forward and upward by extending knees until your legs are straight. Slowly return to the starting position.",
+                    "name": "Leg Extensions",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your legs in between the pads. Release the hand lever and grasp the handles.\n\nPull the lever to the back of your thighs by flexing knees. Slowly return to the starting position.",
+                    "name": "Seated Leg Curl",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Position your toes and balls of your feet on a calf block with your heels extending off. Place your hand on a support for balance.\n\nRaise your heels by extending ankles as high as possible. Lower your heels by bending ankles until your calves are stretched.",
+                    "name": "Standing Calf Raises",
+                    "reps": "10-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Legs",
+            "workoutname": "Controlled Movements"
+        },
+        {
+            "description": "This workout is focused on building your quads. The key exercise in this workout to get your quads firing is the front squat, which emphasises the quads more than a back squat by shifting your center of gravity forward.",
+            "exercises": [
+                {
+                    "execution": "Rest the bar on the front of your shoulders, cross your arms, place hands on top of barbell ensuring that your arms parallel to floor.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight.",
+                    "name": "Front Barbell Squat",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Lie against the back pad with your shoulders under the shoulder pad and place your feet on the platform. Extend your hips and knees and release lever.\n\nSquat down by flexing your hips and knees until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight.",
+                    "name": "Hack Squat",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your feet on the platform. Grasp the handles, extend your hips and knees and release lever.\n\nLower the platform by flexing your hips and knees until your hips are completely flexed. Slowly return to the starting position.",
+                    "name": "Leg Press",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your shins under the padded lever. Grasp the handles to sides for support.\n\nMove the lever forward and upward by extending knees until your legs are straight. Slowly return to the starting position.",
+                    "name": "Leg Extensions",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3 - Superset",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Quadriceps",
+            "workoutname": "Quad Focus"
+        },
+        {
+            "description": "This workout is focused on building your glutes. The following exercises allow the glutes to be trained through their full range of motion. Ensure you achieve a good depth in all squatting motions to maximise glute activation.",
+            "exercises": [
+                {
+                    "execution": "Rest the bar on the back of your shoulders, grasp the barbell on either side and stand with your feet wide by pointing them outward in a 30 to 45-degree angle.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight.",
+                    "name": "Barbell Squat - Wide Stance",
+                    "reps": "6-10",
+                    "rest": "90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Sit down with your back against the back support and place your feet on the platform. Grasp the handles, extend your hips and knees and release lever.\n\nLower the platform by flexing your hips and knees until your hips are completely flexed. Slowly return to the starting position.",
+                    "name": "Leg Press",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Rest the bar on the back of your shoulders and grasp the barbell on either side.\n\nLunge forward with your first leg. Land heel first, followed by the forefoot. Lower your body by flexing the knee and hip of your front leg until the knee of your rear leg is almost in contact with floor. Return to the starting position and alternate legs.",
+                    "name": "Barbell Lunge",
+                    "reps": "8-12",
+                    "rest": "60-90 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp dumbells in front of you and stand with your feet shoulder width apart.\n\nFlex your hips and drive your glutes back as far as you can, which should generate tension in your hamstrings as your hands approach knee level. Lift dumbbells by extending hips and waist until standing upright. Pull shoulders back slightly if rounded.",
+                    "name": "Romanian Deadlift - Dumbbell",
+                    "reps": "10-12",
+                    "rest": "60-90 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Gluteus",
+            "workoutname": "Glute Focus"
+        },
+        {
+            "description": "This workout is focused on building your hamstrings. Sumo deadlifts are an effective move to build your hamstrings, but good form is critical with any type of deadlifts. Keep your back flat and ensure that the range of motion does not cause your back to round.",
+            "exercises": [
+                {
+                    "execution": "Position your feet in a wide stance, bend at the hips, keep your chest up, drive your hips back and reach down to grasp the barbell with a shoulder width overhand or mixed grip. Take a deep breath and engage your core.\n\nKeep your spine straight as you squeeze your glutes, thrust your hips forward and raise the barbell as you straighten your legs to stand. Slowly return to the starting position.",
+                    "name": "Sumo Deadlift",
+                    "reps": "6-10",
+                    "rest": "90-120 seconds",
+                    "sets": "4",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Mount the machine by supporting one knee on the horizontal pad and placing the other leg under the roller pad, with your quad against the vertical pad. Grasp the handles and rest your forearms on padded arm rest.\n\nRaise your ankle to the back of your thigh by flexing your knee. Slowly return to the starting position and alternate legs between sets.",
+                    "name": "Kneeling Leg Curl",
+                    "reps": "8-12",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                },
+                {
+                    "execution": "Grasp dumbells in front of you and stand with your feet shoulder width apart.\n\nFlex your hips and drive your glutes back as far as you can, which should generate tension in your hamstrings as your hands approach knee level. Lift dumbbells by extending hips and waist until standing upright. Pull shoulders back slightly if rounded.",
+                    "name": "Romanian Deadlift - Dumbbell",
+                    "reps": "AMRAP",
+                    "rest": "60 seconds",
+                    "sets": "3",
+                    "target": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWeighted-Crunch.gif?alt=media&token=86728a17-cf1a-4210-80b1-1dc0e79e43ee"
+                }
+            ],
+            "musclegroup": "Hamstrings",
+            "workoutname": "Hamstring Focus"
         }
     ]
 }
