@@ -21,8 +21,7 @@ class PageTwoState extends State<PageTwo> {
     'Shoulders',
     'Arms',
     'Legs',
-    'Abs',
-    'Cardio'
+    'Abs'
   ];
 
   final List<String> lowerBodyCategories = [
@@ -41,7 +40,7 @@ class PageTwoState extends State<PageTwo> {
     'Four-day split: Full body',
   ];
 
-  final List<String> picIndexes = ['1', '2', '3', '4', '5', '6', '7'];
+  final List<String> picIndexes = ['1', '2', '3', '4', '5', '6'];
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +58,14 @@ class PageTwoState extends State<PageTwo> {
         body: new Stack(children: <Widget>[
           new Column(children: <Widget>[
             sliderTitles(
-                "Muscle Group Focus", screenHeight * 0.045, screenWidth),
+                "MUSCLE GROUP FOCUS", screenHeight * 0.045, screenWidth),
             horizontalSlider(
                 screenHeight, this.upperBodyCategories, this.picIndexes),
-            sliderTitles("Goals", screenHeight * 0.045, screenWidth),
+            sliderTitles("GOAL FOCUS", screenHeight * 0.045, screenWidth),
             horizontalSlider(
                 screenHeight, this.lowerBodyCategories, this.picIndexes),
             sliderTitles(
-                "Muscle / Day splits", screenHeight * 0.045, screenWidth),
+                "MUSCLE SPLITS", screenHeight * 0.045, screenWidth),
             horizontalSlider(
                 screenHeight, this.cardioCategories, this.picIndexes)
           ])
@@ -98,11 +97,11 @@ Widget horizontalSlider(
   return Card(
       shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(0.0)),
-      elevation: 5.0,
+      elevation: 15.0,
       margin: EdgeInsets.only(bottom: 0.0, left: 0.0, right: 0.0),
       child: Container(
-        margin: EdgeInsets.only(left: 15, bottom: 10.0, top: 10.0),
-        height: screenHeight * 0.195,
+        margin: EdgeInsets.only(left: 5, top:5, bottom: 5.0),
+        height: screenHeight * 0.208,
         child: new ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
@@ -136,7 +135,7 @@ class CreateTile extends StatelessWidget {
               Colors.black.withOpacity(0.9), BlendMode.dstATop),
         ),
       ),
-      width: screenWidth * 0.40,
+      width: screenWidth * 0.96,
       child: FlatButton(
           onPressed: () {
             Navigator.push(
@@ -153,7 +152,7 @@ class CreateTile extends StatelessWidget {
                 name,
                 style: TextStyle(
                     fontFamily: "Prompt",
-                    fontSize: screenWidth * 0.055,
+                    fontSize: 0,
                     fontWeight: FontWeight.w700,
                     color: Colors.white),
               ),
