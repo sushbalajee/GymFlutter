@@ -606,6 +606,17 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
           textChanged: (item) {
             currentText = item;
           },
+          itemSubmitted: (item) {
+          setState(() {
+              added.clear();
+              currentText = item;
+              added.add(currentText);
+              someMethod(currentText);
+              myController.text = currentText;
+              print(currentText);
+              fetchPostForExecution(currentText);
+            });
+          },
           textSubmitted: (item) {
             setState(() {
               added.clear();

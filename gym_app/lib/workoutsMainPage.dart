@@ -100,8 +100,8 @@ Widget horizontalSlider(
       elevation: 15.0,
       margin: EdgeInsets.only(bottom: 0.0, left: 0.0, right: 0.0),
       child: Container(
-        margin: EdgeInsets.only(left: 5, top:5, bottom: 5.0),
-        height: screenHeight * 0.208,
+        margin: EdgeInsets.all(5),
+        height: screenHeight * 0.204,
         child: new ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,

@@ -1,74 +1,93 @@
 [{
 	"name": "Air Bike",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FAir%20Bike.gif?alt=media&token=b4c1cebd-0e43-4fe0-9133-21a88020510b",
 	"execution": "Lie on your back with your knees bent and feet flat on the floor. Place hands behind your head. Raise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle. Slowly pedal them in the air, alternating as if riding a bicycle."
 }, {
 	"name": "Barbell Rollout",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FBarbell%20Rollout.gif?alt=media&token=904949c3-8075-4ef7-a3a9-7964b1d9716b",
 	"execution": "Kneel and hold a barbell under your shoulders on the ground. Keep your core strong as you roll the bar out in front of you, keeping your arms straight. Return to the starting position."
 }, {
 	"name": "Cable Woodchoppers",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FNoImage.jpg?alt=media&token=1999bc13-9014-44cd-99d4-7bc6b4dbd717",
 	"execution": "Set the cable pulley to slightly above chest height. Keep your body facing forward with hips stable. Grab the pulley handle, fully extend your arms and bring your arms forward and across your body. Hold for 1 second at the end of the movement and slowly return to starting position."
 },
 {
 	"name": "Cross Body Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCross%20Body%20Crunch.gif?alt=media&token=468b1615-71ac-41a8-8654-d768ce438144",
 	"execution": "Lie on your back with hips and knees bent. Place hands on chest with forearms crossed. Flex and twist waist to one direction while raising torso from bench by bending hips. Return until back of shoulders contact floor or mat. Repeat to opposite side alternating twists."
 },
 {
 	"name": "Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCrunch.gif?alt=media&token=28cfdfaa-91e4-4d87-a5f1-58d8006e4b25",
 	"execution": "Lay down flat and hold your hands behind your neck. Lift up with a rolling movement of your back, you should feel each individual vertebrae losing contact with the ground. At the highest point, contract your abs as much as you can and hold there for 2 sec. Return to the starting position by unrolling your back."
 },
 {
 	"name": "Dumbbell Side Bend",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FDumbbell%20Side%20Bend.gif?alt=media&token=7ff2fdaf-de71-404b-92d1-c7dfa4394aa3",
 	"execution": "Bend waist to opposite side of dumbbell until a slight stretch is felt. Lower to the same distance on the opposite side. Continue by alternating sides."
 },
 {
 	"name": "Flutter Kicks",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FFlutter%20Kicks.gif?alt=media&token=74a973a7-4d92-4094-bcd2-325676ea063d",
 	"execution": "Lay down flat and lift your straightened legs from the ground at a 45 degree angle. As your left foot travels downward and nearly touches the floor, your right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your right foot down until it nearly touches the floor, and bring your left foot upwards. Your head should stay off the ground, supported by tightened upper abdominals."
 },
 {
 	"name": "Hanging Leg Raises",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FHanging%20Leg%20Raises.gif?alt=media&token=1c3d4bd6-c3d0-43ad-99eb-9b34d8fd0d1c",
 	"execution": "Grasp and hang from a high bar. Raise legs by flexing hips and knees until hips are fully flexed. Continue to raise knees toward shoulders by flexing waist. Return until waist, hips, and knees are extended."
 },
 {
 	"name": "Landmine 180",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FLandmine%20180.gif?alt=media&token=35a5da8f-0985-40d4-bf8a-36cb331a2d56",
 	"execution": "Hold one end of a barbell with the other end anchored. Tighten your abs as you move the bar in an arc from one side to the next."
 },
 {
 	"name": "Mountain Climbers",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FMountain%20Climbers.gif?alt=media&token=2dbd0436-231a-4668-8d97-7d2a3b1c2076",
 	"execution": "Get into a push-up position. Keep your hips low as your alternate bringing your knees in toward your chest."
 },
 {
 	"name": "Reverse Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FReverse%20Crunch.gif?alt=media&token=65b8113e-91ed-4f00-ae20-0a6cf17179e9",
 	"execution": "Lie face up on the floor with your palms facing down. Bend your hips and knees 90 degrees. Raise your hips off the floor and crunch them inward. Pause, and then slowly lower your legs until your heels nearly touch the floor."
 },
 {
 	"name": "Russian Twist",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FRussian%20Twist.gif?alt=media&token=832d26dc-08cc-43d8-839d-f15dbb66bf00",
 	"execution": "Start by sitting on the floor, with knees bent and feet flat on the ground. Lean back so your upper body is at a 45-degree angle to the floor. Keep your back straight at this angle throughout the exercise. Link your hands together in front of your chest, brace your core and raise your legs up off the ground. Rotate your arms all the way over to one side, then do the same in the other direction."
 },
 {
 	"name": "Side Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSide%20Crunch.gif?alt=media&token=8bff30f5-bcfd-4cde-8beb-af5e718970c4",
 	"execution": "Lay down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position outside of leg down to side. Flex waist, raising your upper body off the ground. Return to the starting position and repeat with movement in opposite leg position."
 },
 {
 	"name": "Sit Up",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSit%20Up.gif?alt=media&token=e0c71b11-1d0b-448b-aa80-7f5428d11ad6",
 	"execution": "Lay down flat with knees bent, feet flat on the floor and hands behind your head. Ask a partner or use a weight (barbell, weight plate etc.) to keep you feet fixed. Lift your upper body till your head or elbows touch your knees. Return slowly to the starting position"
 },
 {
 	"name": "Stability Ball Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStability%20Ball%20Crunch.gif?alt=media&token=9dab2320-070a-4f94-b95b-53f453b70227",
 	"execution": "Sit on exercise ball. Walk forward and lie back on the ball with your shoulders and head hanging off, and your knees and hips bent. Gently hyperextend your back on the contour of ball. Place hands behind neck, or beside your head. Flex waist to raise upper torso. Return to starting position"
 },
 {
 	"name": "Stability Ball Pull In",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStability%20Ball%20Pull%20In.gif?alt=media&token=d1f40daf-c472-43a8-9ff9-014c223f9afc",
 	"execution": "Start in a high plank, with wrists under shoulders, core engaged, and top of your feet resting on ball. Keep hips level and use core to pull knees toward your chest, rolling the ball toward you. Straighten legs and return to the starting position."
 },
 {
 	"name": "Straight Arm Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStraight%20Arm%20Crunch.gif?alt=media&token=1c0f4ff3-7624-493e-903c-ace08ccef2d3",
 	"execution": "Lie on your back in a normal sit-up position, with feet flat on ground, knees bent and your arms stretched out straight on each side. Perform a crunch by reaching both of your arms straight out in front of you and return slowly to the start position."
 },
 {
 	"name": "Tuck Crunch",
+	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FTuck%20Crunch.gif?alt=media&token=4960e166-93e0-4036-afc0-140f2d7a6c4e",
 	"execution": "Lie on your back, cross your arms over your chest and grasp your opposing shoulders. Raise your legs off the floor by bending your knees and keeping your calves parallel with the floor. Raise your torso off the floor but keep your back on the mat. Slowly return to the starting position."
 },
 {
 	"name": "Windshield Wiper",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
 	"execution": "Hold onto the handles, set high off the ground, and hang below them. Lift your legs straight to the ceiling and rotate them from side to side."
 }]

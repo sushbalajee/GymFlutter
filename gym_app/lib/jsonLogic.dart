@@ -8,6 +8,14 @@ class Workouts {
   Workouts(this.workoutname, this.musclegroup, this.exNames, this.description);
 }
 
+class Exercises {
+  String exerciseName;
+  String exerciseExecution;
+  String exerciseImage;
+
+  Exercises(this.exerciseName, this.exerciseExecution, this.exerciseImage);
+}
+
 class WorkoutCategory {
   final List<Wkouts> workouts;
   String uiCode;
