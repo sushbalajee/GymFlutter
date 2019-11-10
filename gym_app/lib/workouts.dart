@@ -117,31 +117,27 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                         }));
                               })),
                       Container(
-                        height: screenHeight * 0.3,
-                        color: Colors.black,
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => BuiltinExercises(
-                                          //value: name,
-                                          )));
-                            },
-                            child: SizedBox(
-                              child: Container(
-                                alignment: AlignmentDirectional.center,
-                                child: Text(
-                                  "Exercises",
-                                  style: TextStyle(
-                                      fontFamily: "Prompt",
-                                      fontSize: 50,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white),
+                          height: screenHeight * 0.315,
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                                image:
+                                    new AssetImage("assets/ExerciseList.jpg"),
+                                fit: BoxFit.cover),
+                          ),
+                          child: FlatButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BuiltinExercises(
+                                              value: widget.value,
+                                            )));
+                              },
+                              child: SizedBox(
+                                child: Container(
+                                  alignment: AlignmentDirectional.center,
                                 ),
-                              ),
-                            )),
-                      )
+                              )))
                     ]);
                   }
                 })));

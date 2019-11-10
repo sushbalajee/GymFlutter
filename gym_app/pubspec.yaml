@@ -67,6 +67,7 @@ flutter:
   - assets/JSON/ExerciseDB.json
   - assets/MyClients.png
   - assets/SessionPlanner.png
+  - assets/ExerciseList.jpg
 
 
   fonts: 
