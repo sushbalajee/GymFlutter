@@ -62,12 +62,19 @@ class PageTwoState extends State<PageTwo> {
             horizontalSlider(
                 screenHeight, this.upperBodyCategories, this.picIndexes),
             sliderTitles("GOAL FOCUS", screenHeight * 0.045, screenWidth),
-            horizontalSlider(
-                screenHeight, this.lowerBodyCategories, this.picIndexes),
+            /*horizontalSlider(
+                screenHeight, this.lowerBodyCategories, this.picIndexes)*/new Container(
+                  height: screenHeight * 0.204,
+                 color: Colors.red, 
+                ),
             sliderTitles(
                 "MUSCLE SPLITS", screenHeight * 0.045, screenWidth),
-            horizontalSlider(
-                screenHeight, this.cardioCategories, this.picIndexes)
+            /*horizontalSlider(
+                screenHeight, this.cardioCategories, this.picIndexes)*/
+                new Container(
+                  height: screenHeight * 0.204,
+                 color: Colors.red, 
+                ),
           ])
         ]));
   }
@@ -97,7 +104,7 @@ Widget horizontalSlider(
   return Card(
       shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(0.0)),
-      elevation: 15.0,
+      elevation: 7.0,
       margin: EdgeInsets.only(bottom: 0.0, left: 0.0, right: 0.0),
       child: Container(
         margin: EdgeInsets.all(5),

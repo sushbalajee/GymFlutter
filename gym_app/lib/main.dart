@@ -8,6 +8,9 @@ import 'root.dart';
 //-----------------------------------------------------------------------------------//
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
+      .copyWith(systemNavigationBarColor: Color(0xFF232528),
+      statusBarColor: Color(0xFF232528)));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MaterialApp(
@@ -26,7 +29,7 @@ class GymApp extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class HomePageState extends State<GymApp> {
-  int currentTab = 0;
+  int currentTab = 1;
 
   PageOne one;
   PageTwo two;
@@ -43,33 +46,33 @@ class HomePageState extends State<GymApp> {
 
     pages = [one, two, login];
 
-    currentPage = one;
+    currentPage = two;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return new MaterialApp(
-        //title: "Evolve FC",
         home: new Scaffold(
             backgroundColor: Colors.grey[100],
-
             appBar: new AppBar(
-                
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
-                title: new Text("Gym App v0.1", style: TextStyle(fontSize: 20.0, fontFamily: "Ubuntu", fontWeight: FontWeight.w500),)),
-
+                title: new Text(
+                  "Gym App v0.1",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "Ubuntu",
+                      fontWeight: FontWeight.w500),
+                )),
             body: currentPage,
-            
-            bottomNavigationBar: new Theme( 
+            bottomNavigationBar: new Theme(
               data: Theme.of(context).copyWith(
                   textTheme: Theme.of(context)
                       .textTheme
                       .copyWith(caption: new TextStyle(color: Colors.white)),
                   canvasColor: Color(0xFF232528)),
-              child: new BottomNavigationBar(  
+              child: new BottomNavigationBar(
                   fixedColor: Color(0xFFEFCA08),
                   currentIndex: currentTab,
                   onTap: (int index) {
@@ -82,11 +85,12 @@ class HomePageState extends State<GymApp> {
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.home), title: new Text("Home")),
                     new BottomNavigationBarItem(
-                        icon: new Icon(Icons.pool), title: new Text("Workouts")),
+                        icon: new Icon(Icons.pool),
+                        title: new Text("Workouts")),
                     new BottomNavigationBarItem(
-                        icon: new Icon(Icons.people), title: new Text("Personalised"))
+                        icon: new Icon(Icons.people),
+                        title: new Text("Personalised"))
                   ]),
             )));
   }
 }
-

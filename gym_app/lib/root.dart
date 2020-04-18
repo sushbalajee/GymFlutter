@@ -110,6 +110,12 @@ class RootPageState extends State<RootPage> {
     });
   }
 
+  Future<void> deleteUser() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    user.delete();
+    confirmAccountDeleteDialog(context, "Signout", "Signout");
+  }
+
   void updateRelationship() async {
     SharedPreferences relations = await SharedPreferences.getInstance();
     relationship = relations.getString('relationship');
@@ -281,9 +287,8 @@ class RootPageState extends State<RootPage> {
                   height: screenHeight / 4,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
-                      image: new AssetImage("assets/MyWorkouts.jpg"),
-                      fit: BoxFit.cover
-                    ),
+                        image: new AssetImage("assets/MyWorkouts.jpg"),
+                        fit: BoxFit.cover),
                   ),
                   width: screenWidth,
                   child: FlatButton(
@@ -310,9 +315,8 @@ class RootPageState extends State<RootPage> {
                   height: screenHeight / 4,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
-                      image: new AssetImage("assets/MySessions.jpg"),
-                      fit: BoxFit.cover
-                    ),
+                        image: new AssetImage("assets/MySessions.jpg"),
+                        fit: BoxFit.cover),
                   ),
                   width: screenWidth,
                   child: FlatButton(
@@ -327,6 +331,24 @@ class RootPageState extends State<RootPage> {
                                     )));
                       }),
                 )),
+            Card(
+                margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
+                child: Container(
+                  decoration: new BoxDecoration(
+                      color: Color(0xFF232528),
+                      borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                  width: screenWidth - 30,
+                  height: 40.0,
+                  child: new FlatButton(
+                    child: new Text("Sign Out",
+                        style: TextStyle(
+                            fontFamily: "Ubuntu",
+                            fontSize: screenWidth * 0.045,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white)),
+                    onPressed: signedOut,
+                  ),
+                )),
             Container(
               decoration: new BoxDecoration(
                   color: Color(0xFF232528),
@@ -334,17 +356,70 @@ class RootPageState extends State<RootPage> {
               width: screenWidth - 30,
               height: 40.0,
               child: new FlatButton(
-                child: new Text("Sign Out",
+                child: new Text("My Account",
                     style: TextStyle(
                         fontFamily: "Ubuntu",
                         fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.w600,
                         color: Colors.white)),
-                onPressed: signedOut,
+                onPressed: () {
+                  confirmDeleteDialog(
+                      context,
+                      "Are you sure you would like to DELETE your account",
+                      "Please enter 'delete' to continue");
+                },
               ),
             ),
           ]));
     }
     return null;
+  }
+
+  Future<Null> confirmDeleteDialog(
+      BuildContext context, String why, String execution) {
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(why),
+            content: new Text(execution),
+            actions: <Widget>[
+              new FlatButton(
+                child: const Text('CLOSE'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                  child: const Text('DELETE'),
+                  onPressed: () {
+                    deleteUser();
+                    Navigator.of(context).pop();
+                  }),
+            ],
+          );
+        });
+  }
+
+  Future<Null> confirmAccountDeleteDialog(
+      BuildContext context, String why, String execution) {
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text(why),
+            content: new Text(execution),
+            actions: <Widget>[
+              new FlatButton(
+                  child: const Text('CLOSE'),
+                  onPressed: () {
+                    signedOut();
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
   }
 }
