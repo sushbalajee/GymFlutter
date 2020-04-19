@@ -12,6 +12,7 @@ import 'color_loader_3.dart';
 import 'package:flutter/services.dart';
 import 'ptDiary.dart';
 import 'upcomingSessions.dart';
+import 'package:rich_alert/rich_alert.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -113,7 +114,8 @@ class RootPageState extends State<RootPage> {
   Future<void> deleteUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     user.delete();
-    confirmAccountDeleteDialog(context, "Signout", "Signout");
+    confirmAccountDeleteDialog(
+        context, "Account Deleted", "Your account has been successfully deleted");
   }
 
   void updateRelationship() async {
@@ -365,8 +367,8 @@ class RootPageState extends State<RootPage> {
                 onPressed: () {
                   confirmDeleteDialog(
                       context,
-                      "Are you sure you would like to DELETE your account",
-                      "Please enter 'delete' to continue");
+                      "Delete my account",
+                      "Are you sure you would like to delete your account?\nYou will no longer have access to any workouts\n associated with this account. \n\nTo confirm, please press 'Delete'");
                 },
               ),
             ),
@@ -376,22 +378,30 @@ class RootPageState extends State<RootPage> {
   }
 
   Future<Null> confirmDeleteDialog(
-      BuildContext context, String why, String execution) {
+      BuildContext context, String why, String subtitle) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(why),
-            content: new Text(execution),
+          return new RichAlertDialog(
+            alertTitle: new Text(why,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text(subtitle,
+                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+            alertType: RichAlertType.WARNING,
             actions: <Widget>[
+              new Padding(
+                  padding: EdgeInsets.only(right: 25.0),
+                  child: new FlatButton(
+                    color: Colors.green,
+                    child: const Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )),
               new FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              new FlatButton(
+                  color: Colors.red,
                   child: const Text('DELETE'),
                   onPressed: () {
                     deleteUser();
@@ -402,22 +412,29 @@ class RootPageState extends State<RootPage> {
         });
   }
 
+
   Future<Null> confirmAccountDeleteDialog(
-      BuildContext context, String why, String execution) {
+      BuildContext context, String why, String subtitle) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(why),
-            content: new Text(execution),
+          return new RichAlertDialog(
+            alertTitle: new Text(why,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text(subtitle,
+                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+            alertType: RichAlertType.SUCCESS,
             actions: <Widget>[
               new FlatButton(
-                  child: const Text('CLOSE'),
-                  onPressed: () {
-                    signedOut();
-                    Navigator.of(context).pop();
-                  })
+                    color: Color(0xFF232528),
+                    child: const Text('CLOSE', style: TextStyle(color: Colors.white)),
+                    onPressed: () {
+                      signedOut();
+                      Navigator.of(context).pop();
+                    },
+                  ),
             ],
           );
         });

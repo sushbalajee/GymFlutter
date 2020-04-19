@@ -114,7 +114,7 @@ class UIDListPage extends State<UIDList> {
                               elevation: 0.6,
                               child: ListTile(
                                   contentPadding: EdgeInsets.all(20.0),
-                                  title: Text(snapshot.data[index],
+                                  title: Text(snapshot.data[index].toString().substring(0, snapshot.data[index].indexOf('-')),
                                       style: TextStyle(
                                           fontFamily: "Ubuntu",
                                           color: Color(0xFF22333B),

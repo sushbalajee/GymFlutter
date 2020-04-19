@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
 import 'color_loader_3.dart';
+import 'package:rich_alert/rich_alert.dart';
 
 class Login extends StatefulWidget {
   Login({this.auth, this.onSignedIn, this.onSignedInAsPt});
@@ -153,7 +154,7 @@ class LoginPageState extends State<Login> {
       validPTID = true;
     } else {
       confirmDialog(context, "Invalid Trainer ID",
-          "Please check that you have entered a valid Trainer ID and try again");
+          "Please check that you have entered a valid\nTrainer ID and try again");
       resetRegister();
     }
     return userIds;
@@ -245,20 +246,20 @@ class LoginPageState extends State<Login> {
     if (e.contains(
         "The password is invalid or the user does not have a password")) {
       confirmDialog(context, "Invalid Password",
-          "Please ensure that you have entered the correct password and try again");
+          "Please ensure that you have entered the\ncorrect password and try again");
       resetLogin();
     } else if (e.contains("The email address is badly formatted")) {
       confirmDialog(context, "Invalid Email",
-          "Please ensure you have formatted your email correctly and try again");
+          "Please ensure you have formatted your email\ncorrectly and try again");
       resetLogin();
     } else if (e.contains(
         "There is no user record corresponding to this identifier. The user may have been deleted")) {
       confirmDialog(context, "Invalid User",
-          "There is no user record corresponding to your login. Please register for further access");
+          "There is no user record corresponding to your login.\nPlease register for further access");
           resetLogin();
     } else if (e.contains("The password must be 6 characters long or more")) {
-      confirmDialog(context, "Password too short",
-          "Please create a password that is atleast 6 characters");
+      confirmDialog(context, "Weak Password",
+          "Please create a password contains atleast\n6 characters");
           resetRegister();
     }
   }
@@ -469,17 +470,22 @@ void updateUID() {
 
 //------------------------------------------------------------------------------//
 
-Future<Null> confirmDialog(BuildContext context, String why, String execution) {
+Future<Null> confirmDialog(BuildContext context, String subtitle, String execution) {
   return showDialog<Null>(
       context: context,
       barrierDismissible: false, 
       builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(why),
-          content: new Text(execution),
+        return new RichAlertDialog(
+            alertTitle: new Text(subtitle,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text(execution,
+                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+            alertType: RichAlertType.ERROR,
           actions: <Widget>[
             new FlatButton(
-              child: const Text('CLOSE'),
+                    color: Color(0xFF232528),
+                    child: const Text('CLOSE', style: TextStyle(color: Colors.white)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
