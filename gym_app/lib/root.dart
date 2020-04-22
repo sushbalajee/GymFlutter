@@ -180,7 +180,7 @@ class RootPageState extends State<RootPage> {
               return Column( children: <Widget> [ 
                 
               Container(color: Color(0xFFF7C59F), height: constraints.maxHeight/3, width: constraints.maxWidth,
-              child: FlatButton.icon(onPressed: null, icon: Image(image: new AssetImage("assets/Gym.svg")), label: Text("My Clients")),),
+              child: FlatButton.icon(onPressed: null, icon: Icon(Icons.calendar_today), label: Text("My Clients")),),
               Container(color: Color(0xFF2A324B), height: constraints.maxHeight/3),
 
               Row(children: <Widget> [
