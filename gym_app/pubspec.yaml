@@ -69,6 +69,8 @@ flutter:
   - assets/MyClients.png
   - assets/SessionPlanner.png
   - assets/ExerciseList.jpg
+  - assets/diary.svg
+  - assets/gym.svg
 
 
   fonts: 

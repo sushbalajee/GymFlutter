@@ -117,6 +117,7 @@ class UIDListPage extends State<UIDList> {
                                   title: Text(snapshot.data[index].toString().substring(0, snapshot.data[index].indexOf('-')),
                                       style: TextStyle(
                                           fontFamily: "Ubuntu",
+                                          fontSize: 30.0,
                                           color: Color(0xFF22333B),
                                           fontWeight: FontWeight.w600)),
                                   onTap: () {

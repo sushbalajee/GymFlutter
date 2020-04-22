@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
+import 'package:rich_alert/rich_alert.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -38,8 +39,8 @@ class _ClientPaymentsState extends State<ClientPayments> {
 
     timer = new Timer(const Duration(seconds: 5), () {
       setState(() {
-                   msg = "No session history available";
-            });
+        msg = "No session history available";
+      });
     });
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -70,8 +71,8 @@ class _ClientPaymentsState extends State<ClientPayments> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
-          title: Text('Client Payments',
-              style: TextStyle(fontFamily: "Ubuntu")),
+          title:
+              Text('Client Payments', style: TextStyle(fontFamily: "Ubuntu")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -81,40 +82,41 @@ class _ClientPaymentsState extends State<ClientPayments> {
                 query: clientSessionsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                      if(snapshot.value != null){
-                  items.sort((a, b) => a.date
-                      .substring(a.date.length - 8, a.date.length)
-                      .compareTo(
-                          b.date.substring(b.date.length - 8, b.date.length)));
+                  if (snapshot.value != null) {
+                    items.sort((a, b) => a.date
+                        .substring(a.date.length - 8, a.date.length)
+                        .compareTo(b.date
+                            .substring(b.date.length - 8, b.date.length)));
 
-                  return Card(
-                      color: Colors.grey[100],
-                      margin: EdgeInsets.all(1.0),
-                      elevation: 0.6,
-                      child: new ListTile(
-                        title: Text(items[index].date,
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: screenWidth * 0.055,
-                                color: Color(0xFF22333B),
-                                fontWeight: FontWeight.w600)),
-                        subtitle: Text(
-                            items[index].startTime.substring(10, 15) +
-                                " - " +
-                                items[index].endTime.substring(10, 15)),
-                        trailing: new IconButton(
-                            iconSize: 40.0,
-                            icon: Icon(Icons.monetization_on),
-                            color: Color(items[index].paid),
-                            onPressed: () {
-                              if (items[index].paid == 0xFFFF6B6B) {
-                                informPT(context, index);
-                              } else if (items[index].paid == 0xFFFFE66D) {
-                                confirmPayment(context, index, 0xFF4ECDC4);
-                              }
-                            }),
-                      ));
-                }},
+                    return Card(
+                        color: Colors.grey[100],
+                        margin: EdgeInsets.all(1.0),
+                        elevation: 0.6,
+                        child: new ListTile(
+                          title: Text(items[index].date,
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: screenWidth * 0.055,
+                                  color: Color(0xFF22333B),
+                                  fontWeight: FontWeight.w600)),
+                          subtitle: Text(
+                              items[index].startTime.substring(10, 15) +
+                                  " - " +
+                                  items[index].endTime.substring(10, 15)),
+                          trailing: new IconButton(
+                              iconSize: 40.0,
+                              icon: Icon(Icons.monetization_on),
+                              color: Color(items[index].paid),
+                              onPressed: () {
+                                if (items[index].paid == 0xFFFF6B6B) {
+                                  informPT(context, index);
+                                } else if (items[index].paid == 0xFFFFE66D) {
+                                  confirmPayment(context, index, 0xFF4ECDC4);
+                                }
+                              }),
+                        ));
+                  }
+                },
               ),
             ),
           ],
@@ -151,7 +153,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
         });
   }
 
-  Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
+  /*Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
     double screenWidth = MediaQuery.of(context).size.width;
     return showDialog<Null>(
         context: context,
@@ -185,6 +187,45 @@ class _ClientPaymentsState extends State<ClientPayments> {
                   Navigator.of(context).pop();
                 },
               ),
+            ],
+          );
+        });
+  }*/
+
+  Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new RichAlertDialog(
+            alertTitle: new Text("Confirm Payment?",
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text("Please confirm if you have received payment from your client for this session. Please note: payment is not done within the app",
+                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+            alertType: RichAlertType.WARNING,
+            actions: <Widget>[
+              new Padding(
+                  padding: EdgeInsets.only(right: 25.0),
+                  child: new FlatButton(
+                    color: Colors.green,
+                    child: const Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )),
+              new FlatButton(
+                  color: Colors.red,
+                  child: const Text('CONFIRM'),
+                  onPressed: () {
+                    clientSessionsRef
+                        .child(items[ind].key)
+                        .child('paid')
+                        .set(changeTo);
+                    handlePayment();
+                    Navigator.of(context).pop();
+                  }),
             ],
           );
         });

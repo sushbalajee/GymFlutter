@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'ptDiary.dart';
 import 'upcomingSessions.dart';
 import 'package:rich_alert/rich_alert.dart';
+import 'package:rich_alert/rich_alert_large.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -114,8 +115,8 @@ class RootPageState extends State<RootPage> {
   Future<void> deleteUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     user.delete();
-    confirmAccountDeleteDialog(
-        context, "Account Deleted", "Your account has been successfully deleted");
+    confirmAccountDeleteDialog(context, "Account Deleted",
+        "Your account has been successfully deleted");
   }
 
   void updateRelationship() async {
@@ -172,104 +173,166 @@ class RootPageState extends State<RootPage> {
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Scaffold(
           backgroundColor: Colors.grey[100],
-          body: Container(
+          body:  SafeArea(
+        child: new LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              // constraints variable has the size info
+              return Column( children: <Widget> [ 
+                
+              Container(color: Color(0xFFF7C59F), height: constraints.maxHeight/3, width: constraints.maxWidth,
+              child: FlatButton.icon(onPressed: null, icon: Image(image: new AssetImage("assets/Gym.svg")), label: Text("My Clients")),),
+              Container(color: Color(0xFF2A324B), height: constraints.maxHeight/3),
+
+              Row(children: <Widget> [
+              Container(color: Color(0xFFC7CCDB), height: constraints.maxHeight/3, width: constraints.maxWidth/2),
+              Container(color: Color(0xFFE1E5EE), height: constraints.maxHeight/3, width: constraints.maxWidth/2),
+              ])
+              
+              ]);
+            }
+        ),
+      ),
+
+          );
+          
+          /*Container(
+              color: Colors.grey[100],
               child: new Column(children: <Widget>[
-            Card(
-                elevation: 0.6,
-                color: Colors.grey[100],
-                margin: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                child: new Container(
-                  height: screenHeight / 4,
-                  width: screenWidth,
-                  decoration: new BoxDecoration(
-                      image: new DecorationImage(
-                          image: new AssetImage("assets/MyClients.png"),
-                          fit: BoxFit.cover)),
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UIDList(
-                                    ptID: uid,
-                                  )));
-                    },
-                  ),
-                )),
-            Card(
-                color: Colors.grey[100],
-                margin: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                child: new Container(
-                  height: screenHeight / 4,
-                  width: screenWidth,
-                  decoration: new BoxDecoration(
-                      image: new DecorationImage(
-                          image: new AssetImage("assets/SessionPlanner.png"),
-                          fit: BoxFit.cover)),
-                  child: FlatButton(
-                      child: null,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PTDiary(
-                                      ptID: uid,
-                                    )));
-                      }),
-                )),
-            Container(
-              decoration: new BoxDecoration(
-                  color: Color(0xFF232528),
-                  borderRadius: BorderRadius.all(Radius.circular(2.0))),
-              width: screenWidth - 30,
-              height: 40.0,
-              child: new FlatButton(
-                child: new Text("Sign Out",
-                    style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white)),
-                onPressed: signedOut,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-              child: Text(
-                "Send your unique Trainer ID to your clients to enter on registration:",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontFamily: "Montserrat",
-                ),
-              ),
-            ),
-            Container(
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text("$uid",
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.w700)),
-                    IconButton(
-                        icon: new Icon(Icons.content_copy),
-                        tooltip: "Copied to clipboard",
+                Card(
+                    elevation: 0.6,
+                    color: Colors.grey[100],
+                    margin: EdgeInsets.only(
+                        left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(5.0)),
+                    child: new Container(
+                      height: screenHeight / 4,
+                      width: screenWidth,
+                      decoration: new BoxDecoration(
+                          borderRadius: new BorderRadius.circular(5.0),
+                          image: new DecorationImage(
+                              image: new AssetImage("assets/MyClients.png"),
+                              fit: BoxFit.cover)),
+                      child: FlatButton(
+                        child: null,
                         onPressed: () {
-                          Clipboard.setData(new ClipboardData(text: uid));
-                        })
-                  ],
-                ))
-          ])));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UIDList(
+                                        ptID: uid,
+                                      )));
+                        },
+                      ),
+                    )),
+                Card(
+                    color: Colors.grey[100],
+                    margin: EdgeInsets.only(
+                        left: 15.0, right: 15.0, bottom: 15.0, top: 15.0),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(5.0)),
+                    child: new Container(
+                      height: screenHeight / 4,
+                      width: screenWidth,
+                      decoration: new BoxDecoration(
+                          borderRadius: new BorderRadius.circular(5.0),
+                          image: new DecorationImage(
+                              image:
+                                  new AssetImage("assets/SessionPlanner.png"),
+                              fit: BoxFit.cover)),
+                      child: FlatButton(
+                          child: null,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PTDiary(
+                                          ptID: uid,
+                                        )));
+                          }),
+                    )),
+                Expanded(
+                    child: Card(
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0))),
+                        margin: EdgeInsets.all(0),
+                        elevation: 10.0,
+                        child: new Column(children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 20.0, right: 20.0, top: 20.0),
+                            child: Text(
+                              "Send your unique Trainer ID to your clients to enter on registration:",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontFamily: "Montserrat",
+                              ),
+                            ),
+                          ),
+                          Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Text("$uid",
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontFamily: "Montserrat",
+                                          fontWeight: FontWeight.w700)),
+                                  IconButton(
+                                      icon: new Icon(Icons.content_copy),
+                                      tooltip: "Copied to clipboard",
+                                      onPressed: () {
+                                        Clipboard.setData(
+                                            new ClipboardData(text: uid));
+                                      })
+                                ],
+                              )),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: new Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                              height: 40.0,
+                              child: FloatingActionButton.extended(
+                                foregroundColor: Colors.black,
+                                heroTag: null,
+                                onPressed: () {
+                                  null;
+                                },
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(5.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF232528), width: 0.5),
+                                ),
+                                icon: Icon(Icons.exit_to_app),
+                                label: new Text("Signout",
+                                    style: TextStyle(
+                                      fontFamily: "Ubuntu",
+                                      fontSize: screenWidth * 0.050,
+                                      fontWeight: FontWeight.w300,
+                                    )),
+                                backgroundColor: Colors.white,
+                              ),
+                              /*child: new OutlineButton(
+                                borderSide: BorderSide(
+                                    color: Color(0xFF4A657A), width: 1),
+                                child: new Text(
+                                  "Sign Out",
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                onPressed: signedOut,
+                              ),*/
+                            ),
+                          )
+                        ]))),
+              ]))*/
+              
     }
 
 //------------------------------------------------------------------------------//
@@ -365,10 +428,8 @@ class RootPageState extends State<RootPage> {
                         fontWeight: FontWeight.w600,
                         color: Colors.white)),
                 onPressed: () {
-                  confirmDeleteDialog(
-                      context,
-                      "Delete my account",
-                      "Are you sure you would like to delete your account?\nYou will no longer have access to any workouts\n associated with this account. \n\nTo confirm, please press 'Delete'");
+                  confirmDeleteDialog(context, "Delete my account",
+                      "Are you sure you would like to delete your account? You will no longer have access to any workouts associated with this account.");
                 },
               ),
             ),
@@ -412,7 +473,6 @@ class RootPageState extends State<RootPage> {
         });
   }
 
-
   Future<Null> confirmAccountDeleteDialog(
       BuildContext context, String why, String subtitle) {
     return showDialog<Null>(
@@ -428,13 +488,14 @@ class RootPageState extends State<RootPage> {
             alertType: RichAlertType.SUCCESS,
             actions: <Widget>[
               new FlatButton(
-                    color: Color(0xFF232528),
-                    child: const Text('CLOSE', style: TextStyle(color: Colors.white)),
-                    onPressed: () {
-                      signedOut();
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                color: Color(0xFF232528),
+                child:
+                    const Text('CLOSE', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  signedOut();
+                  Navigator.of(context).pop();
+                },
+              ),
             ],
           );
         });

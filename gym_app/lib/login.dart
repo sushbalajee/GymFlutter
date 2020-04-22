@@ -154,7 +154,7 @@ class LoginPageState extends State<Login> {
       validPTID = true;
     } else {
       confirmDialog(context, "Invalid Trainer ID",
-          "Please check that you have entered a valid\nTrainer ID and try again");
+          "Please check that you have entered a valid Trainer ID and try again");
       resetRegister();
     }
     return userIds;
@@ -246,20 +246,20 @@ class LoginPageState extends State<Login> {
     if (e.contains(
         "The password is invalid or the user does not have a password")) {
       confirmDialog(context, "Invalid Password",
-          "Please ensure that you have entered the\ncorrect password and try again");
+          "Please ensure that you have entered the correct password and try again");
       resetLogin();
     } else if (e.contains("The email address is badly formatted")) {
       confirmDialog(context, "Invalid Email",
-          "Please ensure you have formatted your email\ncorrectly and try again");
+          "Please ensure you have formatted your email correctly and try again");
       resetLogin();
     } else if (e.contains(
         "There is no user record corresponding to this identifier. The user may have been deleted")) {
       confirmDialog(context, "Invalid User",
-          "There is no user record corresponding to your login.\nPlease register for further access");
+          "There is no user record corresponding to your login. Please register for further access");
           resetLogin();
     } else if (e.contains("The password must be 6 characters long or more")) {
       confirmDialog(context, "Weak Password",
-          "Please create a password contains atleast\n6 characters");
+          "Please create a password contains atleast 6 characters");
           resetRegister();
     }
   }

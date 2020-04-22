@@ -89,7 +89,7 @@ class HomePageState extends State<GymApp> {
                         title: new Text("Workouts")),
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.people),
-                        title: new Text("Personalised"))
+                        title: new Text("My Account"))
                   ]),
             )));
   }

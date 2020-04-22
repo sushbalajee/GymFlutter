@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'uploadClientWorkoutDetails.dart';
 import 'dart:async';
 import 'clientPayements.dart';
+import 'package:rich_alert/rich_alert.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -88,7 +89,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                 query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                      workoutNumber += 1;
+                  workoutNumber += 1;
                   return Card(
                       color: Colors.grey[100],
                       margin: EdgeInsets.all(1.0),
@@ -101,32 +102,27 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       child: new ListTile(
                         contentPadding: EdgeInsets.only(
                             top: 10.0, bottom: 10.0, left: 15.0),
-                            leading: CircleAvatar(
-                                          child: new Text(
-                                            "$workoutNumber",
-                                            style:
-                                                TextStyle(
-                                      fontFamily: "Ubuntu",
-                                      fontSize: screenWidth * 0.055,
-                                      color: Color(0xFFEFCA08),
-                                      fontWeight: FontWeight.w600),
-                                          ),
-                                          backgroundColor: Color(0xFF232528)),
+                        leading: CircleAvatar(
+                            child: new Text(
+                              "$workoutNumber",
+                              style: TextStyle(
+                                  fontFamily: "Ubuntu",
+                                  fontSize: screenWidth * 0.055,
+                                  color: Color(0xFFEFCA08),
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            backgroundColor: Color(0xFF232528)),
                         trailing: new IconButton(
                             iconSize: 35.0,
                             icon: Icon(Icons.delete_forever),
                             color: Color(0xFF232528),
                             onPressed: () {
                               if (items.length == 1) {
-                                confirmError(
-                                    context,
-                                    "Please add a new workout before deleting this one",
-                                    "");
+                                confirmError(context, "Error",
+                                    "Please add a new workout before deleting this one");
                               } else {
                                 confirmDelete(
-                                    context,
-                                    "Are you sure you want to delete this Workout?",
-                                    index);
+                                    context, "Delete Workout?", index);
                               }
                             }),
                         title: Text(items[index].workoutname,
@@ -153,21 +149,34 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                 },
               ),
             ),
-            Container(
-                width: screenWidth - 20,
-                child: new OutlineButton(
-                    borderSide: BorderSide(
-                      color: Color(0xFF232528), //Color of the border
-                      style: BorderStyle
-                          .solid, //Style of the border //width of the border
-                    ),
-                    child: new Text("Sessions",
-                        style: TextStyle(
-                          fontFamily: "Ubuntu",
-                          fontSize: screenWidth * 0.050,
-                          fontWeight: FontWeight.w600,
-                        )),
-                    color: Color(0xFF232528),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                  heroTag: null,
+                  onPressed: () {
+                    confirmDialog(context, "Add a new workout");
+                  },
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(5.0)),
+                  icon: Icon(Icons.add),
+                  label: new Text("Add Workout",
+                      style: TextStyle(
+                        fontFamily: "Ubuntu",
+                        fontSize: screenWidth * 0.050,
+                        fontWeight: FontWeight.w600,
+                      )),
+                  backgroundColor: Color(0xFF22333B),
+                ),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.only(left: 10, bottom: 20.0, top: 10),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: FloatingActionButton.extended(
+                    heroTag: null,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -176,37 +185,40 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                     clientID: widget.clientID,
                                     ptID: widget.ptID,
                                   )));
-                    })),
-            Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                width: screenWidth - 20,
-                child: new FlatButton(
-                    child: new Text("Add Workout",
+                    },
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(5.0)),
+                    icon: Icon(Icons.calendar_today),
+                    label: new Text("Sessions",
                         style: TextStyle(
-                            fontFamily: "Ubuntu",
-                            fontSize: screenWidth * 0.045,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white)),
-                    color: Color(0xFF272727),
-                    onPressed: () {
-                      confirmDialog(context, "Add a new workout");
-                    }))
+                          fontFamily: "Ubuntu",
+                          fontSize: screenWidth * 0.050,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    backgroundColor: Color(0xFF22333B),
+                  ),
+                )),
           ],
         ));
   }
 
-  Future<Null> confirmError(
-      BuildContext context, String why, String execution) {
+  Future<Null> confirmError(BuildContext context, String why, String subtitle) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(why),
-            content: new Text(execution),
+          return new RichAlertDialog(
+            alertTitle: new Text(why,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text(subtitle,
+                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+            alertType: RichAlertType.WARNING,
             actions: <Widget>[
               new FlatButton(
-                child: const Text('CLOSE'),
+                color: Color(0xFF232528),
+                child:
+                    const Text('CLOSE', style: TextStyle(color: Colors.white)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -222,32 +234,32 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(why),
-            content: Container(
-              width: screenWidth,
-              padding: EdgeInsets.only(top: 30.0),
-              child: new FlatButton(
-                child: new Text("Delete",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                onPressed: () {
-                  handleDelete(ind);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
+          return new RichAlertDialog(
+            alertTitle: new Text(why,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center),
+            alertSubtitle: new Text(
+                "Are you sure you want to delete this workout\nand all of its exercises?",
+                style: TextStyle(fontSize: 15.0),
+                textAlign: TextAlign.center),
+            alertType: RichAlertType.WARNING,
             actions: <Widget>[
+              new Padding(
+                  padding: EdgeInsets.only(right: 25.0),
+                  child: new FlatButton(
+                    color: Colors.green,
+                    child: const Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )),
               new FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+                  color: Colors.red,
+                  child: const Text('DELETE'),
+                  onPressed: () {
+                    handleDelete(ind);
+                    Navigator.of(context).pop();
+                  }),
             ],
           );
         });
@@ -285,12 +297,12 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                         decoration:
                             InputDecoration(labelText: "New Workout Name"),
                         initialValue: "",
+                        validator: (value) => value.isEmpty ? 'Workout name can\'t be empty' : null,
                         onSaved: (val) => item.workoutname = val,
-                        validator: (val) => val == "" ? val : null,
                       ),
                       TextFormField(
                         decoration: InputDecoration(labelText: "Muscle Group"),
-                        initialValue: '',
+                        initialValue: "",
                         onSaved: (val) => item.musclegroup = val,
                         validator: (val) => val == "" ? val : null,
                       ),
