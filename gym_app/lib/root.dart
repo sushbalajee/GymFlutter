@@ -13,7 +13,8 @@ import 'package:flutter/services.dart';
 import 'ptDiary.dart';
 import 'upcomingSessions.dart';
 import 'package:rich_alert/rich_alert.dart';
-import 'package:rich_alert/rich_alert_large.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flip_card/flip_card.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -172,167 +173,152 @@ class RootPageState extends State<RootPage> {
 
     if (authStatus == AuthStatus.signedInAsPT) {
       return new Scaffold(
-          backgroundColor: Colors.grey[100],
-          body:  SafeArea(
-        child: new LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              // constraints variable has the size info
-              return Column( children: <Widget> [ 
-                
-              Container(color: Color(0xFFF7C59F), height: constraints.maxHeight/3, width: constraints.maxWidth,
-              child: FlatButton.icon(onPressed: null, icon: Icon(Icons.calendar_today), label: Text("My Clients")),),
-              Container(color: Color(0xFF2A324B), height: constraints.maxHeight/3),
-
-              Row(children: <Widget> [
-              Container(color: Color(0xFFC7CCDB), height: constraints.maxHeight/3, width: constraints.maxWidth/2),
-              Container(color: Color(0xFFE1E5EE), height: constraints.maxHeight/3, width: constraints.maxWidth/2),
-              ])
-              
-              ]);
-            }
-        ),
-      ),
-
-          );
-          
-          /*Container(
-              color: Colors.grey[100],
-              child: new Column(children: <Widget>[
-                Card(
-                    elevation: 0.6,
-                    color: Colors.grey[100],
-                    margin: EdgeInsets.only(
-                        left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(5.0)),
-                    child: new Container(
-                      height: screenHeight / 4,
-                      width: screenWidth,
-                      decoration: new BoxDecoration(
-                          borderRadius: new BorderRadius.circular(5.0),
-                          image: new DecorationImage(
-                              image: new AssetImage("assets/MyClients.png"),
-                              fit: BoxFit.cover)),
-                      child: FlatButton(
-                        child: null,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UIDList(
-                                        ptID: uid,
-                                      )));
-                        },
+        backgroundColor: Colors.grey[100],
+        body: SafeArea(
+          child: new LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            return Column(children: <Widget>[
+              Container(
+                color: Color(0xFF2A324B),
+                height: constraints.maxHeight / 3,
+                width: constraints.maxWidth,
+                child: FlatButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UIDList(
+                                    ptID: uid,
+                                  )));
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/gym.svg",
+                      color: Colors.white,
+                      height: constraints.maxWidth / 5,
+                    ),
+                    label: Text(
+                      "My Clients",
+                      style: TextStyle(
+                        fontSize: screenWidth / 13,
+                        fontFamily: "Montserrat",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
                     )),
-                Card(
-                    color: Colors.grey[100],
-                    margin: EdgeInsets.only(
-                        left: 15.0, right: 15.0, bottom: 15.0, top: 15.0),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(5.0)),
-                    child: new Container(
-                      height: screenHeight / 4,
-                      width: screenWidth,
-                      decoration: new BoxDecoration(
-                          borderRadius: new BorderRadius.circular(5.0),
-                          image: new DecorationImage(
-                              image:
-                                  new AssetImage("assets/SessionPlanner.png"),
-                              fit: BoxFit.cover)),
-                      child: FlatButton(
-                          child: null,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PTDiary(
-                                          ptID: uid,
-                                        )));
-                          }),
-                    )),
-                Expanded(
-                    child: Card(
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0))),
-                        margin: EdgeInsets.all(0),
-                        elevation: 10.0,
-                        child: new Column(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: 20.0, right: 20.0, top: 20.0),
-                            child: Text(
-                              "Send your unique Trainer ID to your clients to enter on registration:",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                fontFamily: "Montserrat",
-                              ),
-                            ),
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("$uid",
-                                      style: TextStyle(
-                                          fontSize: 13.0,
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.w700)),
-                                  IconButton(
-                                      icon: new Icon(Icons.content_copy),
-                                      tooltip: "Copied to clipboard",
-                                      onPressed: () {
-                                        Clipboard.setData(
-                                            new ClipboardData(text: uid));
-                                      })
-                                ],
-                              )),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: new Container(
-                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                              height: 40.0,
-                              child: FloatingActionButton.extended(
-                                foregroundColor: Colors.black,
-                                heroTag: null,
-                                onPressed: () {
-                                  null;
-                                },
-                                shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(5.0),
-                                  side: BorderSide(
-                                      color: Color(0xFF232528), width: 0.5),
+              ),
+              Container(
+                  color: Color(0xFF45537C),
+                  height: constraints.maxHeight / 3,
+                  width: constraints.maxWidth,
+                  child: FlatButton.icon(
+                      icon: SvgPicture.asset("assets/diary.svg",
+                          height: constraints.maxWidth / 5,
+                          color: Colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PTDiary(
+                                      ptID: uid,
+                                    )));
+                      },
+                      label: Text(
+                        "Sessions",
+                        style: TextStyle(
+                          fontSize: screenWidth / 13,
+                          fontFamily: "Montserrat",
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ))),
+              FlipCard(
+                  direction: FlipDirection.HORIZONTAL, // default
+                  front: new Stack(
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.center,
+                          color: Color(0xFF767B91),
+                          height: constraints.maxHeight / 3,
+                          width: constraints.maxWidth,
+                          child: FlatButton.icon(
+                              icon: SvgPicture.asset("assets/name.svg",
+                                  height: constraints.maxWidth / 5,
+                                  color: Colors.white),
+                              onPressed: null,
+                              label: Text(
+                                "Trainer ID",
+                                style: TextStyle(
+                                  fontSize: screenWidth / 13,
+                                  fontFamily: "Montserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                                icon: Icon(Icons.exit_to_app),
-                                label: new Text("Signout",
+                              ))),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: PopupMenuButton(
+                              itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      child: FlatButton(
+                                          onPressed: signedOut,
+                                          child: Text("Signout")),
+                                    ),
+                                  ],
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,
+                              )))
+                    ],
+                  ),
+                  back: Container(
+                      color: Color(0xFF767B91),
+                      child: Column(children: <Widget>[
+                        Container(
+                            padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                            height: constraints.maxHeight / 6,
+                            width: constraints.maxWidth,
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                    "Send your unique Trainer ID to your clients to enter on registration:",
                                     style: TextStyle(
-                                      fontFamily: "Ubuntu",
-                                      fontSize: screenWidth * 0.050,
-                                      fontWeight: FontWeight.w300,
-                                    )),
-                                backgroundColor: Colors.white,
-                              ),
-                              /*child: new OutlineButton(
-                                borderSide: BorderSide(
-                                    color: Color(0xFF4A657A), width: 1),
-                                child: new Text(
-                                  "Sign Out",
-                                  style: TextStyle(
-                                      fontSize: 20.0,
+                                      fontSize: screenWidth / 25,
                                       fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                onPressed: signedOut,
-                              ),*/
-                            ),
-                          )
-                        ]))),
-              ]))*/
-              
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    )))),
+                        Container(
+                            padding: EdgeInsets.only(left: 40.0),
+                            height: constraints.maxHeight / 6,
+                            width: constraints.maxWidth,
+                            child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  width: screenWidth,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text("$uid",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: screenWidth / 25,
+                                              fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w700)),
+                                      IconButton(
+                                          icon: new Icon(Icons.content_copy,
+                                              color: Colors.white),
+                                          tooltip: "Copied to clipboard",
+                                          onPressed: () {
+                                            Clipboard.setData(
+                                                new ClipboardData(text: uid));
+                                          })
+                                    ],
+                                  ),
+                                )))
+                      ])))
+            ]);
+          }),
+        ),
+      );
     }
 
 //------------------------------------------------------------------------------//
@@ -500,4 +486,10 @@ class RootPageState extends State<RootPage> {
           );
         });
   }
+}
+
+class Constants {
+  static const String SignOut = 'Sign out';
+
+  static const List<String> choices = <String>[SignOut];
 }

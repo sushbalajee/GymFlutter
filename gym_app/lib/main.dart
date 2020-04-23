@@ -11,12 +11,12 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
       .copyWith(systemNavigationBarColor: Color(0xFF232528),
       statusBarColor: Color(0xFF232528)));
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+     // .then((_) {
     runApp(new MaterialApp(
       home: new GymApp(),
     ));
-  });
+  //});
 }
 
 //-----------------------------------------------------------------------------------//
@@ -53,9 +53,7 @@ class HomePageState extends State<GymApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: new Scaffold(
-            backgroundColor: Colors.grey[100],
-            appBar: new AppBar(
+        home: new Scaffold(appBar: new AppBar(
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
                 title: new Text(
@@ -65,6 +63,7 @@ class HomePageState extends State<GymApp> {
                       fontFamily: "Ubuntu",
                       fontWeight: FontWeight.w500),
                 )),
+            backgroundColor: Colors.grey[100],
             body: currentPage,
             bottomNavigationBar: new Theme(
               data: Theme.of(context).copyWith(
@@ -73,7 +72,7 @@ class HomePageState extends State<GymApp> {
                       .copyWith(caption: new TextStyle(color: Colors.white)),
                   canvasColor: Color(0xFF232528)),
               child: new BottomNavigationBar(
-                  fixedColor: Color(0xFFEFCA08),
+                  fixedColor: Color(0xFFF7C59F),
                   currentIndex: currentTab,
                   onTap: (int index) {
                     setState(() {
