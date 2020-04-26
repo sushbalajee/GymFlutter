@@ -148,15 +148,14 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
   @override
   Widget build(BuildContext context) {
-    int exerciseNumber = 0;
 
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      //backgroundColor: Color(0xFF550000),
       appBar: AppBar(
         backgroundColor: Color(0xFF232528),
-        title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
+        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
@@ -166,8 +165,8 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                    fontFamily: "Ubuntu",
-                    fontSize: screenWidth * 0.045,
+                    fontFamily: "Montserrat",
+                    fontSize: screenWidth * 0.050,
                     fontWeight: FontWeight.w600)),
           ),
           Container(
@@ -185,9 +184,12 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Ubuntu", fontSize: screenWidth * 0.035)),
+                    fontFamily: "Montserrat", fontSize: screenWidth * 0.04)),
           ),
+          //Container( height: 100, child:
           Flexible(
+            child:Container( 
+              height: screenHeight,
             child: FirebaseAnimatedList(
               query: exercisesRef,
               scrollDirection: Axis.vertical,
@@ -195,30 +197,34 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
               physics: const ClampingScrollPhysics(),
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                exerciseNumber += 1;
-                return Card(
-                    //color: Colors.grey[100],
-                    margin: EdgeInsets.all(10.0),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0))),
-                    //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
-                    elevation: 2.0,
+                int exerciseNumber = index + 1;
+                return Container(
+                  color: Colors.white,
                     child: new Stack(children: <Widget>[
                               new Column(children: <Widget>[
                                 Container(
-                                color: Color(0xFF232528),
+                                color: Color(0xFF2A324B),
                                 child:
-                                ListTile(
-                                    leading: CircleAvatar(
-                                        child: new Text(
-                                          "$exerciseNumber",
-                                          style: TextStyle(color: Color(0xFF232528), fontWeight: FontWeight.w700, fontFamily: "Ubuntu"),
-                                        ),
-                                        backgroundColor: Color(0xFFEFCA08)),
+                                ListTile( 
+                                  contentPadding: EdgeInsets.only(left:0, top:0, bottom: 0),
+                                    leading: Container(
+                          alignment: Alignment.center,
+                          width: 50,
+                          color: Color(0xFF767B91),
+                          child: new Text(
+                          "$exerciseNumber",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.050,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          //backgroundColor: Color(0xFF767B91)
+                        ),
                                     trailing: new IconButton(
                                         iconSize: 35.0,
                                         icon: Icon(Icons.delete_forever),
-                                        color: Color(0xFFEFCA08),
+                                        color: Color(0xFFC7CCDB),
                                         onPressed: () {
                                           exercisesRef
                                               .child(items[index].key)
@@ -247,17 +253,17 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                             child: Container(
                                                 child: Text(items[index].name,
                                                     style: TextStyle(
-                                                        fontFamily: "Ubuntu",
+                                                        fontFamily: "Montserrat",
                                                         color:
-                                                            Color(0xFFEFCA08),
+                                                            Colors.white,
                                                         fontSize:
-                                                            screenWidth * 0.06,
+                                                            screenWidth * 0.050,
                                                         fontWeight:
                                                             FontWeight.w600)))),
                                         Container(
                                             child: new IconButton(
                                                 icon: new Icon(Icons.edit),
-                                                color: Color(0xFFEFCA08),
+                                                color: Color(0xFFC7CCDB),
                                                 onPressed: () {
                                                   confirmEdit(context,
                                                       "Edit Exercise", index);
@@ -354,17 +360,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                             ]));
               },
             ),
-          ),
+          ),),
           Container(
+              height: 75,
               width: screenWidth,
-              child: new FlatButton(
-                  child: new Text("Add Exercise",
+              child: new FlatButton.icon(
+                icon: Icon(Icons.add, color: Colors.white),
+                  label: new Text("Add Exercise",
                       style: TextStyle(
                           fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.045,
-                          fontWeight: FontWeight.w700,
+                          fontSize: screenWidth * 0.05,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white)),
-                  color: Color(0xFF272727),
+                  color: Color(0xFF767B91),
                   onPressed: () {
                     confirmDialog(context, "Add Exercise");
                   }))

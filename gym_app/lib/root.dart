@@ -179,6 +179,7 @@ class RootPageState extends State<RootPage> {
               builder: (BuildContext context, BoxConstraints constraints) {
             return Column(children: <Widget>[
               Container(
+                padding: EdgeInsets.only(left: 10),
                 color: Color(0xFF2A324B),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
@@ -254,9 +255,7 @@ class RootPageState extends State<RootPage> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ))),
-                      Align(
-                          alignment: Alignment.bottomRight,
-                          child: PopupMenuButton(
+                              Positioned(bottom: 0, right: 0, child: PopupMenuButton(
                               itemBuilder: (context) => [
                                     PopupMenuItem(
                                       child: FlatButton(
@@ -268,6 +267,7 @@ class RootPageState extends State<RootPage> {
                                 Icons.exit_to_app,
                                 color: Colors.white,
                               )))
+                              
                     ],
                   ),
                   back: Container(

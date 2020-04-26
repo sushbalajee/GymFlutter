@@ -71,7 +71,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
   @override
   Widget build(BuildContext context) {
-    int workoutNumber = 0;
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     var split = widget.clientID.split(" - ");
@@ -80,7 +80,8 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Color(0xFF232528),
-            title: Text(clientName, style: TextStyle(fontFamily: "Ubuntu"))),
+            title:
+                Text(clientName, style: TextStyle(fontFamily: "Montserrat"))),
         resizeToAvoidBottomPadding: false,
         body: Column(
           children: <Widget>[
@@ -88,34 +89,38 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               child: FirebaseAnimatedList(
                 query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {
-                  workoutNumber += 1;
-                  return Card(
-                      color: Colors.grey[100],
-                      margin: EdgeInsets.all(1.0),
-                      shape: new RoundedRectangleBorder(
-                          //borderRadius: BorderRadius.all( Radius.circular(25.0))),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25.0),
-                              topRight: Radius.circular(25.0))),
-                      elevation: 0.6,
+                    Animation<double> animation, int index) {                
+                  int workoutNumber = index + 1;
+                  return Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                       child: new ListTile(
-                        contentPadding: EdgeInsets.only(
-                            top: 10.0, bottom: 10.0, left: 15.0),
-                        leading: CircleAvatar(
-                            child: new Text(
-                              "$workoutNumber",
-                              style: TextStyle(
-                                  fontFamily: "Ubuntu",
-                                  fontSize: screenWidth * 0.055,
-                                  color: Color(0xFFEFCA08),
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            backgroundColor: Color(0xFF232528)),
+                        contentPadding:
+                            EdgeInsets.only(top: 0.0, bottom: 0.0, left: 0),
+                        leading: Container(
+                          alignment: Alignment.center,
+                          height: 75,
+                          width: 50,
+                          color: Color(0xFF767B91),
+                          child: new Text(
+                          "$workoutNumber",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.050,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          //backgroundColor: Color(0xFF767B91)
+                        ),
                         trailing: new IconButton(
-                            iconSize: 35.0,
+                            iconSize: 25.0,
                             icon: Icon(Icons.delete_forever),
-                            color: Color(0xFF232528),
+                            color: Color(0xFFC7CCDB),
                             onPressed: () {
                               if (items.length == 1) {
                                 confirmError(context, "Error",
@@ -127,12 +132,12 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             }),
                         title: Text(items[index].workoutname,
                             style: TextStyle(
-                                fontFamily: "Ubuntu",
-                                fontSize: screenWidth * 0.055,
-                                color: Color(0xFF22333B),
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.050,
+                                color: Color(0xFF2A324B),
                                 fontWeight: FontWeight.w600)),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.push( 
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
@@ -144,60 +149,60 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                         ptID: widget.ptID,
                                         firebaseGeneratedKey: items[index].key,
                                       )));
-                        },
-                      ));
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton.extended(
-                  heroTag: null,
-                  onPressed: () {
-                    confirmDialog(context, "Add a new workout");
                   },
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(5.0)),
-                  icon: Icon(Icons.add),
-                  label: new Text("Add Workout",
-                      style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        fontSize: screenWidth * 0.050,
-                        fontWeight: FontWeight.w600,
-                      )),
-                  backgroundColor: Color(0xFF22333B),
-                ),
+                      ));
+                
+                  },
               ),
             ),
-            Padding(
-                padding: EdgeInsets.only(left: 10, bottom: 20.0, top: 10),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ClientPayments(
-                                    clientID: widget.clientID,
-                                    ptID: widget.ptID,
-                                  )));
-                    },
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(5.0)),
-                    icon: Icon(Icons.calendar_today),
-                    label: new Text("Sessions",
-                        style: TextStyle(
-                          fontFamily: "Ubuntu",
-                          fontSize: screenWidth * 0.050,
-                          fontWeight: FontWeight.w600,
-                        )),
-                    backgroundColor: Color(0xFF22333B),
-                  ),
-                )),
+            Container(
+              height: 75,
+              width: screenWidth,
+              child: FlatButton.icon(
+                onPressed: () {
+                  confirmDialog(context, "Add a new workout");
+                },
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                label: new Text("Add Workout",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Montserrat",
+                      fontSize: screenWidth * 0.050,
+                      fontWeight: FontWeight.w600,
+                    )),
+                color: Color(0xFF767B91),
+              ),
+            ),
+            Container(
+              height: 75,
+              width: screenWidth,
+              child: FlatButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClientPayments(
+                                clientID: widget.clientID,
+                                ptID: widget.ptID,
+                              )));
+                },
+                icon: Icon(
+                  Icons.calendar_today,
+                  color: Colors.white,
+                ),
+                label: new Text("Sessions",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Montserrat",
+                      fontSize: screenWidth * 0.050,
+                      fontWeight: FontWeight.w600,
+                    )),
+                color: Color(0xFF2A324B),
+              ),
+            )
           ],
         ));
   }
@@ -297,7 +302,9 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                         decoration:
                             InputDecoration(labelText: "New Workout Name"),
                         initialValue: "",
-                        validator: (value) => value.isEmpty ? 'Workout name can\'t be empty' : null,
+                        validator: (value) => value.isEmpty
+                            ? 'Workout name can\'t be empty'
+                            : null,
                         onSaved: (val) => item.workoutname = val,
                       ),
                       TextFormField(
