@@ -74,7 +74,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
 
   @override
   Widget build(BuildContext context) {
-    int workoutNumber = 0;
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (informUser == false) {
@@ -83,7 +83,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
           title: Text('My Personalised Workouts',
-              style: TextStyle(fontFamily: "Ubuntu")),
+              style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -93,35 +93,37 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                 query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
-                  workoutNumber += 1;
-                  return Card(
-                    color: Colors.grey[100],
-                    margin: EdgeInsets.all(1.0),
-                      shape: new RoundedRectangleBorder(
-                          //borderRadius: BorderRadius.all( Radius.circular(25.0))),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25.0),
-                              topRight: Radius.circular(25.0))),
-                      elevation: 0.6,
+                  int workoutNumber = index + 1;
+                  return Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                       child: new ListTile(
                         contentPadding: EdgeInsets.only(
-                            top: 10.0, bottom: 10.0, left: 15.0),
-                        leading: CircleAvatar(
-                                          child: new Text(
-                                            "$workoutNumber",
-                                            style:
-                                                TextStyle(
-                                      fontFamily: "Ubuntu",
-                                      fontSize: screenWidth * 0.055,
-                                      color: Color(0xFFEFCA08),
-                                      fontWeight: FontWeight.w600),
-                                          ),
-                                          backgroundColor: Color(0xFF232528)),
+                            top: 0.0, bottom: 0.0, left: 0.0),
+                        leading: Container(
+                          alignment: Alignment.center,
+                          height: 75,
+                          width: 50,
+                          color: Color(0xFF767B91),
+                          child: new Text(
+                            "$workoutNumber",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.050,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
                         title: Text(items[index].workoutname,
                             style: TextStyle(
-                                fontFamily: "Ubuntu",
-                                fontSize: screenWidth * 0.055,
-                                color: Color(0xFF22333B),
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.05,
+                                color: Color(0xFF2A324B),
                                 fontWeight: FontWeight.w600)),
                         onTap: () {
                           Navigator.push(

@@ -47,7 +47,7 @@ class BuiltinExer extends State<BuiltinExercises> {
           centerTitle: true,
           backgroundColor: Color(0xFF232528),
           title: Text(widget.value + " - Exercise List",
-              style: TextStyle(fontFamily: "Ubuntu")),
+              style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Container(
@@ -58,10 +58,15 @@ class BuiltinExer extends State<BuiltinExercises> {
                       child: ListView.builder(
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                                elevation: 0.5,
-                                color: Colors.grey[100],
-                                margin: EdgeInsets.all(1.0),
+                            return Container(
+                              decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            width: 0.2,
+                                            color: Color(0xFF767B91)),
+                                      ),
+                                    ),
+                                //color: Colors.white,
                                 child: Column(children: <Widget>[
                                   new ExpansionTile(
                                     title: Align(
@@ -74,9 +79,9 @@ class BuiltinExer extends State<BuiltinExercises> {
                                                   snapshot
                                                       .data[index].exerciseName,
                                                   style: TextStyle(
-                                                      fontFamily: "Ubuntu",
+                                                      fontFamily: "Montserrat",
                                                       fontSize:
-                                                          screenWidth * 0.055,
+                                                          screenWidth * 0.05,
                                                       color: Color(0xFF22333B),
                                                       fontWeight:
                                                           FontWeight.w600))
@@ -87,12 +92,12 @@ class BuiltinExer extends State<BuiltinExercises> {
                                             border: Border(
                                                 bottom: BorderSide(
                                                   //                   <--- left side
-                                                  color: Colors.grey[400],
+                                                  color: Color(0xFF767B91),
                                                   width: 1.0,
                                                 ),
                                                 top: BorderSide(
                                                   //                   <--- left side
-                                                  color: Colors.grey[400],
+                                                  color: Color(0xFF767B91),
                                                   width: 1.0,
                                                 )),
                                           ),

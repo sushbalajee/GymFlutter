@@ -179,7 +179,8 @@ class RootPageState extends State<RootPage> {
               builder: (BuildContext context, BoxConstraints constraints) {
             return Column(children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 10),
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: screenWidth / 8),
                 color: Color(0xFF2A324B),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
@@ -198,9 +199,9 @@ class RootPageState extends State<RootPage> {
                       height: constraints.maxWidth / 5,
                     ),
                     label: Text(
-                      "My Clients",
+                      "    My Clients",
                       style: TextStyle(
-                        fontSize: screenWidth / 13,
+                        fontSize: screenWidth / 15,
                         fontFamily: "Montserrat",
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -208,6 +209,8 @@ class RootPageState extends State<RootPage> {
                     )),
               ),
               Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: screenWidth / 8),
                   color: Color(0xFF45537C),
                   height: constraints.maxHeight / 3,
                   width: constraints.maxWidth,
@@ -224,9 +227,9 @@ class RootPageState extends State<RootPage> {
                                     )));
                       },
                       label: Text(
-                        "Sessions",
+                        "    Sessions",
                         style: TextStyle(
-                          fontSize: screenWidth / 13,
+                          fontSize: screenWidth / 15,
                           fontFamily: "Montserrat",
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -237,7 +240,8 @@ class RootPageState extends State<RootPage> {
                   front: new Stack(
                     children: <Widget>[
                       Container(
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: screenWidth / 8),
                           color: Color(0xFF767B91),
                           height: constraints.maxHeight / 3,
                           width: constraints.maxWidth,
@@ -247,15 +251,18 @@ class RootPageState extends State<RootPage> {
                                   color: Colors.white),
                               onPressed: null,
                               label: Text(
-                                "Trainer ID",
+                                "    Trainer ID",
                                 style: TextStyle(
-                                  fontSize: screenWidth / 13,
+                                  fontSize: screenWidth / 15,
                                   fontFamily: "Montserrat",
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ))),
-                              Positioned(bottom: 0, right: 0, child: PopupMenuButton(
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: PopupMenuButton(
                               itemBuilder: (context) => [
                                     PopupMenuItem(
                                       child: FlatButton(
@@ -267,7 +274,6 @@ class RootPageState extends State<RootPage> {
                                 Icons.exit_to_app,
                                 color: Colors.white,
                               )))
-                              
                     ],
                   ),
                   back: Container(
@@ -326,7 +332,137 @@ class RootPageState extends State<RootPage> {
     if (authStatus == AuthStatus.signedIn) {
       return new Scaffold(
           backgroundColor: Colors.grey[100],
-          body: new Column(children: <Widget>[
+          body: SafeArea(
+          child: new LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            return Column(children: <Widget>[
+
+            Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: screenWidth / 8),
+                color: Color(0xFF2A324B),
+                height: constraints.maxHeight / 3,
+                width: constraints.maxWidth,
+                child: FlatButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PersonalisedWorkouts(
+                                    ptID: relationship,
+                                    clientID: uid,
+                                  )));
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/gym.svg",
+                      color: Colors.white,
+                      height: constraints.maxWidth / 5,
+                    ),
+                    label: Text(
+                      "    My Workouts",
+                      style: TextStyle(
+                        fontSize: screenWidth / 15,
+                        fontFamily: "Montserrat",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+              ),
+
+              Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: screenWidth / 8),
+                  color: Color(0xFF45537C),
+                  height: constraints.maxHeight / 3,
+                  width: constraints.maxWidth,
+                  child: FlatButton.icon(
+                      icon: SvgPicture.asset("assets/diary.svg",
+                          height: constraints.maxWidth / 5,
+                          color: Colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClientSessionsClientSide(
+                                      clientID: uid,
+                                      ptID: relationship,
+                                    )));
+                      },
+                      label: Text(
+                        "    My Sessions",
+                        style: TextStyle(
+                          fontSize: screenWidth / 15,
+                          fontFamily: "Montserrat",
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ))),
+
+                      FlipCard(
+                  direction: FlipDirection.HORIZONTAL, // default
+                  front: new Stack(
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: screenWidth / 8),
+                          color: Color(0xFF767B91),
+                          height: constraints.maxHeight / 3,
+                          width: constraints.maxWidth,
+                          child: FlatButton.icon(
+                              icon: SvgPicture.asset("assets/name.svg",
+                                  height: constraints.maxWidth / 5,
+                                  color: Colors.white),
+                              onPressed: null,
+                              label: Text(
+                                "    My Account",
+                                style: TextStyle(
+                                  fontSize: screenWidth / 15,
+                                  fontFamily: "Montserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ))),
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: PopupMenuButton(
+                              itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      child: FlatButton(
+                                          onPressed: signedOut,
+                                          child: Text("Signout")),
+                                    ),
+                                  ],
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,
+                              )))
+                    ],
+                  ),
+
+                  back: Container(
+                    height: constraints.maxHeight/3,
+                    width: screenWidth,
+                      color: Color(0xFF767B91),
+                      child: Column(children: <Widget>[
+                        Container(
+              child: new FlatButton(
+                child: new Text("Delete My Account",
+                    style: TextStyle(
+                        fontFamily: "Ubuntu",
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white)),
+                onPressed: () {
+                  confirmDeleteDialog(context, "Delete my account",
+                      "Are you sure you would like to delete your account? You will no longer have access to any workouts associated with this account.");
+                },
+              ),
+            ),
+                      ])))
+
+/*
+
             Card(
                 elevation: 0.6,
                 color: Colors.grey[100],
@@ -355,6 +491,8 @@ class RootPageState extends State<RootPage> {
                     },
                   ),
                 )),
+*/
+/*
             Card(
                 elevation: 0.6,
                 color: Colors.grey[100],
@@ -381,7 +519,9 @@ class RootPageState extends State<RootPage> {
                                       ptID: relationship,
                                     )));
                       }),
-                )),
+                )),*/
+
+/*
             Card(
                 margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
                 child: Container(
@@ -419,7 +559,9 @@ class RootPageState extends State<RootPage> {
                 },
               ),
             ),
-          ]));
+
+*/
+          ]);})));
     }
     return null;
   }
@@ -490,6 +632,5 @@ class RootPageState extends State<RootPage> {
 
 class Constants {
   static const String SignOut = 'Sign out';
-
   static const List<String> choices = <String>[SignOut];
 }

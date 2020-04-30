@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'dart:math';
+import 'package:flutter_svg/svg.dart';
 
 class ColorLoader3 extends StatefulWidget {
   final double radius;
@@ -27,7 +28,7 @@ class _ColorLoader3State extends State<ColorLoader3>
 
     radius = widget.radius;
     dotRadius = widget.dotRadius;
-    
+
     controller = AnimationController(
         lowerBound: 0.0,
         upperBound: 1.0,
@@ -79,7 +80,6 @@ class _ColorLoader3State extends State<ColorLoader3>
       //color: Colors.black12,
       child: new Center(
         child: new RotationTransition(
-          
           turns: animationRotation,
           child: new Container(
             //color: Colors.limeAccent,
@@ -87,92 +87,9 @@ class _ColorLoader3State extends State<ColorLoader3>
               child: Stack(
                 children: <Widget>[
                   new Transform.translate(
-                    offset: Offset(0.0, 0.0),
-                    child: Dot(
-                      radius: radius,
-                      color: Colors.black12,
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.amber,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0),
-                      radius * sin(0.0),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.deepOrangeAccent,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 1 * pi / 4),
-                      radius * sin(0.0 + 1 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.pinkAccent,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 2 * pi / 4),
-                      radius * sin(0.0 + 2 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.purple,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 3 * pi / 4),
-                      radius * sin(0.0 + 3 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.yellow,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 4 * pi / 4),
-                      radius * sin(0.0 + 4 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.lightGreen,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 5 * pi / 4),
-                      radius * sin(0.0 + 5 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.orangeAccent,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 6 * pi / 4),
-                      radius * sin(0.0 + 6 * pi / 4),
-                    ),
-                  ),
-                  new Transform.translate(
-                    child: Dot(
-                      radius: dotRadius,
-                      color: Colors.blueAccent,
-                    ),
-                    offset: Offset(
-                      radius * cos(0.0 + 7 * pi / 4),
-                      radius * sin(0.0 + 7 * pi / 4),
-                    ),
-                  ),
+                      offset: Offset(0.0, 0.0),
+                      child: SvgPicture.asset("assets/dumbbell.svg",
+                          height: 150, color: Colors.black)),
                 ],
               ),
             ),
@@ -184,7 +101,6 @@ class _ColorLoader3State extends State<ColorLoader3>
 
   @override
   void dispose() {
-
     controller.dispose();
     super.dispose();
   }
@@ -202,8 +118,7 @@ class Dot extends StatelessWidget {
       child: Container(
         width: radius,
         height: radius,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-
+        decoration: BoxDecoration(color: color, shape: BoxShape.rectangle),
       ),
     );
   }

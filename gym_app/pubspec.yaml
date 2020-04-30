@@ -32,6 +32,7 @@ dependencies:
   rich_alert: ^0.1.32
   flutter_svg: ^0.17.4
   flip_card: ^0.4.4
+  rflutter_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,15 @@ flutter:
   - assets/gym.svg
   - assets/name.svg
   - assets/contact.svg
+  - assets/dumbbell.svg
+  - assets/1.svg
+  - assets/2.svg
+  - assets/3.svg
+  - assets/4.svg
+  - assets/5.svg
+  - assets/6.svg
+  - assets/weightlifter.svg
+  - assets/finance.svg
 
 
   fonts: 

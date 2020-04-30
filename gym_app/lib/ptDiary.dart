@@ -160,20 +160,20 @@ class _PTDiaryState extends State<PTDiary> {
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
             title: new Text("My Diary",
-                style: TextStyle(fontFamily: "Ubuntu"))),
+                style: TextStyle(fontFamily: "Montserrat"))),
         backgroundColor: Colors.grey[100],
-        body: new GridView.count(
+        body: Container( color: Color(0xFF767B91), child: new GridView.count(
           childAspectRatio: 1.1,
           crossAxisCount: 4,
           children: new List<Widget>.generate(28, (index) {
+            double screenWidth = MediaQuery.of(context).size.width;
             return new GridTile( 
-              child: new Card(
-                elevation: 2.0,
-                margin: EdgeInsets.all(2.0),
-                  child: new OutlineButton(
-                borderSide: BorderSide(color: Color(0xFF232528), width: 0.1),
+              child: new Container(
+                  child: new FlatButton(
+                    color: Colors.white,
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(1.0)),
+                  side: BorderSide(color: Color(0xFF767B91), width: 0.3),
+                    borderRadius: new BorderRadius.circular(0.0)),
                 child: new Center( 
                   child: new Text(
                       calendar28Day[index].substring(0, 3) +
@@ -182,6 +182,7 @@ class _PTDiaryState extends State<PTDiary> {
                               .substring(0, calendar28Date[index].length - 3),
                       textAlign: TextAlign.center,
                       style: TextStyle(
+                        fontSize: screenWidth * 0.04,
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.w500)),
                 ),
@@ -199,7 +200,7 @@ class _PTDiaryState extends State<PTDiary> {
               )),
             );
           }),
-        ));
+        )));
   }
 }
 

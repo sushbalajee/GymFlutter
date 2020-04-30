@@ -56,7 +56,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
     return new Scaffold(
         //backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
+          title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
           backgroundColor: Color(0xFF232528),
         ),
         resizeToAvoidBottomPadding: false,
@@ -66,8 +66,8 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                  fontFamily: "Ubuntu",
-                  fontSize: screenWidth * 0.045,
+                  fontFamily: "Montserrat",
+                  fontSize: screenWidth * 0.05,
                   fontWeight: FontWeight.w600)),
           ),
           Container(
@@ -85,8 +85,8 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                  fontFamily: "Ubuntu",
-                  fontSize: screenWidth * 0.035)),
+                  fontFamily: "Montserrat",
+                  fontSize: screenWidth * 0.04)),
           ),
           Flexible(
               child: ListView.builder(
@@ -96,31 +96,34 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                   itemCount: workoutExercisesJSON.length,
                   itemBuilder: (BuildContext context, int index) {
                     exerciseNumber += 1;
-                    return Card(
-                        margin: EdgeInsets.all(10.0),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(0.0))),
-                        elevation: 2.0,
+                    return Container(
+                      color: Colors.white,
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
                             Container(
-                                color: Color(0xFF232528),
+                                color: Color(0xFF2A324B),
                                 child: ListTile(
-                                  leading: CircleAvatar(
-                                      child: new Text(
-                                        "$exerciseNumber",
-                                        style: TextStyle(
-                                            fontFamily: "Ubuntu",
-                                            fontWeight: FontWeight.w700,
-                                            color: Color(0xFF232528)),
-                                      ),
-                                      backgroundColor: Color(0xFFEFCA08)),
+                              contentPadding:
+                                  EdgeInsets.only(left: 0, top: 0, bottom: 0),
+                                  leading: Container(
+                                alignment: Alignment.center,
+                                width: 50,
+                                color: Color(0xFF767B91),
+                                child: new Text(
+                                  "$exerciseNumber",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: screenWidth * 0.050,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                //backgroundColor: Color(0xFF767B91)
+                              ),
                                   title: Text(workoutExercisesJSON[index].name,
                                       style: TextStyle(
-                                          fontFamily: "Ubuntu",
-                                          color: Color(0xFFEFCA08),
-                                          fontSize: screenWidth * 0.06,
+                                          fontFamily: "Montserrat",
+                                          color: Colors.white,
+                                          fontSize: screenWidth * 0.05,
                                           fontWeight: FontWeight.w600)),
                                 )),
                             ListTile(

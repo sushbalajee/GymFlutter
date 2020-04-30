@@ -92,7 +92,7 @@ class UIDListPage extends State<UIDList> {
                             radius: 20.0,
                           )),
                       Container(
-                          padding: EdgeInsets.only(top: 100.0),
+                          padding: EdgeInsets.only(top: 150.0),
                           alignment: Alignment.center,
                           child: new Text("Loading",
                               style: new TextStyle(

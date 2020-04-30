@@ -63,13 +63,12 @@ class _ClientSessionsState extends State<ClientSessions> {
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
             title: new Text(widget.day + " : " + widget.date,
-                style: TextStyle(fontFamily: "Ubuntu"))),
-        backgroundColor: Colors.grey[100],
+                style: TextStyle(fontFamily: "Montserrat"))),
+        backgroundColor: Colors.white,
         body: Column(children: <Widget>[
           Form(
             key: formKey,
-            child: Card(
-              elevation: 5.0,
+            child: Container(
               child: Flex(
                 direction: Axis.vertical,
                 children: <Widget>[
@@ -141,20 +140,24 @@ class _ClientSessionsState extends State<ClientSessions> {
                     ),
                   ),
                   Container(
-                    width: screenWidth - 10.0,
+                    padding: EdgeInsets.only(top: 10.0),
+                    width: screenWidth - 20,
                     child: new FlatButton(
+                      padding: EdgeInsets.all(10.0),
                       child: new Text("Submit",
                           style: TextStyle(
-                              fontFamily: "Ubuntu",
-                              fontSize: screenWidth * 0.045,
-                              fontWeight: FontWeight.w700,
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.05,
+                              fontWeight: FontWeight.w500,
                               color: Colors.white)),
-                      color: Color(0xFF232528),
+                      color: Color(0xFF767B91),
                       onPressed: () {
                         item.date = widget.day + " : " + widget.date;
                         item.paid = 0xFFFF6B6B;
                         handleSubmit();
                       },
+                      shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(5.0))
                     ),
                   ),
                 ],
@@ -168,14 +171,20 @@ class _ClientSessionsState extends State<ClientSessions> {
                   Animation<double> animation, int index) {
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
 
-                return Card(
-                    elevation: 3.0,
+                return Container(
+                  decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                     child: new ListTile(
-                      contentPadding: EdgeInsets.only(left: 15.0),
+                      contentPadding: EdgeInsets.only(left: 10.0),
                       trailing: new IconButton(
-                          iconSize: 35.0,
+                          iconSize: 25.0,
                           icon: Icon(Icons.delete_forever),
-                          color: Color(0xFF4A657A),
+                          color: Color(0xFFC7CCDB),
                           onPressed: () {
                             var clientSessionFBKey = items[index].clientSessionID;
                             handleDelete(index, clientSessionFBKey);
@@ -183,7 +192,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                       title: Text(items[index].clientName,
                           style: TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: screenWidth * 0.055,
+                              fontSize: screenWidth * 0.05,
                               color: Color(0xFF22333B),
                               fontWeight: FontWeight.w600)),
                       subtitle: Text(items[index].startTime.substring(10, 15)),

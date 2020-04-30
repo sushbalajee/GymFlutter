@@ -68,7 +68,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
     return Scaffold(
       //backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
-        title: Text(widget.title, style: TextStyle(fontFamily: "Ubuntu")),
+        title: Text(widget.title, style: TextStyle(fontFamily: "Monterrat")),
         backgroundColor: Color(0xFF232528),
       ),
       resizeToAvoidBottomPadding: false,
@@ -80,8 +80,8 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                    fontFamily: "Ubuntu",
-                    fontSize: screenWidth * 0.045,
+                    fontFamily: "Montserrat",
+                    fontSize: screenWidth * 0.05,
                     fontWeight: FontWeight.w600)),
           ),
           Container(
@@ -99,7 +99,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Ubuntu", fontSize: screenWidth * 0.035)),
+                    fontFamily: "Montserrat", fontSize: screenWidth * 0.04)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -110,119 +110,111 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 exerciseNumber += 1;
-                return Card(
-                    margin: EdgeInsets.all(10.0),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0))),
-                    elevation: 2.0,
+                return Container(
+                    color: Colors.white,
                     child: new Stack(children: <Widget>[
-                          new Column(children: <Widget>[
-                            Container(
-                                color: Color(0xFF232528),
-                                child:
-                            ListTile(
-                              leading: CircleAvatar(
-                                  child: new Text(
-                                    "$exerciseNumber",
-                                    style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: "Ubuntu",
-                                            color: Color(0xFF232528)),
-                                  ),
-                                  backgroundColor: Color(0xFFEFCA08)),
+                      new Column(children: <Widget>[
+                        Container(
+                            color: Color(0xFF2A324B),
+                            child: ListTile(
+                              contentPadding:
+                                  EdgeInsets.only(left: 0, top: 0, bottom: 0),
+                              leading: Container(
+                                alignment: Alignment.center,
+                                width: 50,
+                                color: Color(0xFF767B91),
+                                child: new Text(
+                                  "$exerciseNumber",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: screenWidth * 0.050,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                //backgroundColor: Color(0xFF767B91)
+                              ),
                               title: Text(items[index].name,
                                   style: TextStyle(
-                                      fontFamily: "Ubuntu",
-                                          color: Color(0xFFEFCA08),
-                                      fontSize: screenWidth * 0.06,
+                                      fontFamily: "Montserrat",
+                                      color: Colors.white,
+                                      fontSize: screenWidth * 0.05,
                                       fontWeight: FontWeight.w600)),
                             )),
-                            ListTile(
-                                subtitle: new Stack(children: <Widget>[
-                              new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                        ListTile(
+                            subtitle: new Stack(children: <Widget>[
+                          new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                    padding: EdgeInsets.only(top: 10.0),
+                                    child: new Text(
+                                        "Weight: " + items[index].weight,
+                                        style: TextStyle(
+                                            fontFamily: "Prompt",
+                                            color: Color(0xFF22333B),
+                                            fontSize: screenWidth * 0.04),
+                                        textAlign: TextAlign.left)),
+                                new Text("Sets: " + items[index].sets,
+                                    style: TextStyle(
+                                        fontFamily: "Prompt",
+                                        color: Color(0xFF22333B),
+                                        fontSize: screenWidth * 0.04)),
+                                new Text("Repetitions: " + items[index].reps,
+                                    style: TextStyle(
+                                        fontFamily: "Prompt",
+                                        color: Color(0xFF22333B),
+                                        fontSize: screenWidth * 0.04)),
+                                new Text(
+                                    "Rest times: " +
+                                        items[index].rest +
+                                        " seconds between sets",
+                                    style: TextStyle(
+                                        fontFamily: "Prompt",
+                                        color: Color(0xFF22333B),
+                                        fontSize: screenWidth * 0.04)),
+                                new Padding(
+                                  padding: EdgeInsets.only(top: 15.0),
+                                  child: Image.network(items[index].target),
+                                ),
+                                new ExpansionTile(
+                                  title: Align(
+                                      alignment: Alignment(
+                                          -1 - (60 / screenWidth), 0.0),
+                                      child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            new Text("Execution",
+                                                style: TextStyle(
+                                                    fontFamily: "Prompt",
+                                                    color: Color(0xFF22333B),
+                                                    fontSize:
+                                                        screenWidth * 0.04))
+                                          ])),
                                   children: <Widget>[
-
-                                    Container(
-                                        padding: EdgeInsets.only(top: 10.0),
-                                        child: new Text(
-                                            "Weight: " +
-                                                items[index].weight,
-                                            style: TextStyle(
-                                                fontFamily: "Prompt",
-                                                color: Color(0xFF22333B),
-                                                fontSize: screenWidth * 0.04),
-                                            textAlign: TextAlign.left)),
-                                    /*new Text(
-                                        "Execution: " + items[index].execution,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),*/
-                                    new Text("Sets: " + items[index].sets,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text(
-                                        "Repetitions: " + items[index].reps,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Text(
-                                        "Rest times: " +
-                                            items[index].rest +
-                                            " seconds between sets",
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04)),
-                                    new Padding(
-                                      padding: EdgeInsets.only(top: 15.0),
-                                      child: Image.network(items[index].target),
-                                    ),
-                                    new ExpansionTile(
-                                      title: Align(
-                                          alignment: Alignment(
-                                              -1 - (60 / screenWidth), 0.0),
-                                          child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                new Text("Execution",
-                                                    style: TextStyle(
-                                                        fontFamily: "Prompt",
-                                                        color:
-                                                            Color(0xFF22333B),
-                                                        fontSize:
-                                                            screenWidth * 0.04))
-                                              ])),
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(bottom: 10.0),
-                                          child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                new Text(
-                                                    items[index].execution,
-                                                    style: TextStyle(
-                                                        fontFamily: "Prompt",
-                                                        color:
-                                                            Color(0xFF22333B),
-                                                        fontSize:
-                                                            screenWidth * 0.04))
-                                              ],
-                                            ),
-                                          ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            new Text(items[index].execution,
+                                                style: TextStyle(
+                                                    fontFamily: "Prompt",
+                                                    color: Color(0xFF22333B),
+                                                    fontSize:
+                                                        screenWidth * 0.04))
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ])
-                            ]))
-                          ])
-                        ]));
+                                  ],
+                                ),
+                              ])
+                        ]))
+                      ])
+                    ]));
               },
             ),
           ),

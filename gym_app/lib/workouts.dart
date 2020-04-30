@@ -4,6 +4,7 @@ import 'jsonLogic.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'BuiltinExercises.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WorkoutsList extends StatefulWidget {
   final String value;
@@ -49,9 +50,12 @@ class _WorkoutsListState extends State<WorkoutsList> {
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
-            title:
-                new Text(widget.value, style: TextStyle(fontFamily: "Ubuntu"))),
-        body: Container(
+            title: new Text(widget.value,
+                style: TextStyle(fontFamily: "Montserrat"))),
+        body: SafeArea(
+          child: new LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return Container(
             child: FutureBuilder(
                 future: fetchPost(widget.value),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -64,40 +68,48 @@ class _WorkoutsListState extends State<WorkoutsList> {
                   } else {
                     return Column(children: <Widget>[
                       Container(
-                          height: screenHeight * 0.55,
+                          height: constraints.maxHeight*2/3,
                           child: ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 workoutNumber += 1;
-                                return Card(
-                                    color: Colors.grey[100],
-                                    margin: EdgeInsets.all(1.0),
-                                    // shape: new RoundedRectangleBorder(
-                                    //borderRadius: BorderRadius.all( Radius.circular(25.0))),
-                                    //borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
-                                    elevation: 0.6,
+                                return Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            width: 0.3,
+                                            color: Color(0xFF767B91)),
+                                      ),
+                                      color: Colors.white,
+                                    ),
                                     child: new ListTile(
-                                        leading: CircleAvatar(
-                                            child: new Text(
-                                              "$workoutNumber",
-                                              style: TextStyle(
-                                                  fontFamily: "Ubuntu",
-                                                  fontSize: screenWidth * 0.055,
-                                                  color: Color(0xFFEFCA08),
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            backgroundColor: Color(0xFF232528)),
-                                        title: Text(
-                                            snapshot.data[index].workoutname,
-                                            style: TextStyle(
-                                                fontFamily: "Ubuntu",
-                                                fontSize: screenWidth * 0.055,
-                                                color: Color(0xFF22333B),
-                                                fontWeight: FontWeight.w600)),
                                         contentPadding: EdgeInsets.only(
-                                            top: 10.0,
-                                            bottom: 10.0,
-                                            left: 15.0),
+                                            top: 0.0, bottom: 0.0, left: 0.0),
+                                        leading: Container(
+                                          alignment: Alignment.center,
+                                          height: 75,
+                                          width: 50,
+                                          color: Color(0xFF767B91),
+                                          child: new Text(
+                                            "$workoutNumber",
+                                            style: TextStyle(
+                                                fontFamily: "Montserrat",
+                                                fontSize: screenWidth * 0.050,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                        title: Container(
+                                            child: Text(
+                                                snapshot
+                                                    .data[index].workoutname,
+                                                style: TextStyle(
+                                                    fontFamily: "Montserrat",
+                                                    fontSize:
+                                                        screenWidth * 0.05,
+                                                    color: Color(0xFF22333B),
+                                                    fontWeight:
+                                                        FontWeight.w600))),
                                         onTap: () {
                                           Navigator.push(
                                               context,
@@ -116,7 +128,38 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                                               .description)));
                                         }));
                               })),
-                      Container(
+                      
+                     Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: screenWidth / 8),
+                color: Color(0xFF2A324B),
+                height: constraints.maxHeight/3,
+                        width: screenWidth,
+                child: FlatButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BuiltinExercises(
+                                              value: widget.value,
+                                            )));
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/weightlifter.svg",
+                      color: Colors.white,
+                      height: constraints.maxWidth / 5,
+                    ),
+                    label: Text(
+                      "  Exercise List",
+                      style: TextStyle(
+                        fontSize: screenWidth / 15,
+                        fontFamily: "Montserrat",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+              ),
+                      /*Container(
                           height: screenHeight * 0.315,
                           decoration: new BoxDecoration(
                             image: new DecorationImage(
@@ -137,9 +180,9 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                 child: Container(
                                   alignment: AlignmentDirectional.center,
                                 ),
-                              )))
+                              )))*/
                     ]);
                   }
-                })));
+                }));})));
   }
 }

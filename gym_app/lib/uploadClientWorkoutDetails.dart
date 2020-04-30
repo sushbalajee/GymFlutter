@@ -285,13 +285,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                                 fontFamily: "Prompt",
                                                 color: Color(0xFF22333B),
                                                 fontSize: screenWidth * 0.04))),
-                                        /*new Text(
-                                            "Execution: " +
-                                                items[index].execution,
-                                            style: TextStyle(
-                                                fontFamily: "Prompt",
-                                                color: Color(0xFF22333B),
-                                                fontSize: screenWidth * 0.04)),*/
                                         new Text("Sets: " + items[index].sets,
                                             style: TextStyle(
                                                 fontFamily: "Prompt",

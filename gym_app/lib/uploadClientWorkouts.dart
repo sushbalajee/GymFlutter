@@ -71,7 +71,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     var split = widget.clientID.split(" - ");
@@ -89,7 +88,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               child: FirebaseAnimatedList(
                 query: clientWorkoutsRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {                
+                    Animation<double> animation, int index) {
                   int workoutNumber = index + 1;
                   return Container(
                       decoration: BoxDecoration(
@@ -108,7 +107,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                           width: 50,
                           color: Color(0xFF767B91),
                           child: new Text(
-                          "$workoutNumber",
+                            "$workoutNumber",
                             style: TextStyle(
                                 fontFamily: "Montserrat",
                                 fontSize: screenWidth * 0.050,
@@ -137,7 +136,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                 color: Color(0xFF2A324B),
                                 fontWeight: FontWeight.w600)),
                         onTap: () {
-                          Navigator.push( 
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
@@ -149,34 +148,29 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                         ptID: widget.ptID,
                                         firebaseGeneratedKey: items[index].key,
                                       )));
-                  },
+                        },
                       ));
-                
-                  },
-              ),
-            ),
-            Container(
-              height: 75,
-              width: screenWidth,
-              child: FlatButton.icon(
-                onPressed: () {
-                  confirmDialog(context, "Add a new workout");
                 },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                label: new Text("Add Workout",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Montserrat",
-                      fontSize: screenWidth * 0.050,
-                      fontWeight: FontWeight.w600,
-                    )),
-                color: Color(0xFF767B91),
               ),
             ),
             Container(
+                color: Color(0xFF767B91),
+                height: 75,
+                width: screenWidth,
+                child: FlatButton.icon(
+                    icon: Icon(Icons.add, color: Colors.white),
+                    onPressed: () {
+                      confirmDialog(context, "Add a new workout");
+                    },
+                    label: new Text("Add Workout",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Montserrat",
+                          fontSize: screenWidth * 0.050,
+                          fontWeight: FontWeight.w600,
+                        )))),
+            Container(
+              color: Color(0xFF2A324B),
               height: 75,
               width: screenWidth,
               child: FlatButton.icon(
@@ -200,7 +194,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       fontSize: screenWidth * 0.050,
                       fontWeight: FontWeight.w600,
                     )),
-                color: Color(0xFF2A324B),
               ),
             )
           ],
@@ -214,16 +207,16 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         builder: (BuildContext context) {
           return new RichAlertDialog(
             alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500, fontFamily: "Montserrat"),
                 textAlign: TextAlign.center),
             alertSubtitle: new Text(subtitle,
-                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
+                style: TextStyle(fontSize: 15.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
             alertType: RichAlertType.WARNING,
             actions: <Widget>[
               new FlatButton(
-                color: Color(0xFF232528),
+                color: Color(0xFF2A324B),
                 child:
-                    const Text('CLOSE', style: TextStyle(color: Colors.white)),
+                    const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -234,7 +227,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   }
 
   Future<Null> confirmDelete(BuildContext context, String why, int ind) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return showDialog<Null>(
         context: context,
         barrierDismissible: false, // user must tap button!

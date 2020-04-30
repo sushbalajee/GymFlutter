@@ -4,7 +4,10 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rich_alert/rich_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 //-----------------------------------------------------------------------------------//
 
@@ -68,11 +71,11 @@ class _ClientPaymentsState extends State<ClientPayments> {
 
     if (informUser == false) {
       return Scaffold(
-        backgroundColor: Color(0xFFEFF1F3),
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
           title:
-              Text('Client Payments', style: TextStyle(fontFamily: "Ubuntu")),
+              Text('Client Payments', style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -88,15 +91,19 @@ class _ClientPaymentsState extends State<ClientPayments> {
                         .compareTo(b.date
                             .substring(b.date.length - 8, b.date.length)));
 
-                    return Card(
-                        color: Colors.grey[100],
-                        margin: EdgeInsets.all(1.0),
-                        elevation: 0.6,
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                         child: new ListTile(
                           title: Text(items[index].date,
                               style: TextStyle(
                                   fontFamily: "Montserrat",
-                                  fontSize: screenWidth * 0.055,
+                                  fontSize: screenWidth * 0.05,
                                   color: Color(0xFF22333B),
                                   fontWeight: FontWeight.w600)),
                           subtitle: Text(
@@ -105,8 +112,9 @@ class _ClientPaymentsState extends State<ClientPayments> {
                                   items[index].endTime.substring(10, 15)),
                           trailing: new IconButton(
                               iconSize: 40.0,
-                              icon: Icon(Icons.monetization_on),
-                              color: Color(items[index].paid),
+                              icon: SvgPicture.asset(
+                              "assets/finance.svg",
+                              color: Color(items[index].paid)),
                               onPressed: () {
                                 if (items[index].paid == 0xFFFF6B6B) {
                                   informPT(context, index);
@@ -138,8 +146,10 @@ class _ClientPaymentsState extends State<ClientPayments> {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(
+return new RichAlertDialog(
+            alertSubtitle: new Text(""),
+            alertType: RichAlertType.ERROR,
+            alertTitle: new Text(
                 "Your client has not confirmed payment for this session"),
             actions: <Widget>[
               new FlatButton(

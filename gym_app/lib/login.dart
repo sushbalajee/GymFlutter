@@ -52,8 +52,7 @@ class LoginPageState extends State<Login> {
     widget.auth.currentUser().then((userId) {
       if (userId != null) {
         fetchPost(userId);
-      } else {
-      }
+      } else {}
     });
   }
 
@@ -96,7 +95,7 @@ class LoginPageState extends State<Login> {
                   radius: 20.0,
                 )),
             Container(
-                padding: EdgeInsets.only(top: 100.0),
+                padding: EdgeInsets.only(top: 150.0),
                 alignment: Alignment.center,
                 child: new Text("Logging in",
                     style: new TextStyle(
@@ -188,7 +187,6 @@ class LoginPageState extends State<Login> {
                 .createUserWithEmailAndPassword(email, password);
             await fetchPost(userId);
             _createRelationship(userId, personalTrainerID, clientName);
-
           } else {
             resetRegister();
           }
@@ -256,11 +254,11 @@ class LoginPageState extends State<Login> {
         "There is no user record corresponding to this identifier. The user may have been deleted")) {
       confirmDialog(context, "Invalid User",
           "There is no user record corresponding to your login. Please register for further access");
-          resetLogin();
+      resetLogin();
     } else if (e.contains("The password must be 6 characters long or more")) {
       confirmDialog(context, "Weak Password",
           "Please create a password contains atleast 6 characters");
-          resetRegister();
+      resetRegister();
     }
   }
 
@@ -322,7 +320,8 @@ class LoginPageState extends State<Login> {
               labelStyle:
                   new TextStyle(fontSize: 15.0, fontFamily: "Montserrat"),
               icon: new Icon(Icons.person, color: Colors.grey[900])),
-              validator: (value) => value.isEmpty ? 'This field can\'t be empty' : null,
+          validator: (value) =>
+              value.isEmpty ? 'This field can\'t be empty' : null,
           onSaved: (value) => clientName = value),
       new TextFormField(
           decoration: new InputDecoration(
@@ -369,16 +368,18 @@ class LoginPageState extends State<Login> {
 //------------------------------------------------------------------------------//
 
   List<Widget> buildSubmitButtons() {
+    double screenWidth = MediaQuery.of(context).size.width;
     if (formType == FormType.login) {
       return [
         new Container(
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
-                color: Color(0xFF22333B),
+                padding: EdgeInsets.all(10.0),
+                color: Color(0xFF2A324B),
                 child: new Text(
                   "Login",
                   style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: screenWidth * 0.05,
                       color: Colors.white,
                       fontFamily: "Montserrat",
                       fontWeight: FontWeight.w400),
@@ -388,50 +389,65 @@ class LoginPageState extends State<Login> {
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)))),
-        new OutlineButton(
-            borderSide: BorderSide(color: Color(0xFF4A657A)),
-            child: new Text("Create an Account",
-                style: new TextStyle(fontSize: 15.0, fontFamily: "Montserrat")),
-            onPressed: moveToRegister,
-            shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(5.0),
-            ))
+        new Container(
+            padding: EdgeInsets.only(top: 10),
+            child: FlatButton(
+                padding: EdgeInsets.all(10.0),
+                color: Color(0xFF767B91),
+                child: new Text("Create an Account",
+                    style: new TextStyle(
+                        fontSize: screenWidth * 0.05,
+                        fontFamily: "Montserrat",
+                        color: Colors.white)),
+                onPressed: moveToRegister,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(5.0),
+                )))
       ];
     } else {
       return [
         new Container(
             padding: EdgeInsets.only(top: 20.0),
-            child: new RaisedButton(
-                color: Color(0xFF22333B),
+            child: new FlatButton(
+                padding: EdgeInsets.all(10.0),
+                color: Color(0xFF2A324B),
                 child: new Text(
                   "Register",
                   style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: screenWidth * 0.05,
                       color: Colors.white,
                       fontFamily: "Montserrat"),
                 ),
                 onPressed: validateAndSubmit,
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)))),
-        new OutlineButton(
-          borderSide: BorderSide(color: Color(0xFF4A657A)),
-          padding: EdgeInsets.all(10.0),
-          child: new Text("Already have an account? Login in here",
-              textAlign: TextAlign.center,
-              style: new TextStyle(fontSize: 15.0, fontFamily: "Montserrat")),
-          shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(5.0),
-          ),
-          onPressed: moveToLogin,
-        ),
         new Container(
+            padding: EdgeInsets.only(top: 10.0),
+            child: FlatButton(
+              color: Color(0xFF45537C),
+              padding: EdgeInsets.all(10.0),
+              child: new Text("Already have an account?",
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                      fontSize: screenWidth * 0.05,
+                      fontFamily: "Montserrat",
+                      color: Colors.white)),
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(5.0),
+              ),
+              onPressed: moveToLogin,
+            )),
+        new Container(
+            padding: EdgeInsets.only(top: 10.0),
             //padding: EdgeInsets.only(top: screenHeight/6),
             child: new FlatButton(
-                color: Color(0xFF4A657A),
+                padding: EdgeInsets.all(10.0),
+                color: Color(0xFF767B91),
                 child: new Text("Register as a Trainer",
                     style: new TextStyle(
-                      color: Colors.white,
-                        fontSize: 15.0, fontFamily: "Montserrat")),
+                        color: Colors.white,
+                        fontSize: screenWidth * 0.05,
+                        fontFamily: "Montserrat")),
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(5.0),
                 ),
@@ -450,7 +466,8 @@ class LoginPageState extends State<Login> {
     Database.createPTendpoint(uid).then((String unusedKey) {});
   }
 
-  void _createRelationship(String clientUID, String personalTrainerUID, String clientName) {
+  void _createRelationship(
+      String clientUID, String personalTrainerUID, String clientName) {
     Database.createRelationship(clientUID, personalTrainerUID)
         .then((String unusedKey) {});
     Database.createClientEndpoint(clientUID, personalTrainerUID, clientName)
@@ -458,34 +475,34 @@ class LoginPageState extends State<Login> {
     Database.createClientNames(clientUID, clientName);
   }
 
-String uid;
+  String uid;
 
-void updateUID() {
-  FirebaseAuth.instance.currentUser().then((userId) {
-    uid = userId.uid;
-  });
+  void updateUID() {
+    FirebaseAuth.instance.currentUser().then((userId) {
+      uid = userId.uid;
+    });
+  }
 }
-}
-
 
 //------------------------------------------------------------------------------//
 
-Future<Null> confirmDialog(BuildContext context, String subtitle, String execution) {
+Future<Null> confirmDialog(
+    BuildContext context, String subtitle, String execution) {
   return showDialog<Null>(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return new RichAlertDialog(
-            alertTitle: new Text(subtitle,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text(execution,
-                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
-            alertType: RichAlertType.ERROR,
+          alertTitle: new Text(subtitle,
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500, fontFamily: "Montserrat"),
+              textAlign: TextAlign.center),
+          alertSubtitle: new Text(execution,
+              style: TextStyle(fontSize: 15.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
+          alertType: RichAlertType.ERROR,
           actions: <Widget>[
             new FlatButton(
-                    color: Color(0xFF232528),
-                    child: const Text('CLOSE', style: TextStyle(color: Colors.white)),
+              color: Color(0xFF2A324B),
+              child: const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
