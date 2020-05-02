@@ -162,7 +162,7 @@ class _PTDiaryState extends State<PTDiary> {
             title: new Text("My Diary",
                 style: TextStyle(fontFamily: "Montserrat"))),
         backgroundColor: Colors.grey[100],
-        body: Container( color: Color(0xFF767B91), child: new GridView.count(
+        body: Container( color: Color(0xFF788aa3), child: new GridView.count(
           childAspectRatio: 1.1,
           crossAxisCount: 4,
           children: new List<Widget>.generate(28, (index) {

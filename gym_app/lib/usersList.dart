@@ -114,7 +114,7 @@ class UIDListPage extends State<UIDList> {
                             decoration: BoxDecoration(
                         border: Border(
                           bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
                         ),
                       ),
                               child: ListTile(
@@ -126,7 +126,7 @@ class UIDListPage extends State<UIDList> {
                                 Container(
                           alignment: Alignment.center,
                           width: 50,
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           child: new Text(
                           "$workoutNumber",
                             style: TextStyle(

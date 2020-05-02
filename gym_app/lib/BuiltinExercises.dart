@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'dart:convert';
 import 'jsonLogic.dart';
+import 'color_loader_3.dart';
 
 class BuiltinExercises extends StatefulWidget {
   final String value;
@@ -33,7 +34,10 @@ class BuiltinExer extends State<BuiltinExercises> {
 
     for (var exer in jsonResponse) {
       Exercises wk = Exercises(exer['name'], exer['execution'], exer['image']);
+      
+      if(exer['category'] == hitMe){
       exercises.add(wk);
+      }
     }
     return exercises;
   }
@@ -52,8 +56,25 @@ class BuiltinExer extends State<BuiltinExercises> {
         resizeToAvoidBottomPadding: false,
         body: Container(
             child: FutureBuilder(
-                future: fetchPost("Abs"),
+                future: fetchPost(widget.value),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return Container(
+                        child: new Stack(children: <Widget>[
+                      Container(
+                          alignment: Alignment.center,
+                          child: ColorLoader3(
+                            dotRadius: 5.0,
+                            radius: 20.0,
+                          )),
+                      Container(
+                          padding: EdgeInsets.only(top: 150.0),
+                          alignment: Alignment.center,
+                          child: new Text("Loading",
+                              style: new TextStyle(
+                                  fontSize: 20.0, fontFamily: "Montserrat")))
+                    ]));
+                  } 
                   return Container(
                       child: ListView.builder(
                           itemCount: snapshot.data.length,
@@ -81,7 +102,7 @@ class BuiltinExer extends State<BuiltinExercises> {
                                                   style: TextStyle(
                                                       fontFamily: "Montserrat",
                                                       fontSize:
-                                                          screenWidth * 0.05,
+                                                          screenWidth * 0.045,
                                                       color: Color(0xFF22333B),
                                                       fontWeight:
                                                           FontWeight.w600))

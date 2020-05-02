@@ -375,7 +375,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF2A324B),
+                color: Color(0xFF23395b),
                 child: new Text(
                   "Login",
                   style: TextStyle(
@@ -393,7 +393,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 10),
             child: FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF767B91),
+                color: Color(0xFF788aa3),
                 child: new Text("Create an Account",
                     style: new TextStyle(
                         fontSize: screenWidth * 0.05,
@@ -410,7 +410,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF2A324B),
+                color: Color(0xFF23395b),
                 child: new Text(
                   "Register",
                   style: TextStyle(
@@ -424,7 +424,7 @@ class LoginPageState extends State<Login> {
         new Container(
             padding: EdgeInsets.only(top: 10.0),
             child: FlatButton(
-              color: Color(0xFF45537C),
+              color: Color(0xFF4f5d75),
               padding: EdgeInsets.all(10.0),
               child: new Text("Already have an account?",
                   textAlign: TextAlign.center,
@@ -442,7 +442,7 @@ class LoginPageState extends State<Login> {
             //padding: EdgeInsets.only(top: screenHeight/6),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF767B91),
+                color: Color(0xFF788aa3),
                 child: new Text("Register as a Trainer",
                     style: new TextStyle(
                         color: Colors.white,
@@ -494,10 +494,10 @@ Future<Null> confirmDialog(
       builder: (BuildContext context) {
         return new RichAlertDialog(
           alertTitle: new Text(subtitle,
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500, fontFamily: "Montserrat"),
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
               textAlign: TextAlign.center),
           alertSubtitle: new Text(execution,
-              style: TextStyle(fontSize: 15.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
+              style: TextStyle(fontSize: 18.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
           alertType: RichAlertType.ERROR,
           actions: <Widget>[
             new FlatButton(

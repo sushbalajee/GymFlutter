@@ -94,7 +94,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
                         ),
                         color: Colors.white,
                       ),
@@ -105,7 +105,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                           alignment: Alignment.center,
                           height: 75,
                           width: 50,
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           child: new Text(
                             "$workoutNumber",
                             style: TextStyle(
@@ -154,7 +154,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               ),
             ),
             Container(
-                color: Color(0xFF767B91),
+                color: Color(0xFF788aa3),
                 height: 75,
                 width: screenWidth,
                 child: FlatButton.icon(
@@ -170,7 +170,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                           fontWeight: FontWeight.w600,
                         )))),
             Container(
-              color: Color(0xFF2A324B),
+              color: Color(0xFF23395b),
               height: 75,
               width: screenWidth,
               child: FlatButton.icon(
@@ -216,7 +216,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               new FlatButton(
                 color: Color(0xFF2A324B),
                 child:
-                    const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
+                    const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: 20.0)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -233,11 +233,11 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         builder: (BuildContext context) {
           return new RichAlertDialog(
             alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
                 textAlign: TextAlign.center),
             alertSubtitle: new Text(
-                "Are you sure you want to delete this workout\nand all of its exercises?",
-                style: TextStyle(fontSize: 15.0),
+                "Are you sure you want to delete this workout and all of its exercises?",
+                style: TextStyle(fontSize: 18.0, fontFamily: "Montserrat"),
                 textAlign: TextAlign.center),
             alertType: RichAlertType.WARNING,
             actions: <Widget>[
@@ -245,14 +245,14 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                   padding: EdgeInsets.only(right: 25.0),
                   child: new FlatButton(
                     color: Colors.green,
-                    child: const Text('CANCEL'),
+                    child: const Text('Cancel', style: TextStyle(fontFamily: "Montserrat", fontSize: 20)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   )),
               new FlatButton(
                   color: Colors.red,
-                  child: const Text('DELETE'),
+                  child: const Text('Delete', style: TextStyle(fontFamily: "Montserrat", fontSize: 20)),
                   onPressed: () {
                     handleDelete(ind);
                     Navigator.of(context).pop();

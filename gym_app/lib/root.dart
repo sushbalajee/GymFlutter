@@ -181,7 +181,7 @@ class RootPageState extends State<RootPage> {
               Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFF2A324B),
+                color: Color(0xFF23395b),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
                 child: FlatButton.icon(
@@ -211,7 +211,7 @@ class RootPageState extends State<RootPage> {
               Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: screenWidth / 8),
-                  color: Color(0xFF45537C),
+                  color: Color(0xFF4f5d75),
                   height: constraints.maxHeight / 3,
                   width: constraints.maxWidth,
                   child: FlatButton.icon(
@@ -242,7 +242,7 @@ class RootPageState extends State<RootPage> {
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: screenWidth / 8),
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           height: constraints.maxHeight / 3,
                           width: constraints.maxWidth,
                           child: FlatButton.icon(
@@ -263,12 +263,16 @@ class RootPageState extends State<RootPage> {
                           bottom: 0,
                           right: 0,
                           child: PopupMenuButton(
+                            color: Color(0xFF23395b),
+                            offset: Offset(0,-50),
                               itemBuilder: (context) => [
                                     PopupMenuItem(
-                                      child: FlatButton(
+                                    
+                                      child: Container(
+                            padding: EdgeInsets.only(left:15),child: FlatButton(
                                           onPressed: signedOut,
-                                          child: Text("Signout")),
-                                    ),
+                                          child: Text("Signout", style:  TextStyle(fontFamily: "Montserrat", fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500))),
+                                    )),
                                   ],
                               icon: Icon(
                                 Icons.exit_to_app,
@@ -277,7 +281,7 @@ class RootPageState extends State<RootPage> {
                     ],
                   ),
                   back: Container(
-                      color: Color(0xFF767B91),
+                      color: Color(0xFF788aa3),
                       child: Column(children: <Widget>[
                         Container(
                             padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -340,7 +344,7 @@ class RootPageState extends State<RootPage> {
             Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFF2A324B),
+                color: Color(0xFF23395b),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
                 child: FlatButton.icon(
@@ -372,7 +376,7 @@ class RootPageState extends State<RootPage> {
               Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: screenWidth / 8),
-                  color: Color(0xFF45537C),
+                  color: Color(0xFF4f5d75),
                   height: constraints.maxHeight / 3,
                   width: constraints.maxWidth,
                   child: FlatButton.icon(
@@ -405,7 +409,7 @@ class RootPageState extends State<RootPage> {
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: screenWidth / 8),
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           height: constraints.maxHeight / 3,
                           width: constraints.maxWidth,
                           child: FlatButton.icon(
@@ -426,12 +430,16 @@ class RootPageState extends State<RootPage> {
                           bottom: 0,
                           right: 0,
                           child: PopupMenuButton(
+                            
+                            color: Color(0xFF23395b),
+                            offset: Offset(0,-50),
                               itemBuilder: (context) => [
                                     PopupMenuItem(
-                                      child: FlatButton(
+                                      child: 
+                                      Container(child: FlatButton(
                                           onPressed: signedOut,
-                                          child: Text("Signout")),
-                                    ),
+                                          child: Text("Signout", style:  TextStyle(fontFamily: "Montserrat", fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500))),
+                                    )),
                                   ],
                               icon: Icon(
                                 Icons.exit_to_app,
@@ -443,7 +451,7 @@ class RootPageState extends State<RootPage> {
                   back: Container(
                     height: constraints.maxHeight/3,
                     width: screenWidth,
-                      color: Color(0xFF767B91),
+                      color: Color(0xFF788aa3),
                       child: Column(children: <Widget>[
                         Container(
               child: new FlatButton(

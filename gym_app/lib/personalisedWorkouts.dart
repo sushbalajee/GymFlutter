@@ -98,7 +98,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
                         ),
                         color: Colors.white,
                       ),
@@ -109,7 +109,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                           alignment: Alignment.center,
                           height: 75,
                           width: 50,
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           child: new Text(
                             "$workoutNumber",
                             style: TextStyle(

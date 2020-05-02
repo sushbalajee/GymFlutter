@@ -1,32 +1,39 @@
-[{
+[{	
+	"category": "Abs",
 	"name": "Air Bike",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FAir%20Bike.gif?alt=media&token=b4c1cebd-0e43-4fe0-9133-21a88020510b",
 	"execution": "Lie on your back with your knees bent and feet flat on the floor. Place hands behind your head. Raise your shoulder blades off the ground, lift your legs off the floor and bend your knees to 90 degree angle. Slowly pedal them in the air, alternating as if riding a bicycle."
 }, {
+	"category": "Abs",
 	"name": "Barbell Rollout",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FBarbell%20Rollout.gif?alt=media&token=904949c3-8075-4ef7-a3a9-7964b1d9716b",
 	"execution": "Kneel and hold a barbell under your shoulders on the ground. Keep your core strong as you roll the bar out in front of you, keeping your arms straight. Return to the starting position."
 }, {
+	"category": "Abs",
 	"name": "Cable Woodchoppers",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FNoImage.jpg?alt=media&token=1999bc13-9014-44cd-99d4-7bc6b4dbd717",
 	"execution": "Set the cable pulley to slightly above chest height. Keep your body facing forward with hips stable. Grab the pulley handle, fully extend your arms and bring your arms forward and across your body. Hold for 1 second at the end of the movement and slowly return to starting position."
 },
 {
+	"category": "Abs",
 	"name": "Cross Body Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCross%20Body%20Crunch.gif?alt=media&token=468b1615-71ac-41a8-8654-d768ce438144",
 	"execution": "Lie on your back with hips and knees bent. Place hands on chest with forearms crossed. Flex and twist waist to one direction while raising torso from bench by bending hips. Return until back of shoulders contact floor or mat. Repeat to opposite side alternating twists."
 },
 {
+	"category": "Abs",
 	"name": "Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FCrunch.gif?alt=media&token=28cfdfaa-91e4-4d87-a5f1-58d8006e4b25",
 	"execution": "Lay down flat and hold your hands behind your neck. Lift up with a rolling movement of your back, you should feel each individual vertebrae losing contact with the ground. At the highest point, contract your abs as much as you can and hold there for 2 sec. Return to the starting position by unrolling your back."
 },
 {
+	"category": "Abs",
 	"name": "Dumbbell Side Bend",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FDumbbell%20Side%20Bend.gif?alt=media&token=7ff2fdaf-de71-404b-92d1-c7dfa4394aa3",
 	"execution": "Bend waist to opposite side of dumbbell until a slight stretch is felt. Lower to the same distance on the opposite side. Continue by alternating sides."
 },
 {
+	"category": "Abs",
 	"name": "Flutter Kicks",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FFlutter%20Kicks.gif?alt=media&token=74a973a7-4d92-4094-bcd2-325676ea063d",
 	"execution": "Lay down flat and lift your straightened legs from the ground at a 45 degree angle. As your left foot travels downward and nearly touches the floor, your right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your right foot down until it nearly touches the floor, and bring your left foot upwards. Your head should stay off the ground, supported by tightened upper abdominals."
@@ -37,31 +44,37 @@
 	"execution": "Grasp and hang from a high bar. Raise legs by flexing hips and knees until hips are fully flexed. Continue to raise knees toward shoulders by flexing waist. Return until waist, hips, and knees are extended."
 },
 {
+	"category": "Abs",
 	"name": "Landmine 180",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FLandmine%20180.gif?alt=media&token=35a5da8f-0985-40d4-bf8a-36cb331a2d56",
 	"execution": "Hold one end of a barbell with the other end anchored. Tighten your abs as you move the bar in an arc from one side to the next."
 },
 {
+	"category": "Abs",
 	"name": "Mountain Climbers",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FMountain%20Climbers.gif?alt=media&token=2dbd0436-231a-4668-8d97-7d2a3b1c2076",
 	"execution": "Get into a push-up position. Keep your hips low as your alternate bringing your knees in toward your chest."
 },
 {
+	"category": "Abs",
 	"name": "Reverse Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FReverse%20Crunch.gif?alt=media&token=65b8113e-91ed-4f00-ae20-0a6cf17179e9",
 	"execution": "Lie face up on the floor with your palms facing down. Bend your hips and knees 90 degrees. Raise your hips off the floor and crunch them inward. Pause, and then slowly lower your legs until your heels nearly touch the floor."
 },
 {
+	"category": "Abs",
 	"name": "Russian Twist",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FRussian%20Twist.gif?alt=media&token=832d26dc-08cc-43d8-839d-f15dbb66bf00",
 	"execution": "Start by sitting on the floor, with knees bent and feet flat on the ground. Lean back so your upper body is at a 45-degree angle to the floor. Keep your back straight at this angle throughout the exercise. Link your hands together in front of your chest, brace your core and raise your legs up off the ground. Rotate your arms all the way over to one side, then do the same in the other direction."
 },
 {
+	"category": "Abs",
 	"name": "Side Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSide%20Crunch.gif?alt=media&token=8bff30f5-bcfd-4cde-8beb-af5e718970c4",
 	"execution": "Lay down flat and hold your hands behind your neck or folded across your chest. With both legs together, knees and hips bent, position outside of leg down to side. Flex waist, raising your upper body off the ground. Return to the starting position and repeat with movement in opposite leg position."
 },
 {
+	"category": "Abs",
 	"name": "Sit Up",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FSit%20Up.gif?alt=media&token=e0c71b11-1d0b-448b-aa80-7f5428d11ad6",
 	"execution": "Lay down flat with knees bent, feet flat on the floor and hands behind your head. Ask a partner or use a weight (barbell, weight plate etc.) to keep you feet fixed. Lift your upper body till your head or elbows touch your knees. Return slowly to the starting position"
@@ -72,22 +85,438 @@
 	"execution": "Sit on exercise ball. Walk forward and lie back on the ball with your shoulders and head hanging off, and your knees and hips bent. Gently hyperextend your back on the contour of ball. Place hands behind neck, or beside your head. Flex waist to raise upper torso. Return to starting position"
 },
 {
+	"category": "Abs",
 	"name": "Stability Ball Pull In",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStability%20Ball%20Pull%20In.gif?alt=media&token=d1f40daf-c472-43a8-9ff9-014c223f9afc",
 	"execution": "Start in a high plank, with wrists under shoulders, core engaged, and top of your feet resting on ball. Keep hips level and use core to pull knees toward your chest, rolling the ball toward you. Straighten legs and return to the starting position."
 },
 {
+	"category": "Abs",
 	"name": "Straight Arm Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FStraight%20Arm%20Crunch.gif?alt=media&token=1c0f4ff3-7624-493e-903c-ace08ccef2d3",
 	"execution": "Lie on your back in a normal sit-up position, with feet flat on ground, knees bent and your arms stretched out straight on each side. Perform a crunch by reaching both of your arms straight out in front of you and return slowly to the start position."
 },
 {
+	"category": "Abs",
 	"name": "Tuck Crunch",
 	"image": "https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FTuck%20Crunch.gif?alt=media&token=4960e166-93e0-4036-afc0-140f2d7a6c4e",
 	"execution": "Lie on your back, cross your arms over your chest and grasp your opposing shoulders. Raise your legs off the floor by bending your knees and keeping your calves parallel with the floor. Raise your torso off the floor but keep your back on the mat. Slowly return to the starting position."
 },
 {
+	"category": "Abs",
 	"name": "Windshield Wiper",
 	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
 	"execution": "Hold onto the handles, set high off the ground, and hang below them. Lift your legs straight to the ceiling and rotate them from side to side."
+},
+{
+	"category": "Back",
+	"name": "Barbell Deadlift",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "With feet flat beneath the bar, squat down to grasp the barbell with a shoulder width, overhand or mixed grip. Take a deep breath and engage your core.\n\nLift the bar by extending your hips and knees to full extension. Pull your shoulders back at the top of the lift if they are rounded. Lower the bar to the floor by bending your hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet."
+},
+{
+	"category": "Back",
+	"name": "Chin Up",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the high bar with a shoulder width, underhand grip.\n\nPull your body up until your elbows are at your sides. Lower your body until your arms and shoulders are fully extended."
+},{
+	"category": "Back",
+	"name": "45-Degree Hyperextensions",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie face down on a hyperextension bench, tucking your ankles securely under the footpads and cross your arms in front of you.\n\nBend forward slowly at the waist as far as you can while keeping your back flat. Slowly return to the starting position."
+},{
+	"category": "Back",
+	"name": "Bent Over Barbell Row - Overhand",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Bend your knees slightly and bend over the bar while keeping your back straight. Grasp the bar in a wide overhand grip.\n\nPull the bar to your upper waist. Lower the bar until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Back",
+	"name": "Bent Over Barbell Row - Underhand",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Bend your knees slightly and bend over the bar while keeping your back straight. Grasp the bar in an underhand grip.\n\nPull the bar to your upper waist. Lower the bar until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Back",
+	"name": "Incline Row - Dumbbell",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie down on an elevated, angled bench, and grasp dumbbells below to either side.\n\nPull the dumbbells to sides until your upper arm is just beyond horizontal or at the height of your back. Lower the dumbbells until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Back",
+	"name": "Lying Row - Dumbbell",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie down on an elevated bench and grasp dumbbells below to either side.\n\nPull the dumbbells to sides until your upper arm is just beyond horizontal or at the height of your back. Lower the dumbbells until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Back",
+	"name": "Lateral Pulldown - Close Grip",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the high cable bar with a close overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended."
+},{
+	"category": "Back",
+	"name": "Lateral Pulldown - Wide Grip",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down to your upper chest. Return the bar until your arms and shoulders are fully extended."
+},{
+	"category": "Back",
+	"name": "Bent Over Row - Dumbbell",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Kneel over the side of the bench by placing your knee and hand of the supporting arm on the bench. Position your opposite foot slightly back and to the side. Grasp the dumbbell from floor.\n\nPull the dumbbell up until it makes contact with ribs or until your upper arm is just beyond horizontal. Lower the dumbbell until your arm is extended and your shoulder is stretched downward."
+},{
+	"category": "Back",
+	"name": "Rear Lateral Pulldown - Wide Grip",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the high cable bar with a wide overhand grip and sit with your thighs under the supports.\n\nPull the bar down behind your neck. Return the bar until your arms and shoulders are fully extended."
+},{
+	"category": "Back",
+	"name": "Reverse T-Bar Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Bend your knees slightly and rest your chest on the support pad. Grasp the lever handles with a shoulder width underhand grip.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Back",
+	"name": "Seated Cable Rows",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit slightly forward on the seat and grasp the cable attachment. Place your feet on vertical platform and slide your hips back, positioning your knees with slight bend.\n\nPull the cable attachment to your waist while straightening lower back. Pull your shoulders back and push your chest forward while creating a slight arch in your back. Return until your arms are extended, shoulders are stretched forward, and your lower back is flexed forward slightly."
+},{
+	"category": "Back",
+	"name": "Seated Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down and place your chest against the support pad. Grasp the lever handles with an underhand grip.\n\nPull the levers back until your elbows are just behind your back with shoulders pulled back. Return until your arms are extended and shoulders are stretched forward."
+},{
+	"category": "Back",
+	"name": "Single Arm - High Cable Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the cable in an overhand grip and kneel down on the floor.\n\nPull and rotate the cable attachment down to the side of your chest so that you are in an underhand grip at the bottom of the movement. Return until your arm and shoulder is fully extended, and you are back in an overhand grip."
+},{
+	"category": "Back",
+	"name": "Straight Arm Pulldown",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the bar from the high pulley using a shoulder width overhand grip. Bend your torso forward at the waist by around 30-degrees with your arms fully extended in front of you and a slight bend at the elbows.\n\nWhile keeping the arms straight, pull the bar down by contracting the lats until your hands are next to the side of the thighs. Return until you feel a stretch in your lats."
+},{
+	"category": "Back",
+	"name": "T-Bar Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Bend your knees slightly, bend over and grasp the lever handles while keeping your back straight.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Legs",
+	"name": "Barbell Lunge",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Rest the bar on the back of your shoulders and grasp the barbell on either side.\n\nLunge forward with your first leg. Land heel first, followed by the forefoot. Lower your body by flexing the knee and hip of your front leg until the knee of your rear leg is almost in contact with floor. Return to the starting position and alternate legs."
+},{
+	"category": "Legs",
+	"name": "Barbell Squat",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Rest the bar on the back of your shoulders, grasp the barbell on either side and stand with your feet shoulder width apart.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight."
+},{
+	"category": "Legs",
+	"name": "Barbell Squat - Wide Stance",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Rest the bar on the back of your shoulders, grasp the barbell on either side and stand with your feet wide by pointing them outward in a 30 to 45-degree angle.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight."
+},{
+	"category": "Legs",
+	"name": "Front Barbell Squat",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Rest the bar on the front of your shoulders, cross your arms, place hands on top of barbell ensuring that your arms parallel to floor.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight."
+},{
+	"category": "Legs",
+	"name": "Goblet Squat",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Hold a kettlebell close to your chest with your elbows pointing down and feet hip width apart.\n\nSquat down by bending hips back while allowing your knees to bend forward, keeping your back straight and knees pointed in the same direction as your feet. Descend until your elbows contact your knees. Extend your knees and hips until legs are straight."
+},{
+	"category": "Legs",
+	"name": "Hack Squat",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie against the back pad with your shoulders under the shoulder pad and place your feet on the platform. Extend your hips and knees and release lever.\n\nSquat down by flexing your hips and knees until your thighs are slightly past parallel to floor. Extend your knees and hips until legs are straight."
+},{
+	"category": "Legs",
+	"name": "Hamstring Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie prone on the bench with your knees just beyond the edge of the bench. Lower your legs under the pads and grasp the handles.\n\nRaise the pad to the back of your thighs by flexing your knees. Slowly return to the starting position."
+},{
+	"category": "Legs",
+	"name": "Kneeling Leg Curl",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Mount the machine by supporting one knee on the horizontal pad and placing the other leg under the roller pad, with your quad against the vertical pad. Grasp the handles and rest your forearms on padded arm rest.\n\nRaise your ankle to the back of your thigh by flexing your knee. Slowly return to the starting position and alternate legs between sets."
+},{
+	"category": "Legs",
+	"name": "Leg Extensions",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down with your back against the back support and place your shins under the padded lever. Grasp the handles to sides for support.\n\nMove the lever forward and upward by extending knees until your legs are straight. Slowly return to the starting position."
+},{
+	"category": "Legs",
+	"name": "Leg Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down with your back against the back support and place your feet on the platform. Grasp the handles, extend your hips and knees and release lever.\n\nLower the platform by flexing your hips and knees until your hips are completely flexed. Slowly return to the starting position."
+},{
+	"category": "Legs",
+	"name": "Romanian Deadlift - Dumbbell",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp dumbells in front of you and stand with your feet shoulder width apart.\n\nFlex your hips and drive your glutes back as far as you can, which should generate tension in your hamstrings as your hands approach knee level. Lift dumbbells by extending hips and waist until standing upright. Pull shoulders back slightly if rounded."
+},{
+	"category": "Legs",
+	"name": "Seated Leg Curl",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down with your back against the back support and place your legs in between the pads. Release the hand lever and grasp the handles.\n\nPull the lever to the back of your thighs by flexing knees. Slowly return to the starting position."
+},{
+	"category": "Legs",
+	"name": "Standing Calf Raises",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Position your toes and balls of your feet on a calf block with your heels extending off. Place your hand on a support for balance.\n\nRaise your heels by extending ankles as high as possible. Lower your heels by bending ankles until your calves are stretched."
+},{
+	"category": "Legs",
+	"name": "Sumo Deadlift",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Position your feet in a wide stance, bend at the hips, keep your chest up, drive your hips back and reach down to grasp the barbell with a shoulder width overhand or mixed grip. Take a deep breath and engage your core.\n\nKeep your spine straight as you squeeze your glutes, thrust your hips forward and raise the barbell as you straighten your legs to stand. Slowly return to the starting position."
+},{
+	"category": "Legs",
+	"name": "Walking Lunges - Dumbbell",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Stand while holding dumbbells on either side.\n\nStep forward with your first leg. Land heel first, followed by the forefoot. Lower your body by flexing the knee and hip of your front leg until the knee of your rear leg is almost in contact with floor. Stand on the front leg with assistance of the rear leg and lunge forward with opposite leg. Alternate legs with every lunge."
+},{
+	"category": "Chest",
+	"name": "Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie flat on bench. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press bar upward until your arms are extended."
+},{
+	"category": "Chest",
+	"name": "Cable Fly - Low",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp two opposing low pulley cables and stand with the pulleys to either side. Extend your arms out with elbows slightly bent. Step forward until the cables are taut or when the weights are lifted up slightly. Stand with your feet staggered.\n\n Keeping your elbows fixed in a slightly bent position, bring the handles together in an upwardly arching, hugging motion, at a 30º to 45º angle until they meet at the top of motion. Return to starting position until your chest is stretched."
+},{
+	"category": "Chest",
+	"name": "Cable Fly - Middle",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp two opposing pulley cables positioned at chest height, and stand with the pulleys to either side. Extend your arms out with elbows slightly bent. Step forward until the cables are taut or when the weights are lifted up slightly. Stand with your feet staggered.\n\n Keeping your elbows fixed in a slightly bent position, bring the handles together in a hugging motion, until they meet at the end of the motion. Return to starting position until your chest muscles are stretched."
+},{
+	"category": "Chest",
+	"name": "Cable Standing Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp two opposing high pulley cables and stand with the pulleys to either side. Bend over slightly by flexing hips and knees, bend your elbows slightly and internally rotate shoulders so that your elbows are back initially.\n\nBring the cable handles together in hugging motion with elbows in fixed position. Keep your shoulders internally rotated so that your elbows are pointed upward at the top of the motion, and out to the sides at the bottom of the movement. Return to starting position until your chest muscles are stretched."
+},{
+	"category": "Chest",
+	"name": "Decline Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie flat on a decline bench with feet under the brace. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press bar upward until your arms are extended."
+},{
+	"category": "Chest",
+	"name": "Dumbbell Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders. "
+},{
+	"category": "Chest",
+	"name": "Dumbbell Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie flat on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest."
+},{
+	"category": "Chest",
+	"name": "Dumbbell Pullover",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie with your upper back perpendicular to the bench. Flex hips slightly and grasp one dumbbell with both hands under the inner plate of the dumbbell. Position the dumbbell over your chest with elbows slightly bent.\n\nKeeping elbows slightly bent throughout movement, lower the dumbbell over and beyond your head until upper arms are in-line with your torso. Pull the dumbbell up and over your chest."
+},{
+	"category": "Chest",
+	"name": "Dumbbell Reverse Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell. Twist the dumbbells so that your palms are facing your shoulders.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders."
+},{
+	"category": "Chest",
+	"name": "Incline Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie supine on an incline bench. Dismount barbell from the rack over your upper chest using a wide oblique, overhand grip.\n\nLower the bar to your chest and press the bar upward until your arms are extended."
+},{
+	"category": "Chest",
+	"name": "Incline Dumbbell Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie supine on bench and support dumbbells above your chest with arms fixed and slightly bent. Internally rotate shoulders so your elbows point out to the sides.\n\nLower dumbbells to the sides until your chest is stretched, while maintaining the slight bend in your elbows. Bring the dumbbells together in wide hugging motion until they are nearly together directly above your chest."
+},{
+	"category": "Chest",
+	"name": "Incline Dumbbell Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on bench with dumbbells resting on lower thigh. Kick the dumbbells to your shoulders and lie back. Position the dumbbells to the sides of your chest with bent arm under each dumbbell.\n\nPress dumbbells over your chest and lockout. Lower dumbbells until a slight stretch is felt in your chest or shoulders."
+},{
+	"category": "Chest",
+	"name": "Machine Chest Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit with your chest approximately at the height of the handles. Grasp handles with wide overhand grip and elbows out to the sides, just below your shoulders.\n\nPush levers until your arms are fully extended. Slowly return to the starting position until a mild stretch is felt in your chest."
+},{
+	"category": "Chest",
+	"name": "Machine Seated Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit with your back against the pad, and grasp the handles on both sides at shoulder height. Slightly bend elbows and internally rotate shoulders so your elbows are back.\n\nKeeping elbows pointed high, push the lever handles forward and together. Slowly return to the starting position until a mild stretch is felt in your chest or shoulders."
+},{
+	"category": "Chest",
+	"name": "Push Up",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie down with your hands slightly wider than shoulder width apart, and raise your body off floor by extending arms and keeping your body straight.\n\nLower body by bending your arms, until your chest is just above the floor. Push your body up until arms are extended."
+},{
+	"category": "Chest",
+	"name": "Push Up (Bosu Ball)",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie down with your hands placed on top of the bosu ball, and raise your body off floor by extending arms and keeping your body straight.\n\nLower body by bending your arms, until your chest is just above the floor. Push your body up until arms are extended."
+},{
+	"category": "Arms",
+	"name": "Barbell Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Hold barbell with shoulder width underhand grip.\n\nWith elbows to your sides, raise the bar until your forearms are vertical. Lower until arms are fully extended."
+},{
+	"category": "Arms",
+	"name": "One-Arm Preacher Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Hold a dumbbell and sit on the preacher bench. With your arm bent and palm facing shoulder, place the back of your arm down on the pad.\n\nLower the dumbbell until your arm is fully extended. Raise the dumbbell until your forearm is vertical."
+},{
+	"category": "Arms",
+	"name": "Incline Dumbbell Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit back on a 45-60 degree incline bench. With your arms hanging down straight, position the two dumbbells with your palms facing inward.\n\nWith your elbows back to the sides, raise one dumbbell and rotate your forearm until it is vertical and your palm is facing your shoulder. Lower your arm to the original position and repeat with opposite arm. Alternate arms with every repetition."
+},{
+	"category": "Arms",
+	"name": "Hammer Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Hold a dumbbell in each hand, palms facing in and arms straight.\n\nWith your elbows to your sides, raise one dumbbell until your forearm is vertical. Lower your arm to original position and repeat with opposite arm. Alternate arms with every repetition."
+},{
+	"category": "Arms",
+	"name": "Chin Up",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the high bar with a shoulder width, underhand grip.\n\nPull your body up until your elbows are at your sides. Lower your body until your arms and shoulders are fully extended."
+},{
+	"category": "Arms",
+	"name": "Concentration Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit on a bench and hold a dumbbell between your feet. Place the back of your upper arm against your inner thigh. Lean into the leg to raise your elbow slightly.\n\nRaise the dumbbell to your front of shoulder. Lower the dumbbell until your arm is fully extended."
+},{
+	"category": "Arms",
+	"name": "Reverse EZ Bar Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Hold an EZ-Bar in an overhand shoulder width grip.\n\nWith elbows to your sides, raise the bar until your forearms are vertical. Lower until arms are fully extended."
+},{
+	"category": "Arms",
+	"name": "Close-Grip Barbell Bench Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie flat on bench and grasp barbell from the rack in a shoulder width grip.\n\nLower the weight to your chest with elbows close to your body and push the barbell back up until your arms are straight."
+},{
+	"category": "Arms",
+	"name": "Dip Machine ",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Place handles in the narrow position. Sit on the seat with your back against pad. Grasp the handles and position your elbows back.\n\nPush the levers down by straightening your arms downward. Allow the lever bar to raise with your elbows pointing back, until your shoulders are slightly stretched."
+},{
+	"category": "Arms",
+	"name": "Seated Dumbbell Curl",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit with two dumbbells position in front of shoulders, palms facing your body and elbows under wrists.\n\nInitiate the movement by bringing elbows out to sides. Continue to raise your elbows outward while pressing dumbbells overhead until your arms are straight. Lower to the front of your shoulders in the opposite pattern and repeat."
+},{
+	"category": "Arms",
+	"name": "Triceps Pushdown - V Bar",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Face the high pulley, grasp the V-bar attachment with a narrow overhand grip and position your elbows to the side\n\nExtend arms down and return until your forearm is close to your upper arm."
+},{
+	"category": "Arms",
+	"name": "EZ-Bar Skullcrusher",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Lie on the bench with a narrow overhand grip on the barbell. Position the barbell over your shoulders with arms extended.\n\nLower the bar to your forehead by bending your elbows. Extend your arms and repeat."
+},{
+	"category": "Arms",
+	"name": "Triceps Pushdown - Rope",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Face the high pulley, grasp the rope attachment with a narrow overhand grip and position your elbows to the side\n\nExtend arms down and turn your palms down at the bottom. Return until your forearm is close to your upper arm."
+},{
+	"category": "Arms",
+	"name": "Triceps Overhead Extension - Rope",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "From high pulley cable, grasp the ends of the rope attachment. Raise one arm over head while turning your body away from the pulley. Face away from the pulley with feet staggered. Position ends of the ropes behind your head or neck with elbows upward and over head.\n\nRaise ends of the rope overhead by extending forearms until your arms are straight. Lower the rope attachment until your forearms are against your upper arms."
+},{
+	"category": "Arms",
+	"name": "Seated Dumbbell Curl",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit back on a 45-60 degree incline bench, with your arms hanging down straight and two dumbbells positioned with your palms facing inward.\n\nWith elbows back to your sides, raise one dumbbell and rotate your forearm until it is vertical and palms are facing your shoulder. Lower to the original position and repeat with your opposite arm. "
+},{
+	"category": "Arms",
+	"name": "Preacher Curls",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit on the preacher bench placing back of your arms on the pad. Grasp the bar in a shoulder width, underhand grip.\n\nRaise the bar until your forearms are vertical. Lower barbell until your arms are fully extended."
+},{
+	"category": "Arms",
+	"name": "Standing Dumbbell Triceps Extensions",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Position a dumbbell over your head with both hands under the inner plate (heart shaped grip).\n\nWith elbows over your head, lower forearms behind your upper arms by flexing your elbows. Flex your wrists at bottom to avoid hitting dumbbell on back of your neck. Raise the dumbbell over head by extending your elbows while hyper-extending your wrists."
+},{
+	"category": "Shoulders",
+	"name": "Lever Military Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit and grasp the lever handles to each side with an overhand grip.\n\nPress the lever until your arms are extended upward. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Side Lateral Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp dumbbells in front of your thighs with elbows slightly bent. Bend forward with a slight bend in your hips and knees.\n\nRaise your upper arms to the sides, until your elbows are shoulder height. Ensure your elbows' height is above or equal to your wrists. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Front Cable Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Stand facing the pulleys and grasp stirrups with arms straight down to each side of your body with palms facing back.\n\nRaise the stirrups forward and upward until your upper arms are well above horizontal. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Reverse Machine Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit on the machine with your chest against the pad. Grasp the parallel handles with your thumbs up at shoulder height. Bend elbows slightly and internally rotate your shoulders so that your elbows are at shoulder height.\n\nKeeping elbows pointed high, pull the handles apart and to the rear until your elbows are just behind your back. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Cable Rear Delt Fly",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Stand facing the twin pulley cables positioned close together and at shoulder height. Grasp the cable attachment in each hand, step back away from machine to allow for tension in the cable and stand with feet staggered. Point your elbows outward with your arms straight or slightly bent.\n\nPull the stirrups out to your sides, maintaining a strong elbow position throughout exercise. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Seated Dumbbell Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on the seat with dumbbells resting on lower thigh. Kick the dumbbells up and position them to each side of your shoulders with elbows below wrists.\n\nPress dumbbells upward until arms are extended overhead. Lower to the sides of your shoulders and repeat."
+},{
+	"category": "Shoulders",
+	"name": "Front Plate Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp a weight plate with your elbows straight or slightly bent.\n\nRaise the plate forward and upward until your upper arms are above horizontal. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Seated Lateral Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on the seat with dumbbells to either side and elbows slightly bent.\n\nRaise your upper arms to the sides until your elbow is at shoulder height. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Upright Barbell Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the bar in a shoulder width grip or slightly narrow overhand grip.\n\nPull the bar up to your neck with elbows leading and allow your wrists to flex as the bar rises. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "T-Bar Row",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Bend your knees slightly, bend over and grasp the lever handles while keeping your back straight.\n\nPull the lever up to your torso. Lower the lever until your arms are extended and shoulders are stretched downward."
+},{
+	"category": "Shoulders",
+	"name": "Seated Rear Deltoid Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit on the edge of a bench, bend over and position your torso over thighs. Grasp dumbbells with each hand under your legs. Position elbows with slight bend with palms facing together behind your ankles.\n\nRaise your upper arms to sides until your elbows are at shoulder height. Maintain a perpendicular motion with your upper arms, a fixed elbow position and ensure elbows are above your wrists throughout the exercise."
+},{
+	"category": "Shoulders",
+	"name": "Cable Lateral Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Stand with your side to a low pulley and grasp the stirrup attachment with your hand that is furthest from pulley.\n\nRaise your upper arms to the sides until your elbow is at shoulder height. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Seated Barbell Military Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on the seat, grasp the barbell with a slightly wider than shoulder width overhand grip and position the bar near your upper chest.\n\nPress the bar upward until your arms are extended overhead. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Arnold Dumbbell Press",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on seat with two dumbbells positioned in front of your shoulders, palms facing your body and elbows under wrists.\n\nInitiate the movement by bringing elbows out to your sides. Continue to raise your elbows outward while pressing dumbbells overhead until your arms are straight. Slowly return to the starting position by reversing the movement."
+},{
+	"category": "Shoulders",
+	"name": "Front Cable Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Grasp the stirrup attachment, stand away from the pulley with your arm slightly behind your sides and elbow slightly bent.\n\nRaise the stirrup forward and upward until your upper arm is above horizontal. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "One-Arm Side Laterals",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Position a dumbbell in front of your pelvis with elbows slightly bent. Grasp a stationary object with other hand to provide support. Bend over with a slight bend in your knees.\n\nRaise your upper arm to the side until your elbow is at shoulder height. Maintain a perpendicular motion with your upper arm, a fixed elbow position and ensure elbows are above your wrists throughout the exercise. Slowly return to the starting position."
+},{
+	"category": "Shoulders",
+	"name": "Machine Lateral Raise",
+	"image":"https://firebasestorage.googleapis.com/v0/b/gymapp-e8453.appspot.com/o/Target%20Muscles%2FWindshield%20Wiper.gif?alt=media&token=7d55e653-3831-45f7-88b4-a7b9f44dd7d8",
+	"execution": "Sit down on seat and position bent arms between the padded lever and sides of your body.\n\nRaise arms to the sides until your upper arms are horizontal. Slowly return to the starting position."
 }]

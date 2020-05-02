@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -88,7 +89,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
           title: Text('Upcoming Sessions',
-              style: TextStyle(fontFamily: "Ubuntu")),
+              style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -113,16 +114,20 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
       var testUTC = DateTime.utc(dbYear, dbMonth, dbDay);
     
       if(testUTC.isAfter(DateTime.now().toUtc())){
-                  return Card(
-                      color: Colors.grey[100],
+                  return Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                       margin: EdgeInsets.all(1.0),
-                      //color: Color(items[index].paid),
-                      elevation: 0.6,
                       child: new ListTile(
                         title: Text(items[index].date,
                             style: TextStyle(
                                 fontFamily: "Montserrat",
-                                fontSize: screenWidth * 0.055,
+                                fontSize: screenWidth * 0.05,
                                 color: Color(0xFF22333B),
                                 fontWeight: FontWeight.w600)),
                         subtitle: Text(
@@ -131,7 +136,9 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                                 items[index].endTime.substring(10, 15)),
                         trailing: new IconButton(
                             iconSize: 40.0,
-                            icon: Icon(Icons.monetization_on),
+                           icon: SvgPicture.asset(
+                              "assets/finance.svg",
+                              color: Color(items[index].paid)),
                             color: Color(items[index].paid),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
@@ -144,16 +151,19 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                       ));
                 }
                 else{
-                  return Card(
-                      color: Colors.grey[100],
-                      //color: Color(items[index].paid),
-                      elevation: 0.6,
-                       margin: EdgeInsets.all(1.0),
+                  return Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                        ),
+                        color: Colors.white,
+                      ),
                       child: new ListTile(
                         title: Text(items[index].date,
                             style: TextStyle(
-                                fontFamily: "Ubuntu",
-                                fontSize: screenWidth * 0.055,
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.05,
                                 color: Color(0xFF22333B),
                                 fontWeight: FontWeight.w600)),
                         subtitle: Text(
@@ -163,8 +173,9 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                         trailing:
                         new IconButton(
                             iconSize: 50.0,
-                            icon: Icon(Icons.monetization_on),
-                            color: Color(items[index].paid),
+                            icon: SvgPicture.asset(
+                              "assets/finance.svg",
+                              color: Color(items[index].paid)),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
                                 confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);

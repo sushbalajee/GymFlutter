@@ -115,14 +115,14 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                     child: new Stack(children: <Widget>[
                       new Column(children: <Widget>[
                         Container(
-                            color: Color(0xFF2A324B),
+                            color: Color(0xFF23395b),
                             child: ListTile(
                               contentPadding:
                                   EdgeInsets.only(left: 0, top: 0, bottom: 0),
                               leading: Container(
                                 alignment: Alignment.center,
                                 width: 50,
-                                color: Color(0xFF767B91),
+                                color: Color(0xFF788aa3),
                                 child: new Text(
                                   "$exerciseNumber",
                                   style: TextStyle(

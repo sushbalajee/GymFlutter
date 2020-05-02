@@ -44,6 +44,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    String exerciseListName = widget.value;
 
     return new Scaffold(
         backgroundColor: Color(0xFFEFF1F3),
@@ -68,7 +69,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                   } else {
                     return Column(children: <Widget>[
                       Container(
-                          height: constraints.maxHeight*2/3,
+                          height: 280,
                           child: ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
@@ -78,7 +79,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                       border: Border(
                                         bottom: BorderSide(
                                             width: 0.3,
-                                            color: Color(0xFF767B91)),
+                                            color: Color(0xFFc9ada7)),
                                       ),
                                       color: Colors.white,
                                     ),
@@ -89,7 +90,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                           alignment: Alignment.center,
                                           height: 75,
                                           width: 50,
-                                          color: Color(0xFF767B91),
+                                          color: Color(0xFFc9ada7),
                                           child: new Text(
                                             "$workoutNumber",
                                             style: TextStyle(
@@ -132,8 +133,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
                      Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFF2A324B),
-                height: constraints.maxHeight/3,
+                color: Color(0xFFa6808c),
+                height: constraints.maxHeight - 280,
                         width: screenWidth,
                 child: FlatButton.icon(
                     onPressed: () {
@@ -150,7 +151,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                       height: constraints.maxWidth / 5,
                     ),
                     label: Text(
-                      "  Exercise List",
+                      "  $exerciseListName:\n  Exercise List",
                       style: TextStyle(
                         fontSize: screenWidth / 15,
                         fontFamily: "Montserrat",

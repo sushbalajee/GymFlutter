@@ -3,6 +3,7 @@ import 'workouts.dart';
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 class PageTwo extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class PageTwoState extends State<PageTwo> {
                   padding: EdgeInsets.only(left: screenWidth / 8),
                   width: screenWidth,
                   height: constraints.maxHeight / 3,
-                  color: Color(0xFF45537C),
+                  color: Color(0xFFc9ada7),
                   child: FlatButton.icon(
                       onPressed: () {},
                       icon: SvgPicture.asset(
@@ -74,13 +75,13 @@ class PageTwoState extends State<PageTwo> {
                     padding: EdgeInsets.only(left: screenWidth / 8),
                     width: screenWidth,
                     height: constraints.maxHeight / 3,
-                    color: Color(0xFF767B91),
+                    color: Color(0xFFd6cfcb),
                     child: FlatButton.icon(
                         onPressed: () {},
-                        icon: Icon(
-                          Icons.lock_outline,
+                        icon: SvgPicture.asset(
+                          "assets/closed.svg",
                           color: Colors.white,
-                          size: screenWidth / 5,
+                          height: screenWidth / 5,
                         ),
                         label: Text(
                           "    Muscle Splits",
@@ -118,26 +119,25 @@ Widget sliderTitles(String title, double height, double width, Color col) {
 
 Widget horizontalSlider(double screenHeight, List<String> titles,
     List<String> picIndex, double screenWidth, BoxConstraints constraints) {
+
   return Stack(children: <Widget>[
-    Container(
+
+Container(
         child: (
           Row(children:[
       Container(
         height: constraints.maxHeight / 3,
-        width: screenWidth-screenWidth/10,
+        width: screenWidth,
         child: new ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
           itemBuilder: (BuildContext content, int index) =>
-              CreateTile(titles[index], picIndex[index]),
+              CreateTile(titles[index], picIndex[index], constraints),
           itemCount: titles.length,
         ),
       ),
-      Container(color: Color(0xFF2A324B),
-      width: screenWidth/10,
-      height: constraints.maxHeight/3,
-      child: Icon(Icons.keyboard_arrow_right, size: 50, color: Colors.white,))
+      
     ]))),
   ]);
 }
@@ -147,18 +147,31 @@ Widget horizontalSlider(double screenHeight, List<String> titles,
 class CreateTile extends StatelessWidget {
   final String name;
   final String picName;
+  final BoxConstraints constraints;
 
-  CreateTile(this.name, this.picName);
+Icon iconDep;
+
+  CreateTile(this.name, this.picName, this.constraints);
 
   //@override
   Widget build(BuildContext context) {
+    if(name == "Abs"){
+      iconDep = Icon(Icons.arrow_back_ios, color: Colors.white,);
+    }
+    else if(name == "Chest"){
+      iconDep = Icon(Icons.arrow_forward_ios, color: Colors.white,);
+    }
+    else{
+      iconDep = null;//Icon(Icons.compare_arrows,  color: Colors.white, size: 40,);
+    }
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
+return Row(children: [
+     Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(left: screenWidth / 8),
-      color: Color(0xFF2A324B),
-      width: screenWidth,
+      color: Color(0xFFa6808c),
+      width: screenWidth - screenWidth/10,
       child: FlatButton.icon(
           onPressed: () {
             Navigator.push(
@@ -171,7 +184,7 @@ class CreateTile extends StatelessWidget {
           icon: SvgPicture.asset(
             "assets/$picName.svg",
             color: Colors.white,
-            height: screenWidth / 5,
+            height: screenWidth /5,
           ),
           label: Text(
             "    $name",
@@ -182,7 +195,11 @@ class CreateTile extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           )),
-    );
+    ),
+    Container(color: Color(0xFFa6808c),
+      width: screenWidth/10,
+      height: constraints.maxHeight/3,
+      child: iconDep)]);
 
 /*    return Card(
         child: new Container(

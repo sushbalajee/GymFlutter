@@ -203,14 +203,14 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     child: new Stack(children: <Widget>[
                               new Column(children: <Widget>[
                                 Container(
-                                color: Color(0xFF2A324B),
+                                color: Color(0xFF23395b),
                                 child:
                                 ListTile( 
                                   contentPadding: EdgeInsets.only(left:0, top:0, bottom: 0),
                                     leading: Container(
                           alignment: Alignment.center,
                           width: 50,
-                          color: Color(0xFF767B91),
+                          color: Color(0xFF788aa3),
                           child: new Text(
                           "$exerciseNumber",
                             style: TextStyle(
@@ -365,7 +365,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                           fontSize: screenWidth * 0.05,
                           fontWeight: FontWeight.w600,
                           color: Colors.white)),
-                  color: Color(0xFF767B91),
+                  color: Color(0xFF788aa3),
                   onPressed: () {
                     confirmDialog(context, "Add Exercise");
                   }))
@@ -597,7 +597,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   onPressed: () {
                     myController.text = currentText;
                     someMethod(currentText);
-                    print(currentText);
+                    //print("1:" + currentText);
                   })),
           key: key,
           submitOnSuggestionTap: true,
@@ -614,7 +614,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
               added.add(currentText);
               someMethod(currentText);
               myController.text = currentText;
-              print(currentText);
+              print("1:" + currentText);
               fetchPostForExecution(currentText);
             });
           },
@@ -625,7 +625,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
               added.add(currentText);
               someMethod(currentText);
               myController.text = currentText;
-              print(currentText);
+              print("2:" + currentText);
               fetchPostForExecution(currentText);
             });
           },
