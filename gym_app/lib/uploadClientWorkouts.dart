@@ -4,7 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'uploadClientWorkoutDetails.dart';
 import 'dart:async';
 import 'clientPayements.dart';
-import 'package:rich_alert/rich_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 //-----------------------------------------------------------------------------------//
 
@@ -200,66 +200,55 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         ));
   }
 
-  Future<Null> confirmError(BuildContext context, String why, String subtitle) {
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return new RichAlertDialog(
-            alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500, fontFamily: "Montserrat"),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text(subtitle,
-                style: TextStyle(fontSize: 15.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
-            alertType: RichAlertType.WARNING,
-            actions: <Widget>[
-              new FlatButton(
-                color: Color(0xFF2A324B),
-                child:
-                    const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: 20.0)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+  Future<bool> confirmError(BuildContext context, String why, String subtitle) {
+
+    return new Alert(
+      context: context,
+      //style: alertStyle,
+      closeFunction: () => null,
+      type: AlertType.warning,
+      title: why,
+      desc: subtitle,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Close",
+            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+            },
+          color: Color(0xFF4f5d75),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
   }
 
-  Future<Null> confirmDelete(BuildContext context, String why, int ind) {
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return new RichAlertDialog(
-            alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text(
-                "Are you sure you want to delete this workout and all of its exercises?",
-                style: TextStyle(fontSize: 18.0, fontFamily: "Montserrat"),
-                textAlign: TextAlign.center),
-            alertType: RichAlertType.WARNING,
-            actions: <Widget>[
-              new Padding(
-                  padding: EdgeInsets.only(right: 25.0),
-                  child: new FlatButton(
-                    color: Colors.green,
-                    child: const Text('Cancel', style: TextStyle(fontFamily: "Montserrat", fontSize: 20)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )),
-              new FlatButton(
-                  color: Colors.red,
-                  child: const Text('Delete', style: TextStyle(fontFamily: "Montserrat", fontSize: 20)),
-                  onPressed: () {
-                    handleDelete(ind);
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        });
+  Future<bool> confirmDelete(BuildContext context, String why, int ind) {
+
+return new Alert(
+      context: context,
+      //style: alertStyle,
+      closeFunction: () => null,
+      type: AlertType.error,
+      title: why,
+      desc: "Are you sure you want to delete this workout and all of its exercises?",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Delete",
+            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () {
+            handleDelete(ind);
+            Navigator.of(context, rootNavigator: true).pop();
+            },
+          color: Color(0xFF4f5d75),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
   }
 
   Future<Null> confirmDialog(BuildContext context, String execution) {
@@ -280,7 +269,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                   "Create a new workout",
                   style: TextStyle(
                       fontSize: 20.0,
-                      fontFamily: "Ubuntu",
+                      fontFamily: "Montserrat",
                       fontWeight: FontWeight.w500),
                 )),
             body: SingleChildScrollView(
@@ -312,6 +301,29 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                         validator: (val) => val == "" ? val : null,
                       ),
                       Container(
+                    padding: EdgeInsets.only(top: 20.0),
+                    width: screenWidth,
+                    child: new FlatButton(
+                      padding: EdgeInsets.all(10.0),
+                      child: new Text("Submit",
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.05,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white)),
+                      color: Color(0xFF788aa3),
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                              Navigator.of(context).pop();
+                            }
+                            handleSubmit();
+                            setState(() => _UploadClientWorkoutsState());
+                      },
+                      shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(5.0))
+                    ),
+                  ),
+                      /*Container(
                         width: screenWidth - 30,
                         padding: EdgeInsets.only(top: 30.0),
                         child: new FlatButton(
@@ -331,7 +343,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             //Navigator.of(context).pop();
                           },
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 )),

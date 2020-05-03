@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:datetime_picker_formfield/time_picker_formfield.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
@@ -24,7 +24,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   DatabaseReference clientSessionsRef;
   DatabaseReference sessionsRef1;
 
-  String selectedText = "Select a Client";
+  String selectedText;
   String localStart;
   String clientID;
   String firstHalf;
@@ -78,9 +78,10 @@ class _ClientSessionsState extends State<ClientSessions> {
                     width: screenWidth,
                     child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                      hint: Text(selectedText),
+                      hint: Text("Select a Client"),
                       value: null,
                       items: widget.clientList.map((String value) {
+                        //print(selectedText);
                         var splitID = value.toString().split(" - ");
                         firstHalf = splitID[0];
                         return new DropdownMenuItem<String>(
@@ -88,6 +89,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                             child: new Text(firstHalf));
                       }).toList(),
                       onChanged: (String val) {
+                        
                         setState(() {
                           selectedText = val;
                           var splitID1 = val.toString().split(" - ");
@@ -95,7 +97,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                           item.clientName = firstHalf1;
                           item.fullClientID = selectedText;
                           clientID = selectedText;
-                          selectedText =firstHalf1;
+                          selectedText = firstHalf1;
                         });
                       },
                     )),
@@ -103,20 +105,43 @@ class _ClientSessionsState extends State<ClientSessions> {
                   Container(
                     padding: EdgeInsets.only(left: 10.0, right: 10.0),
                     width: screenWidth,
-                    child: TimePickerFormField(
+                    child: DateTimeField(
                       format: timeFormat,
                       decoration: InputDecoration(hintText: 'Start Time'),
-                      validator: (value) {
-                        if (value == null) {
+                      autovalidate: true,
+                      validator: (DateTime value) {
+                      if (value == null) {
                           return 'Please select a start time';
                         }
+                        return null;
                       },
-                      onChanged: (t) {
+                      onSaved: (t) {
                         setState(() {
                           item.startTime = t.toString();
                           localStart = t.toString();
-                          print(t.toString());
+                          //print(t.toString());
                         });
+                      },
+                      onShowPicker: (context, currentValue) async {
+                        final time = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now()),
+                          builder: (BuildContext context, Widget child) {
+                            return Theme(
+                              data: ThemeData.light().copyWith(
+                                primaryColor: const Color(0xFF23395b),
+                                accentColor: const Color(0xFF23395b),
+                                colorScheme: ColorScheme.light(
+                                    primary: const Color(0xFF23395b)),
+                                buttonTheme: ButtonThemeData(
+                                    textTheme: ButtonTextTheme.primary),
+                              ),
+                              child: child,
+                            );
+                          },
+                        );
+                        return DateTimeField.convert(time);
                       },
                     ),
                   ),
@@ -124,18 +149,42 @@ class _ClientSessionsState extends State<ClientSessions> {
                     padding:
                         EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
                     width: screenWidth,
-                    child: TimePickerFormField(
+                    child: DateTimeField(
                       format: timeFormat,
                       decoration: InputDecoration(hintText: 'End Time'),
-                      validator: (value) {
+                      autovalidate: true,
+                      validator: (DateTime value) {
                         if (value == null) {
                           return 'Please select an end time';
                         }
+                        return null;
                       },
-                      onChanged: (t) {
+                      onSaved: (t) {
                         setState(() {
                           item.endTime = t.toString();
+                          print(t.toString());
                         });
+                      },
+                      onShowPicker: (context, currentValue) async {
+                        final time = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now()),
+                          builder: (BuildContext context, Widget child) {
+                            return Theme(
+                              data: ThemeData.light().copyWith(
+                                primaryColor: const Color(0xFF23395b),
+                                accentColor: const Color(0xFF23395b),
+                                colorScheme: ColorScheme.light(
+                                    primary: const Color(0xFF23395b)),
+                                buttonTheme: ButtonThemeData(
+                                    textTheme: ButtonTextTheme.primary),
+                              ),
+                              child: child,
+                            );
+                          },
+                        );
+                        return DateTimeField.convert(time);
                       },
                     ),
                   ),
@@ -143,22 +192,23 @@ class _ClientSessionsState extends State<ClientSessions> {
                     padding: EdgeInsets.only(top: 10.0),
                     width: screenWidth - 20,
                     child: new FlatButton(
-                      padding: EdgeInsets.all(10.0),
-                      child: new Text("Submit",
-                          style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: screenWidth * 0.05,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                      color: Color(0xFF788aa3),
-                      onPressed: () {
-                        item.date = widget.day + " : " + widget.date;
-                        item.paid = 0xFFFF6B6B;
-                        handleSubmit();
-                      },
-                      shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(5.0))
-                    ),
+                        padding: EdgeInsets.all(10.0),
+                        child: new Text("Submit",
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: screenWidth * 0.05,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                        color: Color(0xFF788aa3),
+                        onPressed: () {
+                          item.date = widget.day + " : " + widget.date;
+                          item.paid = 0xFFFF6B6B;
+                          if(selectedText != null){
+                            handleSubmit();
+                          }
+                        },
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5.0))),
                   ),
                 ],
               ),
@@ -172,13 +222,13 @@ class _ClientSessionsState extends State<ClientSessions> {
                 items.sort((a, b) => a.startTime.compareTo(b.startTime));
 
                 return Container(
-                  decoration: BoxDecoration(
-                        border: Border(
-                          bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
-                        ),
-                        color: Colors.white,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom:
+                            BorderSide(width: 0.3, color: Color(0xFF767B91)),
                       ),
+                      color: Colors.white,
+                    ),
                     child: new ListTile(
                       contentPadding: EdgeInsets.only(left: 10.0),
                       trailing: new IconButton(
@@ -186,7 +236,8 @@ class _ClientSessionsState extends State<ClientSessions> {
                           icon: Icon(Icons.delete_forever),
                           color: Color(0xFFC7CCDB),
                           onPressed: () {
-                            var clientSessionFBKey = items[index].clientSessionID;
+                            var clientSessionFBKey =
+                                items[index].clientSessionID;
                             handleDelete(index, clientSessionFBKey);
                           }),
                       title: Text(items[index].clientName,
@@ -195,7 +246,9 @@ class _ClientSessionsState extends State<ClientSessions> {
                               fontSize: screenWidth * 0.05,
                               color: Color(0xFF22333B),
                               fontWeight: FontWeight.w600)),
-                      subtitle: Text(items[index].startTime.substring(10, 15)),
+                      subtitle: Text(items[index].startTime.substring(10, 16) +
+                          " -" +
+                          items[index].endTime.substring(10, 16)),
                     ));
               },
             ),
@@ -204,7 +257,6 @@ class _ClientSessionsState extends State<ClientSessions> {
   }
 
   void handleDelete(int ii, String clientSessionKey) {
-
     sessionsRef1 = database
         .reference()
         .child('Workouts')
@@ -217,15 +269,14 @@ class _ClientSessionsState extends State<ClientSessions> {
     sessionsRef1.remove();
 
     Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ClientSessions(
-                                ptID: widget.ptID,
-                                day: widget.day,
-                                date: widget.date,
-                                clientList: widget.clientList,
-                              )));
-
+        context,
+        MaterialPageRoute(
+            builder: (context) => ClientSessions(
+                  ptID: widget.ptID,
+                  day: widget.day,
+                  date: widget.date,
+                  clientList: widget.clientList,
+                )));
   }
 
   void handleSubmit() {

@@ -5,17 +5,18 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'dart:convert';
 import 'jsonLogic.dart';
 import 'color_loader_3.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class BuiltinExercises extends StatefulWidget {
-  final String value;
+class AllBuiltinExercises extends StatefulWidget {
+  //final String value;
 
-  BuiltinExercises({Key key, this.value}) : super(key: key);
+  //AllBuiltinExercises({Key key, this.value}) : super(key: key);
 
   @override
-  BuiltinExer createState() => BuiltinExer();
+  AllBuiltinExer createState() => AllBuiltinExer();
 }
 
-class BuiltinExer extends State<BuiltinExercises> {
+class AllBuiltinExer extends State<AllBuiltinExercises> {
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
   final List<Exercises> exercises = [];
 
@@ -27,36 +28,36 @@ class BuiltinExer extends State<BuiltinExercises> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  Future fetchPost(String hitMe) async {
+  Future fetchPost() async {
     String data = await DefaultAssetBundle.of(context)
         .loadString("assets/JSON/ExerciseDB.json");
     var jsonResponse = json.decode(data);
 
     for (var exer in jsonResponse) {
-      Exercises wk = Exercises(exer['name'], exer['execution'], exer['image'], exer['category']);
-      
-      if(exer['category'] == hitMe){
+      Exercises wk = Exercises(
+          exer['name'], exer['execution'], exer['image'], exer['category']);
       exercises.add(wk);
-      }
     }
+    exercises.sort((a, b) => a.exerciseName.compareTo(b.exerciseName));
     return exercises;
   }
 
   @override
   Widget build(BuildContext context) {
+    SvgPicture iconDep;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF232528),
-          title: Text(widget.value + " - Exercise List",
-              style: TextStyle(fontFamily: "Montserrat")),
+          title:
+              Text("Exercise List", style: TextStyle(fontFamily: "Montserrat")),
         ),
         resizeToAvoidBottomPadding: false,
         body: Container(
             child: FutureBuilder(
-                future: fetchPost(widget.value),
+                future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return Container(
@@ -74,29 +75,79 @@ class BuiltinExer extends State<BuiltinExercises> {
                               style: new TextStyle(
                                   fontSize: 20.0, fontFamily: "Montserrat")))
                     ]));
-                  } 
+                  }
                   return Container(
                       child: ListView.builder(
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
+                            switch (snapshot.data[index].exerciseCategory) {
+                              case "Chest":
+                                iconDep = SvgPicture.asset(
+                                  "assets/1.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                              case "Back":
+                                iconDep = SvgPicture.asset(
+                                  "assets/2.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                              case "Shoulders":
+                                iconDep = SvgPicture.asset(
+                                  "assets/3.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                              case "Arms":
+                                iconDep = SvgPicture.asset(
+                                  "assets/4.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                              case "Legs":
+                                iconDep = SvgPicture.asset(
+                                  "assets/5.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                              case "Abs":
+                                iconDep = SvgPicture.asset(
+                                  "assets/6.svg",
+                                  height: 35,
+                                  color: Colors.white,
+                                );
+                                break;
+                            }
                             return Container(
-                              decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            width: 0.2,
-                                            color: Color(0xFF767B91)),
-                                      ),
-                                    ),
+                              padding: EdgeInsets.all(0),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                        width: 0.3, color: Color(0xFFc9ada7)),
+                                  ),
+                                ),
                                 //color: Colors.white,
                                 child: Column(children: <Widget>[
-                                  new ExpansionTile(
+                                  new 
+                                  ExpansionTile(
+                                    leading: Transform.translate(
+                                      offset: Offset(-15, 0),
+                                      child: Container(height:75, width: 58 ,color: Color(0xFFc9ada7), padding: EdgeInsets.all(7),
+                                      child:iconDep,
+                                    )),
                                     title: Align(
                                         alignment: Alignment(
                                             -1 - (10 / screenWidth), 0.0),
                                         child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
-                                              new Text(
+                                              new Transform.translate(offset: Offset(-15, 0) ,child:Text(
                                                   snapshot
                                                       .data[index].exerciseName,
                                                   style: TextStyle(
@@ -105,7 +156,7 @@ class BuiltinExer extends State<BuiltinExercises> {
                                                           screenWidth * 0.045,
                                                       color: Color(0xFF22333B),
                                                       fontWeight:
-                                                          FontWeight.w600))
+                                                          FontWeight.w600)))
                                             ])),
                                     children: <Widget>[
                                       Container(
@@ -113,12 +164,12 @@ class BuiltinExer extends State<BuiltinExercises> {
                                             border: Border(
                                                 bottom: BorderSide(
                                                   //                   <--- left side
-                                                  color: Color(0xFF767B91),
+                                                  color: Color(0xFFc9ada7),
                                                   width: 1.0,
                                                 ),
                                                 top: BorderSide(
                                                   //                   <--- left side
-                                                  color: Color(0xFF767B91),
+                                                  color: Color(0xFFc9ada7),
                                                   width: 1.0,
                                                 )),
                                           ),

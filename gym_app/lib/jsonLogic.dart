@@ -12,8 +12,9 @@ class Exercises {
   String exerciseName;
   String exerciseExecution;
   String exerciseImage;
+  String exerciseCategory;
 
-  Exercises(this.exerciseName, this.exerciseExecution, this.exerciseImage);
+  Exercises(this.exerciseName, this.exerciseExecution, this.exerciseImage, this.exerciseCategory);
 }
 
 class WorkoutCategory {

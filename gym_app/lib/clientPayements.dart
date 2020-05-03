@@ -6,6 +6,7 @@ import 'dart:async';
 import 'upcomingClientSessions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rich_alert/rich_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 //-----------------------------------------------------------------------------------//
@@ -140,104 +141,59 @@ class _ClientPaymentsState extends State<ClientPayments> {
     }
   }
 
-  Future<Null> informPT(BuildContext context, int ind) {
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-return new RichAlertDialog(
-            alertSubtitle: new Text(""),
-            alertType: RichAlertType.ERROR,
-            alertTitle: new Text(
-                "Your client has not confirmed payment for this session"),
-            actions: <Widget>[
-              new FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+  Future<bool> informPT(BuildContext context, int ind) {
+
+     return new Alert(
+      context: context,
+      //style: alertStyle,
+      closeFunction: () => null,
+      type: AlertType.warning,
+      title: "Unpaid",
+      desc: "Your client has not confirmed payment for this session",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Close",
+            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+          color: Color(0xFF4f5d75),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
+      
   }
 
-  /*Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(
-                "Your client has confirmed that they have paid for this session. Press confirm if you have received the payment.\n\nPlease Note: payment is not done within the app"),
-            content: Container(
-              width: screenWidth,
-              padding: EdgeInsets.only(top: 30.0),
-              child: new FlatButton(
-                child: new Text("Confirm",
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                onPressed: () {
-                  clientSessionsRef.child(items[ind].key).child('paid').set(changeTo);
-                  handlePayment();
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
-  }*/
+  Future<bool> confirmPayment(BuildContext context, int ind, num changeTo) {
 
-  Future<Null> confirmPayment(BuildContext context, int ind, num changeTo) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new RichAlertDialog(
-            alertTitle: new Text("Confirm Payment?",
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text("Please confirm if you have received payment from your client for this session. Please note: payment is not done within the app",
-                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
-            alertType: RichAlertType.WARNING,
-            actions: <Widget>[
-              new Padding(
-                  padding: EdgeInsets.only(right: 25.0),
-                  child: new FlatButton(
-                    color: Colors.green,
-                    child: const Text('CANCEL'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )),
-              new FlatButton(
-                  color: Colors.red,
-                  child: const Text('CONFIRM'),
-                  onPressed: () {
+    return new Alert(
+      context: context,
+      //style: alertStyle,
+      closeFunction: () => null,
+      type: AlertType.warning,
+      title: "Confirm Payment",
+      desc: "Please confirm if you have received payment from your client for this session.\n\nPlease note: payment is not done within the app",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Confirm",
+            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () {
+
                     clientSessionsRef
                         .child(items[ind].key)
                         .child('paid')
                         .set(changeTo);
                     handlePayment();
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        });
+            Navigator.of(context, rootNavigator: true).pop();
+          }, 
+          color: Color(0xFF4f5d75),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
   }
 
   void handlePayment() {

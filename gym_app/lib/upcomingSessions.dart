@@ -5,6 +5,8 @@ import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 //-----------------------------------------------------------------------------------//
 
@@ -39,6 +41,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   String msg = "Loading";
 
   String jointID;
+
 
   @override
   void initState(){
@@ -142,10 +145,10 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                             color: Color(items[index].paid),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
-                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
+                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D, "Unpaid", AlertType.error);
                               }
                               else if (items[index].paid == 0xFFFFE66D){
-                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B);
+                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B, "Payment Confirmed", AlertType.warning);
                               }
                             }),
                       ));
@@ -178,10 +181,10 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                               color: Color(items[index].paid)),
                             onPressed: () {
                               if (items[index].paid == 0xFFFF6B6B) {
-                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D);
+                                confirmPayment(context, index, "I have paid", "Please confirm if you have paid your Personal Trainer for this session", 0xFFFFE66D, "Unpaid", AlertType.error);
                               }
                               else if (items[index].paid == 0xFFFFE66D){
-                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B);
+                                confirmPayment(context, index, "Undo", "You have confirmed payment for this session. It is pending acceptance from your trainer. Press Undo if you have not paid for this session", 0xFFFF6B6B, "Payment Confirmed", AlertType.warning);
                               }
                             }),
                       ));
@@ -202,44 +205,29 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     }
   }
 
-  Future<Null> confirmPayment(BuildContext context, int ind,String button, String msg, num changeTo) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(msg
-                ),
-            content: Container(
-              width: screenWidth,
-              padding: EdgeInsets.only(top: 30.0),
-              child: new FlatButton(
-                child: new Text(button,
-                    style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                color: Colors.black,
-                onPressed: () {
+  Future<bool> confirmPayment(BuildContext context, int ind,String button, String msg, num changeTo, String title, AlertType alert) {
+    return new Alert(
+      context: context,
+      closeFunction: () => null,
+      type: alert,
+      title: title,
+      desc: msg,
+      buttons: [
+        DialogButton(
+          child: Text(
+            button,
+            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () {Navigator.of(context, rootNavigator: true).pop();
                   clientSessionRef.child(items[ind].key).child('paid').set(changeTo);
                   //setState(() => ClientSessionsClientSide());
                   handlePayment();
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: const Text('CLOSE'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+          },
+          color: Color(0xFF4f5d75),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
   }
 
   void handlePayment() {

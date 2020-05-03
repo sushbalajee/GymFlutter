@@ -29,7 +29,7 @@ class GymApp extends StatefulWidget {
 //-----------------------------------------------------------------------------------//
 
 class HomePageState extends State<GymApp> {
-  int currentTab = 1;
+  int currentTab = 2;
 
   PageOne one;
   PageTwo two;
@@ -46,7 +46,7 @@ class HomePageState extends State<GymApp> {
 
     pages = [one, two, login];
 
-    currentPage = two;
+    currentPage = login;
     super.initState();
   }
 
@@ -57,10 +57,10 @@ class HomePageState extends State<GymApp> {
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
                 title: new Text(
-                  "Gym App v0.1",
+                  "Trainamate 2.0",
                   style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: "Ubuntu",
+                      fontSize: 25.0,
+                      fontFamily: "Montserrat",
                       fontWeight: FontWeight.w500),
                 )),
             backgroundColor: Colors.grey[100],
@@ -72,7 +72,7 @@ class HomePageState extends State<GymApp> {
                       .copyWith(caption: new TextStyle(color: Colors.white)),
                   canvasColor: Color(0xFF232528)),
               child: new BottomNavigationBar(
-                  fixedColor: Color(0xFFF7C59F),
+                  fixedColor: Color(0xFFc9ada7),
                   currentIndex: currentTab,
                   onTap: (int index) {
                     setState(() {
@@ -82,13 +82,14 @@ class HomePageState extends State<GymApp> {
                   },
                   items: [
                     new BottomNavigationBarItem(
-                        icon: new Icon(Icons.home), title: new Text("Home")),
+                      
+                        icon: new Icon(Icons.home), title: new Text("Home", style: TextStyle(fontFamily: "Montserrat", fontSize: 15))),
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.pool),
-                        title: new Text("Workouts")),
+                        title: new Text("Workouts",style: TextStyle(fontFamily: "Montserrat", fontSize: 15))),
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.people),
-                        title: new Text("My Account"))
+                        title: new Text("My Account",style: TextStyle(fontFamily: "Montserrat", fontSize: 15)))
                   ]),
             )));
   }

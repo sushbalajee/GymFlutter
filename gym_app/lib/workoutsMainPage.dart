@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-
+import 'AllBuiltinExercises.dart';
 class PageTwo extends StatefulWidget {
   @override
   PageTwoState createState() {
@@ -54,7 +54,12 @@ class PageTwoState extends State<PageTwo> {
                   height: constraints.maxHeight / 3,
                   color: Color(0xFFc9ada7),
                   child: FlatButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                      Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AllBuiltinExercises()));
+                      },
                       icon: SvgPicture.asset(
                         "assets/weightlifter.svg",
                         color: Colors.white,
