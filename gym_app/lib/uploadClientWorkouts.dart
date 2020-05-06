@@ -201,7 +201,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   }
 
   Future<bool> confirmError(BuildContext context, String why, String subtitle) {
-
     return new Alert(
       context: context,
       //style: alertStyle,
@@ -213,11 +212,12 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
         DialogButton(
           child: Text(
             "Close",
-            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
           ),
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
-            },
+          },
           color: Color(0xFF4f5d75),
           radius: BorderRadius.circular(5.0),
         ),
@@ -226,24 +226,24 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   }
 
   Future<bool> confirmDelete(BuildContext context, String why, int ind) {
-
-return new Alert(
+    return new Alert(
       context: context,
-      //style: alertStyle,
       closeFunction: () => null,
       type: AlertType.error,
       title: why,
-      desc: "Are you sure you want to delete this workout and all of its exercises?",
+      desc:
+          "Are you sure you want to delete this workout and all of its exercises?",
       buttons: [
         DialogButton(
           child: Text(
             "Delete",
-            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
           ),
           onPressed: () {
             handleDelete(ind);
             Navigator.of(context, rootNavigator: true).pop();
-            },
+          },
           color: Color(0xFF4f5d75),
           radius: BorderRadius.circular(5.0),
         ),
@@ -301,49 +301,27 @@ return new Alert(
                         validator: (val) => val == "" ? val : null,
                       ),
                       Container(
-                    padding: EdgeInsets.only(top: 20.0),
-                    width: screenWidth,
-                    child: new FlatButton(
-                      padding: EdgeInsets.all(10.0),
-                      child: new Text("Submit",
-                          style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: screenWidth * 0.05,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                      color: Color(0xFF788aa3),
-                      onPressed: () {
-                        if (formKey.currentState.validate()) {
-                              Navigator.of(context).pop();
-                            }
-                            handleSubmit();
-                            setState(() => _UploadClientWorkoutsState());
-                      },
-                      shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(5.0))
-                    ),
-                  ),
-                      /*Container(
-                        width: screenWidth - 30,
-                        padding: EdgeInsets.only(top: 30.0),
+                        padding: EdgeInsets.only(top: 20.0),
+                        width: screenWidth,
                         child: new FlatButton(
-                          child: new Text("Submit",
-                              style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: screenWidth * 0.045,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white)),
-                          color: Colors.black,
-                          onPressed: () {
-                            if (formKey.currentState.validate()) {
-                              Navigator.of(context).pop();
-                            }
-                            handleSubmit();
-                            setState(() => _UploadClientWorkoutsState());
-                            //Navigator.of(context).pop();
-                          },
-                        ),
-                      ),*/
+                            padding: EdgeInsets.all(10.0),
+                            child: new Text("Submit",
+                                style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: screenWidth * 0.05,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white)),
+                            color: Color(0xFF788aa3),
+                            onPressed: () {
+                              if (formKey.currentState.validate()) {
+                                Navigator.of(context).pop();
+                              }
+                              handleSubmit();
+                              setState(() => _UploadClientWorkoutsState());
+                            },
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(5.0))),
+                      ),
                     ],
                   ),
                 )),

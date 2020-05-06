@@ -68,11 +68,9 @@ class UIDListPage extends State<UIDList> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     return new Scaffold(
-      //backgroundColor: Color(0xFF232528),
         appBar: new AppBar(
             centerTitle: true,
             backgroundColor: Color(0xFF232528),
@@ -104,42 +102,36 @@ class UIDListPage extends State<UIDList> {
                       child: Text(informUser),
                     ));
                   } else {
-                    return 
-                    
-                    ListView.builder(
+                    return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
                           int workoutNumber = index + 1;
-                          return Container( 
-                            decoration: BoxDecoration(
-                        border: Border(
-                          bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
-                        ),
-                      ),
+                          return Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                      width: 0.3, color: Color(0xFF788aa3)),
+                                ),
+                              ),
                               child: ListTile(
-                              
-                                contentPadding:
-                            EdgeInsets.only(top: 0.0, bottom: 0.0, left: 0),
-                                leading: 
-                                
-                                Container(
-                          alignment: Alignment.center,
-                          width: 50,
-                          color: Color(0xFF788aa3),
-                          child: new Text(
-                          "$workoutNumber",
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: screenWidth * 0.050,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          //backgroundColor: Color(0xFF767B91)
-                        ),
-
-                                  //contentPadding: EdgeInsets.all(20.0),
-                                  title: Text(snapshot.data[index].toString().substring(0, snapshot.data[index].indexOf('-')),
+                                  contentPadding: EdgeInsets.only(
+                                      top: 0.0, bottom: 0.0, left: 0),
+                                  leading: Container(
+                                    alignment: Alignment.center,
+                                    width: 50,
+                                    color: Color(0xFF788aa3),
+                                    child: new Text(
+                                      "$workoutNumber",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: screenWidth * 0.050,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  title: Text(
+                                      snapshot.data[index].toString().substring(
+                                          0, snapshot.data[index].indexOf('-')),
                                       style: TextStyle(
                                           fontFamily: "Montserrat",
                                           fontSize: screenWidth * 0.050,

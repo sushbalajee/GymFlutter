@@ -33,7 +33,6 @@ class WorkoutCategory {
 
     return WorkoutCategory(workouts: imagesList, uiCode: ui);
   }
-
 }
 
 class Wkouts {

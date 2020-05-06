@@ -33,10 +33,11 @@ class BuiltinExer extends State<BuiltinExercises> {
     var jsonResponse = json.decode(data);
 
     for (var exer in jsonResponse) {
-      Exercises wk = Exercises(exer['name'], exer['execution'], exer['image'], exer['category']);
-      
-      if(exer['category'] == hitMe){
-      exercises.add(wk);
+      Exercises wk = Exercises(
+          exer['name'], exer['execution'], exer['image'], exer['category']);
+
+      if (exer['category'] == hitMe) {
+        exercises.add(wk);
       }
     }
     return exercises;
@@ -74,20 +75,18 @@ class BuiltinExer extends State<BuiltinExercises> {
                               style: new TextStyle(
                                   fontSize: 20.0, fontFamily: "Montserrat")))
                     ]));
-                  } 
+                  }
                   return Container(
                       child: ListView.builder(
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Container(
-                              decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            width: 0.2,
-                                            color: Color(0xFF767B91)),
-                                      ),
-                                    ),
-                                //color: Colors.white,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                        width: 0.2, color: Color(0xFF767B91)),
+                                  ),
+                                ),
                                 child: Column(children: <Widget>[
                                   new ExpansionTile(
                                     title: Align(
@@ -112,12 +111,10 @@ class BuiltinExer extends State<BuiltinExercises> {
                                           decoration: new BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                  //                   <--- left side
                                                   color: Color(0xFF767B91),
                                                   width: 1.0,
                                                 ),
                                                 top: BorderSide(
-                                                  //                   <--- left side
                                                   color: Color(0xFF767B91),
                                                   width: 1.0,
                                                 )),

@@ -22,13 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  carousel_pro:
-    dependency: "direct main"
-    description:
-      name: carousel_pro
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   charcode:
     dependency: transitive
     description:
@@ -275,13 +268,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  rich_alert:
-    dependency: "direct main"
-    description:
-      name: rich_alert
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.32"
   shared_preferences:
     dependency: "direct main"
     description:

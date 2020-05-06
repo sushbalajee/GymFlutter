@@ -54,7 +54,6 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
     updateData();
 
     return new Scaffold(
-        //backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
           backgroundColor: Color(0xFF232528),
@@ -66,16 +65,14 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
                 style: TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: screenWidth * 0.05,
-                  fontWeight: FontWeight.w600)),
+                    fontFamily: "Montserrat",
+                    fontSize: screenWidth * 0.05,
+                    fontWeight: FontWeight.w600)),
           ),
           Container(
-            //color: Color(0xFF272727),
             decoration: new BoxDecoration(
               border: Border(
                   bottom: BorderSide(
-                //                   <--- left side
                 color: Colors.grey[300],
                 width: 1.0,
               )),
@@ -85,8 +82,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: screenWidth * 0.04)),
+                    fontFamily: "Montserrat", fontSize: screenWidth * 0.04)),
           ),
           Flexible(
               child: ListView.builder(
@@ -97,28 +93,27 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                   itemBuilder: (BuildContext context, int index) {
                     exerciseNumber += 1;
                     return Container(
-                      color: Colors.white,
+                        color: Colors.white,
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
                             Container(
                                 color: Color(0xFFa6808c),
                                 child: ListTile(
-                              contentPadding:
-                                  EdgeInsets.only(left: 0, top: 0, bottom: 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: 0, top: 0, bottom: 0),
                                   leading: Container(
-                                alignment: Alignment.center,
-                                width: 50,
-                                color: Color(0xFFc9ada7),
-                                child: new Text(
-                                  "$exerciseNumber",
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: screenWidth * 0.050,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                //backgroundColor: Color(0xFF767B91)
-                              ),
+                                    alignment: Alignment.center,
+                                    width: 50,
+                                    color: Color(0xFFc9ada7),
+                                    child: new Text(
+                                      "$exerciseNumber",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: screenWidth * 0.050,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
                                   title: Text(workoutExercisesJSON[index].name,
                                       style: TextStyle(
                                           fontFamily: "Montserrat",
@@ -158,8 +153,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                             fontSize: screenWidth * 0.04)),
                                     new Image.network(
                                         workoutExercisesJSON[index].target),
-
-                                        new ExpansionTile(
+                                    new ExpansionTile(
                                       title: Align(
                                           alignment: Alignment(
                                               -1 - (60 / screenWidth), 0.0),
@@ -176,7 +170,8 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                               ])),
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom:10.0),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 10.0),
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: Column(

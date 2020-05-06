@@ -40,10 +40,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
 
   @override
   Widget build(BuildContext context) {
-    //int workoutNumber = 0;
-
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+
     String exerciseListName = widget.value;
 
     return new Scaffold(
@@ -53,122 +51,88 @@ class _WorkoutsListState extends State<WorkoutsList> {
             backgroundColor: Color(0xFF232528),
             title: new Text(widget.value,
                 style: TextStyle(fontFamily: "Montserrat"))),
-        body: SafeArea(
-          child: new LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Container(
-            child: FutureBuilder(
-                future: fetchPost(widget.value),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  int workoutNumber = 0;
-                  if (snapshot.data == null) {
-                    return Container(
-                        child: Center(
-                      child: Text("Loading..."),
-                    ));
-                  } else {
-                    return Column(children: <Widget>[
-                      Container(
-                          height: 280,
-                          child: ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                workoutNumber += 1;
-                                return Container(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            width: 0.3,
-                                            color: Color(0xFFc9ada7)),
-                                      ),
-                                      color: Colors.white,
-                                    ),
-                                    child: new ListTile(
-                                        contentPadding: EdgeInsets.only(
-                                            top: 0.0, bottom: 0.0, left: 0.0),
-                                        leading: Container(
-                                          alignment: Alignment.center,
-                                          height: 75,
-                                          width: 50,
-                                          color: Color(0xFFc9ada7),
-                                          child: new Text(
-                                            "$workoutNumber",
-                                            style: TextStyle(
-                                                fontFamily: "Montserrat",
-                                                fontSize: screenWidth * 0.050,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
-                                          ),
+        body: SafeArea(child: new LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return Container(
+              child: FutureBuilder(
+                  future: fetchPost(widget.value),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    int workoutNumber = 0;
+                    if (snapshot.data == null) {
+                      return Container(
+                          child: Center(
+                        child: Text("Loading..."),
+                      ));
+                    } else {
+                      return Column(children: <Widget>[
+                        Container(
+                            height: 280,
+                            child: ListView.builder(
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  workoutNumber += 1;
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              width: 0.3,
+                                              color: Color(0xFFc9ada7)),
                                         ),
-                                        title: Container(
-                                            child: Text(
-                                                snapshot
-                                                    .data[index].workoutname,
-                                                style: TextStyle(
-                                                    fontFamily: "Montserrat",
-                                                    fontSize:
-                                                        screenWidth * 0.05,
-                                                    color: Color(0xFF22333B),
-                                                    fontWeight:
-                                                        FontWeight.w600))),
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WorkoutDetails(
-                                                          value: workouts,
-                                                          title: snapshot
-                                                              .data[index]
-                                                              .workoutname,
-                                                          muscleGroup: snapshot
-                                                              .data[index]
-                                                              .musclegroup,
-                                                          description: snapshot
-                                                              .data[index]
-                                                              .description)));
-                                        }));
-                              })),
-                      
-                     Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFFa6808c),
-                height: constraints.maxHeight - 280,
-                        width: screenWidth,
-                child: FlatButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => BuiltinExercises(
-                                              value: widget.value,
-                                            )));
-                    },
-                    icon: SvgPicture.asset(
-                      "assets/weightlifter.svg",
-                      color: Colors.white,
-                      height: constraints.maxWidth / 5,
-                    ),
-                    label: Text(
-                      "  $exerciseListName:\n  Exercise List",
-                      style: TextStyle(
-                        fontSize: screenWidth / 15,
-                        fontFamily: "Montserrat",
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )),
-              ),
-                      /*Container(
-                          height: screenHeight * 0.315,
-                          decoration: new BoxDecoration(
-                            image: new DecorationImage(
-                                image:
-                                    new AssetImage("assets/ExerciseList.jpg"),
-                                fit: BoxFit.cover),
-                          ),
-                          child: FlatButton(
+                                        color: Colors.white,
+                                      ),
+                                      child: new ListTile(
+                                          contentPadding: EdgeInsets.only(
+                                              top: 0.0, bottom: 0.0, left: 0.0),
+                                          leading: Container(
+                                            alignment: Alignment.center,
+                                            height: 75,
+                                            width: 50,
+                                            color: Color(0xFFc9ada7),
+                                            child: new Text(
+                                              "$workoutNumber",
+                                              style: TextStyle(
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: screenWidth * 0.050,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          title: Container(
+                                              child: Text(
+                                                  snapshot
+                                                      .data[index].workoutname,
+                                                  style: TextStyle(
+                                                      fontFamily: "Montserrat",
+                                                      fontSize:
+                                                          screenWidth * 0.05,
+                                                      color: Color(0xFF22333B),
+                                                      fontWeight:
+                                                          FontWeight.w600))),
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WorkoutDetails(
+                                                            value: workouts,
+                                                            title: snapshot
+                                                                .data[index]
+                                                                .workoutname,
+                                                            muscleGroup: snapshot
+                                                                .data[index]
+                                                                .musclegroup,
+                                                            description: snapshot
+                                                                .data[index]
+                                                                .description)));
+                                          }));
+                                })),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: screenWidth / 8),
+                          color: Color(0xFFa6808c),
+                          height: constraints.maxHeight - 280,
+                          width: screenWidth,
+                          child: FlatButton.icon(
                               onPressed: () {
                                 Navigator.push(
                                     context,
@@ -177,13 +141,24 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                               value: widget.value,
                                             )));
                               },
-                              child: SizedBox(
-                                child: Container(
-                                  alignment: AlignmentDirectional.center,
+                              icon: SvgPicture.asset(
+                                "assets/weightlifter.svg",
+                                color: Colors.white,
+                                height: constraints.maxWidth / 5,
+                              ),
+                              label: Text(
+                                "  $exerciseListName:\n  Exercise List",
+                                style: TextStyle(
+                                  fontSize: screenWidth / 15,
+                                  fontFamily: "Montserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              )))*/
-                    ]);
-                  }
-                }));})));
+                              )),
+                        ),
+                      ]);
+                    }
+                  }));
+        })));
   }
 }

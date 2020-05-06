@@ -28,6 +28,7 @@ class _ClientSessionsState extends State<ClientSessions> {
   String localStart;
   String clientID;
   String firstHalf;
+  String thisText = "Please select a client";
 
   List<Session> items = List();
   Session item;
@@ -56,6 +57,9 @@ class _ClientSessionsState extends State<ClientSessions> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -78,10 +82,9 @@ class _ClientSessionsState extends State<ClientSessions> {
                     width: screenWidth,
                     child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                      hint: Text("Select a Client"),
+                      hint: Text(thisText),
                       value: null,
                       items: widget.clientList.map((String value) {
-                        //print(selectedText);
                         var splitID = value.toString().split(" - ");
                         firstHalf = splitID[0];
                         return new DropdownMenuItem<String>(
@@ -89,7 +92,6 @@ class _ClientSessionsState extends State<ClientSessions> {
                             child: new Text(firstHalf));
                       }).toList(),
                       onChanged: (String val) {
-                        
                         setState(() {
                           selectedText = val;
                           var splitID1 = val.toString().split(" - ");
@@ -98,9 +100,11 @@ class _ClientSessionsState extends State<ClientSessions> {
                           item.fullClientID = selectedText;
                           clientID = selectedText;
                           selectedText = firstHalf1;
+                          thisText = selectedText;
                         });
                       },
-                    )),
+                    )
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -110,7 +114,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                       decoration: InputDecoration(hintText: 'Start Time'),
                       autovalidate: true,
                       validator: (DateTime value) {
-                      if (value == null) {
+                        if (value == null) {
                           return 'Please select a start time';
                         }
                         return null;
@@ -119,7 +123,6 @@ class _ClientSessionsState extends State<ClientSessions> {
                         setState(() {
                           item.startTime = t.toString();
                           localStart = t.toString();
-                          //print(t.toString());
                         });
                       },
                       onShowPicker: (context, currentValue) async {
@@ -203,7 +206,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                         onPressed: () {
                           item.date = widget.day + " : " + widget.date;
                           item.paid = 0xFFFF6B6B;
-                          if(selectedText != null){
+                          if (selectedText != null) {
                             handleSubmit();
                           }
                         },
@@ -245,7 +248,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                               fontFamily: "Montserrat",
                               fontSize: screenWidth * 0.05,
                               color: Color(0xFF22333B),
-                              fontWeight: FontWeight.w600)),
+                              fontWeight: FontWeight.w500)),
                       subtitle: Text(items[index].startTime.substring(10, 16) +
                           " -" +
                           items[index].endTime.substring(10, 16)),

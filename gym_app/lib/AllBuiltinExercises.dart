@@ -8,10 +8,6 @@ import 'color_loader_3.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AllBuiltinExercises extends StatefulWidget {
-  //final String value;
-
-  //AllBuiltinExercises({Key key, this.value}) : super(key: key);
-
   @override
   AllBuiltinExer createState() => AllBuiltinExer();
 }
@@ -125,50 +121,55 @@ class AllBuiltinExer extends State<AllBuiltinExercises> {
                                 break;
                             }
                             return Container(
-                              padding: EdgeInsets.all(0),
+                                padding: EdgeInsets.all(0),
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
                                         width: 0.3, color: Color(0xFFc9ada7)),
                                   ),
                                 ),
-                                //color: Colors.white,
                                 child: Column(children: <Widget>[
-                                  new 
-                                  ExpansionTile(
+                                  new ExpansionTile(
                                     leading: Transform.translate(
-                                      offset: Offset(-15, 0),
-                                      child: Container(height:75, width: 58 ,color: Color(0xFFc9ada7), padding: EdgeInsets.all(7),
-                                      child:iconDep,
-                                    )),
+                                        offset: Offset(-15, 0),
+                                        child: Container(
+                                          height: 75,
+                                          width: 58,
+                                          color: Color(0xFFc9ada7),
+                                          padding: EdgeInsets.all(7),
+                                          child: iconDep,
+                                        )),
                                     title: Align(
                                         alignment: Alignment(
                                             -1 - (10 / screenWidth), 0.0),
                                         child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
-                                              new Transform.translate(offset: Offset(-15, 0) ,child:Text(
-                                                  snapshot
-                                                      .data[index].exerciseName,
-                                                  style: TextStyle(
-                                                      fontFamily: "Montserrat",
-                                                      fontSize:
-                                                          screenWidth * 0.045,
-                                                      color: Color(0xFF22333B),
-                                                      fontWeight:
-                                                          FontWeight.w600)))
+                                              new Transform.translate(
+                                                  offset: Offset(-15, 0),
+                                                  child: Text(
+                                                      snapshot.data[index]
+                                                          .exerciseName,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Montserrat",
+                                                          fontSize:
+                                                              screenWidth *
+                                                                  0.045,
+                                                          color:
+                                                              Color(0xFF22333B),
+                                                          fontWeight:
+                                                              FontWeight.w600)))
                                             ])),
                                     children: <Widget>[
                                       Container(
                                           decoration: new BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                  //                   <--- left side
                                                   color: Color(0xFFc9ada7),
                                                   width: 1.0,
                                                 ),
                                                 top: BorderSide(
-                                                  //                   <--- left side
                                                   color: Color(0xFFc9ada7),
                                                   width: 1.0,
                                                 )),

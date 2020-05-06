@@ -5,9 +5,7 @@ import 'color_loader_3.dart';
 import 'dart:async';
 import 'upcomingClientSessions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rich_alert/rich_alert.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 
 //-----------------------------------------------------------------------------------//
 
@@ -124,6 +122,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                               }),
                         ));
                   }
+                  return null;
                 },
               ),
             ),

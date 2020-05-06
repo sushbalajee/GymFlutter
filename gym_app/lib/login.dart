@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'usersList.dart';
 import 'color_loader_3.dart';
-import 'package:rich_alert/rich_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Login extends StatefulWidget {
   Login({this.auth, this.onSignedIn, this.onSignedInAsPt});
@@ -255,6 +255,11 @@ class LoginPageState extends State<Login> {
       confirmDialog(context, "Invalid User",
           "There is no user record corresponding to your login. Please register for further access");
       resetLogin();
+    } else if (e
+        .contains("The email address is already in use by another account")) {
+      confirmDialog(context, "Email Taken",
+          "The email address is already in use by another account. Please register using another email ID for further access");
+      resetRegister();
     } else if (e.contains("The password must be 6 characters long or more")) {
       confirmDialog(context, "Weak Password",
           "Please create a password contains atleast 6 characters");
@@ -354,6 +359,7 @@ class LoginPageState extends State<Login> {
             if (value != _passController.text) {
               return "Passwords Do Not Match";
             }
+            return null;
           }),
       new TextFormField(
           decoration: new InputDecoration(
@@ -486,30 +492,30 @@ class LoginPageState extends State<Login> {
 
 //------------------------------------------------------------------------------//
 
-Future<Null> confirmDialog(
+Future<bool> confirmDialog(
     BuildContext context, String subtitle, String execution) {
-  return showDialog<Null>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return new RichAlertDialog(
-          alertTitle: new Text(subtitle,
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
-              textAlign: TextAlign.center),
-          alertSubtitle: new Text(execution,
-              style: TextStyle(fontSize: 18.0, fontFamily: "Montserrat"), textAlign: TextAlign.center),
-          alertType: RichAlertType.ERROR,
-          actions: <Widget>[
-            new FlatButton(
-              color: Color(0xFF2A324B),
-              child: const Text('Close', style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: 20)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      });
+  return new Alert(
+    context: context,
+    //style: alertStyle,
+    closeFunction: () => null,
+    type: AlertType.error,
+    title: subtitle,
+    desc: execution,
+    buttons: [
+      DialogButton(
+        child: Text(
+          "Close",
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+        ),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+        color: Color(0xFF4f5d75),
+        radius: BorderRadius.circular(5.0),
+      ),
+    ],
+  ).show();
 }
 
 //------------------------------------------------------------------------------//

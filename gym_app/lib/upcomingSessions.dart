@@ -62,7 +62,12 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
         .child(widget.clientID);
 
     clientNamesRef.once().then((DataSnapshot snapshot){
-      jointID = snapshot.value + " - " + widget.clientID;
+      Map<dynamic, dynamic> values = snapshot.value;
+     values.forEach((key,values) {
+      print(values["clientName"]);
+    
+      //print(snapshot);
+      jointID = values["clientName"] + " - " + widget.clientID;
 
       clientSessionRef = database
           .reference()
@@ -72,7 +77,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
           .child('clientSessions');
 
       clientSessionRef.onChildAdded.listen(_onEntryAdded);
-    });
+    });});
   }
 
   _onEntryAdded(Event event) {
@@ -168,11 +173,11 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                                 fontFamily: "Montserrat",
                                 fontSize: screenWidth * 0.05,
                                 color: Color(0xFF22333B),
-                                fontWeight: FontWeight.w600)),
+                                fontWeight: FontWeight.w500)),
                         subtitle: Text(
-                            items[index].startTime.substring(10, 15) +
+                            items[index].startTime.substring(10, 16) +
                                 " - " +
-                                items[index].endTime.substring(10, 15) + " - Past Session", style: TextStyle(color: Colors.red),),
+                                items[index].endTime.substring(10, 16) + " - Past Session", style: TextStyle(color: Colors.red),),
                         trailing:
                         new IconButton(
                             iconSize: 50.0,

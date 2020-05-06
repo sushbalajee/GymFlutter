@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'dart:math';
 import 'package:flutter_svg/svg.dart';
 
 class ColorLoader3 extends StatefulWidget {
@@ -77,12 +76,10 @@ class _ColorLoader3State extends State<ColorLoader3>
     return Container(
       width: 100.0,
       height: 100.0,
-      //color: Colors.black12,
       child: new Center(
         child: new RotationTransition(
           turns: animationRotation,
           child: new Container(
-            //color: Colors.limeAccent,
             child: new Center(
               child: Stack(
                 children: <Widget>[

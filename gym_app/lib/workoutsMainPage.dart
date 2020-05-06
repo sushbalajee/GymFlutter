@@ -3,8 +3,8 @@ import 'workouts.dart';
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'AllBuiltinExercises.dart';
+
 class PageTwo extends StatefulWidget {
   @override
   PageTwoState createState() {
@@ -34,8 +34,9 @@ class PageTwoState extends State<PageTwo> {
     subscription =
         connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
       connectionStatus = result.toString();
-    });
-
+   });
+   subscription.cancel();
+  
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -55,10 +56,10 @@ class PageTwoState extends State<PageTwo> {
                   color: Color(0xFFc9ada7),
                   child: FlatButton.icon(
                       onPressed: () {
-                      Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AllBuiltinExercises()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AllBuiltinExercises()));
                       },
                       icon: SvgPicture.asset(
                         "assets/weightlifter.svg",
@@ -124,12 +125,9 @@ Widget sliderTitles(String title, double height, double width, Color col) {
 
 Widget horizontalSlider(double screenHeight, List<String> titles,
     List<String> picIndex, double screenWidth, BoxConstraints constraints) {
-
   return Stack(children: <Widget>[
-
-Container(
-        child: (
-          Row(children:[
+    Container(
+        child: (Row(children: [
       Container(
         height: constraints.maxHeight / 3,
         width: screenWidth,
@@ -142,7 +140,6 @@ Container(
           itemCount: titles.length,
         ),
       ),
-      
     ]))),
   ]);
 }
@@ -154,91 +151,61 @@ class CreateTile extends StatelessWidget {
   final String picName;
   final BoxConstraints constraints;
 
-Icon iconDep;
-
   CreateTile(this.name, this.picName, this.constraints);
 
   //@override
   Widget build(BuildContext context) {
-    if(name == "Abs"){
-      iconDep = Icon(Icons.arrow_back_ios, color: Colors.white,);
-    }
-    else if(name == "Chest"){
-      iconDep = Icon(Icons.arrow_forward_ios, color: Colors.white,);
-    }
-    else{
-      iconDep = null;//Icon(Icons.compare_arrows,  color: Colors.white, size: 40,);
+      Icon iconDep;
+    if (name == "Abs") {
+      iconDep = Icon(
+        Icons.arrow_back_ios,
+        color: Colors.white,
+      );
+    } else if (name == "Chest") {
+      iconDep = Icon(
+        Icons.arrow_forward_ios,
+        color: Colors.white,
+      );
+    } else {
+      iconDep = null;
     }
     double screenWidth = MediaQuery.of(context).size.width;
 
-return Row(children: [
-     Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: screenWidth / 8),
-      color: Color(0xFFa6808c),
-      width: screenWidth - screenWidth/10,
-      child: FlatButton.icon(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WorkoutsList(
-                          value: name,
-                        )));
-          },
-          icon: SvgPicture.asset(
-            "assets/$picName.svg",
-            color: Colors.white,
-            height: screenWidth /5,
-          ),
-          label: Text(
-            "    $name",
-            style: TextStyle(
-              fontSize: screenWidth / 15,
-              fontFamily: "Montserrat",
+    return Row(children: [
+      Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: screenWidth / 8),
+        color: Color(0xFFa6808c),
+        width: screenWidth - screenWidth / 10,
+        child: FlatButton.icon(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WorkoutsList(
+                            value: name,
+                          )));
+            },
+            icon: SvgPicture.asset(
+              "assets/$picName.svg",
               color: Colors.white,
-              fontWeight: FontWeight.w600,
+              height: screenWidth / 5,
             ),
-          )),
-    ),
-    Container(color: Color(0xFFa6808c),
-      width: screenWidth/10,
-      height: constraints.maxHeight/3,
-      child: iconDep)]);
-
-/*    return Card(
-        child: new Container(
-      decoration: new BoxDecoration(
-        image: new DecorationImage(
-          image: new AssetImage("assets/$picName.jpg"),
-          fit: BoxFit.cover,
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.9), BlendMode.dstATop),
-        ),
-      ),
-      width: screenWidth * 0.96,
-      child: FlatButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WorkoutsList(
-                          value: name,
-                        )));
-          },
-          child: SizedBox(
-            child: Container(
-              alignment: AlignmentDirectional.center,
-              child: Text(
-                name,
-                style: TextStyle(
-                    fontFamily: "Prompt",
-                    fontSize: 110,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
+            label: Text(
+              "    $name",
+              style: TextStyle(
+                fontSize: screenWidth / 15,
+                fontFamily: "Montserrat",
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
               ),
-            ),
-          )),
-    ));*/
+            )),
+      ),
+      Container(
+          color: Color(0xFFa6808c),
+          width: screenWidth / 10,
+          height: constraints.maxHeight / 3,
+          child: iconDep)
+    ]);
   }
 }

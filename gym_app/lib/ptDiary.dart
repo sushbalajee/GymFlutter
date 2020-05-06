@@ -153,8 +153,6 @@ class _PTDiaryState extends State<PTDiary> {
 
     getNext28Days();
 
-    GridTile gridtile;
-
     return Scaffold(
         appBar: new AppBar(
             centerTitle: true,

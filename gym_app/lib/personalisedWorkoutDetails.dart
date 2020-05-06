@@ -27,19 +27,14 @@ class PersonalisedWorkoutDetails extends StatefulWidget {
 
 class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
   List<Item> items = List();
-  //Item item;
   DatabaseReference clientExercisesRef;
-  //DatabaseReference snek;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    //item = Item("", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
-
-    //snek = database.reference().child('Workouts').child(widget.uid);
 
     clientExercisesRef = database
         .reference()
@@ -66,7 +61,6 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      //backgroundColor: Color(0xFFEFF1F3),
       appBar: AppBar(
         title: Text(widget.title, style: TextStyle(fontFamily: "Monterrat")),
         backgroundColor: Color(0xFF232528),
@@ -75,7 +69,6 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
       body: Column(
         children: <Widget>[
           Container(
-            //color: Color(0xFF272727),
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
@@ -85,11 +78,9 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                     fontWeight: FontWeight.w600)),
           ),
           Container(
-            //color: Color(0xFF272727),
             decoration: new BoxDecoration(
               border: Border(
                   bottom: BorderSide(
-                //                   <--- left side
                 color: Colors.grey[300],
                 width: 1.0,
               )),
@@ -131,7 +122,6 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600),
                                 ),
-                                //backgroundColor: Color(0xFF767B91)
                               ),
                               title: Text(items[index].name,
                                   style: TextStyle(

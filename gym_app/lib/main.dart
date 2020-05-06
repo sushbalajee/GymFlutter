@@ -8,14 +8,14 @@ import 'root.dart';
 //-----------------------------------------------------------------------------------//
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
-      .copyWith(systemNavigationBarColor: Color(0xFF232528),
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      systemNavigationBarColor: Color(0xFF232528),
       statusBarColor: Color(0xFF232528)));
   //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-     // .then((_) {
-    runApp(new MaterialApp(
-      home: new GymApp(),
-    ));
+  // .then((_) {
+  runApp(new MaterialApp(
+    home: new GymApp(),
+  ));
   //});
 }
 
@@ -53,7 +53,8 @@ class HomePageState extends State<GymApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: new Scaffold(appBar: new AppBar(
+        home: new Scaffold(
+            appBar: new AppBar(
                 centerTitle: true,
                 backgroundColor: Color(0xFF232528),
                 title: new Text(
@@ -82,14 +83,20 @@ class HomePageState extends State<GymApp> {
                   },
                   items: [
                     new BottomNavigationBarItem(
-                      
-                        icon: new Icon(Icons.home), title: new Text("Home", style: TextStyle(fontFamily: "Montserrat", fontSize: 15))),
+                        icon: new Icon(Icons.home),
+                        title: new Text("Home",
+                            style: TextStyle(
+                                fontFamily: "Montserrat", fontSize: 15))),
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.pool),
-                        title: new Text("Workouts",style: TextStyle(fontFamily: "Montserrat", fontSize: 15))),
+                        title: new Text("Workouts",
+                            style: TextStyle(
+                                fontFamily: "Montserrat", fontSize: 15))),
                     new BottomNavigationBarItem(
                         icon: new Icon(Icons.people),
-                        title: new Text("My Account",style: TextStyle(fontFamily: "Montserrat", fontSize: 15)))
+                        title: new Text("My Account",
+                            style: TextStyle(
+                                fontFamily: "Montserrat", fontSize: 15)))
                   ]),
             )));
   }

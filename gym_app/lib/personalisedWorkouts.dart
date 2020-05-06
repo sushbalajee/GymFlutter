@@ -21,7 +21,6 @@ class PersonalisedWorkouts extends StatefulWidget {
 
 class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
   List<Item> items = List();
-  //Item item;
   DatabaseReference clientWorkoutsRef;
   DatabaseReference clientNamesRef;
 
@@ -44,7 +43,6 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
       });
     });
 
-    //item = Item("", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
     clientNamesRef = database
@@ -52,8 +50,15 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         .child('Workouts')
         .child('ClientNames')
         .child(widget.clientID);
+        
     clientNamesRef.once().then((DataSnapshot snapshot) {
-      jointID = snapshot.value + " - " + widget.clientID;
+      
+  Map<dynamic, dynamic> values = snapshot.value;
+     values.forEach((key,values) {
+      print(values["clientName"]);
+    
+      //print(snapshot);
+      jointID = values["clientName"] + " - " + widget.clientID;
 
       clientWorkoutsRef = database
           .reference()
@@ -62,7 +67,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
           .child(jointID)
           .child("clientWorkouts");
       clientWorkoutsRef.onChildAdded.listen(_onEntryAdded);
-    });
+      });});
   }
 
   _onEntryAdded(Event event) {
@@ -74,7 +79,6 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (informUser == false) {
@@ -103,8 +107,8 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                         color: Colors.white,
                       ),
                       child: new ListTile(
-                        contentPadding: EdgeInsets.only(
-                            top: 0.0, bottom: 0.0, left: 0.0),
+                        contentPadding:
+                            EdgeInsets.only(top: 0.0, bottom: 0.0, left: 0.0),
                         leading: Container(
                           alignment: Alignment.center,
                           height: 75,

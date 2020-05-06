@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'auth.dart';
+import 'database.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'personalisedWorkouts.dart';
 import 'usersList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,9 +14,9 @@ import 'color_loader_3.dart';
 import 'package:flutter/services.dart';
 import 'ptDiary.dart';
 import 'upcomingSessions.dart';
-import 'package:rich_alert/rich_alert.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -30,6 +32,8 @@ enum AuthStatus { notSignedIn, signedIn, signedInAsPT, notDetermined }
 class RootPageState extends State<RootPage> {
   RootPageState({this.auth, this.onSignedOut});
 
+    DatabaseReference clientNamesRef;
+
   final BaseAuth auth;
   final VoidCallback onSignedOut;
 
@@ -38,6 +42,7 @@ class RootPageState extends State<RootPage> {
   bool userType;
 
   String uid = "Please sign out and sign in\n to activate your Trainer ID";
+  String xx = "unknown";
   String statusOfUser;
   String relationship = "";
 
@@ -91,6 +96,53 @@ class RootPageState extends State<RootPage> {
     return userIDs;
   }
 
+  Future fetchPost1() async {
+
+TestingClientNames testclient;
+testclient = TestingClientNames("", "");
+
+final FirebaseDatabase database = FirebaseDatabase.instance;
+
+    clientNamesRef = database
+        .reference()
+        .child('Workouts')
+        .child('ClientNames')
+        .child(uid);
+        
+    clientNamesRef.once().then((DataSnapshot snapshot) {
+      
+  Map<dynamic, dynamic> values = snapshot.value;
+     values.forEach((key,values) {
+      print(values["status"]);
+
+    testclient.clientName = values["clientName"];
+    testclient.status = "Deleted";  
+
+    clientNamesRef.set(testclient.toJson());
+
+
+      });
+
+
+
+
+      //print(clientNamesRef.path);
+      
+      });
+
+      //testclient.status = "Deleted";
+      //clientNamesRef.push().set(testclient.toJson());
+
+    //final response = await http.get(
+      //  'https://gymapp-e8453.firebaseio.com/Workouts/ClientNames/' + uid + '.json');
+
+   // var jsonResponse = json.decode(response.body);
+    //print(jsonResponse);
+    /*if (jsonResponse != "") {
+      GetClientIDs post = new GetClientIDs.fromJson20(jsonResponse);
+    } */
+  }
+
   void signedIn() {
     updateUserID();
     updateRelationship();
@@ -114,6 +166,9 @@ class RootPageState extends State<RootPage> {
   }
 
   Future<void> deleteUser() async {
+
+    fetchPost1();
+    
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     user.delete();
     confirmAccountDeleteDialog(context, "Account Deleted",
@@ -136,7 +191,6 @@ class RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
 //------------------------------------------------------------------------------//
 
@@ -263,15 +317,21 @@ class RootPageState extends State<RootPage> {
                           bottom: 0,
                           right: 0,
                           child: PopupMenuButton(
-                            color: Color(0xFF23395b),
-                            offset: Offset(0,-50),
+                              color: Color(0xFF23395b),
+                              offset: Offset(0, -50),
                               itemBuilder: (context) => [
                                     PopupMenuItem(
-                                    
-                                      child: Container(
-                            padding: EdgeInsets.only(left:15),child: FlatButton(
+                                        child: Container(
+                                      padding: EdgeInsets.only(left: 15),
+                                      child: FlatButton(
                                           onPressed: signedOut,
-                                          child: Text("Signout", style:  TextStyle(fontFamily: "Montserrat", fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500))),
+                                          child: Text("Signout",
+                                              style: TextStyle(
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      FontWeight.w500))),
                                     )),
                                   ],
                               icon: Icon(
@@ -334,14 +394,13 @@ class RootPageState extends State<RootPage> {
 //------------------------------------------------------------------------------//
 
     if (authStatus == AuthStatus.signedIn) {
+      //fetchPost1();
       return new Scaffold(
           backgroundColor: Colors.grey[100],
-          body: SafeArea(
-          child: new LayoutBuilder(
+          body: SafeArea(child: new LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
             return Column(children: <Widget>[
-
-            Container(
+              Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
                 color: Color(0xFF23395b),
@@ -372,7 +431,6 @@ class RootPageState extends State<RootPage> {
                       ),
                     )),
               ),
-
               Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: screenWidth / 8),
@@ -401,8 +459,7 @@ class RootPageState extends State<RootPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ))),
-
-                      FlipCard(
+              FlipCard(
                   direction: FlipDirection.HORIZONTAL, // default
                   front: new Stack(
                     children: <Widget>[
@@ -430,15 +487,20 @@ class RootPageState extends State<RootPage> {
                           bottom: 0,
                           right: 0,
                           child: PopupMenuButton(
-                            
-                            color: Color(0xFF23395b),
-                            offset: Offset(0,-50),
+                              color: Color(0xFF23395b),
+                              offset: Offset(0, -50),
                               itemBuilder: (context) => [
                                     PopupMenuItem(
-                                      child: 
-                                      Container(child: FlatButton(
+                                        child: Container(
+                                      child: FlatButton(
                                           onPressed: signedOut,
-                                          child: Text("Signout", style:  TextStyle(fontFamily: "Montserrat", fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500))),
+                                          child: Text("Signout",
+                                              style: TextStyle(
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      FontWeight.w500))),
                                     )),
                                   ],
                               icon: Icon(
@@ -447,194 +509,102 @@ class RootPageState extends State<RootPage> {
                               )))
                     ],
                   ),
-
                   back: Container(
-                    height: constraints.maxHeight/3,
-                    width: screenWidth,
+                      height: constraints.maxHeight / 3,
+                      width: screenWidth,
                       color: Color(0xFF788aa3),
                       child: Column(children: <Widget>[
                         Container(
-              child: new FlatButton(
-                child: new Text("Delete My Account",
-                    style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white)),
-                onPressed: () {
-                  confirmDeleteDialog(context, "Delete my account",
-                      "Are you sure you would like to delete your account? You will no longer have access to any workouts associated with this account.");
-                },
-              ),
-            ),
+                          child: new FlatButton(
+                            child: new Text("Delete My Account",
+                                style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: screenWidth * 0.045,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white)),
+                            onPressed: () {
+                              
+                              print(xx);
+                              confirmDeleteDialog(context, "Delete Account",
+                                  "Are you sure you would like to delete your account? \n\nYou will no longer have access to any workouts associated with this account.");
+                            },
+                          ),
+                        ),
                       ])))
-
-/*
-
-            Card(
-                elevation: 0.6,
-                color: Colors.grey[100],
-                margin: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 0.0, top: 15.0),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                child: new Container(
-                  height: screenHeight / 4,
-                  decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                        image: new AssetImage("assets/MyWorkouts.jpg"),
-                        fit: BoxFit.cover),
-                  ),
-                  width: screenWidth,
-                  child: FlatButton(
-                    child: null,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PersonalisedWorkouts(
-                                    ptID: relationship,
-                                    clientID: uid,
-                                  )));
-                    },
-                  ),
-                )),
-*/
-/*
-            Card(
-                elevation: 0.6,
-                color: Colors.grey[100],
-                margin: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 20.0, top: 15.0),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                child: new Container(
-                  height: screenHeight / 4,
-                  decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                        image: new AssetImage("assets/MySessions.jpg"),
-                        fit: BoxFit.cover),
-                  ),
-                  width: screenWidth,
-                  child: FlatButton(
-                      child: null,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientSessionsClientSide(
-                                      clientID: uid,
-                                      ptID: relationship,
-                                    )));
-                      }),
-                )),*/
-
-/*
-            Card(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
-                child: Container(
-                  decoration: new BoxDecoration(
-                      color: Color(0xFF232528),
-                      borderRadius: BorderRadius.all(Radius.circular(2.0))),
-                  width: screenWidth - 30,
-                  height: 40.0,
-                  child: new FlatButton(
-                    child: new Text("Sign Out",
-                        style: TextStyle(
-                            fontFamily: "Ubuntu",
-                            fontSize: screenWidth * 0.045,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white)),
-                    onPressed: signedOut,
-                  ),
-                )),
-            Container(
-              decoration: new BoxDecoration(
-                  color: Color(0xFF232528),
-                  borderRadius: BorderRadius.all(Radius.circular(2.0))),
-              width: screenWidth - 30,
-              height: 40.0,
-              child: new FlatButton(
-                child: new Text("My Account",
-                    style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        fontSize: screenWidth * 0.045,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white)),
-                onPressed: () {
-                  confirmDeleteDialog(context, "Delete my account",
-                      "Are you sure you would like to delete your account? You will no longer have access to any workouts associated with this account.");
-                },
-              ),
-            ),
-
-*/
-          ]);})));
+            ]);
+          })));
     }
     return null;
   }
 
-  Future<Null> confirmDeleteDialog(
+  Future<bool> confirmDeleteDialog(
       BuildContext context, String why, String subtitle) {
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new RichAlertDialog(
-            alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text(subtitle,
-                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
-            alertType: RichAlertType.WARNING,
-            actions: <Widget>[
-              new Padding(
-                  padding: EdgeInsets.only(right: 25.0),
-                  child: new FlatButton(
-                    color: Colors.green,
-                    child: const Text('CANCEL'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )),
-              new FlatButton(
-                  color: Colors.red,
-                  child: const Text('DELETE'),
-                  onPressed: () {
-                    deleteUser();
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        });
+
+return new Alert(
+    context: context,
+    //style: alertStyle,
+    closeFunction: () => null,
+    type: AlertType.warning,
+    title: why,
+    desc: subtitle,
+    buttons: [
+      DialogButton(
+        child: Text(
+          "Cancel",
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+        ),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+        color: Color(0xFF4f5d75),
+        radius: BorderRadius.circular(5.0),
+      ),
+      DialogButton(
+        child: Text(
+          "Delete",
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+        ),
+        onPressed: () {
+          print("test");
+          deleteUser();
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+        color: Colors.red,
+        radius: BorderRadius.circular(5.0),
+      ),
+    ],
+  ).show();
   }
 
-  Future<Null> confirmAccountDeleteDialog(
+  Future<bool> confirmAccountDeleteDialog(
       BuildContext context, String why, String subtitle) {
-    return showDialog<Null>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new RichAlertDialog(
-            alertTitle: new Text(why,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center),
-            alertSubtitle: new Text(subtitle,
-                style: TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
-            alertType: RichAlertType.SUCCESS,
-            actions: <Widget>[
-              new FlatButton(
-                color: Color(0xFF232528),
-                child:
-                    const Text('CLOSE', style: TextStyle(color: Colors.white)),
-                onPressed: () {
-                  signedOut();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+
+
+return new Alert(
+    context: context,
+    //style: alertStyle,
+    closeFunction: () => null,
+    type: AlertType.success,
+    title: why,
+    desc: subtitle,
+    buttons: [
+      DialogButton(
+        child: Text(
+          "Close",
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+        ),
+        onPressed: () {
+          signedOut();
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+        color: Color(0xFF4f5d75),
+        radius: BorderRadius.circular(5.0),
+      ),
+    ],
+  ).show();
   }
 }
 
