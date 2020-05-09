@@ -60,6 +60,7 @@ class LoginPageState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     if (formType == FormType.login) {
       return new Scaffold(
           resizeToAvoidBottomPadding: false,
@@ -89,6 +90,7 @@ class LoginPageState extends State<Login> {
           resizeToAvoidBottomPadding: false,
           body: new Stack(children: <Widget>[
             Container(
+              color: Color(0xFF788aa3),
                 alignment: Alignment.center,
                 child: ColorLoader3(
                   dotRadius: 5.0,
@@ -97,9 +99,9 @@ class LoginPageState extends State<Login> {
             Container(
                 padding: EdgeInsets.only(top: 150.0),
                 alignment: Alignment.center,
-                child: new Text("Logging in",
+                child: new Text("Logging in. . .",
                     style: new TextStyle(
-                        fontSize: 20.0, fontFamily: "Montserrat")))
+                        fontSize: screenWidth * 0.05, fontFamily: "Montserrat", color: Colors.white)))
           ]));
     }
   }

@@ -217,7 +217,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                     ),
                                   ),
                                   trailing: new IconButton(
-                                      iconSize: 35.0,
+                                      iconSize: 25.0,
                                       icon: Icon(Icons.delete_forever),
                                       color: Color(0xFFC7CCDB),
                                       onPressed: () {
@@ -255,6 +255,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                                           FontWeight.w600)))),
                                       Container(
                                           child: new IconButton(
+                                            iconSize: 25.0,
                                               icon: new Icon(Icons.edit),
                                               color: Color(0xFFC7CCDB),
                                               onPressed: () {
@@ -289,7 +290,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                   new Text(
                                       "Rest times: " +
                                           items[index].rest +
-                                          " seconds between sets",
+                                          " seconds",
                                       style: TextStyle(
                                           color: Color(0xFF22333B),
                                           fontFamily: "Prompt",
@@ -391,6 +392,8 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   direction: Axis.vertical,
                   children: <Widget>[
                     searchField(),
+                    Row(children: [
+                      SizedBox( width: screenWidth/2 - 25, child:
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: "Reps"),
@@ -398,7 +401,9 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       onSaved: (val) => item.reps = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )),
+                    SizedBox(width: screenWidth/2 - 7.5, child: 
+                    Container(padding: EdgeInsets.only(left:20), child:
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: "Sets"),
@@ -406,15 +411,19 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       onSaved: (val) => item.sets = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )))]),
+                    Row(children: [
+                      SizedBox( width: screenWidth/2 - 25, child:
                     TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Rest"),
+                      decoration: InputDecoration(labelText: "Rest (seconds)"),
                       initialValue: "",
                       onSaved: (val) => item.rest = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )),
+                    SizedBox(width: screenWidth/2 - 7.5, child: 
+                    Container(padding: EdgeInsets.only(left:20), child:
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: "Weight"),
@@ -422,7 +431,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       onSaved: (val) => item.weight = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )))]),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       width: screenWidth,
@@ -490,22 +499,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                 child: Flex(
                   direction: Axis.vertical,
                   children: <Widget>[
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Reps"),
-                      initialValue: items[ind].reps,
-                      onSaved: (val) => item.reps = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Sets"),
-                      initialValue: items[ind].sets,
-                      onSaved: (val) => item.sets = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    ),
                     Container(
                         height: 270,
                         child: TextFormField(
@@ -518,14 +511,38 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                           validator: (val) =>
                               val == "" ? "This field cannot be empty" : null,
                         )),
+                        Row(children: [
+                      SizedBox( width: screenWidth/2 - 25, child:
+                        TextFormField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: "Reps"),
+                      initialValue: items[ind].reps,
+                      onSaved: (val) => item.reps = val,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
+                    )),
+                    SizedBox(width: screenWidth/2 - 7.5, child: 
+                    Container(padding: EdgeInsets.only(left:20), child:
                     TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Rest"),
+                      decoration: InputDecoration(labelText: "Sets"),
+                      initialValue: items[ind].sets,
+                      onSaved: (val) => item.sets = val,
+                      validator: (val) =>
+                          val == "" ? "This field cannot be empty" : null,
+                    )))]),
+                    Row(children: [
+                      SizedBox( width: screenWidth/2 - 25, child:
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: "Rest (seconds)"),
                       initialValue: items[ind].rest,
                       onSaved: (val) => item.rest = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )),
+                    SizedBox(width: screenWidth/2 - 7.5, child: 
+                    Container(padding: EdgeInsets.only(left:20), child:
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: "Weight"),
@@ -533,7 +550,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       onSaved: (val) => item.weight = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    ),
+                    )))]),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       width: screenWidth,

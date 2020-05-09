@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class ClientSessions extends StatefulWidget {
+
   final String date;
   final String day;
   final String ptID;
@@ -20,6 +21,8 @@ class ClientSessions extends StatefulWidget {
 class _ClientSessionsState extends State<ClientSessions> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  List<String> clist;
+
   DatabaseReference comingUpRef;
   DatabaseReference clientSessionsRef;
   DatabaseReference sessionsRef1;
@@ -32,6 +35,9 @@ class _ClientSessionsState extends State<ClientSessions> {
 
   List<Session> items = List();
   Session item;
+
+    List<String> clientList1 = [''];
+    DatabaseReference itemRef;
 
   final FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -58,9 +64,9 @@ class _ClientSessionsState extends State<ClientSessions> {
   @override
   Widget build(BuildContext context) {
 
-    
 
     double screenWidth = MediaQuery.of(context).size.width;
+
 
     return Scaffold(
         appBar: new AppBar(
@@ -85,13 +91,15 @@ class _ClientSessionsState extends State<ClientSessions> {
                       hint: Text(thisText),
                       value: null,
                       items: widget.clientList.map((String value) {
+                        
                         var splitID = value.toString().split(" - ");
                         firstHalf = splitID[0];
                         return new DropdownMenuItem<String>(
                             value: value.toString(),
                             child: new Text(firstHalf));
-                      }).toList(),
+                      }).toSet().toList(),
                       onChanged: (String val) {
+                        if(this.mounted){
                         setState(() {
                           selectedText = val;
                           var splitID1 = val.toString().split(" - ");
@@ -102,7 +110,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                           selectedText = firstHalf1;
                           thisText = selectedText;
                         });
-                      },
+                                            }},
                     )
                     ),
                   ),
@@ -111,7 +119,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                     width: screenWidth,
                     child: DateTimeField(
                       format: timeFormat,
-                      decoration: InputDecoration(hintText: 'Start Time'),
+                      decoration: InputDecoration(hintText: 'Start Time',hintStyle: TextStyle(fontFamily: "Montserrat")),
                       autovalidate: true,
                       validator: (DateTime value) {
                         if (value == null) {
@@ -120,11 +128,12 @@ class _ClientSessionsState extends State<ClientSessions> {
                         return null;
                       },
                       onSaved: (t) {
+                        if(this.mounted){
                         setState(() {
                           item.startTime = t.toString();
                           localStart = t.toString();
                         });
-                      },
+                      }},
                       onShowPicker: (context, currentValue) async {
                         final time = await showTimePicker(
                           context: context,
@@ -154,7 +163,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                     width: screenWidth,
                     child: DateTimeField(
                       format: timeFormat,
-                      decoration: InputDecoration(hintText: 'End Time'),
+                      decoration: InputDecoration(hintText: 'End Time', hintStyle: TextStyle(fontFamily: "Montserrat")),
                       autovalidate: true,
                       validator: (DateTime value) {
                         if (value == null) {
@@ -163,11 +172,12 @@ class _ClientSessionsState extends State<ClientSessions> {
                         return null;
                       },
                       onSaved: (t) {
+                        if(this.mounted){
                         setState(() {
                           item.endTime = t.toString();
                           print(t.toString());
                         });
-                      },
+                      }},
                       onShowPicker: (context, currentValue) async {
                         final time = await showTimePicker(
                           context: context,
@@ -299,6 +309,16 @@ class _ClientSessionsState extends State<ClientSessions> {
       item.clientSessionID = setSessionKey.key;
       setSessionKey.set(item.toJson());
       comingUpRef.push().set(item.toJson());
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ClientSessions(
+                  ptID: widget.ptID,
+                  day: widget.day,
+                  date: widget.date,
+                  clientList: widget.clientList,
+                )));
     }
   }
 }

@@ -38,7 +38,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   bool informUser;
 
   Timer timer;
-  String msg = "Loading";
+  String msg = "Loading. . .";
 
   String jointID;
 
@@ -48,7 +48,9 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     super.initState();
 
     timer = new Timer(const Duration(seconds: 5), () {
-      msg = "No workouts assigned to you";
+      setState(() {
+        msg = "No upcoming sessions";
+      });
     });
 
     //item = Session("", "", "", "", "", 0, "");
@@ -107,10 +109,23 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                 query: clientSessionRef,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
+
+                  items.sort((a, b) => a.startTime.compareTo(b.startTime));
                   items.sort((a, b) => a.date
                       .substring(a.date.length - 8, a.date.length)
                       .compareTo(
                           b.date.substring(b.date.length - 8, b.date.length)));
+                  items.sort((a, b) => a.date
+                      .substring(a.date.length - 6, a.date.length)
+                      .compareTo(
+                          b.date.substring(b.date.length - 6, b.date.length)));
+                          items.sort((a, b) => a.date
+                      .substring(a.date.length - 2, a.date.length)
+                      .compareTo(
+                          b.date.substring(b.date.length - 2, b.date.length)));
+                          
+
+                          
 
       var splitColon = items[index].date.split(" : ");
       var afterColon = splitColon[1];
@@ -137,11 +152,11 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                                 fontFamily: "Montserrat",
                                 fontSize: screenWidth * 0.05,
                                 color: Color(0xFF22333B),
-                                fontWeight: FontWeight.w600)),
+                                fontWeight: FontWeight.w500)),
                         subtitle: Text(
-                            items[index].startTime.substring(10, 15) +
+                            items[index].startTime.substring(10, 16) +
                                 " - " +
-                                items[index].endTime.substring(10, 15)),
+                                items[index].endTime.substring(10, 16)),
                         trailing: new IconButton(
                             iconSize: 40.0,
                            icon: SvgPicture.asset(
@@ -202,7 +217,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     } else {
       return Scaffold(
           appBar: AppBar(
-            title: Text('Upcoming Sessions', style: TextStyle(fontFamily: "Ubuntu")),
+            title: Text('Upcoming Sessions', style: TextStyle(fontFamily: "Montserrat")),
             backgroundColor: Color(0xFF232528),
           ),
           resizeToAvoidBottomPadding: false,
@@ -246,19 +261,21 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   }
 
   Widget loadingScreen() {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
         child: new Stack(children: <Widget>[
       Container(
+          color:  Color(0xFF788aa3),
           alignment: Alignment.center,
           child: ColorLoader3(
             dotRadius: 5.0,
             radius: 20.0,
           )),
       Container(
-          padding: EdgeInsets.only(top: 100.0),
+          padding: EdgeInsets.only(top: 150.0, left: 50, right: 50),
           alignment: Alignment.center,
           child: new Text(msg,
-              style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
+              style: new TextStyle(fontSize: screenWidth * 0.05, fontFamily: "Montserrat", color: Colors.white))),
     ]));
   }
 }

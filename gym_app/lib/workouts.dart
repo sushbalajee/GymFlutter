@@ -4,6 +4,7 @@ import 'jsonLogic.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'BuiltinExercises.dart';
+import 'color_loader_3.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WorkoutsList extends StatefulWidget {
@@ -60,9 +61,21 @@ class _WorkoutsListState extends State<WorkoutsList> {
                     int workoutNumber = 0;
                     if (snapshot.data == null) {
                       return Container(
-                          child: Center(
-                        child: Text("Loading..."),
-                      ));
+                        child: new Stack(children: <Widget>[
+                      Container(
+                          color: Color(0xFFa6808c),
+                          alignment: Alignment.center,
+                          child: ColorLoader3(
+                            dotRadius: 5.0,
+                            radius: 20.0,
+                          )),
+                      Container(
+                          padding: EdgeInsets.only(top: 150.0),
+                          alignment: Alignment.center,
+                          child: new Text("Loading. . .",
+                              style: new TextStyle(
+                                  fontSize: screenWidth * 0.05, fontFamily: "Montserrat", color: Colors.white, fontWeight: FontWeight.w500)))
+                    ]));
                     } else {
                       return Column(children: <Widget>[
                         Container(

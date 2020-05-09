@@ -200,17 +200,18 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
           resizeToAvoidBottomPadding: false,
           body: new Stack(children: <Widget>[
             Container(
+              color: Color(0xFF788aa3),
                 alignment: Alignment.center,
                 child: ColorLoader3(
                   dotRadius: 5.0,
                   radius: 20.0,
                 )),
             Container(
-                padding: EdgeInsets.only(top: 100.0),
+                padding: EdgeInsets.only(top: 150.0),
                 alignment: Alignment.center,
-                child: new Text("Loading",
+                child: new Text("Loading. . .",
                     style: new TextStyle(
-                        fontSize: 20.0, fontFamily: "Montserrat")))
+                        fontSize: 20.0, fontFamily: "Montserrat", color: Colors.white)))
           ]));
     }
 

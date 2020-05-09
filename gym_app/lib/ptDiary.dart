@@ -94,16 +94,29 @@ class _PTDiaryState extends State<PTDiary> {
 
     itemRef = database.reference().child('Workouts').child(widget.ptID);
 
-    itemRef.onValue.listen((Event event) {
+   itemRef.once().then((DataSnapshot snapshot) {
+      
+  Map<dynamic, dynamic> values = snapshot.value;
+     values.forEach((key,values) {
+      print(key.toString());
+      clientList.add(key.toString());
+      if (clientList.contains("ComingUp")) {
+          clientList.remove("ComingUp");
+        }
+      });});
+
+
+    /*itemRef.onValue.listen((Event event) {
       var value = event.snapshot.value;
       var uids = value.keys;
       for (var clientIDs in uids) {
         clientList.add(clientIDs.toString());
+        print("CC : " + uids.toString());
         if (clientList.contains("ComingUp")) {
           clientList.remove("ComingUp");
         }
       }
-    });
+    });*/
   }
 
   Future cleanUpOldSessions() async {
@@ -185,6 +198,7 @@ class _PTDiaryState extends State<PTDiary> {
                           fontWeight: FontWeight.w500)),
                 ),
                 onPressed: () {
+                  print(clientList.length);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

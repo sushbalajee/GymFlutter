@@ -82,6 +82,7 @@ class UIDListPage extends State<UIDList> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null && informUser == null) {
                     return Container(
+                        color: Color(0xFF788aa3),
                         child: new Stack(children: <Widget>[
                       Container(
                           alignment: Alignment.center,
@@ -92,14 +93,16 @@ class UIDListPage extends State<UIDList> {
                       Container(
                           padding: EdgeInsets.only(top: 150.0),
                           alignment: Alignment.center,
-                          child: new Text("Loading",
+                          child: new Text("Loading . . .",
                               style: new TextStyle(
-                                  fontSize: 20.0, fontFamily: "Montserrat")))
+                                  fontSize: screenWidth * 0.05, fontFamily: "Montserrat", color: Colors.white)))
                     ]));
                   } else if (informUser != null) {
                     return Container(
+                      padding: EdgeInsets.all(50),
+                      color: Color(0xFF788aa3),
                         child: Center(
-                      child: Text(informUser),
+                      child: Text(informUser, style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: screenWidth * 0.05, fontWeight: FontWeight.w500)),
                     ));
                   } else {
                     return ListView.builder(

@@ -86,7 +86,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   new Transform.translate(
                       offset: Offset(0.0, 0.0),
                       child: SvgPicture.asset("assets/dumbbell.svg",
-                          height: 150, color: Colors.black)),
+                          height: 150, color: Colors.white)),
                 ],
               ),
             ),

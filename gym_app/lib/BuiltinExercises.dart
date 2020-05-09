@@ -63,6 +63,7 @@ class BuiltinExer extends State<BuiltinExercises> {
                     return Container(
                         child: new Stack(children: <Widget>[
                       Container(
+                          color: Color(0xFFa6808c),
                           alignment: Alignment.center,
                           child: ColorLoader3(
                             dotRadius: 5.0,
@@ -71,9 +72,9 @@ class BuiltinExer extends State<BuiltinExercises> {
                       Container(
                           padding: EdgeInsets.only(top: 150.0),
                           alignment: Alignment.center,
-                          child: new Text("Loading",
+                          child: new Text("Loading. . .",
                               style: new TextStyle(
-                                  fontSize: 20.0, fontFamily: "Montserrat")))
+                                  fontSize: screenWidth * 0.05, fontFamily: "Montserrat", color: Colors.white, fontWeight: FontWeight.w500)))
                     ]));
                   }
                   return Container(

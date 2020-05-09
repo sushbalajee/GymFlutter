@@ -121,13 +121,8 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             icon: Icon(Icons.delete_forever),
                             color: Color(0xFFC7CCDB),
                             onPressed: () {
-                              if (items.length == 1) {
-                                confirmError(context, "Error",
-                                    "Please add a new workout before deleting this one");
-                              } else {
-                                confirmDelete(
+                              confirmDelete(
                                     context, "Delete Workout?", index);
-                              }
                             }),
                         title: Text(items[index].workoutname,
                             style: TextStyle(
