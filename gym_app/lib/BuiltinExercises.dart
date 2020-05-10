@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:gym_app/workoutsMainPage.dart';
 import 'dart:convert';
 import 'jsonLogic.dart';
 import 'color_loader_3.dart';
+import 'main.dart';
 
 class BuiltinExercises extends StatefulWidget {
   final String value;
@@ -51,8 +53,24 @@ class BuiltinExer extends State<BuiltinExercises> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF232528),
-          title: Text(widget.value + " - Exercise List",
-              style: TextStyle(fontFamily: "Montserrat")),
+          title: Container(
+              width: screenWidth,
+              child: Stack(children: <Widget>[
+                Container(  alignment: Alignment.center,width: screenWidth*0.65,child:
+                Text(widget.value + " - Exercise List",
+                    style: TextStyle(fontFamily: "Montserrat"))),
+                new Positioned(
+                  right: 10,
+                  child: new InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => GymApp(currentPage: PageTwo())),
+                            result: (route) => false);
+                      },
+                      child: Container(child: Icon(Icons.home))),
+                )
+              ])),
         ),
         resizeToAvoidBottomPadding: false,
         body: Container(

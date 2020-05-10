@@ -25,6 +25,11 @@ class _ClientPaymentsState extends State<ClientPayments> {
   List<Session> items = List();
   //Session item;
 
+  String ordering = "Oldest";
+  String arrowDirection = "⬇";
+  String isPast;
+  Color isPastCol;
+
   DatabaseReference clientSessionsRef;
 
   bool informUser;
@@ -84,141 +89,216 @@ class _ClientPaymentsState extends State<ClientPayments> {
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   if (snapshot.value != null) {
-                    items.sort((a, b) => a.date
-                        .substring(a.date.length - 8, a.date.length)
-                        .compareTo(b.date
-                            .substring(b.date.length - 8, b.date.length)));
-
-                    return Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF767B91)),
-                        ),
-                        color: Colors.white,
-                      ),
-                        child: new ListTile(
-                          title: Text(items[index].date,
-                              style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: screenWidth * 0.05,
-                                  color: Color(0xFF22333B),
-                                  fontWeight: FontWeight.w600)),
-                          subtitle: Text(
-                              items[index].startTime.substring(10, 15) +
-                                  " - " +
-                                  items[index].endTime.substring(10, 15)),
-                          trailing: new IconButton(
-                              iconSize: 40.0,
-                              icon: SvgPicture.asset(
-                              "assets/finance.svg",
-                              color: Color(items[index].paid)),
+                    filterDates();
+                    checkPast(index);
+                                        
+                    
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            border: Border(
+                                              bottom:
+                                                  BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                                            ),
+                                            color: Colors.white,
+                                          ),
+                                            child: new ListTile(
+                                              title: Text(items[index].date,
+                                                  style: TextStyle(
+                                                      fontFamily: "Montserrat",
+                                                      fontSize: screenWidth * 0.05,
+                                                      color: Color(0xFF22333B),
+                                                      fontWeight: FontWeight.w500)),
+                                              subtitle: Text(
+                                                  items[index].startTime.substring(10, 16) +
+                                                      " - " +
+                                                      items[index].endTime.substring(10, 16) + isPast, style: TextStyle(color: isPastCol,fontFamily: "Montserrat")),
+                                              trailing: new IconButton(
+                                                  iconSize: 40.0,
+                                                  icon: SvgPicture.asset(
+                                                  "assets/finance.svg",
+                                                  color: Color(items[index].paid)),
+                                                  onPressed: () {
+                                                    if (items[index].paid == 0xFFFF6B6B) {
+                                                      informPT(context, index);
+                                                    } else if (items[index].paid == 0xFFFFE66D) {
+                                                      confirmPayment(context, index, 0xFF4ECDC4);
+                                                    }
+                                                  }),
+                                            ));
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                    Container(
+                                        color: Color(0xFF788aa3),
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        width: screenWidth,
+                                        child: FlatButton(
+                                          child: Text("Showing $ordering Sessions First $arrowDirection",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Montserrat",
+                                                fontSize: screenWidth * 0.050,
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (ordering == "Oldest") {
+                                                arrowDirection = "⬆";
+                                                ordering = "Newest";
+                                              } else if (ordering == "Newest") {
+                                                ordering = "Oldest";
+                                                arrowDirection = "⬇";
+                                              }
+                                            });
+                                          },
+                                        ))
+                              ],
+                            ),
+                          );
+                        } else {
+                          return Scaffold(
+                              appBar: AppBar(
+                                title: Text('Client Payments'),
+                                backgroundColor: Colors.grey[900],
+                              ),
+                              resizeToAvoidBottomPadding: false,
+                              body: loadingScreen());
+                        }
+                      }
+                    
+                      Future<bool> informPT(BuildContext context, int ind) {
+                    
+                         return new Alert(
+                          context: context,
+                          //style: alertStyle,
+                          closeFunction: () => null,
+                          type: AlertType.warning,
+                          title: "Unpaid",
+                          desc: "Your client has not confirmed payment for this session",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "Close",
+                                style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+                              ),
+                              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                              color: Color(0xFF4f5d75),
+                              radius: BorderRadius.circular(5.0),
+                            ),
+                          ],
+                        ).show();
+                          
+                      }
+                    
+                      Future<bool> confirmPayment(BuildContext context, int ind, num changeTo) {
+                    
+                        return new Alert(
+                          context: context,
+                          //style: alertStyle,
+                          closeFunction: () => null,
+                          type: AlertType.warning,
+                          title: "Confirm Payment",
+                          desc: "Please confirm if you have received payment from your client for this session.\n\nPlease note: payment is not done within the app",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "Confirm",
+                                style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+                              ),
                               onPressed: () {
-                                if (items[index].paid == 0xFFFF6B6B) {
-                                  informPT(context, index);
-                                } else if (items[index].paid == 0xFFFFE66D) {
-                                  confirmPayment(context, index, 0xFF4ECDC4);
-                                }
-                              }),
-                        ));
+                    
+                                        clientSessionsRef
+                                            .child(items[ind].key)
+                                            .child('paid')
+                                            .set(changeTo);
+                                        handlePayment();
+                                Navigator.of(context, rootNavigator: true).pop();
+                              }, 
+                              color: Color(0xFF4f5d75),
+                              radius: BorderRadius.circular(5.0),
+                            ),
+                          ],
+                        ).show();
+                      }
+                    
+                      void handlePayment() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClientPayments(
+                                      clientID: widget.clientID,
+                                      ptID: widget.ptID,
+                                    )));
+                      }
+                    
+                      Widget loadingScreen() {
+                        return Container(
+                            child: new Stack(children: <Widget>[
+                          Container(
+                              alignment: Alignment.center,
+                              child: ColorLoader3(
+                                dotRadius: 5.0,
+                                radius: 20.0,
+                              )),
+                          Container(
+                              padding: EdgeInsets.only(top: 100.0),
+                              alignment: Alignment.center,
+                              child: new Text(msg,
+                                  style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
+                        ]));
+                      }
+                    
+                       void filterDates() {
+                        if (ordering == "Oldest") {
+                    
+                    
+                          items.sort((a, b) => a.startTime.compareTo(b.startTime));
+                          items.sort((a, b) => a.date
+                              .substring(a.date.length - 8, a.date.length)
+                              .compareTo(b.date.substring(b.date.length - 8, b.date.length)));
+                          items.sort((a, b) => a.date
+                              .substring(a.date.length - 6, a.date.length)
+                              .compareTo(b.date.substring(b.date.length - 6, b.date.length)));
+                          items.sort((a, b) => a.date
+                              .substring(a.date.length - 2, a.date.length)
+                              .compareTo(b.date.substring(b.date.length - 2, b.date.length)));
+                        } else if (ordering == "Newest") {
+                    
+                    
+                          items.sort((a, b) => b.startTime.compareTo(a.startTime));
+                          items.sort((a, b) => b.date
+                              .substring(b.date.length - 8, b.date.length)
+                              .compareTo(a.date.substring(a.date.length - 8, a.date.length)));
+                          items.sort((a, b) => b.date
+                              .substring(b.date.length - 6, b.date.length)
+                              .compareTo(a.date.substring(a.date.length - 6, a.date.length)));
+                          items.sort((a, b) => b.date
+                              .substring(b.date.length - 2, b.date.length)
+                              .compareTo(a.date.substring(a.date.length - 2, a.date.length)));
+                        }
+                      }
+                    
+                      void checkPast(int index) {
+
+                        var splitColon = items[index].date.split(" : ");
+                  var afterColon = splitColon[1];
+
+                  int dbDay = int.parse(afterColon.toString().substring(0, 2));
+                  int dbMonth =
+                      int.parse(afterColon.toString().substring(3, 5));
+                  int dbYear =
+                      int.parse("20" + afterColon.toString().substring(6, 8));
+
+                  var testUTC = DateTime.utc(dbYear, dbMonth, dbDay);
+                  if (testUTC.isAfter(DateTime.now().toUtc())) {
+                    isPast = "";
+                    isPastCol = Colors.black;
                   }
-                  return null;
-                },
-              ),
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Scaffold(
-          appBar: AppBar(
-            title: Text('Client Payments'),
-            backgroundColor: Colors.grey[900],
-          ),
-          resizeToAvoidBottomPadding: false,
-          body: loadingScreen());
-    }
-  }
-
-  Future<bool> informPT(BuildContext context, int ind) {
-
-     return new Alert(
-      context: context,
-      //style: alertStyle,
-      closeFunction: () => null,
-      type: AlertType.warning,
-      title: "Unpaid",
-      desc: "Your client has not confirmed payment for this session",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Close",
-            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
-          ),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-          color: Color(0xFF4f5d75),
-          radius: BorderRadius.circular(5.0),
-        ),
-      ],
-    ).show();
-      
-  }
-
-  Future<bool> confirmPayment(BuildContext context, int ind, num changeTo) {
-
-    return new Alert(
-      context: context,
-      //style: alertStyle,
-      closeFunction: () => null,
-      type: AlertType.warning,
-      title: "Confirm Payment",
-      desc: "Please confirm if you have received payment from your client for this session.\n\nPlease note: payment is not done within the app",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Confirm",
-            style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
-          ),
-          onPressed: () {
-
-                    clientSessionsRef
-                        .child(items[ind].key)
-                        .child('paid')
-                        .set(changeTo);
-                    handlePayment();
-            Navigator.of(context, rootNavigator: true).pop();
-          }, 
-          color: Color(0xFF4f5d75),
-          radius: BorderRadius.circular(5.0),
-        ),
-      ],
-    ).show();
-  }
-
-  void handlePayment() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ClientPayments(
-                  clientID: widget.clientID,
-                  ptID: widget.ptID,
-                )));
-  }
-
-  Widget loadingScreen() {
-    return Container(
-        child: new Stack(children: <Widget>[
-      Container(
-          alignment: Alignment.center,
-          child: ColorLoader3(
-            dotRadius: 5.0,
-            radius: 20.0,
-          )),
-      Container(
-          padding: EdgeInsets.only(top: 100.0),
-          alignment: Alignment.center,
-          child: new Text(msg,
-              style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
-    ]));
-  }
+                  else{
+                     isPast = " - Past Session";
+                      isPastCol = Colors.red;
+                  }
+                      }
 }

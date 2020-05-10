@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'jsonLogic.dart';
+import 'main.dart';
+import 'workoutsMainPage.dart';
 
 class WorkoutDetails extends StatefulWidget {
   final List<Workouts> value;
@@ -55,7 +57,24 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
 
     return new Scaffold(
         appBar: AppBar(
-          title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
+          title: Container(
+              width: screenWidth,
+              child: Stack(children: <Widget>[
+                Container(  alignment: Alignment.center,width: screenWidth*0.65,child:
+                Text(widget.title,
+                    style: TextStyle(fontFamily: "Montserrat"))),
+                new Positioned(
+                  right: 10,
+                  child: new InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => GymApp(currentPage: PageTwo())),
+                            result: (route) => false);
+                      },
+                      child: Container(child: Icon(Icons.home))),
+                )
+              ])),
           backgroundColor: Color(0xFF232528),
         ),
         resizeToAvoidBottomPadding: false,

@@ -24,6 +24,11 @@ void main() {
 class GymApp extends StatefulWidget {
   @override
   HomePageState createState() => new HomePageState();
+  Widget currentPage;
+
+GymApp(
+      {Key key, this.currentPage})
+      : super(key: key);
 }
 
 //-----------------------------------------------------------------------------------//
@@ -36,7 +41,7 @@ class HomePageState extends State<GymApp> {
   RootPage login;
 
   List<Widget> pages;
-  Widget currentPage;
+  Widget currPage;
 
   @override
   void initState() {
@@ -45,8 +50,10 @@ class HomePageState extends State<GymApp> {
     login = RootPage(auth: new Auth());
 
     pages = [one, two, login];
-
-    currentPage = login;
+    if(widget.currentPage == null){
+      currPage = login;
+    }else{
+    currPage = widget.currentPage;}
     super.initState();
   }
 
@@ -65,8 +72,9 @@ class HomePageState extends State<GymApp> {
                       fontWeight: FontWeight.w500),
                 )),
             backgroundColor: Colors.grey[100],
-            body: currentPage,
-            bottomNavigationBar: new Theme(
+            body: currPage,
+            bottomNavigationBar: 
+            new Theme(
               data: Theme.of(context).copyWith(
                   textTheme: Theme.of(context)
                       .textTheme
@@ -78,7 +86,7 @@ class HomePageState extends State<GymApp> {
                   onTap: (int index) {
                     setState(() {
                       currentTab = index;
-                      currentPage = pages[index];
+                      currPage = pages[index];
                     });
                   },
                   items: [

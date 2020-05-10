@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'main.dart';
 import 'uploadClientWorkoutDetails.dart';
 
 class PersonalisedWorkoutDetails extends StatefulWidget {
@@ -62,7 +63,24 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title, style: TextStyle(fontFamily: "Monterrat")),
+        title: Container(
+              width: screenWidth,
+              child: Stack(children: <Widget>[
+                Container(  alignment: Alignment.center,width: screenWidth*0.65,child:
+                Text(widget.title,
+                    style: TextStyle(fontFamily: "Montserrat"))),
+                new Positioned(
+                  right: 10,
+                  child: new InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => GymApp()),
+                            (route) => false);
+                      },
+                      child: Container(child: Icon(Icons.home))),
+                )
+              ])),
         backgroundColor: Color(0xFF232528),
       ),
       resizeToAvoidBottomPadding: false,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'main.dart';
 import 'personalisedWorkoutDetails.dart';
 import 'uploadClientWorkouts.dart';
 import 'color_loader_3.dart';
 import 'dart:async';
+import 'root.dart';
 //-----------------------------------------------------------------------------------//
 
 class PersonalisedWorkouts extends StatefulWidget {
@@ -50,24 +52,24 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         .child('Workouts')
         .child('ClientNames')
         .child(widget.clientID);
-        
-    clientNamesRef.once().then((DataSnapshot snapshot) {
-      
-  Map<dynamic, dynamic> values = snapshot.value;
-     values.forEach((key,values) {
-      print(values["clientName"]);
-    
-      //print(snapshot);
-      jointID = values["clientName"] + " - " + widget.clientID;
 
-      clientWorkoutsRef = database
-          .reference()
-          .child('Workouts')
-          .child(widget.ptID)
-          .child(jointID)
-          .child("clientWorkouts");
-      clientWorkoutsRef.onChildAdded.listen(_onEntryAdded);
-      });});
+    clientNamesRef.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        print(values["clientName"]);
+
+        //print(snapshot);
+        jointID = values["clientName"] + " - " + widget.clientID;
+
+        clientWorkoutsRef = database
+            .reference()
+            .child('Workouts')
+            .child(widget.ptID)
+            .child(jointID)
+            .child("clientWorkouts");
+        clientWorkoutsRef.onChildAdded.listen(_onEntryAdded);
+      });
+    });
   }
 
   _onEntryAdded(Event event) {
@@ -86,9 +88,9 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
-          title: Text('My Personalised Workouts',
-              style: TextStyle(fontFamily: "Montserrat")),
-        ),
+          title: 
+                Text('My Personalised Workouts',
+                    style: TextStyle(fontFamily: "Montserrat"))),
         resizeToAvoidBottomPadding: false,
         body: Column(
           children: <Widget>[
@@ -172,7 +174,6 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
     return Container(
         child: new Stack(children: <Widget>[
       Container(
-        
           color: Color(0xFF788aa3),
           alignment: Alignment.center,
           child: ColorLoader3(
@@ -183,7 +184,11 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
           padding: EdgeInsets.only(top: 150.0),
           alignment: Alignment.center,
           child: new Text(msg,
-              style: new TextStyle(fontSize: screenWidth * 0.05, fontFamily: "Montserrat", fontWeight: FontWeight.w500, color: Colors.white))),
+              style: new TextStyle(
+                  fontSize: screenWidth * 0.05,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white))),
     ]));
   }
 }
