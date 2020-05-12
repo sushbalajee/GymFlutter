@@ -78,7 +78,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                             MaterialPageRoute(builder: (context) => GymApp()),
                             (route) => false);
                       },
-                      child: Container(child: Icon(Icons.home))),
+                      child: Container(child: Icon(Icons.people))),
                 )
               ])),
         backgroundColor: Color(0xFF232528),

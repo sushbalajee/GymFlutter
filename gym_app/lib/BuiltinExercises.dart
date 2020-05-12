@@ -68,7 +68,7 @@ class BuiltinExer extends State<BuiltinExercises> {
                             MaterialPageRoute(builder: (context) => GymApp(currentPage: PageTwo())),
                             result: (route) => false);
                       },
-                      child: Container(child: Icon(Icons.home))),
+                      child: Container(child: Icon(Icons.pool))),
                 )
               ])),
         ),

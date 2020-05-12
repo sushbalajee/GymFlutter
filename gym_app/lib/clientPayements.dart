@@ -35,7 +35,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
   bool informUser;
 
   Timer timer;
-  String msg = "Loading";
+  String msg = "Loading. . .";
 
   String jointID;
 
@@ -78,7 +78,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
         appBar: AppBar(
           backgroundColor: Color(0xFF232528),
           title:
-              Text('Client Payments', style: TextStyle(fontFamily: "Montserrat")),
+              Text('Client Payments', style: TextStyle(fontFamily: "Montserrat", fontSize: screenWidth *0.05)),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -160,7 +160,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                         } else {
                           return Scaffold(
                               appBar: AppBar(
-                                title: Text('Client Payments'),
+                                title: Text('Client Payments', style: TextStyle(fontFamily: "Montserrat", fontSize: screenWidth *0.05)),
                                 backgroundColor: Colors.grey[900],
                               ),
                               resizeToAvoidBottomPadding: false,
@@ -234,19 +234,24 @@ class _ClientPaymentsState extends State<ClientPayments> {
                       }
                     
                       Widget loadingScreen() {
+                        double screenWidth = MediaQuery.of(context).size.width;
                         return Container(
                             child: new Stack(children: <Widget>[
                           Container(
+                            color: Color(0xFF788aa3),
                               alignment: Alignment.center,
                               child: ColorLoader3(
                                 dotRadius: 5.0,
                                 radius: 20.0,
                               )),
                           Container(
-                              padding: EdgeInsets.only(top: 100.0),
+                              padding: EdgeInsets.only(top: 150.0),
                               alignment: Alignment.center,
                               child: new Text(msg,
-                                  style: new TextStyle(fontSize: 20.0, fontFamily: "Montserrat"))),
+                                  style: new TextStyle(fontSize: screenWidth * 0.05,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white))),
                         ]));
                       }
                     

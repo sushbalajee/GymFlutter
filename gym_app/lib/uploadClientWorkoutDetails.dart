@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:convert';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class UploadClientWorkoutDetails extends StatefulWidget {
   final String firebaseGeneratedKey;
@@ -23,7 +24,6 @@ class UploadClientWorkoutDetails extends StatefulWidget {
       this.ptID,
       this.firebaseGeneratedKey})
       : super(key: key);
-
   @override
   UploadedWorkoutInfo createState() => new UploadedWorkoutInfo();
 }
@@ -39,12 +39,21 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
   DatabaseReference exercisesRef;
 
+  int needToKnow = 0;
+
   String imageUrlStorage = "";
   String currentText = "";
   String textForEx;
 
+  bool switchVal = false;
+
   final myController = TextEditingController();
   final myController2 = TextEditingController();
+  final durationController = TextEditingController();
+  final repController = TextEditingController();
+  final setController = TextEditingController();
+  final restController = TextEditingController();
+  final weightController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -54,7 +63,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
     fetchPost();
 
-    item = Item("", "", "", "", "", "", "");
+    item = Item("", "", "", "", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
     exercisesRef = database
@@ -81,6 +90,12 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
         print(x['execution']);
       }
     }
+  }
+
+  onSwitchedValue(bool newSwitchVal) {
+    setState(() {
+      switchVal = newSwitchVal;
+    });
   }
 
   Future fetchPostForExecution(String currText) async {
@@ -255,7 +270,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                                           FontWeight.w600)))),
                                       Container(
                                           child: new IconButton(
-                                            iconSize: 25.0,
+                                              iconSize: 25.0,
                                               icon: new Icon(Icons.edit),
                                               color: Color(0xFFC7CCDB),
                                               onPressed: () {
@@ -290,6 +305,14 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                   new Text(
                                       "Rest times: " +
                                           items[index].rest +
+                                          " seconds",
+                                      style: TextStyle(
+                                          color: Color(0xFF22333B),
+                                          fontFamily: "Prompt",
+                                          fontSize: screenWidth * 0.04)),
+                                  new Text(
+                                      "Duration: " +
+                                          items[index].duration +
                                           " seconds",
                                       style: TextStyle(
                                           color: Color(0xFF22333B),
@@ -365,6 +388,13 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
   Future<Null> confirmDialog(BuildContext context, String execution) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    durationController.text = "N/A";
+    repController.text = "";
+    setController.text = "";
+    restController.text = "";
+    weightController.text = "";
+
+
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
@@ -393,45 +423,100 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   children: <Widget>[
                     searchField(),
                     Row(children: [
-                      SizedBox( width: screenWidth/2 - 25, child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Reps"),
-                      initialValue: '',
-                      onSaved: (val) => item.reps = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )),
-                    SizedBox(width: screenWidth/2 - 7.5, child: 
-                    Container(padding: EdgeInsets.only(left:20), child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Sets"),
-                      initialValue: "",
-                      onSaved: (val) => item.sets = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )))]),
+                      SizedBox(
+                          width: screenWidth / 2 - 25,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(labelText: "Reps"),
+                            controller: repController,
+                            onSaved: (val) => item.reps = val,
+                            validator: (val) =>
+                                val == "" ? "This field cannot be empty" : null,
+                          )),
+                      SizedBox(
+                          width: screenWidth / 2 - 7.5,
+                          child: Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(labelText: "Sets"),
+                                controller: setController,
+                                onSaved: (val) => item.sets = val,
+                                validator: (val) => val == ""
+                                    ? "This field cannot be empty"
+                                    : null,
+                              )))
+                    ]),
                     Row(children: [
-                      SizedBox( width: screenWidth/2 - 25, child:
-                    TextFormField(
+                      SizedBox(
+                          width: screenWidth / 2 - 25,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration:
+                                InputDecoration(labelText: "Rest (seconds)"),
+                            controller: restController,
+                            onSaved: (val) => item.rest = val,
+                            validator: (val) =>
+                                val == "" ? "This field cannot be empty" : null,
+                          )),
+                      SizedBox(
+                          width: screenWidth / 2 - 7.5,
+                          child: Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration:
+                                    InputDecoration(labelText: "Weight"),
+                                controller: weightController,
+                                onSaved: (val) => item.weight = val,
+                                validator: (val) => val == ""
+                                    ? "This field cannot be empty"
+                                    : null,
+                              )))
+                    ]),
+                    Row(children: [
+                      SizedBox( width: screenWidth / 2 - 25,child:
+                    Container(
+                        child: TextFormField(
+                      controller: durationController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Rest (seconds)"),
-                      initialValue: "",
-                      onSaved: (val) => item.rest = val,
+                      decoration:
+                          InputDecoration(labelText: "Duration (seconds)"),
+                      //initialValue: "",
+                      onSaved: (val) => item.duration = val,
                       validator: (val) =>
                           val == "" ? "This field cannot be empty" : null,
-                    )),
-                    SizedBox(width: screenWidth/2 - 7.5, child: 
-                    Container(padding: EdgeInsets.only(left:20), child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Weight"),
-                      initialValue: "",
-                      onSaved: (val) => item.weight = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )))]),
+                    ))),
+                    new SizedBox(
+                    width: screenWidth / 2 - 5, child:
+                    Container(
+                      padding: EdgeInsets.only(left: 20, top:20),
+                      child: ToggleSwitch(
+                        minWidth: screenWidth / 4 - 15,
+                        cornerRadius: 5,
+                        initialLabelIndex: 0,
+                        activeBgColor: Colors.green,
+                        activeTextColor: Colors.white,
+                        inactiveBgColor: Color(0xFF788aa3),
+                        inactiveTextColor: Colors.grey[900],
+                        labels: ['Weights', 'Cardio'],
+                        onToggle: (index) {
+                          if (index == 0) {
+                            durationController.text = "N/A";
+                            repController.text = "";
+                            setController.text = "";
+                            restController.text = "";
+                            weightController.text = "";
+                          } else if (index == 1) {
+                            durationController.text = "";
+                            repController.text = "N/A";
+                            setController.text = "N/A";
+                            restController.text = "N/A";
+                            weightController.text = "N/A";
+                          }
+                        },
+                      ),
+                    ))]),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       width: screenWidth,
@@ -511,46 +596,58 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                           validator: (val) =>
                               val == "" ? "This field cannot be empty" : null,
                         )),
-                        Row(children: [
-                      SizedBox( width: screenWidth/2 - 25, child:
-                        TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Reps"),
-                      initialValue: items[ind].reps,
-                      onSaved: (val) => item.reps = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )),
-                    SizedBox(width: screenWidth/2 - 7.5, child: 
-                    Container(padding: EdgeInsets.only(left:20), child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Sets"),
-                      initialValue: items[ind].sets,
-                      onSaved: (val) => item.sets = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )))]),
                     Row(children: [
-                      SizedBox( width: screenWidth/2 - 25, child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Rest (seconds)"),
-                      initialValue: items[ind].rest,
-                      onSaved: (val) => item.rest = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )),
-                    SizedBox(width: screenWidth/2 - 7.5, child: 
-                    Container(padding: EdgeInsets.only(left:20), child:
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Weight"),
-                      initialValue: items[ind].weight,
-                      onSaved: (val) => item.weight = val,
-                      validator: (val) =>
-                          val == "" ? "This field cannot be empty" : null,
-                    )))]),
+                      SizedBox(
+                          width: screenWidth / 2 - 25,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(labelText: "Reps"),
+                            initialValue: items[ind].reps,
+                            onSaved: (val) => item.reps = val,
+                            validator: (val) =>
+                                val == "" ? "This field cannot be empty" : null,
+                          )),
+                      SizedBox(
+                          width: screenWidth / 2 - 7.5,
+                          child: Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(labelText: "Sets"),
+                                initialValue: items[ind].sets,
+                                onSaved: (val) => item.sets = val,
+                                validator: (val) => val == ""
+                                    ? "This field cannot be empty"
+                                    : null,
+                              )))
+                    ]),
+                    Row(children: [
+                      SizedBox(
+                          width: screenWidth / 2 - 25,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration:
+                                InputDecoration(labelText: "Rest (seconds)"),
+                            initialValue: items[ind].rest,
+                            onSaved: (val) => item.rest = val,
+                            validator: (val) =>
+                                val == "" ? "This field cannot be empty" : null,
+                          )),
+                      SizedBox(
+                          width: screenWidth / 2 - 7.5,
+                          child: Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration:
+                                    InputDecoration(labelText: "Weight"),
+                                initialValue: items[ind].weight,
+                                onSaved: (val) => item.weight = val,
+                                validator: (val) => val == ""
+                                    ? "This field cannot be empty"
+                                    : null,
+                              )))
+                    ]),
                     Container(
                       padding: EdgeInsets.only(top: 20.0),
                       width: screenWidth,
@@ -694,9 +791,10 @@ class Item {
   String execution;
   String target;
   String weight;
+  String duration;
 
   Item(this.name, this.reps, this.sets, this.rest, this.execution, this.target,
-      this.weight);
+      this.weight, this.duration);
 
   Item.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
@@ -706,7 +804,8 @@ class Item {
         rest = snapshot.value["rest"],
         execution = snapshot.value["execution"],
         target = snapshot.value["target"],
-        weight = snapshot.value["weight"];
+        weight = snapshot.value["weight"],
+        duration = snapshot.value["duration"];
 
   toJson() {
     return {
@@ -716,7 +815,8 @@ class Item {
       "rest": rest,
       "execution": execution,
       "target": target,
-      "weight": weight
+      "weight": weight,
+      "duration": duration
     };
   }
 }

@@ -46,6 +46,9 @@ class UIDListPage extends State<UIDList> {
   List clients;
   String informUser;
 
+  String ordering = "A-Z";
+  String arrowDirection = "⬇";
+
   Future fetchPost() async {
     final response = await http.get(
         'https://gymapp-e8453.firebaseio.com/Workouts/' +
@@ -76,10 +79,13 @@ class UIDListPage extends State<UIDList> {
             backgroundColor: Color(0xFF232528),
             title: new Text("My Clients",
                 style: TextStyle(fontFamily: "Montserrat"))),
-        body: Container(
-            child: FutureBuilder(
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: FutureBuilder(
                 future: fetchPost(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+
                   if (snapshot.data == null && informUser == null) {
                     return Container(
                         color: Color(0xFF788aa3),
@@ -108,6 +114,9 @@ class UIDListPage extends State<UIDList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
+                          
+                          alphabeticalSort(index);
+                          //snapshot.data[index].sort((a,b){});
                           int workoutNumber = index + 1;
                           return Container(
                               decoration: BoxDecoration(
@@ -133,8 +142,8 @@ class UIDListPage extends State<UIDList> {
                                     ),
                                   ),
                                   title: Text(
-                                      snapshot.data[index].toString().substring(
-                                          0, snapshot.data[index].indexOf('-')),
+                                      clients[index].toString().substring(
+                                          0, clients[index].indexOf('-')),
                                       style: TextStyle(
                                           fontFamily: "Montserrat",
                                           fontSize: screenWidth * 0.050,
@@ -147,12 +156,54 @@ class UIDListPage extends State<UIDList> {
                                             builder: (context) =>
                                                 UploadClientWorkouts(
                                                   clientID:
-                                                      snapshot.data[index],
+                                                      clients[index],
                                                   ptID: widget.ptID,
                                                 )));
                                   }));
                         });
                   }
-                })));
+                })),
+                Container(
+                    color: Color(0xFF788aa3),
+                    padding: EdgeInsets.only(bottom: 10),
+                    width: screenWidth,
+                    child: FlatButton(
+                      child: Text("Showing Clients $ordering $arrowDirection",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Montserrat",
+                            fontSize: screenWidth * 0.050,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      onPressed: () {
+                        setState(() {
+                          if (ordering == "A-Z") {
+                            arrowDirection = "⬆";
+                            ordering = "Z-A";
+                          } else if (ordering == "Z-A") {
+                            ordering = "A-Z";
+                            arrowDirection = "⬇";
+                          }
+                        });
+                      },
+                    )),]));
   }
+  void alphabeticalSort(int index) {
+
+    if(ordering == "A-Z"){
+
+      clients.sort((a, b) {
+  return a.toLowerCase().compareTo(b.toLowerCase());
+});
+
+    }
+    else if (ordering == "Z-A"){
+
+      clients.sort((a, b) {
+  return b.toLowerCase().compareTo(a.toLowerCase());
+});
+
+    }
+                  
+                      }
 }
