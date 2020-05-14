@@ -168,7 +168,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF232528),
+        backgroundColor: Color(0xFF14171A),
         title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
       ),
       resizeToAvoidBottomPadding: false,
@@ -214,14 +214,14 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                       child: new Stack(children: <Widget>[
                         new Column(children: <Widget>[
                           Container(
-                              color: Color(0xFF23395b),
+                              color: Color(0xFF003459),
                               child: ListTile(
                                   contentPadding: EdgeInsets.only(
                                       left: 0, top: 0, bottom: 0),
                                   leading: Container(
                                     alignment: Alignment.center,
                                     width: 50,
-                                    color: Color(0xFF788aa3),
+                                    color: Color(0xFF005792),
                                     child: new Text(
                                       "$exerciseNumber",
                                       style: TextStyle(
@@ -376,7 +376,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                           fontSize: screenWidth * 0.05,
                           fontWeight: FontWeight.w600,
                           color: Colors.white)),
-                  color: Color(0xFF788aa3),
+                  color: Color(0xFF005792),
                   onPressed: () {
                     confirmDialog(context, "Add Exercise");
                   }))
@@ -406,7 +406,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: true,
-                backgroundColor: Color(0xFF232528),
+                backgroundColor: Color(0xFF14171A),
                 title: new Text(
                   "Add a new exercise",
                   style: TextStyle(
@@ -492,13 +492,13 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                     Container(
                       padding: EdgeInsets.only(left: 20, top:20),
                       child: ToggleSwitch(
-                        minWidth: screenWidth / 4 - 15,
+                        minWidth: screenWidth / 4 - 13,
                         cornerRadius: 5,
                         initialLabelIndex: 0,
-                        activeBgColor: Colors.green,
+                        activeBgColor: Color(0xFF005792),
                         activeTextColor: Colors.white,
-                        inactiveBgColor: Color(0xFF788aa3),
-                        inactiveTextColor: Colors.grey[900],
+                        inactiveBgColor: Color(0xFF14171A),
+                        inactiveTextColor: Colors.grey[500],
                         labels: ['Weights', 'Cardio'],
                         onToggle: (index) {
                           if (index == 0) {
@@ -528,7 +528,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                   fontSize: screenWidth * 0.05,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white)),
-                          color: Color(0xFF788aa3),
+                          color: Color(0xFF005792),
                           onPressed: () {
                             if (formKey.currentState.validate()) {
                               Navigator.of(context).pop();

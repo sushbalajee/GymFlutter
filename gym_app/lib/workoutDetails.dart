@@ -75,7 +75,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                       child: Container(child: Icon(Icons.pool))),
                 )
               ])),
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
         ),
         resizeToAvoidBottomPadding: false,
         body: new Column(children: <Widget>[
@@ -116,14 +116,14 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                         child: new Stack(children: <Widget>[
                           new Column(children: <Widget>[
                             Container(
-                                color: Color(0xFFa6808c),
+                                color: Color(0xFF5E030C),
                                 child: ListTile(
                                   contentPadding: EdgeInsets.only(
                                       left: 0, top: 0, bottom: 0),
                                   leading: Container(
                                     alignment: Alignment.center,
                                     width: 50,
-                                    color: Color(0xFFc9ada7),
+                                    color: Color(0xFF9C1C26),
                                     child: new Text(
                                       "$exerciseNumber",
                                       style: TextStyle(

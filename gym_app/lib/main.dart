@@ -63,7 +63,7 @@ class HomePageState extends State<GymApp> {
         home: new Scaffold(
             appBar: new AppBar(
                 centerTitle: true,
-                backgroundColor: Color(0xFF232528),
+                backgroundColor: Color(0xFF14171A),
                 title: new Text(
                   "Trainamate 2.0",
                   style: TextStyle(
@@ -79,7 +79,7 @@ class HomePageState extends State<GymApp> {
                   textTheme: Theme.of(context)
                       .textTheme
                       .copyWith(caption: new TextStyle(color: Colors.white)),
-                  canvasColor: Color(0xFF232528)),
+                  canvasColor: Color(0xFF14171A)),
               child: new BottomNavigationBar(
                   fixedColor: Color(0xFFc9ada7),
                   currentIndex: currentTab,

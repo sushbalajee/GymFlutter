@@ -76,7 +76,7 @@ class UIDListPage extends State<UIDList> {
     return new Scaffold(
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF232528),
+            backgroundColor: Color(0xFF14171A),
             title: new Text("My Clients",
                 style: TextStyle(fontFamily: "Montserrat"))),
         body: Column(
@@ -88,7 +88,7 @@ class UIDListPage extends State<UIDList> {
 
                   if (snapshot.data == null && informUser == null) {
                     return Container(
-                        color: Color(0xFF788aa3),
+                        color: Color(0xFF003459),
                         child: new Stack(children: <Widget>[
                       Container(
                           alignment: Alignment.center,
@@ -106,7 +106,7 @@ class UIDListPage extends State<UIDList> {
                   } else if (informUser != null) {
                     return Container(
                       padding: EdgeInsets.all(50),
-                      color: Color(0xFF788aa3),
+                      color: Color(0xFF003459),
                         child: Center(
                       child: Text(informUser, style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontSize: screenWidth * 0.05, fontWeight: FontWeight.w500)),
                     ));
@@ -122,7 +122,7 @@ class UIDListPage extends State<UIDList> {
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                      width: 0.3, color: Color(0xFF788aa3)),
+                                      width: 0.0, color: Color(0xFF005792)),
                                 ),
                               ),
                               child: ListTile(
@@ -131,7 +131,7 @@ class UIDListPage extends State<UIDList> {
                                   leading: Container(
                                     alignment: Alignment.center,
                                     width: 50,
-                                    color: Color(0xFF788aa3),
+                                    color: Color(0xFF005792),
                                     child: new Text(
                                       "$workoutNumber",
                                       style: TextStyle(
@@ -164,7 +164,7 @@ class UIDListPage extends State<UIDList> {
                   }
                 })),
                 Container(
-                    color: Color(0xFF788aa3),
+                    color: Color(0xFF005792),
                     padding: EdgeInsets.only(bottom: 10),
                     width: screenWidth,
                     child: FlatButton(

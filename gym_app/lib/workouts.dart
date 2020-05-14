@@ -49,7 +49,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF232528),
+            backgroundColor: Color(0xFF14171A),
             title: new Text(widget.value,
                 style: TextStyle(fontFamily: "Montserrat"))),
         body: SafeArea(child: new LayoutBuilder(
@@ -63,7 +63,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                       return Container(
                         child: new Stack(children: <Widget>[
                       Container(
-                          color: Color(0xFFa6808c),
+                          color: Color(0xFF5E030C),
                           alignment: Alignment.center,
                           child: ColorLoader3(
                             dotRadius: 5.0,
@@ -88,8 +88,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                       decoration: BoxDecoration(
                                         border: Border(
                                           bottom: BorderSide(
-                                              width: 0.3,
-                                              color: Color(0xFFc9ada7)),
+                                              width: 0.0,
+                                              color: Color(0xFF9C1C26)),
                                         ),
                                         color: Colors.white,
                                       ),
@@ -100,7 +100,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                                             alignment: Alignment.center,
                                             height: 75,
                                             width: 50,
-                                            color: Color(0xFFc9ada7),
+                                            color: Color(0xFF9C1C26),
                                             child: new Text(
                                               "$workoutNumber",
                                               style: TextStyle(
@@ -142,7 +142,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: screenWidth / 8),
-                          color: Color(0xFFa6808c),
+                          color: Color(0xFF5E030C),
                           height: constraints.maxHeight - 280,
                           width: screenWidth,
                           child: FlatButton.icon(

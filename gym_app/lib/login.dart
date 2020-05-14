@@ -90,7 +90,7 @@ class LoginPageState extends State<Login> {
           resizeToAvoidBottomPadding: false,
           body: new Stack(children: <Widget>[
             Container(
-              color: Color(0xFF788aa3),
+              color: Color(0xFF003459),
                 alignment: Alignment.center,
                 child: ColorLoader3(
                   dotRadius: 5.0,
@@ -383,7 +383,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF23395b),
+                color: Color(0xFF003459),
                 child: new Text(
                   "Login",
                   style: TextStyle(
@@ -401,7 +401,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 10),
             child: FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF788aa3),
+                color: Color(0xFF005792),
                 child: new Text("Create an Account",
                     style: new TextStyle(
                         fontSize: screenWidth * 0.05,
@@ -418,7 +418,7 @@ class LoginPageState extends State<Login> {
             padding: EdgeInsets.only(top: 20.0),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF23395b),
+                color: Color(0xFF003459),
                 child: new Text(
                   "Register",
                   style: TextStyle(
@@ -432,7 +432,7 @@ class LoginPageState extends State<Login> {
         new Container(
             padding: EdgeInsets.only(top: 10.0),
             child: FlatButton(
-              color: Color(0xFF4f5d75),
+              color: Color(0xFF005792),
               padding: EdgeInsets.all(10.0),
               child: new Text("Already have an account?",
                   textAlign: TextAlign.center,
@@ -450,7 +450,7 @@ class LoginPageState extends State<Login> {
             //padding: EdgeInsets.only(top: screenHeight/6),
             child: new FlatButton(
                 padding: EdgeInsets.all(10.0),
-                color: Color(0xFF788aa3),
+                color: Color(0xFF3282b8),
                 child: new Text("Register as a Trainer",
                     style: new TextStyle(
                         color: Colors.white,

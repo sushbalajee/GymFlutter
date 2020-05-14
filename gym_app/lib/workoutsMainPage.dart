@@ -53,7 +53,7 @@ class PageTwoState extends State<PageTwo> {
                   padding: EdgeInsets.only(left: screenWidth / 8),
                   width: screenWidth,
                   height: constraints.maxHeight / 3,
-                  color: Color(0xFFc9ada7),
+                  color: Color(0xFF9c1c26),
                   child: FlatButton.icon(
                       onPressed: () {
                         Navigator.push(
@@ -81,7 +81,7 @@ class PageTwoState extends State<PageTwo> {
                     padding: EdgeInsets.only(left: screenWidth / 8),
                     width: screenWidth,
                     height: constraints.maxHeight / 3,
-                    color: Color(0xFFd6cfcb),
+                    color: Color(0xFFd15d33),
                     child: FlatButton.icon(
                         onPressed: () {},
                         icon: SvgPicture.asset(
@@ -175,7 +175,7 @@ class CreateTile extends StatelessWidget {
       Container(
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: screenWidth / 8),
-        color: Color(0xFFa6808c),
+        color: Color(0xFF5e030c),
         width: screenWidth - screenWidth / 10,
         child: FlatButton.icon(
             onPressed: () {
@@ -202,7 +202,7 @@ class CreateTile extends StatelessWidget {
             )),
       ),
       Container(
-          color: Color(0xFFa6808c),
+          color: Color(0xFF5e030c),
           width: screenWidth / 10,
           height: constraints.maxHeight / 3,
           child: iconDep)

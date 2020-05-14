@@ -46,7 +46,7 @@ class AllBuiltinExer extends State<AllBuiltinExercises> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
           title:
               Text("Exercise List", style: TextStyle(fontFamily: "Montserrat")),
         ),
@@ -59,7 +59,7 @@ class AllBuiltinExer extends State<AllBuiltinExercises> {
                     return Container(
                         child: new Stack(children: <Widget>[
                       Container(
-                          color: Color(0xFFc9ada7),
+                          color: Color(0xFF5E030C),
                           alignment: Alignment.center,
                           child: ColorLoader3(
                             dotRadius: 5.0,
@@ -122,25 +122,28 @@ class AllBuiltinExer extends State<AllBuiltinExercises> {
                                 break;
                             }
                             return Container(
+                              //color: Color(0xFF9C1C26),
                                 padding: EdgeInsets.all(0),
-                                decoration: BoxDecoration(
+                                /*decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
-                                        width: 0.3, color: Color(0xFFc9ada7)),
+                                        width:0.0, color: Color(0xFF9C1C26)),
                                   ),
-                                ),
+                                ),*/
                                 child: Column(children: <Widget>[
                                   new ExpansionTile(
                                     leading: Transform.translate(
                                         offset: Offset(-15, 0),
                                         child: Container(
-                                          height: 75,
+                                          height: 85,
                                           width: 58,
-                                          color: Color(0xFFc9ada7),
+                                          color: Color(0xFF9C1C26),
                                           padding: EdgeInsets.all(7),
                                           child: iconDep,
                                         )),
-                                    title: Align(
+                                    title: 
+                                    
+                                    Align(
                                         alignment: Alignment(
                                             -1 - (10 / screenWidth), 0.0),
                                         child: Column(
@@ -167,11 +170,11 @@ class AllBuiltinExer extends State<AllBuiltinExercises> {
                                           decoration: new BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                  color: Color(0xFFc9ada7),
+                                                  color: Color(0xFF9C1C26),
                                                   width: 1.0,
                                                 ),
                                                 top: BorderSide(
-                                                  color: Color(0xFFc9ada7),
+                                                  color: Color(0xFF9C1C26),
                                                   width: 1.0,
                                                 )),
                                           ),

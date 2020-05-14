@@ -78,7 +78,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Color(0xFF232528),
+            backgroundColor: Color(0xFF14171A),
             title:
                 Text(clientName, style: TextStyle(fontFamily: "Montserrat"))),
         resizeToAvoidBottomPadding: false,
@@ -94,7 +94,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
+                              BorderSide(width: 0.3, color: Color(0xFF005792)),
                         ),
                         color: Colors.white,
                       ),
@@ -105,7 +105,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                           alignment: Alignment.center,
                           height: 75,
                           width: 50,
-                          color: Color(0xFF788aa3),
+                          color: Color(0xFF005792),
                           child: new Text(
                             "$workoutNumber",
                             style: TextStyle(
@@ -149,7 +149,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
               ),
             ),
             Container(
-                color: Color(0xFF788aa3),
+                color: Color(0xFF005792),
                 height: 75,
                 width: screenWidth,
                 child: FlatButton.icon(
@@ -165,7 +165,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                           fontWeight: FontWeight.w600,
                         )))),
             Container(
-              color: Color(0xFF23395b),
+              color: Color(0xFF003459),
               height: 75,
               width: screenWidth,
               child: FlatButton.icon(
@@ -239,7 +239,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
             handleDelete(ind);
             Navigator.of(context, rootNavigator: true).pop();
           },
-          color: Color(0xFF4f5d75),
+          color: Color(0xFF005792),
           radius: BorderRadius.circular(5.0),
         ),
       ],
@@ -259,7 +259,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: true,
-                backgroundColor: Color(0xFF232528),
+                backgroundColor: Color(0xFF14171A),
                 title: new Text(
                   "Create a new workout",
                   style: TextStyle(
@@ -306,7 +306,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                     fontSize: screenWidth * 0.05,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white)),
-                            color: Color(0xFF788aa3),
+                            color: Color(0xFF005792),
                             onPressed: () {
                               if (formKey.currentState.validate()) {
                                 Navigator.of(context).pop();

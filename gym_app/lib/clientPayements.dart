@@ -76,7 +76,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
           title:
               Text('Client Payments', style: TextStyle(fontFamily: "Montserrat", fontSize: screenWidth *0.05)),
         ),
@@ -131,7 +131,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                                   ),
                                 ),
                                     Container(
-                                        color: Color(0xFF788aa3),
+                                        color: Color(0xFF005792),
                                         padding: EdgeInsets.only(bottom: 10),
                                         width: screenWidth,
                                         child: FlatButton(
@@ -184,7 +184,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                                 style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
                               ),
                               onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-                              color: Color(0xFF4f5d75),
+                              color: Color(0xFF005792),
                               radius: BorderRadius.circular(5.0),
                             ),
                           ],

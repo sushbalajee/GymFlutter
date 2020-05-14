@@ -52,7 +52,7 @@ class BuiltinExer extends State<BuiltinExercises> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
           title: Container(
               width: screenWidth,
               child: Stack(children: <Widget>[

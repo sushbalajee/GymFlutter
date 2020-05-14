@@ -236,7 +236,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
               Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFF23395b),
+                color: Color(0xFF003459),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
                 child: FlatButton.icon(
@@ -266,7 +266,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
               Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: screenWidth / 8),
-                  color: Color(0xFF4f5d75),
+                  color: Color(0xFF005792),
                   height: constraints.maxHeight / 3,
                   width: constraints.maxWidth,
                   child: FlatButton.icon(
@@ -297,7 +297,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: screenWidth / 8),
-                          color: Color(0xFF788aa3),
+                          color: Color(0xFF3282b8),
                           height: constraints.maxHeight / 3,
                           width: constraints.maxWidth,
                           child: FlatButton.icon(
@@ -404,7 +404,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
               Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: screenWidth / 8),
-                color: Color(0xFF23395b),
+                color: Color(0xFF003459),
                 height: constraints.maxHeight / 3,
                 width: constraints.maxWidth,
                 child: FlatButton.icon(
@@ -435,7 +435,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
               Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: screenWidth / 8),
-                  color: Color(0xFF4f5d75),
+                  color: Color(0xFF005792),
                   height: constraints.maxHeight / 3,
                   width: constraints.maxWidth,
                   child: FlatButton.icon(
@@ -467,7 +467,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: screenWidth / 8),
-                          color: Color(0xFF788aa3),
+                          color: Color(0xFF3282b8),
                           height: constraints.maxHeight / 3,
                           width: constraints.maxWidth,
                           child: FlatButton.icon(
