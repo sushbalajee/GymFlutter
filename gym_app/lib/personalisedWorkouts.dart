@@ -85,9 +85,8 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
 
     if (informUser == false) {
       return Scaffold(
-        backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
           title: 
                 Text('My Personalised Workouts',
                     style: TextStyle(fontFamily: "Montserrat"))),
@@ -104,7 +103,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom:
-                              BorderSide(width: 0.3, color: Color(0xFF788aa3)),
+                              BorderSide(width: 0.0, color: Color(0xFF005792)),
                         ),
                         color: Colors.white,
                       ),
@@ -115,7 +114,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                           alignment: Alignment.center,
                           height: 75,
                           width: 50,
-                          color: Color(0xFF788aa3),
+                          color: Color(0xFF005792),
                           child: new Text(
                             "$workoutNumber",
                             style: TextStyle(
@@ -138,7 +137,6 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
                                   builder: (context) =>
                                       PersonalisedWorkoutDetails(
                                         title: items[index].workoutname,
-                                        muscleGroup: items[index].musclegroup,
                                         description: items[index].description,
                                         clientID: jointID,
                                         ptID: widget.ptID,
@@ -155,8 +153,8 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
     } else {
       return Scaffold(
           appBar: AppBar(
-            title: Text('My Personalised Workouts'),
-            backgroundColor: Colors.grey[900],
+            title: Text('My Personalised Workouts',style: TextStyle(fontFamily: "Montserrat")),
+            backgroundColor: Color(0xFF14171A),
           ),
           resizeToAvoidBottomPadding: false,
           body: loadingScreen());
@@ -174,7 +172,7 @@ class PersonalisedWorkoutsState extends State<PersonalisedWorkouts> {
     return Container(
         child: new Stack(children: <Widget>[
       Container(
-          color: Color(0xFF788aa3),
+          color: Color(0xFF003459),
           alignment: Alignment.center,
           child: ColorLoader3(
             dotRadius: 5.0,

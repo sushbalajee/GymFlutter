@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class PTDiary extends StatefulWidget {
   final String ptID;
@@ -16,7 +18,170 @@ class PTDiary extends StatefulWidget {
 
 class _PTDiaryState extends State<PTDiary> {
 
+  List<Session> items = List();
   DatabaseReference itemRef;
+  DatabaseReference comingUpRef;
+  Session item;
+  String updatedPath;
+  bool boolVar = false;
+  var _key;
+
+  List<Session> newListOf = List();
+
+  AnimationController _animationController;
+  CalendarController _calendarController;
+
+  DateTime dd;
+  DateTime startDate = DateTime.now().subtract(Duration(days: 10));
+  DateTime endDate = DateTime.now().add(Duration(days: 10));
+  DateTime selectedDate = DateTime.now();
+  
+  void initState() {
+    super.initState();
+
+
+    
+    
+
+    _calendarController = CalendarController();
+
+    initialDate();
+
+    item = Session("", "", "", "", "", 0, "");
+
+
+    
+  }
+
+  _onEntryAdded(Event event) {
+    //newListOf.clear();
+    newListOf.add(Session.fromSnapshot(event.snapshot));
+  }
+
+var actualDayOfWeek1;
+
+  void _onDaySelected(DateTime day, List events) {
+    setState(() {
+
+      var daynew = day.toString().substring(8,10);
+      var monthnew = day.toString().substring(5,7);
+      var yearnew = day.toString().substring(2,4);
+      updatedPath = "$daynew" + "-" + "$monthnew" + "-" + "$yearnew";
+
+      //var actualDayOfWeek1;
+      DateTime dd = day;
+      //print(dd.weekday);
+
+
+    switch (dd.weekday) {
+        case 1:
+          actualDayOfWeek1 = "Monday";
+          break;
+        case 2:
+          actualDayOfWeek1 = "Tuesday";
+          break;
+        case 3:
+          actualDayOfWeek1 = "Wednesday";
+          break;
+        case 4:
+          actualDayOfWeek1 = "Thursday";
+          break;
+        case 5:
+          actualDayOfWeek1 = "Friday";
+          break;
+        case 6:
+          actualDayOfWeek1 = "Saturday";
+          break;
+        case 7:
+          actualDayOfWeek1 = "Sunday";
+          break;
+      }
+      print(updatedPath + " " + actualDayOfWeek1);
+    });
+
+    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClientSessions(
+                                ptID: widget.ptID,
+                                day: actualDayOfWeek1,
+                                date: updatedPath,
+                                clientList: clientList,
+                              )));
+
+  }
+
+
+  initialDate(){
+    
+    var daynew = selectedDate.toString().substring(8,10);
+    var monthnew = selectedDate.toString().substring(5,7);
+    var yearnew = selectedDate.toString().substring(2,4);
+
+    updatedPath = "$daynew" + "-" + "$monthnew" + "-" + "$yearnew";
+    //print("xxx1" + updatedPath);
+
+    comingUpRef = database
+        .reference()
+        .child('Workouts')
+        .child(widget.ptID)
+        .child("ComingUp")
+        .child("$updatedPath");
+         _key = Key("$updatedPath");
+        
+    comingUpRef.onChildAdded.listen(_onEntryAdded);
+
+  }
+
+  onSelect(data) {
+    var daynew = data.toString().substring(8,10);
+    var monthnew = data.toString().substring(5,7);
+    var yearnew = data.toString().substring(2,4);
+    //var dayOfWeek1;
+    var actualDayOfWeek1;
+
+    DateTime dd = data;
+    //print(dd.weekday);
+
+
+    switch (dd.weekday) {
+        case 1:
+          actualDayOfWeek1 = "Monday";
+          break;
+        case 2:
+          actualDayOfWeek1 = "Tuesday";
+          break;
+        case 3:
+          actualDayOfWeek1 = "Wednesday";
+          break;
+        case 4:
+          actualDayOfWeek1 = "Thursday";
+          break;
+        case 5:
+          actualDayOfWeek1 = "Friday";
+          break;
+        case 6:
+          actualDayOfWeek1 = "Saturday";
+          break;
+        case 7:
+          actualDayOfWeek1 = "Sunday";
+          break;
+      }
+
+    updatedPath = "$daynew" + "-" + "$monthnew" + "-" + "$yearnew";
+    comingUpRef = database
+        .reference()
+        .child('Workouts')
+        .child(widget.ptID)
+        .child("ComingUp")
+        .child("$updatedPath");
+    
+    _key = Key("$updatedPath");
+
+  }
+
+
+  //DatabaseReference itemRef;
   DatabaseReference clearOld;
   
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -98,7 +263,6 @@ class _PTDiaryState extends State<PTDiary> {
       
   Map<dynamic, dynamic> values = snapshot.value;
      values.forEach((key,values) {
-      print(key.toString());
       clientList.add(key.toString());
       if (clientList.contains("ComingUp")) {
           clientList.remove("ComingUp");
@@ -156,24 +320,88 @@ class _PTDiaryState extends State<PTDiary> {
 
   }
 
+  Widget _buildTableCalendar() {
+    return TableCalendar(
+      calendarController: _calendarController,
+      startingDayOfWeek: StartingDayOfWeek.monday,
+      calendarStyle: CalendarStyle(
+        selectedColor: Colors.deepOrange[400],
+        todayColor: Colors.deepOrange[200],
+        markersColor: Colors.brown[700],
+        outsideDaysVisible: false,
+      ),
+      headerStyle: HeaderStyle(
+        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+        formatButtonDecoration: BoxDecoration(
+          color: Colors.deepOrange[400],
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+      ),
+      onDaySelected: _onDaySelected,
+      //onVisibleDaysChanged: _onVisibleDaysChanged,
+      //onCalendarCreated: _onCalendarCreated,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
 
     calendar28Day.clear();
     calendar28Date.clear();
 
     updateClients();
+    initialDate();
 
     getNext28Days();
 
     return Scaffold(
         appBar: new AppBar(
             centerTitle: true,
-            backgroundColor: Color(0xFF232528),
+            backgroundColor: Color(0xFF14171A),
             title: new Text("My Diary",
                 style: TextStyle(fontFamily: "Montserrat"))),
         backgroundColor: Colors.grey[100],
-        body: Container( color: Color(0xFF788aa3), child: new GridView.count(
+        body: 
+      Column(children: [
+      _buildTableCalendar(),
+      /*Flexible(
+            child: FirebaseAnimatedList(
+              key: _key,
+              query: comingUpRef,
+              itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                  Animation<double> animation, int index) {
+                items.sort((a, b) => a.startTime.compareTo(b.startTime));
+
+                return Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom:
+                            BorderSide(width: 0.3, color: Color(0xFF767B91)),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: new ListTile(
+                      contentPadding: EdgeInsets.only(left: 10.0),
+                      title: Text(items[index].clientName,
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: screenWidth * 0.05,
+                              color: Color(0xFF22333B),
+                              fontWeight: FontWeight.w500)),
+                      subtitle: Text(items[index].startTime.substring(10, 16) +
+                          " -" +
+                          items[index].endTime.substring(10, 16)),
+                    ));
+              },
+            ),
+          ),*/
+          
+      
+      ],)
+        
+        /*Container( color: Color(0xFF788aa3), child: new GridView.count(
           childAspectRatio: 1.1,
           crossAxisCount: 4,
           children: new List<Widget>.generate(28, (index) {
@@ -198,8 +426,8 @@ class _PTDiaryState extends State<PTDiary> {
                           fontWeight: FontWeight.w500)),
                 ),
                 onPressed: () {
-                  print(clientList.length);
-                  Navigator.push(
+                  print(calendar28Day[index] + calendar28Date[index]);
+                  /*Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => ClientSessions(
@@ -207,12 +435,12 @@ class _PTDiaryState extends State<PTDiary> {
                                 day: calendar28Day[index],
                                 date: calendar28Date[index],
                                 clientList: clientList,
-                              )));
+                              )));*/
                 },
               )),
             );
           }),
-        )));
+        ))*/);
   }
 }
 

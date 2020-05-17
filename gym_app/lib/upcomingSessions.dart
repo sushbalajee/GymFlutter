@@ -30,7 +30,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
   List<Session> items = List();
 
   String ordering = "Oldest";
-  String arrowDirection = "⬇";
+  IconData arrowDirection = Icons.arrow_downward;
    String isPast;
   Color isPastCol;
   //Session item;
@@ -100,7 +100,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
       return Scaffold(
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
-          backgroundColor: Color(0xFF232528),
+          backgroundColor: Color(0xFF14171A),
           title: Text('Upcoming Sessions',
               style: TextStyle(fontFamily: "Montserrat")),
         ),
@@ -229,25 +229,34 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
             Row(
               children: [
                 Container(
-                    color: Color(0xFF788aa3),
+                    color: Color(0xFF005792),
                     padding: EdgeInsets.only(bottom: 10),
                     width: screenWidth,
                     child: FlatButton(
-                      child: Text("Showing $ordering Sessions First $arrowDirection",
+                      child: 
+                      Row( 
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                      
+                      Text("Showing $ordering Sessions First",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "Montserrat",
                             fontSize: screenWidth * 0.050,
                             fontWeight: FontWeight.w500,
                           )),
+                          Container( 
+                            padding: EdgeInsets.only(left:5)
+                            ,child:
+                          Icon(arrowDirection, color: Colors.white,))]),
                       onPressed: () {
                         setState(() {
                           if (ordering == "Oldest") {
-                            arrowDirection = "⬆";
+                            arrowDirection = Icons.arrow_upward;
                             ordering = "Newest";
                           } else if (ordering == "Newest") {
                             ordering = "Oldest";
-                            arrowDirection = "⬇";
+                            arrowDirection = Icons.arrow_downward;
                           }
                         });
                       },
@@ -262,7 +271,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
           appBar: AppBar(
             title: Text('Upcoming Sessions',
                 style: TextStyle(fontFamily: "Montserrat")),
-            backgroundColor: Color(0xFF232528),
+            backgroundColor: Color(0xFF14171A),
           ),
           resizeToAvoidBottomPadding: false,
           body: loadingScreen());
@@ -290,7 +299,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
             //setState(() => ClientSessionsClientSide());
             handlePayment();
           },
-          color: Color(0xFF4f5d75),
+          color: Color(0xFF005792),
           radius: BorderRadius.circular(5.0),
         ),
       ],
@@ -312,7 +321,7 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
     return Container(
         child: new Stack(children: <Widget>[
       Container(
-          color: Color(0xFF788aa3),
+          color: Color(0xFF003459),
           alignment: Alignment.center,
           child: ColorLoader3(
             dotRadius: 5.0,

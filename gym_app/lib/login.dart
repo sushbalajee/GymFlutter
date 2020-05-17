@@ -513,7 +513,7 @@ Future<bool> confirmDialog(
         onPressed: () {
           Navigator.of(context, rootNavigator: true).pop();
         },
-        color: Color(0xFF4f5d75),
+        color: Color(0xFF005792),
         radius: BorderRadius.circular(5.0),
       ),
     ],

@@ -31,7 +31,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
   void initState() {
     super.initState();
 
-    item = Item("", "", "");
+    item = Item("", "");
 
     final FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -137,7 +137,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                                   builder: (context) =>
                                       UploadClientWorkoutDetails(
                                         title: items[index].workoutname,
-                                        muscleGroup: items[index].musclegroup,
                                         description: items[index].description,
                                         clientID: widget.clientID,
                                         ptID: widget.ptID,
@@ -213,7 +212,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
           },
-          color: Color(0xFF4f5d75),
+          color: Color(0xFF005792),
           radius: BorderRadius.circular(5.0),
         ),
       ],
@@ -283,18 +282,16 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             : null,
                         onSaved: (val) => item.workoutname = val,
                       ),
+                      Container(
+                        height: 200,
+                        child:
                       TextFormField(
-                        decoration: InputDecoration(labelText: "Muscle Group"),
-                        initialValue: "",
-                        onSaved: (val) => item.musclegroup = val,
-                        validator: (val) => val == "" ? val : null,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(labelText: "Description"),
+                        maxLines: 12,
+                        decoration: InputDecoration(labelText: "Description", alignLabelWithHint: true),
                         initialValue: "",
                         onSaved: (val) => item.description = val,
                         validator: (val) => val == "" ? val : null,
-                      ),
+                      )),
                       Container(
                         padding: EdgeInsets.only(top: 20.0),
                         width: screenWidth,
@@ -328,21 +325,18 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 class Item {
   String key;
   String workoutname;
-  String musclegroup;
   String description;
 
-  Item(this.workoutname, this.musclegroup, this.description);
+  Item(this.workoutname, this.description);
 
   Item.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         workoutname = snapshot.value["workoutname"],
-        musclegroup = snapshot.value["musclegroup"],
         description = snapshot.value["description"];
 
   toJson() {
     return {
       "workoutname": workoutname,
-      "musclegroup": musclegroup,
       "description": description,
     };
   }

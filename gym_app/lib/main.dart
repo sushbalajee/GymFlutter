@@ -9,8 +9,8 @@ import 'root.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      systemNavigationBarColor: Color(0xFF232528),
-      statusBarColor: Color(0xFF232528)));
+      systemNavigationBarColor: Color(0xFF14171A),
+      statusBarColor: Color(0xFF14171A)));
   //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   // .then((_) {
   runApp(new MaterialApp(
@@ -81,7 +81,7 @@ class HomePageState extends State<GymApp> {
                       .copyWith(caption: new TextStyle(color: Colors.white)),
                   canvasColor: Color(0xFF14171A)),
               child: new BottomNavigationBar(
-                  fixedColor: Color(0xFFc9ada7),
+                  fixedColor: Color(0xFFD15D33),
                   currentIndex: currentTab,
                   onTap: (int index) {
                     setState(() {

@@ -47,7 +47,7 @@ class UIDListPage extends State<UIDList> {
   String informUser;
 
   String ordering = "A-Z";
-  String arrowDirection = "⬇";
+  IconData arrowDirection = Icons.arrow_downward;
 
   Future fetchPost() async {
     final response = await http.get(
@@ -168,21 +168,30 @@ class UIDListPage extends State<UIDList> {
                     padding: EdgeInsets.only(bottom: 10),
                     width: screenWidth,
                     child: FlatButton(
-                      child: Text("Showing Clients $ordering $arrowDirection",
+                      child: 
+                      Row( 
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                      Text("Showing Clients $ordering",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "Montserrat",
                             fontSize: screenWidth * 0.050,
                             fontWeight: FontWeight.w500,
                           )),
+                          Container( 
+                            padding: EdgeInsets.only(left:5)
+                            ,child:
+                          Icon(arrowDirection, color: Colors.white,))
+                          ]),
                       onPressed: () {
                         setState(() {
                           if (ordering == "A-Z") {
-                            arrowDirection = "⬆";
+                            arrowDirection = Icons.arrow_upward;
                             ordering = "Z-A";
                           } else if (ordering == "Z-A") {
                             ordering = "A-Z";
-                            arrowDirection = "⬇";
+                            arrowDirection = Icons.arrow_downward;
                           }
                         });
                       },

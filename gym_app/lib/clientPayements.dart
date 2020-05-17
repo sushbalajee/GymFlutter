@@ -26,7 +26,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
   //Session item;
 
   String ordering = "Oldest";
-  String arrowDirection = "⬇";
+  IconData arrowDirection = Icons.arrow_downward;
   String isPast;
   Color isPastCol;
 
@@ -135,21 +135,30 @@ class _ClientPaymentsState extends State<ClientPayments> {
                                         padding: EdgeInsets.only(bottom: 10),
                                         width: screenWidth,
                                         child: FlatButton(
-                                          child: Text("Showing $ordering Sessions First $arrowDirection",
+                                          child: 
+                                          Row( 
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                                          Text("Showing $ordering Sessions First",
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Montserrat",
                                                 fontSize: screenWidth * 0.050,
                                                 fontWeight: FontWeight.w500,
                                               )),
+                                              Container( 
+                            padding: EdgeInsets.only(left:5)
+                            ,child:
+                          Icon(arrowDirection, color: Colors.white,))
+                                              ]),
                                           onPressed: () {
                                             setState(() {
                                               if (ordering == "Oldest") {
-                                                arrowDirection = "⬆";
+                                                arrowDirection = Icons.arrow_upward;
                                                 ordering = "Newest";
                                               } else if (ordering == "Newest") {
                                                 ordering = "Oldest";
-                                                arrowDirection = "⬇";
+                                                arrowDirection = Icons.arrow_downward;
                                               }
                                             });
                                           },
@@ -216,7 +225,7 @@ class _ClientPaymentsState extends State<ClientPayments> {
                                         handlePayment();
                                 Navigator.of(context, rootNavigator: true).pop();
                               }, 
-                              color: Color(0xFF4f5d75),
+                              color: Color(0xFF005792),
                               radius: BorderRadius.circular(5.0),
                             ),
                           ],

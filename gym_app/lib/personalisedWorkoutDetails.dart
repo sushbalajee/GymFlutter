@@ -81,12 +81,12 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                       child: Container(child: Icon(Icons.people))),
                 )
               ])),
-        backgroundColor: Color(0xFF232528),
+        backgroundColor: Color(0xFF14171A),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
         children: <Widget>[
-          Container(
+          /*Container(
             padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text("Muscle Group - " + widget.muscleGroup,
@@ -94,7 +94,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                     fontFamily: "Montserrat",
                     fontSize: screenWidth * 0.05,
                     fontWeight: FontWeight.w600)),
-          ),
+          ),*/
           Container(
             decoration: new BoxDecoration(
               border: Border(
@@ -104,11 +104,11 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
               )),
             ),
             padding: EdgeInsets.only(
-                top: 5.0, left: 15.0, right: 15.0, bottom: 15.0),
+                top: 15.0, left: 15.0, right: 15.0, bottom: 15.0),
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Montserrat", fontSize: screenWidth * 0.04)),
+                    fontFamily: "Helvetica Neue", fontSize: screenWidth * 0.04)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -124,14 +124,14 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                     child: new Stack(children: <Widget>[
                       new Column(children: <Widget>[
                         Container(
-                            color: Color(0xFF23395b),
+                            color: Color(0xFF003459),
                             child: ListTile(
                               contentPadding:
                                   EdgeInsets.only(left: 0, top: 0, bottom: 0),
                               leading: Container(
                                 alignment: Alignment.center,
                                 width: 50,
-                                color: Color(0xFF788aa3),
+                                color: Color(0xFF005792),
                                 child: new Text(
                                   "$exerciseNumber",
                                   style: TextStyle(
@@ -154,36 +154,89 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Container(
-                                    padding: EdgeInsets.only(top: 10.0),
-                                    child: new Text(
-                                        "Weight: " + items[index].weight,
-                                        style: TextStyle(
-                                            fontFamily: "Prompt",
-                                            color: Color(0xFF22333B),
-                                            fontSize: screenWidth * 0.04),
-                                        textAlign: TextAlign.left)),
-                                new Text("Sets: " + items[index].sets,
-                                    style: TextStyle(
-                                        fontFamily: "Prompt",
-                                        color: Color(0xFF22333B),
-                                        fontSize: screenWidth * 0.04)),
-                                new Text("Repetitions: " + items[index].reps,
-                                    style: TextStyle(
-                                        fontFamily: "Prompt",
-                                        color: Color(0xFF22333B),
-                                        fontSize: screenWidth * 0.04)),
-                                new Text(
-                                    "Rest times: " +
-                                        items[index].rest +
-                                        " seconds between sets",
-                                    style: TextStyle(
-                                        fontFamily: "Prompt",
-                                        color: Color(0xFF22333B),
-                                        fontSize: screenWidth * 0.04)),
-                                new Padding(
-                                  padding: EdgeInsets.only(top: 15.0),
-                                  child: Image.network(items[index].target),
-                                ),
+                                      padding: EdgeInsets.only(top: 10.0),
+                                      child: 
+                                      Row(children: [
+                                        Container( 
+                                          width: screenWidth * 1/4,
+                                          child:
+                                      new Text(
+                                          "Weight:",
+                                          style: TextStyle(
+                                              fontFamily: "Helvetica Neue",
+                                              color: Color(0xFF22333B),
+                                              fontSize: screenWidth * 0.04))),
+                                              new Text(items[index].weight,
+                                          style: TextStyle(
+                                              fontFamily: "Helvetica Neue",
+                                              color: Color(0xFF22333B),
+                                              fontSize: screenWidth * 0.04)),
+                                              ],)),
+                                Row(children: [
+                                        Container( 
+                                          width: screenWidth * 1/4,
+                                          child:
+                                  new Text("Sets:",
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04))),
+                                          new Text(items[index].sets,
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04))
+                                          ]),
+                                Row(children: [
+                                        Container( 
+                                          width: screenWidth * 1/4,
+                                          child:
+                                  new Text("Reps:",
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04)))
+                                          ,new Text(items[index].reps,
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04))
+                                          
+                                          ]),
+                                Row(children: [
+                                        Container( 
+                                          width: screenWidth * 1/4,
+                                          child:
+                                  new Text(
+                                      "Rest:",
+                                      style: TextStyle(
+                                          color: Color(0xFF22333B),
+                                          fontFamily: "Helvetica Neue",
+                                          fontSize: screenWidth * 0.04)))
+                                          ,
+                                          new Text(items[index].rest,
+                                      style: TextStyle(
+                                          color: Color(0xFF22333B),
+                                          fontFamily: "Helvetica Neue",
+                                          fontSize: screenWidth * 0.04))
+                                          ]),
+                                        Row(children: [
+                                        Container( 
+                                          width: screenWidth * 1/4,
+                                          child:
+                                  new Text(
+                                      "Duration:",
+                                      style: TextStyle(
+                                          color: Color(0xFF22333B),
+                                          fontFamily: "Helvetica Neue",
+                                          fontSize: screenWidth * 0.04)))
+                                          ,
+                                          new Text(items[index].duration,
+                                      style: TextStyle(
+                                          color: Color(0xFF22333B),
+                                          fontFamily: "Helvetica Neue",
+                                          fontSize: screenWidth * 0.04))
+                                          ]),
                                 new ExpansionTile(
                                   title: Align(
                                       alignment: Alignment(
@@ -193,15 +246,19 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                           children: <Widget>[
                                             new Text("Execution",
                                                 style: TextStyle(
-                                                    fontFamily: "Prompt",
+                                                    fontFamily: "Helvetica Neue",
                                                     color: Color(0xFF22333B),
                                                     fontSize:
                                                         screenWidth * 0.04))
                                           ])),
                                   children: <Widget>[
+                                    new Padding(
+                                  padding: EdgeInsets.only(top: 15.0),
+                                  child: Image.network(items[index].target),
+                                ),
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(bottom: 10.0),
+                                          const EdgeInsets.only(bottom: 15.0, top: 15),
                                       child: Align(
                                         alignment: Alignment.topLeft,
                                         child: Column(
@@ -209,7 +266,7 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                                           children: <Widget>[
                                             new Text(items[index].execution,
                                                 style: TextStyle(
-                                                    fontFamily: "Prompt",
+                                                    fontFamily: "Helvetica Neue",
                                                     color: Color(0xFF22333B),
                                                     fontSize:
                                                         screenWidth * 0.04))
