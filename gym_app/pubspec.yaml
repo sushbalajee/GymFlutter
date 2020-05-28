@@ -76,6 +76,9 @@ flutter:
   - assets/weightlifter.svg
   - assets/finance.svg
   - assets/closed.svg
+  - assets/az_sort.svg
+  - assets/za_sort.svg
+  - assets/sort.svg
 
 
   fonts: 

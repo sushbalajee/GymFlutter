@@ -212,7 +212,7 @@ class _ClientSessionsState extends State<ClientSessions> {
                                 fontSize: screenWidth * 0.05,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white)),
-                        color: Color(0xFF788aa3),
+                        color: Color(0xFF005792),
                         onPressed: () {
                           item.date = widget.day + " : " + widget.date;
                           item.paid = 0xFFFF6B6B;

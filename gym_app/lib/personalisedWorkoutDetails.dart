@@ -64,23 +64,25 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-              width: screenWidth,
-              child: Stack(children: <Widget>[
-                Container(  alignment: Alignment.center,width: screenWidth*0.65,child:
-                Text(widget.title,
-                    style: TextStyle(fontFamily: "Montserrat"))),
-                new Positioned(
-                  right: 10,
-                  child: new InkWell(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => GymApp()),
-                            (route) => false);
-                      },
-                      child: Container(child: Icon(Icons.people))),
-                )
-              ])),
+            width: screenWidth,
+            child: Stack(children: <Widget>[
+              Container(
+                  alignment: Alignment.center,
+                  width: screenWidth * 0.65,
+                  child: Text(widget.title,
+                      style: TextStyle(fontFamily: "Montserrat"))),
+              new Positioned(
+                right: 10,
+                child: new InkWell(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => GymApp()),
+                          (route) => false);
+                    },
+                    child: Container(child: Icon(Icons.people))),
+              )
+            ])),
         backgroundColor: Color(0xFF14171A),
       ),
       resizeToAvoidBottomPadding: false,
@@ -108,7 +110,8 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Helvetica Neue", fontSize: screenWidth * 0.04)),
+                    fontFamily: "Helvetica Neue",
+                    fontSize: screenWidth * 0.04)),
           ),
           Flexible(
             child: FirebaseAnimatedList(
@@ -154,128 +157,128 @@ class PersonalisedWorkoutInfo extends State<PersonalisedWorkoutDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Container(
-                                      padding: EdgeInsets.only(top: 10.0),
-                                      child: 
-                                      Row(children: [
-                                        Container( 
-                                          width: screenWidth * 1/4,
-                                          child:
-                                      new Text(
-                                          "Weight:",
+                                    padding: EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            width: screenWidth * 1 / 4,
+                                            child: new Text("Weight:",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Helvetica Neue",
+                                                    color: Color(0xFF22333B),
+                                                    fontSize:
+                                                        screenWidth * 0.04))),
+                                        new Text(items[index].weight,
+                                            style: TextStyle(
+                                                fontFamily: "Helvetica Neue",
+                                                color: Color(0xFF22333B),
+                                                fontSize: screenWidth * 0.04)),
+                                      ],
+                                    )),
+                                Row(children: [
+                                  Container(
+                                      width: screenWidth * 1 / 4,
+                                      child: new Text("Sets:",
                                           style: TextStyle(
                                               fontFamily: "Helvetica Neue",
                                               color: Color(0xFF22333B),
                                               fontSize: screenWidth * 0.04))),
-                                              new Text(items[index].weight,
+                                  new Text(items[index].sets,
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04))
+                                ]),
+                                Row(children: [
+                                  Container(
+                                      width: screenWidth * 1 / 4,
+                                      child: new Text("Reps:",
                                           style: TextStyle(
                                               fontFamily: "Helvetica Neue",
                                               color: Color(0xFF22333B),
-                                              fontSize: screenWidth * 0.04)),
-                                              ],)),
+                                              fontSize: screenWidth * 0.04))),
+                                  new Text(items[index].reps,
+                                      style: TextStyle(
+                                          fontFamily: "Helvetica Neue",
+                                          color: Color(0xFF22333B),
+                                          fontSize: screenWidth * 0.04))
+                                ]),
                                 Row(children: [
-                                        Container( 
-                                          width: screenWidth * 1/4,
-                                          child:
-                                  new Text("Sets:",
+                                  Container(
+                                      width: screenWidth * 1 / 4,
+                                      child: new Text("Rest:",
+                                          style: TextStyle(
+                                              color: Color(0xFF22333B),
+                                              fontFamily: "Helvetica Neue",
+                                              fontSize: screenWidth * 0.04))),
+                                  new Text(items[index].rest,
                                       style: TextStyle(
-                                          fontFamily: "Helvetica Neue",
                                           color: Color(0xFF22333B),
-                                          fontSize: screenWidth * 0.04))),
-                                          new Text(items[index].sets,
-                                      style: TextStyle(
                                           fontFamily: "Helvetica Neue",
-                                          color: Color(0xFF22333B),
                                           fontSize: screenWidth * 0.04))
-                                          ]),
+                                ]),
                                 Row(children: [
-                                        Container( 
-                                          width: screenWidth * 1/4,
-                                          child:
-                                  new Text("Reps:",
-                                      style: TextStyle(
-                                          fontFamily: "Helvetica Neue",
-                                          color: Color(0xFF22333B),
-                                          fontSize: screenWidth * 0.04)))
-                                          ,new Text(items[index].reps,
-                                      style: TextStyle(
-                                          fontFamily: "Helvetica Neue",
-                                          color: Color(0xFF22333B),
-                                          fontSize: screenWidth * 0.04))
-                                          
-                                          ]),
-                                Row(children: [
-                                        Container( 
-                                          width: screenWidth * 1/4,
-                                          child:
-                                  new Text(
-                                      "Rest:",
-                                      style: TextStyle(
-                                          color: Color(0xFF22333B),
-                                          fontFamily: "Helvetica Neue",
-                                          fontSize: screenWidth * 0.04)))
-                                          ,
-                                          new Text(items[index].rest,
+                                  Container(
+                                      width: screenWidth * 1 / 4,
+                                      child: new Text("Duration:",
+                                          style: TextStyle(
+                                              color: Color(0xFF22333B),
+                                              fontFamily: "Helvetica Neue",
+                                              fontSize: screenWidth * 0.04))),
+                                  new Text(items[index].duration,
                                       style: TextStyle(
                                           color: Color(0xFF22333B),
                                           fontFamily: "Helvetica Neue",
                                           fontSize: screenWidth * 0.04))
-                                          ]),
-                                        Row(children: [
-                                        Container( 
-                                          width: screenWidth * 1/4,
-                                          child:
-                                  new Text(
-                                      "Duration:",
-                                      style: TextStyle(
-                                          color: Color(0xFF22333B),
-                                          fontFamily: "Helvetica Neue",
-                                          fontSize: screenWidth * 0.04)))
-                                          ,
-                                          new Text(items[index].duration,
-                                      style: TextStyle(
-                                          color: Color(0xFF22333B),
-                                          fontFamily: "Helvetica Neue",
-                                          fontSize: screenWidth * 0.04))
-                                          ]),
-                                new ExpansionTile(
-                                  title: Align(
-                                      alignment: Alignment(
-                                          -1 - (60 / screenWidth), 0.0),
-                                      child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            new Text("Execution",
-                                                style: TextStyle(
-                                                    fontFamily: "Helvetica Neue",
-                                                    color: Color(0xFF22333B),
-                                                    fontSize:
-                                                        screenWidth * 0.04))
-                                          ])),
-                                  children: <Widget>[
-                                    new Padding(
-                                  padding: EdgeInsets.only(top: 15.0),
-                                  child: Image.network(items[index].target),
-                                ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 15.0, top: 15),
-                                      child: Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            new Text(items[index].execution,
-                                                style: TextStyle(
-                                                    fontFamily: "Helvetica Neue",
-                                                    color: Color(0xFF22333B),
-                                                    fontSize:
-                                                        screenWidth * 0.04))
-                                          ],
+                                ]),
+                                Container(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: new ExpansionTile(
+                                      title: Align(
+                                          alignment: Alignment(
+                                              -1 - (60 / screenWidth), 0.0),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text("Execution",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Helvetica Neue",
+                                                        fontWeight: FontWeight.w500,
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ])),
+                                      children: <Widget>[
+                                        new Padding(
+                                          padding: EdgeInsets.only(top: 15.0),
+                                          child: Image.network(
+                                              items[index].target),
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 15.0, top: 15),
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(items[index].execution,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Helvetica Neue",
+                                                        color:
+                                                            Color(0xFF22333B),
+                                                        fontSize:
+                                                            screenWidth * 0.04))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                               ])
                         ]))
                       ])

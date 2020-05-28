@@ -231,6 +231,10 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
 
    Widget _buildTableCalendar() {
     return TableCalendar(
+      availableCalendarFormats: const{
+        CalendarFormat.month: "Two Weeks",
+        CalendarFormat.twoWeeks: "Month"
+      },
       daysOfWeekStyle: DaysOfWeekStyle(
         weekdayStyle: TextStyle( fontSize: 15,fontFamily: "Montserrat", fontWeight: FontWeight.w800 ,color: Color(0xFFD15D33)),
         weekendStyle: TextStyle( fontSize: 15,fontFamily: "Montserrat", fontWeight: FontWeight.w800 ,color: Color(0xFFD15D33))),
@@ -240,7 +244,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
       calendarStyle: CalendarStyle(
         weekdayStyle: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "Montserrat", fontWeight: FontWeight.w500),
         selectedColor: Color(0xFFD15D33),
-        todayColor: Colors.deepOrange[200],
+        todayColor: Color(0xFF3282b8),
         markersColor: Colors.brown[700],
         outsideDaysVisible: true,
         weekendStyle: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "Montserrat", fontWeight: FontWeight.w500)
@@ -250,6 +254,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
         rightChevronIcon: Icon(Icons.arrow_forward_ios, size: 15, color: Colors.white),
         titleTextStyle: TextStyle(color: Colors.white,fontSize: 20,fontFamily: "Montserrat", fontWeight: FontWeight.w500),
         formatButtonTextStyle: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "Montserrat", fontWeight: FontWeight.w500),
+        formatButtonShowsNext: false,
         formatButtonDecoration: BoxDecoration(
           color: Color(0xFFD15D33),
           borderRadius: BorderRadius.circular(5.0),
@@ -396,8 +401,11 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
               FlipCard(
                   onFlip: (){
                     setState(() {
-                    _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
+                      if(_calendarController.calendarFormat == CalendarFormat.twoWeeks){
+                        _calendarController.setCalendarFormat(CalendarFormat.month);
+                      }
                     });
+                    _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
                   },
                   direction: FlipDirection.HORIZONTAL, // default
                   front: new Stack(
@@ -482,9 +490,16 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                                 ),
                               ))),
                       Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: PopupMenuButton(
+                          bottom: 5,
+                          right: 5,
+                          child: new InkWell(
+                      onTap: () {
+                        confirmSignout(context, "Sign Out", "Would you like to sign out of your account?");
+                      },
+                      child: Container(child: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,)))
+                          /*PopupMenuButton(
                               color: Color(0xFF23395b),
                               offset: Offset(0, -50),
                               itemBuilder: (context) => [
@@ -505,7 +520,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                               icon: Icon(
                                 Icons.exit_to_app,
                                 color: Colors.white,
-                              )))
+                              ))*/)
                     ],
                   ),
                   back: Container(
@@ -653,7 +668,39 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                                   fontWeight: FontWeight.w600,
                                 ),
                               ))),
-                      Positioned(
+                              Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: new InkWell(
+                      onTap: () {
+                        confirmSignout(context, "Sign Out", "Would you like to sign out of your account?");
+                      },
+                      child: Container(child: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,)))
+                          /*PopupMenuButton(
+                              color: Color(0xFF23395b),
+                              offset: Offset(0, -50),
+                              itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                        child: Container(
+                                      padding: EdgeInsets.only(left: 15),
+                                      child: FlatButton(
+                                          onPressed: signedOut,
+                                          child: Text("Signout",
+                                              style: TextStyle(
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      FontWeight.w500))),
+                                    )),
+                                  ],
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,
+                              ))*/)
+                      /*Positioned(
                           bottom: 0,
                           right: 0,
                           child: PopupMenuButton(
@@ -676,7 +723,7 @@ final FirebaseDatabase database = FirebaseDatabase.instance;
                               icon: Icon(
                                 Icons.exit_to_app,
                                 color: Colors.white,
-                              )))
+                              )))*/
                     ],
                   ),
                   back: Container(
@@ -776,9 +823,37 @@ return new Alert(
     ],
   ).show();
   }
-}
 
+Future<bool> confirmSignout(BuildContext context, String why, String subtitle) {
+    return new Alert(
+      context: context,
+      //style: alertStyle,
+      closeFunction: () => null,
+      type: AlertType.warning,
+      title: why,
+      desc: subtitle,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Sign out",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontFamily: "Montserrat"),
+          ),
+          onPressed: () {
+            signedOut();
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          color: Color(0xFF005792),
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
+  }
+
+}
+/*
 class Constants {
   static const String SignOut = 'Sign out';
   static const List<String> choices = <String>[SignOut];
 }
+*/

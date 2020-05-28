@@ -78,9 +78,25 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
 
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Color(0xFF14171A),
-            title:
-                Text(clientName, style: TextStyle(fontFamily: "Montserrat"))),
+          backgroundColor: Color(0xFF14171A),
+          title: Container(
+              width: screenWidth,
+              child: Stack(children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    width: screenWidth * 0.65,
+                    child: Text(clientName,
+                        style: TextStyle(fontFamily: "Montserrat"))),
+                new Positioned(
+                  right: 10,
+                  child: new InkWell(
+                      onTap: () {
+                        confirmDialog(context, "Add a new workout");
+                      },
+                      child: Container(child: Icon(Icons.add))),
+                )
+              ])),
+        ),
         resizeToAvoidBottomPadding: false,
         body: Column(
           children: <Widget>[
@@ -121,8 +137,7 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                             icon: Icon(Icons.delete_forever),
                             color: Color(0xFFC7CCDB),
                             onPressed: () {
-                              confirmDelete(
-                                    context, "Delete Workout?", index);
+                              confirmDelete(context, "Delete Workout?", index);
                             }),
                         title: Text(items[index].workoutname,
                             style: TextStyle(
@@ -147,22 +162,6 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                 },
               ),
             ),
-            Container(
-                color: Color(0xFF005792),
-                height: 75,
-                width: screenWidth,
-                child: FlatButton.icon(
-                    icon: Icon(Icons.add, color: Colors.white),
-                    onPressed: () {
-                      confirmDialog(context, "Add a new workout");
-                    },
-                    label: new Text("Add Workout",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.050,
-                          fontWeight: FontWeight.w600,
-                        )))),
             Container(
               color: Color(0xFF003459),
               height: 75,
@@ -283,15 +282,16 @@ class _UploadClientWorkoutsState extends State<UploadClientWorkouts> {
                         onSaved: (val) => item.workoutname = val,
                       ),
                       Container(
-                        height: 200,
-                        child:
-                      TextFormField(
-                        maxLines: 12,
-                        decoration: InputDecoration(labelText: "Description", alignLabelWithHint: true),
-                        initialValue: "",
-                        onSaved: (val) => item.description = val,
-                        validator: (val) => val == "" ? val : null,
-                      )),
+                          height: 200,
+                          child: TextFormField(
+                            maxLines: 12,
+                            decoration: InputDecoration(
+                                labelText: "Description",
+                                alignLabelWithHint: true),
+                            initialValue: "",
+                            onSaved: (val) => item.description = val,
+                            validator: (val) => val == "" ? val : null,
+                          )),
                       Container(
                         padding: EdgeInsets.only(top: 20.0),
                         width: screenWidth,

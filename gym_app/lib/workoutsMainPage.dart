@@ -41,7 +41,7 @@ class PageTwoState extends State<PageTwo> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return new Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Color(0xFF5e030c),
         body: SafeArea(child: new LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
           return new Stack(children: <Widget>[
@@ -59,7 +59,7 @@ class PageTwoState extends State<PageTwo> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AllBuiltinExercises()));
+                                builder: (context) => AllBuiltinExercises(filter: "No Filter",)));
                       },
                       icon: SvgPicture.asset(
                         "assets/weightlifter.svg",
@@ -192,7 +192,7 @@ class CreateTile extends StatelessWidget {
               height: screenWidth / 5,
             ),
             label: Text(
-              "    $name",
+              "    $name\n    Workouts",
               style: TextStyle(
                 fontSize: screenWidth / 15,
                 fontFamily: "Montserrat",

@@ -171,7 +171,25 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF14171A),
-        title: Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),
+        title: /*Text(widget.title, style: TextStyle(fontFamily: "Montserrat")),*/
+
+                Container(
+            width: screenWidth,
+            child: Stack(children: <Widget>[
+              Container(
+                  alignment: Alignment.center,
+                  width: screenWidth * 0.65,
+                  child: Text(widget.title,
+                      style: TextStyle(fontFamily: "Montserrat"))),
+              new Positioned(
+                right: 10,
+                child: new InkWell(
+                    onTap: () {
+                      confirmDialog(context, "Add Exercise");
+                    },
+                    child: Container(child: Icon(Icons.add))),
+              )
+            ])),
       ),
       resizeToAvoidBottomPadding: false,
       body: Column(
@@ -281,6 +299,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                                   style: TextStyle(
                                                       fontFamily: "Helvetica Neue",
                                                       color: Color(0xFF22333B),
+                                                      fontWeight: FontWeight.w500,
                                                       fontSize:
                                                           screenWidth * 0.04))
                                             ])),
@@ -373,7 +392,9 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                           fontFamily: "Helvetica Neue",
                                           fontSize: screenWidth * 0.04))
                                           ]),
-                                  
+                                  Container(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child:
                                   new ExpansionTile(
                                     title: Align(
                                         alignment: Alignment(
@@ -384,6 +405,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                               new Text("Execution",
                                                   style: TextStyle(
                                                       fontFamily: "Helvetica Neue",
+                                                      fontWeight: FontWeight.w500,
                                                       color: Color(0xFF22333B),
                                                       fontSize:
                                                           screenWidth * 0.04))
@@ -415,7 +437,7 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
                                         ),
                                       ),
                                     ],
-                                  ),
+                                  )),
                                 ])
                           ])]))
                         ])
@@ -424,21 +446,6 @@ class UploadedWorkoutInfo extends State<UploadClientWorkoutDetails> {
               ),
             ),
           ),
-          Container(
-              height: 75,
-              width: screenWidth,
-              child: new FlatButton.icon(
-                  icon: Icon(Icons.add, color: Colors.white),
-                  label: new Text("Add Exercise",
-                      style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: screenWidth * 0.05,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white)),
-                  color: Color(0xFF005792),
-                  onPressed: () {
-                    confirmDialog(context, "Add Exercise");
-                  }))
         ],
       ),
     );

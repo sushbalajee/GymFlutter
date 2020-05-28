@@ -60,16 +60,20 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
           title: Container(
               width: screenWidth,
               child: Stack(children: <Widget>[
-                Container(  alignment: Alignment.center,width: screenWidth*0.65,child:
-                Text(widget.title,
-                    style: TextStyle(fontFamily: "Montserrat"))),
+                Container(
+                    alignment: Alignment.center,
+                    width: screenWidth * 0.65,
+                    child: Text(widget.title,
+                        style: TextStyle(fontFamily: "Montserrat"))),
                 new Positioned(
                   right: 10,
                   child: new InkWell(
                       onTap: () {
                         Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => GymApp(currentPage: PageTwo())),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    GymApp(currentPage: PageTwo())),
                             result: (route) => false);
                       },
                       child: Container(child: Icon(Icons.pool))),
@@ -101,7 +105,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
             alignment: Alignment(-1.0, 0.0),
             child: Text(widget.description,
                 style: TextStyle(
-                    fontFamily: "Montserrat", fontSize: screenWidth * 0.04)),
+                    fontFamily: "Helvetica Neue", fontSize: screenWidth * 0.04)),
           ),
           Flexible(
               child: ListView.builder(
@@ -152,7 +156,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                 workoutExercisesJSON[index]
                                                     .sets,
                                             style: TextStyle(
-                                                fontFamily: "Prompt",
+                                                fontFamily: "Helvetica Neue",
                                                 color: Color(0xFF22333B),
                                                 fontSize: screenWidth * 0.04),
                                             textAlign: TextAlign.left)),
@@ -160,18 +164,19 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                         "Repetitions: " +
                                             workoutExercisesJSON[index].reps,
                                         style: TextStyle(
-                                            fontFamily: "Prompt",
+                                            fontFamily: "Helvetica Neue",
                                             color: Color(0xFF22333B),
                                             fontSize: screenWidth * 0.04)),
                                     new Text(
                                         "Rest times: " +
                                             workoutExercisesJSON[index].rest,
                                         style: TextStyle(
-                                            fontFamily: "Prompt",
+                                            fontFamily: "Helvetica Neue",
                                             color: Color(0xFF22333B),
                                             fontSize: screenWidth * 0.04)),
-                                    new Image.network(
-                                        workoutExercisesJSON[index].target),
+                                    Container(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: 
                                     new ExpansionTile(
                                       title: Align(
                                           alignment: Alignment(
@@ -181,13 +186,19 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                               children: <Widget>[
                                                 new Text("Execution",
                                                     style: TextStyle(
-                                                        fontFamily: "Prompt",
+                                                      fontWeight: FontWeight.w500,
+                                                        fontFamily: "Helvetica Neue",
                                                         color:
                                                             Color(0xFF22333B),
                                                         fontSize:
                                                             screenWidth * 0.04))
                                               ])),
                                       children: <Widget>[
+                                        new Padding(
+                                            padding: EdgeInsets.only(top: 15.0),
+                                            child: new Image.network(
+                                                workoutExercisesJSON[index]
+                                                    .target)),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 10.0),
@@ -200,7 +211,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                                     workoutExercisesJSON[index]
                                                         .execution,
                                                     style: TextStyle(
-                                                        fontFamily: "Prompt",
+                                                        fontFamily: "Helvetica Neue",
                                                         color:
                                                             Color(0xFF22333B),
                                                         fontSize:
@@ -210,7 +221,7 @@ class WorkoutDetailsState extends State<WorkoutDetails> {
                                           ),
                                         ),
                                       ],
-                                    ),
+                                    )),
                                   ])
                             ]))
                           ])

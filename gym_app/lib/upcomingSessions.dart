@@ -101,8 +101,36 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
         backgroundColor: Color(0xFFEFF1F3),
         appBar: AppBar(
           backgroundColor: Color(0xFF14171A),
-          title: Text('Upcoming Sessions',
-              style: TextStyle(fontFamily: "Montserrat")),
+          title: /*Text('Upcoming Sessions',
+              style: TextStyle(fontFamily: "Montserrat"))*/
+              Container(
+              width: screenWidth,
+              child: Stack(children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    width: screenWidth * 0.65,
+                    child: Text("Upcoming Sessions",
+                        style: TextStyle(fontFamily: "Montserrat"))),
+                new Positioned(
+                      right: 10,
+                      child: new InkWell(
+                          onTap: () {
+                            setState(() {
+                          if (ordering == "Oldest") {
+                            ordering = "Newest";
+                          } else if (ordering == "Newest") {
+                            ordering = "Oldest";
+                          }
+                        });
+                          },
+                          child: Container(
+                            child: SvgPicture.asset("assets/sort.svg",
+                              color: Colors.white,
+                              height: screenWidth * 0.057,
+                            ),
+                          )),
+                    )
+              ])),
         ),
         resizeToAvoidBottomPadding: false,
         body: Column(
@@ -226,43 +254,6 @@ class _ClientSessionsStateClient extends State<ClientSessionsClientSide> {
                 },
               ),
             ),
-            Row(
-              children: [
-                Container(
-                    color: Color(0xFF005792),
-                    padding: EdgeInsets.only(bottom: 10),
-                    width: screenWidth,
-                    child: FlatButton(
-                      child: 
-                      Row( 
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:[
-                      
-                      Text("Showing $ordering Sessions First",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Montserrat",
-                            fontSize: screenWidth * 0.050,
-                            fontWeight: FontWeight.w500,
-                          )),
-                          Container( 
-                            padding: EdgeInsets.only(left:5)
-                            ,child:
-                          Icon(arrowDirection, color: Colors.white,))]),
-                      onPressed: () {
-                        setState(() {
-                          if (ordering == "Oldest") {
-                            arrowDirection = Icons.arrow_upward;
-                            ordering = "Newest";
-                          } else if (ordering == "Newest") {
-                            ordering = "Oldest";
-                            arrowDirection = Icons.arrow_downward;
-                          }
-                        });
-                      },
-                    )),
-              ],
-            )
           ],
         ),
       );
